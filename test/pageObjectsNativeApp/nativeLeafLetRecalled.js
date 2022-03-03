@@ -1,3 +1,7 @@
+const LeafletFetchData = require('../utils/utilitiesReuseFunctions')
+const testData = require('../testdata/testExpectations.json')
+const expect = require('chai').expect
+
 class LeafletRecalled{
 
     get recalledText(){
@@ -31,6 +35,16 @@ class LeafletRecalled{
         },2100);
         const batchInfoDetails=await this.leafletProdInfoDetails.getText();
         console.log("Prod Info Details of Leaflet is: "+ batchInfoDetails);
+
+        console.log(LeafletFetchData.LeafletInfo().leafletInfoDetails.match(expiryDatePattern)[0]);
+        console.log(LeafletFetchData.LeafletInfo().leafletInfoDetails.match(serialNumberPattern)[0]);
+        console.log(LeafletFetchData.LeafletInfo().leafletInfoDetails.match(gtinPattern)[0]);
+        console.log(LeafletFetchData.LeafletInfo().leafletInfoDetails.match(batchNumberPattern)[0]);
+
+        expect(LeafletFetchData.LeafletInfo().leafletInfoDetails.match(gtinPattern)[0]).to.equal(browser.testData.prodCode);
+        expect(LeafletFetchData.LeafletInfo().leafletInfoDetails.match(batchNumberPattern)[0]).to.equal(browser.testData.batchNumber);
+        expect(LeafletFetchData.LeafletInfo().leafletInfoDetails.match(serialNumberPattern)[0]).to.equal(browser.testData.serialNumber);
+        expect(LeafletFetchData.LeafletInfo().leafletInfoDetails.match(expiryDatePattern)[0]).to.equal(browser.testData.leafletExpiry);
 
     }
 

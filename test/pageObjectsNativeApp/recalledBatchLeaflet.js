@@ -1,9 +1,6 @@
-// const testData=require('../testdata/myjsonFile.json')
-const expect=require('chai').expect
-const expiryDatePattern = /(?<=Expiry:)(.*)(?=Serial)/g
-const serialNumberPattern = /(?<=Serial number:)(.*)(?=Product)/g
-const gtinPattern = /(?<=Product code:)(.*)(?=Batch)/g
-const batchNumberPattern = /(?<=Batch number:).*/g
+const LeafletFetchData = require('../utils/utilitiesReuseFunctions')
+const testData = require('../testdata/testExpectations.json')
+const expect = require('chai').expect
 
 class RecalledBatchLeaflet{
 
@@ -79,16 +76,15 @@ class RecalledBatchLeaflet{
        
         console.log("Prod Info Details of Leaflet is: "+ LeafletInfo);
 
-        console.log(LeafletInfoDetails.match(expiryDatePattern)[0]);
-        console.log(LeafletInfoDetails.match(serialNumberPattern)[0]);
-        console.log(LeafletInfoDetails.match(gtinPattern)[0]);
-        console.log(LeafletInfoDetails.match(batchNumberPattern)[0]);
+        console.log(LeafletFetchData.LeafletInfo().leafletInfoDetails.match(expiryDatePattern)[0]);
+        console.log(LeafletFetchData.LeafletInfo().leafletInfoDetails.match(serialNumberPattern)[0]);
+        console.log(LeafletFetchData.LeafletInfo().leafletInfoDetails.match(gtinPattern)[0]);
+        console.log(LeafletFetchData.LeafletInfo().leafletInfoDetails.match(batchNumberPattern)[0]);
 
-       expect(LeafletInfoDetails.match(gtinPattern)[0]).to.equal(browser.testExpectations.prodCode);
-       expect(LeafletInfoDetails.match(batchNumberPattern)[0]).to.equal(browser.testExpectations.batchNumber);
-       expect(LeafletInfoDetails.match(serialNumberPattern)[0]).to.equal(browser.testExpectations.serialNumber);
-       expect(LeafletInfoDetails.match(expiryDatePattern)[0]).to.equal(browser.testExpectations.leafletExpiry);
-
+        expect(LeafletFetchData.LeafletInfo().leafletInfoDetails.match(gtinPattern)[0]).to.equal(browser.testData.prodCode);
+        expect(LeafletFetchData.LeafletInfo().leafletInfoDetails.match(batchNumberPattern)[0]).to.equal(browser.testData.batchNumber);
+        expect(LeafletFetchData.LeafletInfo().leafletInfoDetails.match(serialNumberPattern)[0]).to.equal(browser.testData.serialNumber);
+        expect(LeafletFetchData.LeafletInfo().leafletInfoDetails.match(expiryDatePattern)[0]).to.equal(browser.testData.leafletExpiry);
     }
 
  

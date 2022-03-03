@@ -1,3 +1,7 @@
+const LeafletFetchData = require('../utils/utilitiesReuseFunctions')
+const testData = require('../testdata/testExpectations.json')
+const expect = require('chai').expect
+
 class LeafletDecomissioned{
 
     get decomissionedInfo(){
@@ -41,6 +45,16 @@ class LeafletDecomissioned{
         const batchInfoDetails=await this.batchInfoDetailsData.getText();
         const bacthInfo = batchInfoDetails.split(':');
         console.log("Batch Info Details of Leaflet is: "+ bacthInfo);
+
+        console.log(LeafletFetchData.LeafletInfo().leafletInfoDetails.match(expiryDatePattern)[0]);
+        console.log(LeafletFetchData.LeafletInfo().leafletInfoDetails.match(serialNumberPattern)[0]);
+        console.log(LeafletFetchData.LeafletInfo().leafletInfoDetails.match(gtinPattern)[0]);
+        console.log(LeafletFetchData.LeafletInfo().leafletInfoDetails.match(batchNumberPattern)[0]);
+
+        expect(LeafletFetchData.LeafletInfo().leafletInfoDetails.match(gtinPattern)[0]).to.equal(browser.testData.prodCode);
+        expect(LeafletFetchData.LeafletInfo().leafletInfoDetails.match(batchNumberPattern)[0]).to.equal(browser.testData.batchNumber);
+        expect(LeafletFetchData.LeafletInfo().leafletInfoDetails.match(serialNumberPattern)[0]).to.equal(browser.testData.serialNumber);
+        expect(LeafletFetchData.LeafletInfo().leafletInfoDetails.match(expiryDatePattern)[0]).to.equal(browser.testData.leafletExpiry);
 
     }
 }
