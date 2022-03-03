@@ -1,0 +1,5 @@
+node_modules
+allure*
+.lambdatest
+*.log
+package-lock.json
