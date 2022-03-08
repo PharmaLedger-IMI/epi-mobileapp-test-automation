@@ -37,7 +37,7 @@ exports.config = {
     ],
     specs: [
         [
-             'test/specs/nativeEpiQATest.js'
+             'test/specs/nativeLeafletValidTest.js'
         ], 
         //'test/specs/nativeEpiQATest.js'
     ],
@@ -265,7 +265,7 @@ exports.config = {
        
         if(passed){
             console.info("Starting Mobile Execution");
-            const { stdout1, stderr1 } =await exec('cd ../../../epi-mobileapp-test-automation && npm run test');
+            const { stdout1, stderr1 } =await exec('cd ../../../epi-mobileapp-test-automation && npm run nativeLeafletValidTest');
         
             console.log('stdout: ', stdout1);
             

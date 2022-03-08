@@ -8,7 +8,7 @@ class LeafletEPIUpload{
     get productInfo(){
         return $("//android.widget.TextView[@text='Cosentyx']")
     }
-    get ProductInfoDetails(){
+    get ProductInfoDescription(){
         return $("//android.widget.TextView[@text='Cosentyx 150mg/ml 2x1 PFS AT']")
     }
 
@@ -20,7 +20,7 @@ class LeafletEPIUpload{
         return $("//android.widget.TextView[@text='Batch Info']")
     }
 
-    get leafletUploadText(){
+    get leafletEPIUploadText(){
         return $("(//android.widget.TextView[@text='ENTRESTO (sacubitril and valsartan) is a combination of a neprilysin inhibitor and an angiotensin II receptor blocker.'])")
     }
 
@@ -34,27 +34,28 @@ class LeafletEPIUpload{
 
     async leafletEPIUploadDetailsFetch(){
     
+        // get text of product info
         await this.productInfo.getText();
         await setTimeout(()=>{
             console.log("inside timeout");
         },2100);
-        await this.ProductInfoDetails.getText();
+        // get text of product info description
+        await this.ProductInfoDescription.getText();
         await setTimeout(()=>{
             console.log("inside timeout");
         },2100);
-        await this.ProductInfoDetails.getText();
-        await setTimeout(()=>{
-            console.log("inside timeout");
-        },2100);
+        // click on leaflet shiled button icon
         await this.leafletShieldBtn.click();
         await setTimeout(()=>{
             console.log("inside timeout");
         },2100);
+        // get text of batch info
         await this.batchInfo.getText();
         await setTimeout(()=>{
             console.log("inside timeout");
         },2100);
-        await this.leafletUploadText.getText();
+        //get text information of EPI Leaflet  
+        await this.leafletEPIUploadText.getText();
         await setTimeout(()=>{
             console.log("inside timeout");
         },3100);
@@ -67,11 +68,13 @@ class LeafletEPIUpload{
         const leafletInfo = leafletInfoDetails.split(':',"="," ");
         console.log("Batch Info Details of Leaflet is: "+ leafletInfo);
 
+        //log output for expiry date, serial number, gtin number and batch Number pattern
         console.log(LeafletFetchData.LeafletInfo().leafletInfoDetails.match(expiryDatePattern)[0]);
         console.log(LeafletFetchData.LeafletInfo().leafletInfoDetails.match(serialNumberPattern)[0]);
         console.log(LeafletFetchData.LeafletInfo().leafletInfoDetails.match(gtinPattern)[0]);
         console.log(LeafletFetchData.LeafletInfo().leafletInfoDetails.match(batchNumberPattern)[0]);
 
+        // chai assertions on expiry date, serial number, gtin number and batch Number pattern
         expect(LeafletFetchData.LeafletInfo().leafletInfoDetails.match(gtinPattern)[0]).to.equal(browser.testData.prodCode);
         expect(LeafletFetchData.LeafletInfo().leafletInfoDetails.match(batchNumberPattern)[0]).to.equal(browser.testData.batchNumber);
         expect(LeafletFetchData.LeafletInfo().leafletInfoDetails.match(serialNumberPattern)[0]).to.equal(browser.testData.serialNumber);

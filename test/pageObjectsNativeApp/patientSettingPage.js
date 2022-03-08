@@ -51,38 +51,42 @@ class PatientSettingPage{
   }
  
     async patientsettingsScan(blockchainval){
-             
+        
+        // hover over menu settings 
         await this.hoverMenuSettings.click();
         await setTimeout(()=>{
             console.log("inside timeout");
         },3300);
+        // click on setting button 
         await this.settingsBtn.click();
         await setTimeout(()=>{
             console.log("inside timeout");
         },3300);
+        // click on the block chain Network
         await this.appBlockchainNetwork.click();
         await setTimeout(()=>{
             console.log("inside timeout");
         },3300);
+        // click on block chain value text
         await this.setupBlockChainNet.click();
         await setTimeout(()=>{
             console.log("inside timeout");
         },2300);
-      // await browser.hideKeyboard();
-        //await browser.hideDeviceKeyboard('pressKey', 'Done');
         await this.setupBlockChainNet.clearValue();
         await setTimeout(()=>{
             console.log("inside timeout");
         },3300);
+        // set up the value epiqa for block chain 
         await this.setupBlockChainNet.setValue(blockchainval);
         await setTimeout(()=>{
             console.log("inside timeout");
         },2300);
-        //await browser.hideDeviceKeyboard('pressKey', 'Done');
+       //click on save button to save the setting
         await this.saveBtnBlockChain.click();
         await setTimeout(()=>{
             console.log("inside timeout");
         },2300);
+        // click on back button 
         await this.menuBackBtn.click();
         await setTimeout(()=>{
             console.log("inside timeout");
@@ -92,6 +96,7 @@ class PatientSettingPage{
 
     async scan2DImageProcess(){
 
+        // click on scan 2D Matrix data
         await this.scanDataMatrix.click();
         await setTimeout(()=>{
             console.log("inside timeout");

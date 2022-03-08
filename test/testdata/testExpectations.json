@@ -1,6 +1,1 @@
-{"prodCode":"09088884204609","prodName":"Cosentyx","expiry":"230926",
-"batchNumber":"WL6190","serialNumber":"654321",
-"leafletExpiry":"26 - Sep - 2023","batchRecall":true,
-"ePIBeDisplayed":true,"batchMessageDisplayed":true,
-"batchRecallMessage":"Tim said its recall"
-}
+{"prodCode":"09088884204609","prodName":"Cosentyx","expiry":"230926","batchNumber":"WL6190","serialNumber":"654321","leafletExpiry":"26 - Sep - 2023","batchRecall":true,"isEpiDisplayed":true,"batchMessageDisplayed":true,"updateValidDrpDwn":"Update Recalled","batchRecallMessage":"Tim said its recall"}

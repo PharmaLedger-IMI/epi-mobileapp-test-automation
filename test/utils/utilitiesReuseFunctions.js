@@ -9,6 +9,6 @@ class UtilitiesReusableFunctions{
 
     }
 
-    async 
+     
 }
 module.exports=new UtilitiesReusableFunctions();

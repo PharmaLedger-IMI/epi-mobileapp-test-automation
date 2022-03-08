@@ -5,6 +5,7 @@
   "main": "wdio.conf.js",
   "scripts": {
     "test": "npx wdio run wdio.conf.native.app.js",
+    "nativeLeafletValidTest":"npx wdio run wdio.conf.native.app.js --spec nativeLeafletValidTest.js",
     "report": "allure generate allure-results/ --clean && allure open"
   },
   "keywords": [],

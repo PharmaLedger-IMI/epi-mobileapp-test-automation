@@ -39,56 +39,63 @@ class RecalledBatchLeaflet{
     
 
     async leafletRecalledBatchFetch(){
+        // recalled text message
         const recalledMsg=await this.recalledTxtMsg.getText();
         console.log(recalledMsg);
-        expect(recalledMsg).to.equal(browser.testExpectations.batchRecallMessage);
         await setTimeout(()=>{
             console.log("inside timeout");
         },2100);
-       
+       // close button click
         await this.closeBtnMsg.click();
         await setTimeout(()=>{
             console.log("inside timeout");
         },2100);
+        // recalled text message 
         await this.recalledTextBatch.getText();
         await setTimeout(()=>{
             console.log("inside timeout");
         },2100);
+        // product info message
         await this.prodInfoMsg.getText();
         await setTimeout(()=>{
             console.log("inside timeout");
         },2100);
+        // click on leaflet shield button
         await this.leafletShieldInfoBtn.click();
         await setTimeout(()=>{
             console.log("inside timeout");
         },2100);
+        // btach info text message 
         await this.batchInfoTxtMsg.getText();
         await setTimeout(()=>{
             console.log("inside timeout");
         },2100);
+        // leaflet product information details
         await this.leafletProdInfoDetails.getText();
         await setTimeout(()=>{
             console.log("inside timeout");
         },2100);
+
+        expect(recalledMsg).to.equal(browser.testExpectations.batchRecallMessage);
+
         const LeafletInfoDetails=await this.leafletProdInfoDetails.getText();
         
         const LeafletInfo = LeafletInfoDetails.split(':');
        
         console.log("Prod Info Details of Leaflet is: "+ LeafletInfo);
 
+        // logs output for leafelt info for expiry date, serial number, gtin number, batch number pattern
         console.log(LeafletFetchData.LeafletInfo().leafletInfoDetails.match(expiryDatePattern)[0]);
         console.log(LeafletFetchData.LeafletInfo().leafletInfoDetails.match(serialNumberPattern)[0]);
         console.log(LeafletFetchData.LeafletInfo().leafletInfoDetails.match(gtinPattern)[0]);
         console.log(LeafletFetchData.LeafletInfo().leafletInfoDetails.match(batchNumberPattern)[0]);
 
+        // chai assertions on expiry date, serial number, gtin number, batch number pattern
         expect(LeafletFetchData.LeafletInfo().leafletInfoDetails.match(gtinPattern)[0]).to.equal(browser.testData.prodCode);
         expect(LeafletFetchData.LeafletInfo().leafletInfoDetails.match(batchNumberPattern)[0]).to.equal(browser.testData.batchNumber);
         expect(LeafletFetchData.LeafletInfo().leafletInfoDetails.match(serialNumberPattern)[0]).to.equal(browser.testData.serialNumber);
         expect(LeafletFetchData.LeafletInfo().leafletInfoDetails.match(expiryDatePattern)[0]).to.equal(browser.testData.leafletExpiry);
     }
-
- 
-
 
 }
 module.exports=new RecalledBatchLeaflet();

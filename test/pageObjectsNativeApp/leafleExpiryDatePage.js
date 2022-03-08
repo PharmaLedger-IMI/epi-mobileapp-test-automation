@@ -11,7 +11,7 @@ class LeafletExpiryDate{
     get productInfo(){
         return $("//android.widget.TextView[@text='Cosentyx']")
     }
-    get ProductInfoDetails(){
+    get ProductInfoDescription(){
         return $("//android.widget.TextView[@text='Cosentyx 150mg/ml 2x1 PFS AT']")
     }
 
@@ -32,30 +32,32 @@ class LeafletExpiryDate{
     }
 
     async leafletExpiryDateBatchDetailsFetch(){
+        //get text of Incorrect expiry date
         await this.incorrectExpiryText.getText();
         await setTimeout(()=>{
             console.log("inside timeout");
         },2100);
+        //get text of product information
         await this.productInfo.getText();
         await setTimeout(()=>{
             console.log("inside timeout");
         },2100);
-        await this.ProductInfoDetails.getText();
+        //get text on product information description
+        await this.ProductInfoDescription.getText();
         await setTimeout(()=>{
             console.log("inside timeout");
         },2100);
-        await this.ProductInfoDetails.getText();
-        await setTimeout(()=>{
-            console.log("inside timeout");
-        },2100);
+        // click on leaflet shiled button
         await this.leafletShieldBtn.click();
         await setTimeout(()=>{
             console.log("inside timeout");
         },2100);
+        // get batch info text
         await this.batchInfo.getText();
         await setTimeout(()=>{
             console.log("inside timeout");
         },2100);
+        // get leaflet product details information
         await this.leafletProdInfoDetails.getText();
         await setTimeout(()=>{
             console.log("inside timeout");
@@ -65,11 +67,13 @@ class LeafletExpiryDate{
         const leafletInfo = leafletInfoDetails.split(':',"="," ");
         console.log("Batch Info Details of Leaflet is: "+ leafletInfo);
 
+        // log output for expiry date, serial number, gtin number and batch Number pattern
         console.log(LeafletFetchData.LeafletInfo().leafletInfoDetails.match(expiryDatePattern)[0]);
         console.log(LeafletFetchData.LeafletInfo().leafletInfoDetails.match(serialNumberPattern)[0]);
         console.log(LeafletFetchData.LeafletInfo().leafletInfoDetails.match(gtinPattern)[0]);
         console.log(LeafletFetchData.LeafletInfo().leafletInfoDetails.match(batchNumberPattern)[0]);
 
+        // chai assertions on expiry date, serial number, gtin number and batch Number pattern
         expect(LeafletFetchData.LeafletInfo().leafletInfoDetails.match(gtinPattern)[0]).to.equal(browser.testData.prodCode);
         expect(LeafletFetchData.LeafletInfo().leafletInfoDetails.match(batchNumberPattern)[0]).to.equal(browser.testData.batchNumber);
         expect(LeafletFetchData.LeafletInfo().leafletInfoDetails.match(serialNumberPattern)[0]).to.equal(browser.testData.serialNumber);
