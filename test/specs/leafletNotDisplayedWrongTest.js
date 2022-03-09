@@ -1,4 +1,4 @@
-const nativeLeafLetWrong= require('../pageObjectsNativeApp/nativeLeafletWrong')
+const nativeLeafLetWrong= require('../pageObjectsNativeApp/leafletNotDisplayedWrong')
 const allureReporter = require('@wdio/allure-reporter').default
 const nativePatientPage = require('../pageObjectsNativeApp/patientSettingPage')
 

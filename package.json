@@ -6,6 +6,9 @@
   "scripts": {
     "test": "npx wdio run wdio.conf.native.app.js",
     "nativeLeafletValidTest":"npx wdio run wdio.conf.native.app.js --spec nativeLeafletValidTest.js",
+    "addProductBatchLeafletValid":"npx wdio run wdio.conf.native.app.js --spec addProductBatchLeafletValidTest.js",
+    "editBatchRecallMsg":"npx wdio run wdio.conf.native.app.js --spec recalledBatchLeafLetTest.js",
+    "updateProductSnRecallFlag":"npx wdio run wdio.conf.native.app.js --spec updateProductSnRecallFlagTest.js",
     "report": "allure generate allure-results/ --clean && allure open"
   },
   "keywords": [],

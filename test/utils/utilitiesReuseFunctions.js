@@ -1,4 +1,9 @@
+let expiryDatePattern;
+let serialNumberPattern;
+let gtinPattern;
+let batchNumberPattern;
 class UtilitiesReusableFunctions{
+
 
     async LeafletInfo(){
 

@@ -50,7 +50,7 @@ class PatientSettingPage{
    return val
   }
  
-    async patientsettingsScan(blockchainval){
+    async patientsettingsScan(blockchainvalue){
         
         // hover over menu settings 
         await this.hoverMenuSettings.click();
@@ -77,7 +77,7 @@ class PatientSettingPage{
             console.log("inside timeout");
         },3300);
         // set up the value epiqa for block chain 
-        await this.setupBlockChainNet.setValue(blockchainval);
+        await this.setupBlockChainNet.setValue(blockchainvalue);
         await setTimeout(()=>{
             console.log("inside timeout");
         },2300);

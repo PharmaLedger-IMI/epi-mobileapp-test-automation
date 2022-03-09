@@ -1,4 +1,4 @@
-const leafletVaildBatch=require('../pageObjectsNativeApp/nativeLeafLetPage')
+const leafletVaildBatch=require('../pageObjectsNativeApp/nativeLeafLetValid')
 const nativePatientPage = require('../pageObjectsNativeApp/patientSettingPage')
 const allureReporter = require('@wdio/allure-reporter').default
 
@@ -24,7 +24,7 @@ describe('ePI Automation Testing', () => {
     });
 
     it('should open Valid LeafLet Batch Info Page', async () => {
-        allureReporter.addFeature('LeafLet Batch Info Data');
+        allureReporter.addFeature('Valid LeafLet Batch Info Data');
          //Wait timeout for Leaflet to be displayed
         await leafletVaildBatch.waitTimeout();
         await browser.pause(4000);

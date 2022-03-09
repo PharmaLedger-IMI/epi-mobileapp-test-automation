@@ -2,34 +2,56 @@ const LeafletFetchData = require('../utils/utilitiesReuseFunctions')
 const testData = require('../testdata/testExpectations.json')
 const expect = require('chai').expect
 
+const expiryDatePattern = /(?<=Expiry:)(.*)(?=Serial)/g
+const serialNumberPattern = /(?<=Serial number:)(.*)(?=Product)/g
+const gtinPattern = /(?<=Product code:)(.*)(?=Batch)/g
+const batchNumberPattern = /(?<=Batch number:).*/g
+
+
 class RecalledBatchLeaflet{
 
     get recalledTextBatch(){
         return $("//android.widget.TextView[@text='Batch Recalled']")
     }
 
+    // get recalledTxtMsg(){
+    //     return $("//android.widget.TextView[@text='Tim said its recall']")
+    // }
+
     get recalledTxtMsg(){
-        return $("//android.widget.TextView[@text='Tim said its recall']")
+        return $("(//android.app.Dialog/descendant::android.view.View)[5]")
     }
 
     get closeBtnMsg(){
         return $("//android.widget.Button[@text='Close']")
     }
 
+    // get prodInfoMsg(){
+    //     return $("//android.widget.TextView[@text='Cosentyx']")
+    // }
+
     get prodInfoMsg(){
-        return $("//android.widget.TextView[@text='Cosentyx']")
+        return $("//android.widget.TextView[@text='Dolo-650']")
     }
 
     get leafletShieldInfoBtn(){
        return $("//android.widget.Image[@text='leaflet-verified']")
     }
 
+    get productDescription(){
+        return $("(//android.widget.TextView[@text=\"Dolo-650 Tablet 15's contains 'Paracetamol' which is a mild analgesic and fever reducer\"])");
+    }
+
     get batchInfoTxtMsg(){
         return $("//android.widget.TextView[@text='Batch Info']")
     }
 
-    get leafletProdInfoDetails(){
-        return $("//android.view.View[@text='Expiry:26 - Sep - 2023Serial number:123456Product code:09088884204609Batch number:WL6190']")
+    // get leafletProdInfoDetails(){
+    //     return $("//android.view.View[@text='Expiry:26 - Sep - 2023Serial number:123456Product code:09088884204609Batch number:WL6190']")
+    // }
+
+    get productLeafletInfoDetails(){
+        return $("(//android.app.Dialog/descendant::android.view.View)[6]")
     }
 
     async waitTimeout(){
@@ -60,6 +82,10 @@ class RecalledBatchLeaflet{
         await setTimeout(()=>{
             console.log("inside timeout");
         },2100);
+        await this.productDescription.getText();
+        await setTimeout(()=>{
+            console.log("inside timeout");
+        },2100);
         // click on leaflet shield button
         await this.leafletShieldInfoBtn.click();
         await setTimeout(()=>{
@@ -71,30 +97,30 @@ class RecalledBatchLeaflet{
             console.log("inside timeout");
         },2100);
         // leaflet product information details
-        await this.leafletProdInfoDetails.getText();
+        await this.productLeafletInfoDetails.getText();
         await setTimeout(()=>{
             console.log("inside timeout");
         },2100);
 
         expect(recalledMsg).to.equal(browser.testExpectations.batchRecallMessage);
 
-        const LeafletInfoDetails=await this.leafletProdInfoDetails.getText();
+        const LeafletInfoDetails=await this.productLeafletInfoDetails.getText();
         
-        const LeafletInfo = LeafletInfoDetails.split(':');
+        const LeafletInfo = LeafletInfoDetails.split(':',"=");
        
         console.log("Prod Info Details of Leaflet is: "+ LeafletInfo);
 
         // logs output for leafelt info for expiry date, serial number, gtin number, batch number pattern
-        console.log(LeafletFetchData.LeafletInfo().leafletInfoDetails.match(expiryDatePattern)[0]);
-        console.log(LeafletFetchData.LeafletInfo().leafletInfoDetails.match(serialNumberPattern)[0]);
-        console.log(LeafletFetchData.LeafletInfo().leafletInfoDetails.match(gtinPattern)[0]);
-        console.log(LeafletFetchData.LeafletInfo().leafletInfoDetails.match(batchNumberPattern)[0]);
+        console.log(leafletInfoDetails.match(expiryDatePattern)[0]);
+        console.log(leafletInfoDetails.match(serialNumberPattern)[0]);
+        console.log(leafletInfoDetails.match(gtinPattern)[0]);
+        console.log(leafletInfoDetails.match(batchNumberPattern)[0]);
 
         // chai assertions on expiry date, serial number, gtin number, batch number pattern
-        expect(LeafletFetchData.LeafletInfo().leafletInfoDetails.match(gtinPattern)[0]).to.equal(browser.testData.prodCode);
-        expect(LeafletFetchData.LeafletInfo().leafletInfoDetails.match(batchNumberPattern)[0]).to.equal(browser.testData.batchNumber);
-        expect(LeafletFetchData.LeafletInfo().leafletInfoDetails.match(serialNumberPattern)[0]).to.equal(browser.testData.serialNumber);
-        expect(LeafletFetchData.LeafletInfo().leafletInfoDetails.match(expiryDatePattern)[0]).to.equal(browser.testData.leafletExpiry);
+        expect(leafletInfoDetails.match(gtinPattern)[0]).to.equal(browser.testData.prodCode);
+        expect(leafletInfoDetails.match(batchNumberPattern)[0]).to.equal(browser.testData.batchNumber);
+        expect(leafletInfoDetails.match(serialNumberPattern)[0]).to.equal(browser.testData.serialNumber);
+        //expect(leafletInfoDetails.match(expiryDatePattern)[0]).to.equal(browser.testData.leafletExpiry);
     }
 
 }
