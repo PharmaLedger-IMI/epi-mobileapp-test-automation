@@ -1,6 +1,8 @@
 const leafletEPIUpload=require('../pageObjectsNativeApp/leafletEpiUploadPage')
 const allureReporter = require('@wdio/allure-reporter').default
 const nativePatientPage = require('../pageObjectsNativeApp/patientSettingPage')
+const timeWait=require('../utils/setTimeout')
+const commonFunctions=require('../utils/commonutilitiesFunctions')
 
 
 describe('ePI Native App Mobile Leaflet Automation Testing', () => {
@@ -11,16 +13,8 @@ describe('ePI Native App Mobile Leaflet Automation Testing', () => {
     allureReporter.startStep("EPI leaflet Details are Populated when EPI Leaflets for Batch is created")
 
     it('should open Patient Setting Scan Page', async() => {
-        allureReporter.addFeature('Patient Setting Scan Page');
-        // wait time for application to launch
-        await nativePatientPage.waitLaunchURL();
-        await browser.pause(3500);
-         // add the block chain value epiqa in settings page
-        await nativePatientPage.patientsettingsScan(patientSettingPage.blockchainval());
-        await browser.pause(4000);
-         // Scan the 2D matrix Data 
-        await nativePatientPage.scan2DImageProcess();
-        await browser.pause(5000);
+        commonFunctions.patientSettingsScanTest();
+
     });
 
     it('should open EPI LeafLet Batch Info Page', async () => {

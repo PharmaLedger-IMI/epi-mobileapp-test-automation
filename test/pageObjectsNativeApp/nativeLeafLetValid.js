@@ -1,6 +1,8 @@
-const LeafletFetchData = require('../utils/utilitiesReuseFunctions')
+const LeafletFetchData = require('../utils/commonutilitiesFunctions')
 const testData = require('../testdata/testExpectations.json')
 const expect = require('chai').expect
+const timeoutWait=require('../utils/setTimeout')
+
 
 class LeafLetPage{
 
@@ -21,45 +23,25 @@ class LeafLetPage{
     }
 
     async waitTimeout(){
-        await browser.pause(10000);
+        await timeoutWait.setTimeoutwait(30);
     }
 
     async leafletDetailsFetch(){
         //get leaflet text info data
+       
         await this.leafletTextName.getText();
-        await setTimeout(()=>{
-            console.log("inside timeout");
-        },2100);
+        await timeoutWait.setTimeoutTime(2);
         // click on leaflet shiled button icon
         await this.leafletshieldBtn.click();
-        await setTimeout(()=>{
-            console.log("inside timeout");
-        },2100);
+        await timeoutWait.setTimeoutTime(2);
         // get text on batch info 
         await this.bacthInfoVal.getText();
-        await setTimeout(()=>{
-            console.log("inside timeout");
-        },2100);
+        await timeoutWait.setTimeoutTime(2);
         // get text of leaflet details 
         await this.leafLetBatchInfoVal.getText();
-        await setTimeout(()=>{
-            console.log("inside timeout");
-        },2100);
-        const batchInfoDetails=await this.leafLetBatchInfoVal.getText();
-        const bacthInfo = batchInfoDetails.split(':');
-        console.log("Batch Info Details of Leaflet is: "+ bacthInfo);
+        await timeoutWait.setTimeoutTime(2);
 
-        // logs output for expiry date, serial number, gtin number and batch number pattern
-        console.log(LeafletFetchData.LeafletInfo().leafletInfoDetails.match(expiryDatePattern)[0]);
-        console.log(LeafletFetchData.LeafletInfo().leafletInfoDetails.match(serialNumberPattern)[0]);
-        console.log(LeafletFetchData.LeafletInfo().leafletInfoDetails.match(gtinPattern)[0]);
-        console.log(LeafletFetchData.LeafletInfo().leafletInfoDetails.match(batchNumberPattern)[0]);
-
-        // chai assertions on expiry date, serial number, gtin number and batch number pattern
-        expect(LeafletFetchData.LeafletInfo().leafletInfoDetails.match(gtinPattern)[0]).to.equal(browser.testData.prodCode);
-        expect(LeafletFetchData.LeafletInfo().leafletInfoDetails.match(batchNumberPattern)[0]).to.equal(browser.testData.batchNumber);
-        expect(LeafletFetchData.LeafletInfo().leafletInfoDetails.match(serialNumberPattern)[0]).to.equal(browser.testData.serialNumber);
-        expect(LeafletFetchData.LeafletInfo().leafletInfoDetails.match(expiryDatePattern)[0]).to.equal(browser.testData.leafletExpiry);
+        await commonFunctions.leafletDetailsFetchAndValidateData(this.leafLetBatchInfoVal);
 
     }
 

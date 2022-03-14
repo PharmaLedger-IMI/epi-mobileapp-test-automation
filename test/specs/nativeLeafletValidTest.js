@@ -1,6 +1,8 @@
 const leafletVaildBatch=require('../pageObjectsNativeApp/nativeLeafLetValid')
 const nativePatientPage = require('../pageObjectsNativeApp/patientSettingPage')
 const allureReporter = require('@wdio/allure-reporter').default
+const timeWait=require('../utils/setTimeout')
+const commonFunctions=require('../utils/commonutilitiesFunctions')
 
 describe('ePI Automation Testing', () => {
 
@@ -10,16 +12,7 @@ describe('ePI Automation Testing', () => {
     allureReporter.startStep("Valid leaflet Details are Populated when Batch is created")
 
     it('should open Patient Setting Scan Page', async () => {
-        allureReporter.addFeature('Patient Setting Scan Page');
-        // wait time for application to launch
-        await nativePatientPage.waitLaunchURL();
-        await browser.pause(3500);
-         // add the block chain value epiqa in settings page
-        await nativePatientPage.patientsettingsScan(patientSettingPage.blockchainval());
-        await browser.pause(4000);
-         // Scan the 2D matrix Data 
-        await nativePatientPage.scan2DImageProcess();
-        await browser.pause(5000);
+        commonFunctions.patientSettingsScanTest();
 
     });
 
@@ -27,11 +20,11 @@ describe('ePI Automation Testing', () => {
         allureReporter.addFeature('Valid LeafLet Batch Info Data');
          //Wait timeout for Leaflet to be displayed
         await leafletVaildBatch.waitTimeout();
-        await browser.pause(4000);
+        await timeWait.setTimeoutwait(4);
          //display details on Valid Leaflet for create batch scenario
         await leafletVaildBatch.leafletDetailsFetch();
-        await browser.pause(4500);
-        allureReporter.endStep("End Test step for Valid leaflet Details when Batch is created")
+        await timeWait.setTimeoutwait(4);
+       
     });
 
 })

@@ -4,8 +4,11 @@ const expect = require('chai').expect
 const timeoutWait=require('../utils/setTimeout')
 
 
-class LeafletEPIUpload{
-    
+class LeafletSNInvalid{
+
+    get inValidText(){
+        return $("(//android.widget.TextView[@text='Failed to validate serial Number'])")
+    }
 
     get productInfo(){
         return $("//android.widget.TextView[@text='Cosentyx']")
@@ -22,24 +25,23 @@ class LeafletEPIUpload{
         return $("//android.widget.TextView[@text='Batch Info']")
     }
 
-    get leafletEPIUploadText(){
-        return $("(//android.widget.TextView[@text='ENTRESTO (sacubitril and valsartan) is a combination of a neprilysin inhibitor and an angiotensin II receptor blocker.'])")
-    }
-
     get leafletProdInfoDetails(){
-        return $("(//android.view.View[@text='Expiry:09 - Jan - 2002Serial number:654321Product code:09088884204609Batch number:WL6190'])")
+        return $("(//android.view.View[@text='Expiry:26 - Sep - 2023Serial number:WRONGProduct code:09088884204609Batch number:WL6190'])")
     }
 
     async waitTimeout(){
         await timeoutWait.setTimeoutwait(30);
     }
 
-    async leafletEPIUploadDetailsFetch(){
-    
-        // get text of product info
+    async leafletSNInvalidDetailsFetch(){
+
+        // invalid leaflet text
+        await this.inValidText.getText();
+        await timeoutWait.setTimeoutTime(2);
+        // get product info text
         await this.productInfo.getText();
         await timeoutWait.setTimeoutTime(2);
-        // get text of product info description
+        // get product info description
         await this.ProductInfoDescription.getText();
         await timeoutWait.setTimeoutTime(2);
         // click on leaflet shiled button icon
@@ -48,16 +50,14 @@ class LeafletEPIUpload{
         // get text of batch info
         await this.batchInfo.getText();
         await timeoutWait.setTimeoutTime(2);
-        //get text information of EPI Leaflet  
-        await this.leafletEPIUploadText.getText();
-        await timeoutWait.setTimeoutTime(2);
+        // get leaflet prod info data 
         await this.leafletProdInfoDetails.getText();
         await timeoutWait.setTimeoutTime(2);
 
         await commonFunctions.leafletDetailsFetchAndValidateData(this.leafletProdInfoDetails);
 
 
-
     }
 }
-module.exports=new LeafletEPIUpload();
+
+module.exports=new LeafletSNInvalid();

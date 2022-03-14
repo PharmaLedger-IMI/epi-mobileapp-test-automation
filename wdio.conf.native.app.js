@@ -38,8 +38,9 @@ exports.config = {
     specs: [
         [
             // 'test/specs/nativeLeafletValidTest.js'
-            //'test/specs/addProductBatchLeafletValidTest.js'
-            'test/specs/recalledBatchLeafLetTest.js'
+            //'test/specs/addProductBatchLeafletTest.js'
+           // 'test/specs/editProductSnRecallFlagTest.js'
+             'test/specs/editBatchRecallMsgLeafLetTest.js'
         ], 
         //'test/specs/nativeEpiQATest.js'
     ],
@@ -74,14 +75,13 @@ exports.config = {
         maxInstances: 1,
         "appium:platformName": "Android",
         "appium:deviceName": "emulator-5554",
-        "appium:platformVersion": "7.0",
+        "appium:platformVersion": "10",
         "appium:automationName": "UIAutomator2",
         "appium:appPackage": "eu.pharmaledger.epi",
         "appium:appActivity": "eu.pharmaledger.epi.MainActivity",
         "appium:connectHardwareKeyboard": "false",
         "appium:unicodeKeyboard": "true",
         "appium:resetKeyboard": "true",
-        'appium:noReset': true,
         'appium:newCommandTimeout': 240,
     }],
     //
@@ -239,7 +239,7 @@ exports.config = {
      * Function to be executed before a test (in Mocha/Jasmine) starts.
      */
      beforeTest: function (test, context) {
-        browser.setTimeout({ 'pageLoad': 15000 })
+        browser.setTimeout({ 'pageLoad': 25000 })
      },
     /**
      * Hook that gets executed _before_ a hook within the suite starts (e.g. runs before calling
@@ -266,12 +266,13 @@ exports.config = {
      afterTest:async function(test, context, { error, result, duration, passed, retries }) {
        
         if(passed){
-            console.info("Starting Mobile Execution");
-            const { stdout1, stderr1 } =await exec('cd ../../../epi-mobileapp-test-automation && npm run sNrecalledProduct');
+            // console.info("Starting Mobile Execution");
+            // const { stdout1, stderr1 } =await exec('cd ../../../epi-mobileapp-test-automation && npm run addProductBatchLeaflet');
         
-            console.log('stdout: ', stdout1);
+            // console.log('stdout: ', stdout1);
             
-            console.log('stderr: ', stderr1);
+            // console.log('stderr: ', stderr1);
+            console.log("Passed Mobile test execution")
         }
         if(error){
             browser.takeScreenshot();

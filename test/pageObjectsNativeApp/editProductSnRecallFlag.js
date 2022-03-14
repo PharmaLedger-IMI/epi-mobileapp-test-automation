@@ -1,6 +1,8 @@
 const LeafletFetchData = require('../utils/utilitiesReuseFunctions')
 const testData = require('../testdata/testExpectations.json')
 const expect = require('chai').expect
+const timeoutWait=require('../utils/setTimeout')
+
 
 const expiryDatePattern = /(?<=Expiry:)(.*)(?=Serial)/g
 const serialNumberPattern = /(?<=Serial number:)(.*)(?=Product)/g
@@ -44,71 +46,41 @@ get productLeafletInfoDetails(){
 }
 
 async waitTimeout(){
-    await browser.pause(10000);
+    await timeoutWait.setTimeoutwait(30);
 }
 
 async leafletRecalledBatchFetch(){
     // recalled text message
     const recalledMsg=await this.recalledTxtMsg.getText();
     console.log(recalledMsg);
-    await setTimeout(()=>{
-        console.log("inside timeout");
-    },2100);
+    await timeoutWait.setTimeoutTime(2);
    // close button click
     await this.closeBtnMsg.click();
-    await setTimeout(()=>{
-        console.log("inside timeout");
-    },2100);
+    await timeoutWait.setTimeoutTime(2);
     // recalled text message 
     await this.recalledTextBatch.getText();
-    await setTimeout(()=>{
-        console.log("inside timeout");
-    },2100);
+    await timeoutWait.setTimeoutTime(2);
     // product info message
     await this.prodInfoMsg.getText();
-    await setTimeout(()=>{
-        console.log("inside timeout");
-    },2100);
+    await timeoutWait.setTimeoutTime(2);
     // get product description text
     await this.productDescription.getText();
-    await setTimeout(()=>{
-        console.log("inside timeout");
-    },2100);
+    await timeoutWait.setTimeoutTime(2);
     // click on leaflet shield button
     await this.leafletShieldInfoBtn.click();
-    await setTimeout(()=>{
-        console.log("inside timeout");
-    },2100);
+    await timeoutWait.setTimeoutTime(2);
     // btach info text message 
     await this.batchInfoTxtMsg.getText();
-    await setTimeout(()=>{
-        console.log("inside timeout");
-    },2100);
+    await timeoutWait.setTimeoutTime(2);
     // leaflet product information details
     await this.productLeafletInfoDetails.getText();
-    await setTimeout(()=>{
-        console.log("inside timeout");
-    },2100);
+    await timeoutWait.setTimeoutTime(2);
 
-    expect(recalledMsg).to.equal(browser.testExpectations.batchRecallMessage);
 
-    const LeafletInfoDetails=await this.productLeafletInfoDetails.getText();
-    
-    const LeafletInfo = LeafletInfoDetails.split(':',"=");
-   
-    console.log("Prod Info Details of Leaflet is: "+ LeafletInfo);
+   expect(recalledMsg).to.equal(browser.testExpectations.batchRecallMessage);
 
-    // logs output for leafelt info for expiry date, serial number, gtin number, batch number pattern
-    console.log(leafletInfoDetails.match(expiryDatePattern)[0]);
-    console.log(leafletInfoDetails.match(serialNumberPattern)[0]);
-    console.log(leafletInfoDetails.match(gtinPattern)[0]);
-    console.log(leafletInfoDetails.match(batchNumberPattern)[0]);
+   await commonFunctions.leafletDetailsFetchAndValidateData(this.productLeafletInfoDetails);
 
-    // chai assertions on expiry date, serial number, gtin number, batch number pattern
-    expect(leafletInfoDetails.match(gtinPattern)[0]).to.equal(browser.testData.prodCode);
-    expect(leafletInfoDetails.match(batchNumberPattern)[0]).to.equal(browser.testData.batchNumber);
-    expect(leafletInfoDetails.match(serialNumberPattern)[0]).to.equal(browser.testData.serialNumber);
-    //expect(leafletInfoDetails.match(expiryDatePattern)[0]).to.equal(browser.testData.leafletExpiry);
 }
 
 }

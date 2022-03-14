@@ -1,5 +1,12 @@
-let val="epiqa"
+const timeoutWait=require('../utils/setTimeout')
+const testData=require('../testData/configTest.json')
+
+//let val="epiqa"
 class PatientSettingPage{
+
+    get allowCamera(){
+        return $("id=com.android.permissioncontroller:id/permission_allow_button");
+    }
 
     get hoverMenuSettings(){
         return $("//android.widget.Image[@text='menu-light']")
@@ -31,66 +38,41 @@ class PatientSettingPage{
 
     async waitLaunchURL(){
 
-       await browser.pause(28000);
-       await browser.waitUntil( () => 
-          this.hoverMenuSettings, 
-       { 
-         timeout:7400, 
-         timeoutMsg:"Error message not poulated"
-       })
+       await this.allowCamera.click();
+       await timeoutWait.setTimeoutwait(60);
+       await timeoutWait.waitforelement(this.hoverMenuSettings);
     }
 
-    // async hideDeviceKeyboard(){
-    //     if (await browser.isKeyboardShown()) {
-    //         await browser.hideKeyboard();
-    //      }
-    // }
 
-  blockchainval(){
-   return val
-  }
+//   blockchainval(){
+//    return val
+//   }
  
-    async patientsettingsScan(blockchainvalue){
+    async patientsettingsScan(setBlockChainValue){
         
         // hover over menu settings 
         await this.hoverMenuSettings.click();
-        await setTimeout(()=>{
-            console.log("inside timeout");
-        },3300);
+        await timeoutWait.setTimeoutTime(3);
         // click on setting button 
         await this.settingsBtn.click();
-        await setTimeout(()=>{
-            console.log("inside timeout");
-        },3300);
+        await timeoutWait.setTimeoutTime(3);
         // click on the block chain Network
         await this.appBlockchainNetwork.click();
-        await setTimeout(()=>{
-            console.log("inside timeout");
-        },3300);
+        await timeoutWait.setTimeoutTime(3);
         // click on block chain value text
         await this.setupBlockChainNet.click();
-        await setTimeout(()=>{
-            console.log("inside timeout");
-        },2300);
+        await timeoutWait.setTimeoutTime(3);
         await this.setupBlockChainNet.clearValue();
-        await setTimeout(()=>{
-            console.log("inside timeout");
-        },3300);
+        await timeoutWait.setTimeoutTime(3);
         // set up the value epiqa for block chain 
-        await this.setupBlockChainNet.setValue(blockchainvalue);
-        await setTimeout(()=>{
-            console.log("inside timeout");
-        },2300);
+        await this.setupBlockChainNet.setValue(setBlockChainValue);
+        await timeoutWait.setTimeoutTime(3);
        //click on save button to save the setting
         await this.saveBtnBlockChain.click();
-        await setTimeout(()=>{
-            console.log("inside timeout");
-        },2300);
+        await timeoutWait.setTimeoutTime(3);
         // click on back button 
         await this.menuBackBtn.click();
-        await setTimeout(()=>{
-            console.log("inside timeout");
-        },3100);
+        await timeoutWait.setTimeoutTime(3);
 
     }
 
@@ -98,9 +80,7 @@ class PatientSettingPage{
 
         // click on scan 2D Matrix data
         await this.scanDataMatrix.click();
-        await setTimeout(()=>{
-            console.log("inside timeout");
-        },5500);
+        await timeoutWait.setTimeoutTime(5);
 
 
     }

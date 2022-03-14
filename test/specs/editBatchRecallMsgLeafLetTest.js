@@ -1,6 +1,8 @@
-const updateProductSnRecalledFlag=require('../pageObjectsNativeApp/updateProductSnRecallFlag')
+const editBatchRecallMsg=require('../pageObjectsNativeApp/editBatchRecallMsgLeaflet')
 const allureReporter = require('@wdio/allure-reporter').default
 const nativePatientPage = require('../pageObjectsNativeApp/patientSettingPage')
+const timeWait=require('../utils/setTimeout')
+const commonFunctions=require('../utils/commonutilitiesFunctions')
 
 describe('ePI Native App Mobile Leaflet Automation Testing', () => {
 
@@ -11,26 +13,16 @@ describe('ePI Native App Mobile Leaflet Automation Testing', () => {
  
     
     it('should open Patient Setting Scan Page', async() => {
-        allureReporter.addFeature('Patient Setting Scan Page');
-        // wait time for application to launch
-        await nativePatientPage.waitLaunchURL();
-        await browser.pause(3500);
-        // add the block chain value epiqa in settings page
-        await nativePatientPage.patientsettingsScan(patientSettingPage.blockchainval());
-        await browser.pause(4000);
-        // Scan the 2D matrix Data 
-        await nativePatientPage.scan2DImageProcess();
-        await browser.pause(5000);
-
+        commonFunctions.patientSettingsScanTest();
     });
 
-    it('should open LeafLet for Recalled Batch Info Page', async () => {
-        allureReporter.addFeature('Recalled Batch Leaflet display Info Data');
+    it('should open LeafLet for edit Batch Recall Msg Info Page', async () => {
+        allureReporter.addFeature('Edit Batch Recall Msg Leaflet display Info Data');
         //Wait timeout for Leaflet to be displayed 
-        await leafletRecalledBatch.waitTimeout;
+        await editBatchRecallMsg.waitTimeout;
         await browser.pause(4000);
         //display details on Leaflet for recalled batch scenario
-        await leafletRecalledBatch.leafletRecalledBatchFetch();
+        await editBatchRecallMsg.editBatchRecallMsgFetch();
         await browser.pause(4500); 
         allureReporter.endStep("End Recalled Batch leaflet display test")
 

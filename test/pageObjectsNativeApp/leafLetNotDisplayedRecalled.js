@@ -1,6 +1,8 @@
 const LeafletFetchData = require('../utils/utilitiesReuseFunctions')
 const testData = require('../testdata/testExpectations.json')
 const expect = require('chai').expect
+const timeoutWait=require('../utils/setTimeout')
+
 
 class LeafletRecalled{
 
@@ -17,27 +19,23 @@ class LeafletRecalled{
     }
 
     async waitTimeout(){
-        await browser.pause(10000);
+        await timeoutWait.setTimeoutwait(30);
     }
 
     async leafletRecalledDetailsFetch(){
         //recalled text message
         await this.recalledText.getText();
-        await setTimeout(()=>{
-            console.log("inside timeout");
-        },2100);
+        await timeoutWait.setTimeoutTime(2);
         // leaflet not displayed message
         await this.leafletNotDisplayedMessage.getText();
-        await setTimeout(()=>{
-            console.log("inside timeout");
-        },2100);
+        await timeoutWait.setTimeoutTime(2);
         // leaflet not displayed for product created 
         await this.leafletNotdisplayedProdInfoDetails.getText();
-        await setTimeout(()=>{
-            console.log("inside timeout");
-        },2100);
+        await timeoutWait.setTimeoutTime(2);
         const batchInfoDetails=await this.leafletNotdisplayedProdInfoDetails.getText();
         console.log("Prod Info Details of Leaflet is: "+ batchInfoDetails);
+
+        await commonFunctions.leafletDetailsFetchAndValidateData(this.leafletNotdisplayedProdInfoDetails);
 
     }
 
