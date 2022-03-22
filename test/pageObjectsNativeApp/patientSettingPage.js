@@ -1,5 +1,5 @@
-const timeoutWait=require('../utils/setTimeout')
-const testData=require('../testData/configTest.json')
+const timeoutWait = require('../utils/setTimeout')
+const configData=require('../testdata/configTest.json')
 
 //let val="epiqa"
 class PatientSettingPage{
@@ -38,9 +38,11 @@ class PatientSettingPage{
 
     async waitLaunchURL(){
 
-       await this.allowCamera.click();
-       await timeoutWait.setTimeoutwait(60);
-       await timeoutWait.waitforelement(this.hoverMenuSettings);
+        await this.allowCamera.click();
+        console.log("Clicked on allow camera")
+        await timeoutWait.setTimeoutWait(55);
+        console.log("wait timeout")
+        await timeoutWait.waitForElement(this.hoverMenuSettings);
     }
 
 
@@ -48,8 +50,10 @@ class PatientSettingPage{
 //    return val
 //   }
  
-    async patientsettingsScan(setBlockChainValue){
+    async patientsettingsScan(){
         
+        // console.log("waiting  patientsettingsScan")
+        // await browser.pause(80000);
         // hover over menu settings 
         await this.hoverMenuSettings.click();
         await timeoutWait.setTimeoutTime(3);
@@ -65,7 +69,7 @@ class PatientSettingPage{
         await this.setupBlockChainNet.clearValue();
         await timeoutWait.setTimeoutTime(3);
         // set up the value epiqa for block chain 
-        await this.setupBlockChainNet.setValue(setBlockChainValue);
+        await this.setupBlockChainNet.setValue(configData[0]['setBlockChainValue'].setUserBlockChainValue);
         await timeoutWait.setTimeoutTime(3);
        //click on save button to save the setting
         await this.saveBtnBlockChain.click();

@@ -5,10 +5,10 @@
   "main": "wdio.conf.js",
   "scripts": {
     "test": "npx wdio run wdio.conf.native.app.js",
-    "nativeLeafletValidTest":"npx wdio run wdio.conf.native.app.js --spec nativeLeafletValidTest.js",
-    "addProductBatchLeaflet":"npx wdio run wdio.conf.native.app.js --spec addProductBatchLeafletTest.js",
-    "editBatchRecallMsg":"npx wdio run wdio.conf.native.app.js --spec recalledBatchLeafLetTest.js",
-    "updateProductSnRecallFlag":"npx wdio run wdio.conf.native.app.js --spec editProductSnRecallFlagTest.js",
+    "nativeLeafletValidTest": "npx wdio run wdio.conf.native.app.js --spec nativeLeafletValidTest.js",
+    "addProductBatchTest": "npx wdio run wdio.conf.native.app.js --spec createProductWithAddBatchTest.js",
+    "editBatchRecallMsgTest": "npx wdio run wdio.conf.native.app.js --spec editBatchCheckRecallMsgTest.js",
+    "updateProductSnRecallTest": "npx wdio run wdio.conf.native.app.js --spec editProductSnRecallListTest.js",
     "report": "allure generate allure-results/ --clean && allure open"
   },
   "keywords": [],
@@ -31,6 +31,7 @@
   },
   "dependencies": {
     "appium": "^1.22.2",
-    "deepmerge": "^4.2.2"
+    "deepmerge": "^4.2.2",
+    "moment": "^2.29.1"
   }
 }

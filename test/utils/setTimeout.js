@@ -1,7 +1,7 @@
-class setTimeout {
+class TimeoutWait {
 
      // waits until element is located with specified seconds
-    async waitforelement(element, seconds) {
+    async waitForElement(element, seconds) {
         try {
             for (let i = 0; i < seconds; i++) {
                 await browser.waitUntil(
@@ -20,7 +20,7 @@ class setTimeout {
 
     }
 // waits until element is located with 60 seconds
-    async waitforelement(element) {
+    async waitForElement(element) {
 
         await browser.waitUntil(
             async () => (await element),
@@ -32,10 +32,10 @@ class setTimeout {
     }
 
     // To wait for specified time to load the application
-    async setTimeoutwait(seconds){
+    async setTimeoutWait(seconds){
 
         try{
-            for(let i=0; i<seconds; i++){
+            for(let i = 0; i < seconds; i++){
                 await browser.pause(1000);
             }
         }catch(err){
@@ -46,7 +46,7 @@ class setTimeout {
     async setTimeoutTime(seconds){
 
         try{
-            for(let i=0; i<seconds; i++){
+            for(let i = 0; i < seconds; i++){
                 await setTimeout(() => {
                     console.log("inside timeout");
                 }, 1000);
@@ -58,4 +58,4 @@ class setTimeout {
    
 }
 
-module.exports = new setTimeout();
+module.exports = new TimeoutWait();

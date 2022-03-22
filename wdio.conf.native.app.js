@@ -37,10 +37,10 @@ exports.config = {
     ],
     specs: [
         [
-            // 'test/specs/nativeLeafletValidTest.js'
-            //'test/specs/addProductBatchLeafletTest.js'
-           // 'test/specs/editProductSnRecallFlagTest.js'
-             'test/specs/editBatchRecallMsgLeafLetTest.js'
+           
+           // 'test/specs/createProductWithAddBatchTest.js'
+           'test/specs/editBatchCheckRecallMsgTest.js',
+           'test/specs/editProductSnRecallListTest.js'
         ], 
         //'test/specs/nativeEpiQATest.js'
     ],
@@ -83,6 +83,7 @@ exports.config = {
         "appium:unicodeKeyboard": "true",
         "appium:resetKeyboard": "true",
         'appium:newCommandTimeout': 240,
+        'appium:noReset':"false"
     }],
     //
     // ===================
@@ -118,11 +119,11 @@ exports.config = {
     baseUrl: '',
     //npx
     // Default timeout for all waitFor* commands.
-    waitforTimeout: 10000,
+    waitforTimeout: 20000,
     //
     // Default timeout in milliseconds for request
     // if browser driver or grid doesn't send response
-    connectionRetryTimeout: 120000,
+    connectionRetryTimeout: 200000,
     //
     // Default request retries count
     connectionRetryCount:5,
@@ -165,7 +166,7 @@ exports.config = {
     // See the full list at http://mochajs.org/
     mochaOpts: {
         ui: 'bdd',
-        timeout: 100000
+        timeout: 400000 
     },
     //
     // =====
@@ -211,18 +212,18 @@ exports.config = {
      * @param {Array.<String>} specs        List of spec file paths that are to be run
      * @param {Object}         browser      instance of created browser/device session
      */
-    before: function (capabilities, specs) {
-        try{
+//     before: function (capabilities, specs) {
+//         try{
             
-       driver.testExpectations = JSON.parse(fs.readFileSync('./test/testdata/testExpectations.json'));
-       console.log("File is read successfully")     
-  } catch(err) {
+//        driver.testExpectations = JSON.parse(fs.readFileSync('./test/testdata/testExpectations.json'));
+//        console.log("File is read successfully")     
+//   } catch(err) {
             
-            console.log("Error while reading file: ", err);
+//             console.log("Error while reading file: ", err);
             
-            }
-    },
-    /**
+//             }
+//     },
+   /**
      * Runs before a WebdriverIO command gets executed.
      * @param {String} commandName hook command name
      * @param {Array} args arguments that command would receive
@@ -238,9 +239,9 @@ exports.config = {
     /**
      * Function to be executed before a test (in Mocha/Jasmine) starts.
      */
-     beforeTest: function (test, context) {
-        browser.setTimeout({ 'pageLoad': 25000 })
-     },
+    //  beforeTest: function (test, context) {
+    //     browser.setTimeout({ 'pageLoad': 25000 })
+    //  },
     /**
      * Hook that gets executed _before_ a hook within the suite starts (e.g. runs before calling
      * beforeEach in Mocha)
