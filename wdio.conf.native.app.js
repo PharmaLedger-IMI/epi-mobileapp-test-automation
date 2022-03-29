@@ -38,9 +38,14 @@ exports.config = {
     specs: [
         [
            
-           // 'test/specs/createProductWithAddBatchTest.js'
-           'test/specs/editBatchCheckRecallMsgTest.js',
-           'test/specs/editProductSnRecallListTest.js'
+            'test/specs/createProductWithAddBatchTest.js',
+            'test/specs/editBatchCheckRecallMsgTest.js',
+            'test/specs/editProductSnRecallListTest.js',
+            'test/specs/enableSnCheckSnIsValidTest.js',
+            'test/specs/enableSnCheckSnIsInvalidTest.js',
+            'test/specs/disableSnCheckSnIsValidTest.js',
+            'test/specs/disableSnCheckWithoutSnValidTest.js'
+           // 'test/specs/uploadEPILeafletTest.js'
         ], 
         //'test/specs/nativeEpiQATest.js'
     ],

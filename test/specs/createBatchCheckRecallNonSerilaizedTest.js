@@ -1,17 +1,17 @@
-const leafletEPIUpload=require('../pageObjectsNativeApp/uploadEpiLeaflet')
+const createBatchRecallSerailized=require('../pageObjectsNativeApp/createBatchCheckRecallNonSerialized')
 const allureReporter = require('@wdio/allure-reporter').default
 const nativePatientPage = require('../pageObjectsNativeApp/patientSettingPage')
 const timeWait=require('../utils/setTimeout')
 const commonFunctions=require('../utils/commonutilitiesFunctions')
 
-
 describe('ePI Native App Mobile Leaflet Automation Testing', () => {
-    
-    allureReporter.addSeverity('Critical');
-    allureReporter.addTestId('EPI_LeafletDisplayed_Setup')
-    allureReporter.addDescription('Check that EPI Leaflet displayed')
-    allureReporter.startStep("EPI leaflet Details are Populated when EPI Leaflets for Batch is created")
 
+    allureReporter.addSeverity('Critical');
+    allureReporter.addTestId('recalledBatch_LeafletDisplayed_Setup')
+    allureReporter.addDescription('Check that batch is recalled and Leaflet is displayed')
+    allureReporter.startStep("Recalled Leaflet Details are Populated after Recalled Message Displayed")
+ 
+    
     it('should open Patient Setting Scan Page', async() => {
         allureReporter.addFeature('Patient Setting Scan Page');
         // wait time for application to launch
@@ -26,16 +26,15 @@ describe('ePI Native App Mobile Leaflet Automation Testing', () => {
 
     });
 
-    it('should open EPI LeafLet Batch Info Page', async () => {
-        allureReporter.addFeature('EPI LeafLet for Batch Info Data');
-         //Wait timeout for Leaflet to be displayed
-        await leafletEPIUpload.waitTimeout;
+    it('should open LeafLet for Recalled Batch Info Page', async () => {
+        allureReporter.addFeature('Recalled Batch Leaflet display Info Data');
+        //Wait timeout for Leaflet to be displayed 
+        await createBatchRecallSerailized.waitTimeout();
         await timeWait.setTimeoutwait(4);
-         //display details on EPI Leaflet when EPI Leaflet for batch scenario created
-        await leafletEPIUpload.uploadEPILeafletDetailsFetch();
+        //display details on Leaflet for recalled batch scenario
+        await createBatchRecallSerailized.createBatchCheckRecallNonSerailzedFetch();
         await timeWait.setTimeoutwait(4);
        
-
 });
 
 });

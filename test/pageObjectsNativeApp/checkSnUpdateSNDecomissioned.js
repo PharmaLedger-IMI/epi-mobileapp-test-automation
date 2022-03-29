@@ -38,7 +38,7 @@ class LeafletSNDecomissioned{
         await timeoutWait.setTimeoutwait(30);
     }
 
-    async leafletSNDecommisonedDetailsFetch(){
+    async sNUpdateSnDecommisonedDetailsFetch(){
 
         //get decommisoned text 
         await this.decommisonedText.getText();

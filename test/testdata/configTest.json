@@ -4,5 +4,25 @@
     {
      "setUserBlockChainValue":"epiqa"
     }
+},
+{
+    "epiDisplayedDetails":
+    {
+       "recalledTextBatch":"Batch Recalled",
+       "recalledTxtMsg":"Tim said its recall",
+       "prodInfoMsg":"epi-auto-",
+       "leafletShieldInfoBtn":"leaflet-verified",
+       "leaflet_ProductLevel_Description":"Leaflet Product Level",
+       "leaflet_BatchLevel_Description":"Leaflet Batch Level",
+       "leaflet_UpdatedLevel_Description":"Leaflet Updated Level"
+    }
+},
+{
+    "epiNotDisplayedDetails":
+    {
+        "leafletFailedMsgText":"Failed to validate serial Number",
+        "leafletNotDisplayedText":"Leaflet Not Displayed",
+        "leafLetNotDisplayedProdData":"The leaflet for this product can't be displayed due to validation settings."
+    }
 }
 ]

@@ -30,7 +30,7 @@ describe('ePI Native App Mobile Leaflet Automation Testing', () => {
         //Wait timeout for Leaflet to be displayed
         await timeWait.setTimeoutwait(4);
         //display details on Decommisoned Serail Number Leaflet for Decommisoned Serial Number batch scenario
-        await leafletSNDecommisonedBatch.leafletSNDecommisonedDetailsFetch();
+        await leafletSNDecommisonedBatch.sNUpdateSnDecommisonedDetailsFetch();
         await timeWait.setTimeoutwait(4);
 
 });

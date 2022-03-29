@@ -1,4 +1,4 @@
-const addProductBatchLeaflet=require('../pageObjectsNativeApp/createProductWithAddBatch')
+const enableSnCheckSnValid=require('../pageObjectsNativeApp/enabelSnCheckSnIsValid')
 const allureReporter = require('@wdio/allure-reporter').default
 const nativePatientPage = require('../pageObjectsNativeApp/patientSettingPage')
 const timeoutWait=require('../utils/setTimeout')
@@ -30,10 +30,10 @@ describe('ePI Native App Mobile Leaflet Automation Testing', () => {
     it('should open Recalled LeafLet Batch Info Page', async () => {
         allureReporter.addFeature('LeafLet Recalled Batch Info Data');
         //wait timeout for Leaflet to be displayed
-        await addProductBatchLeaflet.waitTimeout();
+        await enableSnCheckSnValid.waitTimeout();
         await timeoutWait.setTimeoutWait(3);
         //display details on Add_productBatch Leaflet when Add_productBatch Leaflet for batch scenario created
-        await addProductBatchLeaflet.addProductBatchLeafletDetailsFetch();
+        await enableSnCheckSnValid.enableSnCheckSnIsValidDetailsFetch();
         await timeoutWait.setTimeoutWait(4);
         // await setTimeout(() => {
         //     console.log("inside timeout");

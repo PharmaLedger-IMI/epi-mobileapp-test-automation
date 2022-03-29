@@ -24,7 +24,7 @@ get closeBtnMsg(){
 }
 
 get prodInfoMsg(){
-    return $("//android.widget.TextView[@text='Dolo-650']")
+    return $("(//android.view.View[@resource-id='leaflet-header']/descendant::android.widget.TextView)[1]")
 }
 
 get leafletShieldInfoBtn(){

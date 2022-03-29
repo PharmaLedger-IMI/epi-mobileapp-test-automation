@@ -1,18 +1,23 @@
-
 const testData = require('../testdata/testExpectations.json')
 const expect = require('chai').expect
-const timeout=require('../utils/setTimeout')
+const timeoutWait=require('../utils/setTimeout')
 const moment = require('moment')
-
+const commonFunctions=require('../utils/commonutilitiesFunctions')
 
 const expiryDatePattern = /(?<=Expiry:)(.*)(?=Serial)/g
 const serialNumberPattern = /(?<=Serial number:)(.*)(?=Product)/g
 const gtinPattern = /(?<=Product code:)(.*)(?=Batch)/g
 const batchNumberPattern = /(?<=Batch number:).*/g
 
-class AddproductBatchLeafletPage{
+
+class EnableSnCheckSnIsInvalid{
+
+    get inValidText(){
+        return $("(//android.widget.TextView[@text='Failed to validate serial Number'])")
+    }
 
     get productInfo(){
+        
         return $("(//android.view.View[@resource-id='leaflet-header']/descendant::android.widget.TextView)[1]")
     }
     get productDescription(){
@@ -32,31 +37,32 @@ class AddproductBatchLeafletPage{
     }
 
     async waitTimeout(){
-        await timeout.setTimeoutWait(30);
-        await timeout.waitForElement(this.productInfo);
-   
+        await timeoutWait.setTimeoutWait(30);
+        await timeoutWait.waitForElement(this.inValidText);
+
     }
 
- 
-    async addProductBatchLeafletDetailsFetch(){
+    async enableSnCheckSnInvalidDetailsFetch(){
 
-        // commonFunctions.getLeafletDetails(true);
-        // await timeout.setTimeoutTime(3);
+        // invalid leaflet text
+        await this.inValidText.getText();
+        await timeoutWait.setTimeoutTime(2);
+        // get product info text
         await this.productInfo.getText();
-       // expect(this.productInfo.getText()).to.not.equal(null);
-        await timeout.setTimeoutTime(3);
-        //get text of product information description
+        await timeoutWait.setTimeoutTime(2);
+        // get product info description
         await this.productDescription.getText();
-        await timeout.setTimeoutTime(3);
-        //click on leaflet Shieled Button
+        await timeoutWait.setTimeoutTime(2);
+        // click on leaflet shiled button icon
         await this.leafletVerifiedShiledBtn.click();
-        await timeout.setTimeoutTime(3);
-        // get batch info text
+        await timeoutWait.setTimeoutTime(2);
+        // get text of batch info
         await this.batchInfo.getText();
-        await timeout.setTimeoutTime(3);
-        // get leaflet product details information
+        await timeoutWait.setTimeoutTime(2);
+        // get leaflet prod info data 
         await this.productLeafletInfoDetails.getText();
-        await timeout.setTimeoutTime(3);  
+        await timeoutWait.setTimeoutTime(2);
+
         const leafletInfoDetailsFetch = await this.productLeafletInfoDetails.getText();
         console.log("Prod Info Details of Leaflet is:"+" "+leafletInfoDetailsFetch)
         const leafletInfoFetch = leafletInfoDetailsFetch.replace(':',"=");
@@ -67,8 +73,12 @@ class AddproductBatchLeafletPage{
          console.log(leafletInfoDetailsFetch.match(serialNumberPattern)[0]);
          console.log(leafletInfoDetailsFetch.match(gtinPattern)[0]);
          console.log(leafletInfoDetailsFetch.match(batchNumberPattern)[0]);
+         // console.log(this.LeafletInfo().expiryDatePattern[0].match(expiryDatePattern)[0]);
+         // console.log(this.LeafletInfo().match(serialNumberPattern)[0]);
+         // console.log(this.LeafletInfo().match(gtinPattern)[0]);
+         // console.log(this.LeafletInfo().match(batchNumberPattern)[0]);
  
-         await timeout.setTimeoutTime(3);
+         await timeoutWait.setTimeoutTime(3);
 
          const datebefore=leafletInfoDetailsFetch.match(expiryDatePattern)[0];
          const dateafter=moment(datebefore, "DD-MMM-YYYY").format("YYMMDD")
@@ -77,10 +87,15 @@ class AddproductBatchLeafletPage{
          // chai assertions on expiry date, serial number, gtin number and batch Number pattern
          expect(leafletInfoDetailsFetch.match(gtinPattern)[0]).to.equal(testData.prodCode);
          expect(leafletInfoDetailsFetch.match(batchNumberPattern)[0]).to.equal(testData.batchValue);
-         expect(leafletInfoDetailsFetch.match(serialNumberPattern)[0]).to.equal(testData.batchSerialNumber);
+         expect(leafletInfoDetailsFetch.match(serialNumberPattern)[0]).to.not.equal(testData.batchSerialNumber);
          expect(dateafter).to.equal(testData.expiry);
-           
+        //  expect(this.LeafletInfo().match(gtinPattern)[0]).to.equal(testData.prodCode);
+        //  expect(this.LeafletInfo().match(batchNumberPattern)[0]).to.equal(testData.batchValue);
+         // expect(this.LeafletInfo().match(serialNumberPattern)[0]).to.equal(testData.batchSerialNumber);
+         // expect(this.LeafletInfo().match(expiryDatePattern)[0]).to.equal(testData.expiryDate);
+
+
     }
 }
 
-module.exports=new AddproductBatchLeafletPage();
+module.exports=new EnableSnCheckSnIsInvalid();

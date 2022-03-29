@@ -1,16 +1,15 @@
-
 const testData = require('../testdata/testExpectations.json')
 const expect = require('chai').expect
 const timeout=require('../utils/setTimeout')
 const moment = require('moment')
-
+const commonFunctions=require('../utils/commonutilitiesFunctions')
 
 const expiryDatePattern = /(?<=Expiry:)(.*)(?=Serial)/g
 const serialNumberPattern = /(?<=Serial number:)(.*)(?=Product)/g
 const gtinPattern = /(?<=Product code:)(.*)(?=Batch)/g
 const batchNumberPattern = /(?<=Batch number:).*/g
 
-class AddproductBatchLeafletPage{
+class DisableSnCheckWithoutSnIsValid{
 
     get productInfo(){
         return $("(//android.view.View[@resource-id='leaflet-header']/descendant::android.widget.TextView)[1]")
@@ -34,11 +33,11 @@ class AddproductBatchLeafletPage{
     async waitTimeout(){
         await timeout.setTimeoutWait(30);
         await timeout.waitForElement(this.productInfo);
-   
+      // await browser.pause(30000);
     }
 
  
-    async addProductBatchLeafletDetailsFetch(){
+    async disableSnCheckWithoutSnIsValidDetailsFetch(){
 
         // commonFunctions.getLeafletDetails(true);
         // await timeout.setTimeoutTime(3);
@@ -83,4 +82,4 @@ class AddproductBatchLeafletPage{
     }
 }
 
-module.exports=new AddproductBatchLeafletPage();
+module.exports=new DisableSnCheckWithoutSnIsValid();

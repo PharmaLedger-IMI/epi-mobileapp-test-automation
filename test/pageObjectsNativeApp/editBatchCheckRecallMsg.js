@@ -22,8 +22,8 @@ class RecalledBatchLeaflet{
     }
 
 
-    get prodInfoMsg(){
-        return $("//android.widget.TextView[@text='Dolo-650']")
+    get productInfoMsg(){
+        return $("(//android.view.View[@resource-id='leaflet-header']/descendant::android.widget.TextView)[1]")
     }
 
     get leafletShieldInfoBtn(){
@@ -62,7 +62,7 @@ class RecalledBatchLeaflet{
         await this.recalledTextBatch.getText();
         await timeoutWait.setTimeoutTime(2);
         // product info message
-        await this.prodInfoMsg.getText();
+        await this.productInfoMsg.getText();
         await timeoutWait.setTimeoutTime(2);
         await this.productDescription.getText();
         await timeoutWait.setTimeoutTime(2);

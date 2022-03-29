@@ -16,13 +16,13 @@ class LeafletSNInvalid{
     }
 
     get productInfo(){
-        return $("//android.widget.TextView[@text='Cosentyx']")
+        return $("//android.widget.TextView[@text='Dolo-650']")
     }
-    get ProductInfoDescription(){
-        return $("//android.widget.TextView[@text='Cosentyx 150mg/ml 2x1 PFS AT']")
+    get productDescription(){
+        return $("(//android.widget.TextView[@text='It is a mild analgesic and fever reducer'])");
     }
 
-    get leafletShieldBtn(){
+    get leafletVerifiedShiledBtn(){
         return $("//android.widget.Image[@text='leaflet-verified']")
     }
 
@@ -30,8 +30,8 @@ class LeafletSNInvalid{
         return $("//android.widget.TextView[@text='Batch Info']")
     }
 
-    get leafletProdInfoDetails(){
-        return $("(//android.view.View[@text='Expiry:26 - Sep - 2023Serial number:WRONGProduct code:09088884204609Batch number:WL6190'])")
+    get productLeafletInfoDetails(){
+        return $("(//android.app.Dialog/descendant::android.view.View)[6]")
     }
 
     async waitTimeout(){
@@ -47,19 +47,19 @@ class LeafletSNInvalid{
         await this.productInfo.getText();
         await timeoutWait.setTimeoutTime(2);
         // get product info description
-        await this.ProductInfoDescription.getText();
+        await this.productDescription.getText();
         await timeoutWait.setTimeoutTime(2);
         // click on leaflet shiled button icon
-        await this.leafletShieldBtn.click();
+        await this.leafletVerifiedShiledBtn.click();
         await timeoutWait.setTimeoutTime(2);
         // get text of batch info
         await this.batchInfo.getText();
         await timeoutWait.setTimeoutTime(2);
         // get leaflet prod info data 
-        await this.leafletProdInfoDetails.getText();
+        await this.productLeafletInfoDetails.getText();
         await timeoutWait.setTimeoutTime(2);
 
-        const leafletInfoDetailsFetch = await this.leafletProdInfoDetails.getText();
+        const leafletInfoDetailsFetch = await this.productLeafletInfoDetails.getText();
         console.log("Prod Info Details of Leaflet is:"+" "+leafletInfoDetailsFetch)
         const leafletInfoFetch = leafletInfoDetailsFetch.replace(':',"=");
         console.log("Batch Info Details of Leaflet is: "+ leafletInfoFetch);
@@ -76,11 +76,15 @@ class LeafletSNInvalid{
  
          await timeoutWait.setTimeoutTime(3);
 
+         const datebefore=leafletInfoDetailsFetch.match(expiryDatePattern)[0];
+         const dateafter=moment(datebefore, "DD-MMM-YYYY").format("YYMMDD")
+         console.log(dateafter);
+
          // chai assertions on expiry date, serial number, gtin number and batch Number pattern
          expect(leafletInfoDetailsFetch.match(gtinPattern)[0]).to.equal(testData.prodCode);
          expect(leafletInfoDetailsFetch.match(batchNumberPattern)[0]).to.equal(testData.batchValue);
          expect(leafletInfoDetailsFetch.match(serialNumberPattern)[0]).to.equal(testData.batchSerialNumber);
-        //  expect(expectedExpirydate.match(expiryDatePattern)[0]).to.equal(testData.expiryDate);
+         expect(dateafter).to.equal(testData.expiry);
         //  expect(this.LeafletInfo().match(gtinPattern)[0]).to.equal(testData.prodCode);
         //  expect(this.LeafletInfo().match(batchNumberPattern)[0]).to.equal(testData.batchValue);
          // expect(this.LeafletInfo().match(serialNumberPattern)[0]).to.equal(testData.batchSerialNumber);

@@ -8,6 +8,7 @@ const testData = require('../testdata/testExpectations.json')
 const configData=require('../testdata/configTest.json')
 const allureReporter = require('@wdio/allure-reporter').default
 
+
 const expiryDatePattern = /(?<=Expiry:)(.*)(?=Serial)/g
 const serialNumberPattern = /(?<=Serial number:)(.*)(?=Product)/g
 const gtinPattern = /(?<=Product code:)(.*)(?=Batch)/g
@@ -25,42 +26,24 @@ class UtilitiesReusableFunctions{
 
     }
 
-    async leafletDetailsFetchAndValidateData(element){
-        
-        const leafletInfoDetailsFetch = await this.element.getText();
-        console.log("Prod Info Details of Leaflet is:"+" "+leafletInfoDetailsFetch)
-        const leafletInfoFetch = leafletInfoDetailsFetch.replace(':',"=");
-        console.log("Batch Info Details of Leaflet is: "+ leafletInfoFetch);
+   getLeafletDetails(isLeafletDisplayed){
 
-         // log output for expiry date, serial number, gtin number and batch Number pattern
-         console.log(leafletInfoDetailsFetch.match(expiryDatePattern)[0]);
-         console.log(leafletInfoDetailsFetch.match(serialNumberPattern)[0]);
-         console.log(leafletInfoDetailsFetch.match(gtinPattern)[0]);
-         console.log(leafletInfoDetailsFetch.match(batchNumberPattern)[0]);
-         // console.log(this.LeafletInfo().expiryDatePattern[0].match(expiryDatePattern)[0]);
-         // console.log(this.LeafletInfo().match(serialNumberPattern)[0]);
-         // console.log(this.LeafletInfo().match(gtinPattern)[0]);
-         // console.log(this.LeafletInfo().match(batchNumberPattern)[0]);
- 
-         await timeoutWait.setTimeoutTime(3);
+    if(isLeafletDisplayed){
+        console.log("Epi Leaflet is displayed")
+        console.log("Epi is displayed" + configData[1]['epiDisplayedDetails'].recalledTextBatch) 
+        console.log("Epi is displayed" + configData[1]['epiDisplayedDetails'].leafletShieldInfoBtn)
+        return configData[1]['epiDisplayedDetails'].leafletShieldInfoBtn 
+ }
+    else 
+    {       
 
-         const actualexpiryDate=leafletInfoDetailsFetch.match(expiryDatePattern)[0];
- 
-         const expectedExpirydate = actualexpiryDate.replace("-","");
-         console.log("After expiry date is:"+ expectedExpirydate);
+        console.log("Epi Not displayed")
+        console.log("Epi is Not displayed" + configData[2]['epiNotDisplayedDetails'].leafletFailedMsgText) 
+        console.log("Epi is Not displayed" + configData[2]['epiNotDisplayedDetails'].leafletNotDisplayedText) 
+        return configData[2]['epiNotDisplayedDetails'].leafletNotDisplayedText
 
-         // chai assertions on expiry date, serial number, gtin number and batch Number pattern
-         expect(leafletInfoDetailsFetch.match(gtinPattern)[0]).to.equal(testData.prodCode);
-         expect(leafletInfoDetailsFetch.match(batchNumberPattern)[0]).to.equal(testData.batchValue);
-         expect(leafletInfoDetailsFetch.match(serialNumberPattern)[0]).to.equal(testData.batchSerialNumber);
-          expect(expectedExpirydate.match(expiryDatePattern)[0]).to.equal(testData.expiryDate);
-        //  expect(this.LeafletInfo().match(gtinPattern)[0]).to.equal(testData.prodCode);
-        //  expect(this.LeafletInfo().match(batchNumberPattern)[0]).to.equal(testData.batchValue);
-         // expect(this.LeafletInfo().match(serialNumberPattern)[0]).to.equal(testData.batchSerialNumber);
-         // expect(this.LeafletInfo().match(expiryDatePattern)[0]).to.equal(testData.expiryDate);
-    
-    
     }
+   }
 
 
      

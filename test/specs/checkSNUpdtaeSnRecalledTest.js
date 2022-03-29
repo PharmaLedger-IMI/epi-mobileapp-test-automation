@@ -31,7 +31,7 @@ describe('ePI Native App Mobile Leaflet Automation Testing', () => {
         await leafletSNRecalledBatch.waitTimeout();
         await timeWait.setTimeoutwait(4);
          //display details on Serail Number Recalled Leaflet for Serial Number batch scenario
-        await leafletSNRecalledBatch.leafletSNRecalledDetailsFetch();
+        await leafletSNRecalledBatch.leafletCheckSnUpadteSNRecalledDetailsFetch();
         await timeWait.setTimeoutwait(4);
 });
 

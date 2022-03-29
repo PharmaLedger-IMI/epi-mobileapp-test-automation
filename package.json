@@ -9,6 +9,11 @@
     "addProductBatchTest": "npx wdio run wdio.conf.native.app.js --spec createProductWithAddBatchTest.js",
     "editBatchRecallMsgTest": "npx wdio run wdio.conf.native.app.js --spec editBatchCheckRecallMsgTest.js",
     "updateProductSnRecallTest": "npx wdio run wdio.conf.native.app.js --spec editProductSnRecallListTest.js",
+    "uploadEpiLeafletTest": "npx wdio run wdio.conf.native.app.js --spec uploadEPILeafletTest.js",
+    "enableSnCheckSnIsValidTest": "npx wdio run wdio.conf.native.app.js --spec enableSnCheckSnIsValidTest.js",
+    "enableSnCheckSnIsInValidTest": "npx wdio run wdio.conf.native.app.js --spec enableSnCheckSnIsInvalidTest.js",
+    "disableSnCheckSnIsValidTest": "npx wdio run wdio.conf.native.app.js --spec disableSnCheckSnIsValidTest.js",
+    "disableSnCheckWithoutSnIsValidTest": "npx wdio run wdio.conf.native.app.js --spec disableSnCheckWithoutSnValidTest.js",
     "report": "allure generate allure-results/ --clean && allure open"
   },
   "keywords": [],
@@ -25,7 +30,7 @@
     "allure-commandline": "^2.17.2",
     "bwip-js": "^3.0.4",
     "chai": "^4.3.6",
-    "chromedriver": "^98.0.1",
+    "chromedriver": "^99.0.0",
     "wdio-chromedriver-service": "^7.2.8",
     "wdio-lambdatest-service": "^1.0.6"
   },

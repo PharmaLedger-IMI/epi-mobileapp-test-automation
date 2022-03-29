@@ -12,7 +12,16 @@ describe('ePI Native Leaflet Valid Testing', () => {
     allureReporter.startStep("Recalled Batch leaflet Details are Not Populated when Recalled Batch is Unchecked")
 
     it('should open Patient Setting Scan Page', async() => {
-        commonFunctions.patientSettingsScanTest();
+        allureReporter.addFeature('Patient Setting Scan Page');
+        // wait time for application to launch
+        await nativePatientPage.waitLaunchURL();
+        await timeoutWait.setTimeoutWait(3);
+        // add the block chain value epiqa in settings page
+        await nativePatientPage.patientsettingsScan();
+        await timeoutWait.setTimeoutWait(3);
+        // Scan the 2D matrix Data 
+        await nativePatientPage.scan2DImageProcess();
+        await timeoutWait.setTimeoutWait(4);
     });
 
     it('should open Recalled Batch Leaflet not displayed', async() => {

@@ -38,7 +38,7 @@ class LeafletSNRecalled{
         await timeoutWait.setTimeoutwait(30);
     }
 
-    async leafletSNRecalledDetailsFetch(){
+    async leafletCheckSnUpadteSNRecalledDetailsFetch(){
         
         //SN Recalled text
         await this.recalledText.getText();

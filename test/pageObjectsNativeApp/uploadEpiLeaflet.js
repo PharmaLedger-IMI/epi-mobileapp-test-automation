@@ -34,7 +34,7 @@ class LeafletEPIUpload{
         await timeoutWait.setTimeoutwait(30);
     }
 
-    async leafletEPIUploadDetailsFetch(){
+    async uploadEPILeafletDetailsFetch(){
     
         // get text of product info
         await this.productInfo.getText();

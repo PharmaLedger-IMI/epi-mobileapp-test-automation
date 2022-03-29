@@ -48,7 +48,7 @@ class EditBatchRecallForNonSerialzed{
     }
 
     
-    async editBatchRecallNonSerailzedFetch(){
+    async createBatchCheckRecallNonSerailzedFetch(){
         // recalled text message
         const recalledMsg=await this.recalledTxtMsg.getText();
         console.log(recalledMsg);
