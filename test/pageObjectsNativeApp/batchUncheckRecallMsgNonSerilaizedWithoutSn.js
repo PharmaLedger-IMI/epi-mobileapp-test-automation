@@ -8,8 +8,26 @@ const serialNumberPattern = /(?<=Serial number:)(.*)(?=Product)/g
 const gtinPattern = /(?<=Product code:)(.*)(?=Batch)/g
 const batchNumberPattern = /(?<=Batch number:).*/g
 
-class CreateBatchWithNoBatchMsg{
 
+class BatchUncheckRecallMsgNonSerialzedWithoutSN{
+
+
+    //recalled Batch 
+    get failedTextMsg(){
+        return $("(//android.view.View/child::android.widget.TextView)[5]")
+    }
+
+    get recalledBatchLearnMore(){
+        return $("(//android.view.View/child::android.widget.TextView)[6]")
+    }
+
+    get recalledPopUpMsg(){
+        return $("(//android.app.Dialog/descendant::android.view.View[5]/child::android.widget.TextView)")
+    }
+
+    get closeRecalledPopUpMsg(){
+        return $("(//android.view.View/child::android.widget.Button)[7]")
+    }
 
     get prodInfoMsg(){
         return $("(//android.view.View[@resource-id='leaflet-header']/descendant::android.widget.TextView)[1]")
@@ -33,23 +51,33 @@ class CreateBatchWithNoBatchMsg{
 
     async waitTimeout(){
         await timeoutWait.setTimeoutWait(30);
-        await timeoutWait.waitForElement(this.prodInfoMsg);
+        await timeoutWait.waitForElement(this.failedTextMsg);
+
     }
 
     
-    async createBatchWithNoBatchMsgFetch(){
-        
+    async editBatchUncheckRecallMsgNonSerialzedWithoutSNFetch(){
+      
+        // recalled text message 
+        await this.failedTextMsg.getText();
+        await timeoutWait.setTimeoutTime(3);
         // product info message
+        await this.recalledBatchLearnMore.click();
+        await timeoutWait.setTimeoutTime(3);
+        await this.recalledPopUpMsg.getText();
+        await timeoutWait.setTimeoutTime(3);
+        await this.closeRecalledPopUpMsg.click();
+        await timeoutWait.setTimeoutTime(3);
         await this.prodInfoMsg.getText();
-        await timeoutWait.setTimeoutTime(2);
+        await timeoutWait.setTimeoutTime(3);
         await this.productDescription.getText();
-        await timeoutWait.setTimeoutTime(2);
+        await timeoutWait.setTimeoutTime(3);
         // click on leaflet shield button
         await this.leafletShieldInfoBtn.click();
-        await timeoutWait.setTimeoutTime(2);
+        await timeoutWait.setTimeoutTime(3);
         // btach info text message 
         await this.batchInfoTxtMsg.getText();
-        await timeoutWait.setTimeoutTime(2);
+        await timeoutWait.setTimeoutTime(3);
         // leaflet product information details
         await this.productLeafletInfoDetails.getText();
         await timeoutWait.setTimeoutTime(2);
@@ -85,8 +113,8 @@ class CreateBatchWithNoBatchMsg{
          // expect(this.LeafletInfo().match(serialNumberPattern)[0]).to.equal(testData.batchSerialNumber);
          // expect(this.LeafletInfo().match(expiryDatePattern)[0]).to.equal(testData.expiryDate);
 
-
+    
     }
 
 }
-module.exports=new CreateBatchWithNoBatchMsg();
+module.exports=new BatchUncheckRecallMsgNonSerialzedWithoutSN();

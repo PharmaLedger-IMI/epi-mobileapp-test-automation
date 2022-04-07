@@ -2,14 +2,13 @@ const testData = require('../testdata/testExpectations.json')
 const expect = require('chai').expect
 const timeout=require('../utils/setTimeout')
 const moment = require('moment')
-const commonFunctions=require('../utils/commonutilitiesFunctions')
 
 const expiryDatePattern = /(?<=Expiry:)(.*)(?=Serial)/g
 const serialNumberPattern = /(?<=Serial number:)(.*)(?=Product)/g
 const gtinPattern = /(?<=Product code:)(.*)(?=Batch)/g
 const batchNumberPattern = /(?<=Batch number:).*/g
 
-class DisableSnCheckSnIsValid{
+class EnableExpiryDateCheckValidExpiryDate{
 
     get productInfo(){
         return $("(//android.view.View[@resource-id='leaflet-header']/descendant::android.widget.TextView)[1]")
@@ -37,7 +36,7 @@ class DisableSnCheckSnIsValid{
     }
 
  
-    async disableSnCheckSnIsValidDetailsFetch(){
+    async enableExpirydateCheckValidExpiryDateFetch(){
 
         // commonFunctions.getLeafletDetails(true);
         // await timeout.setTimeoutTime(3);
@@ -72,7 +71,7 @@ class DisableSnCheckSnIsValid{
          const datebefore=leafletInfoDetailsFetch.match(expiryDatePattern)[0];
          const dateafter=moment(datebefore, "DD-MMM-YYYY").format("YYMMDD")
          console.log(dateafter);
-
+         
          // chai assertions on expiry date, serial number, gtin number and batch Number pattern
          expect(leafletInfoDetailsFetch.match(gtinPattern)[0]).to.equal(testData.prodCode);
          expect(leafletInfoDetailsFetch.match(batchNumberPattern)[0]).to.equal(testData.batchValue);
@@ -82,4 +81,4 @@ class DisableSnCheckSnIsValid{
     }
 }
 
-module.exports=new DisableSnCheckSnIsValid();
+module.exports=new EnableExpiryDateCheckValidExpiryDate();

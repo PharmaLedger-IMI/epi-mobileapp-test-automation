@@ -1,7 +1,7 @@
-const LeafletFetchData = require('../utils/utilitiesReuseFunctions')
 const testData = require('../testdata/testExpectations.json')
 const expect = require('chai').expect
 const timeoutWait=require('../utils/setTimeout')
+const moment = require('moment')
 
 const expiryDatePattern = /(?<=Expiry:)(.*)(?=Serial)/g
 const serialNumberPattern = /(?<=Serial number:)(.*)(?=Product)/g
@@ -9,34 +9,37 @@ const gtinPattern = /(?<=Product code:)(.*)(?=Batch)/g
 const batchNumberPattern = /(?<=Batch number:).*/g
 
 
-class EditBatchRecallForSerialzed{
+class EnableExpiryDateCheckInvalidExpiryDate{
 
-    get recalledTextBatch(){
-        return $("//android.widget.TextView[@text='Batch Recalled']")
+    get incorrectExpiryText(){
+        return $("(//android.view.View/child::android.widget.TextView)[5]")
     }
 
-    get recalledTxtMsg(){
-        return $("(//android.app.Dialog/descendant::android.view.View)[5]")
+    get incorrectExpiryLearnMore(){
+        return $("(//android.view.View/child::android.widget.TextView)[6]")
     }
 
-    get closeBtnMsg(){
-        return $("//android.widget.Button[@text='Close']")
+    get incorrectExpiryPopUpMsg(){
+        return $("(//android.app.Dialog/descendant::android.view.View[5]/child::android.widget.TextView)")
     }
 
-    get prodInfoMsg(){
-        return $("//android.widget.TextView[@text='Dolo-650']")
+    get closeIncorrectPopUpMsg(){
+        return $("(//android.view.View/child::android.widget.Button)[7]")
     }
 
-    get leafletShieldInfoBtn(){
-       return $("//android.widget.Image[@text='leaflet-verified']")
+    get productInfo(){
+        return $("(//android.view.View[@resource-id='leaflet-header']/descendant::android.widget.TextView)[1]")
+    }
+    get productInfoDescription(){
+        return $("(//android.view.View/child::android.widget.TextView)[8]");
     }
 
-    get productDescription(){
-        return $("(//android.widget.TextView[@text=\"Dolo-650 Tablet 15's contains 'Paracetamol' which is a mild analgesic and fever reducer\"])");
+    get leafletShieldBtn(){
+        return $("(//android.view.View/child::android.widget.Image)[2]")
     }
 
-    get batchInfoTxtMsg(){
-        return $("//android.widget.TextView[@text='Batch Info']")
+    get batchInfo(){
+        return $("(//android.app.Dialog/descendant::android.view.View/child::android.widget.TextView)[1]")
     }
 
     get productLeafletInfoDetails(){
@@ -44,33 +47,33 @@ class EditBatchRecallForSerialzed{
     }
 
     async waitTimeout(){
-        await timeoutWait.setTimeoutwait(30);
+        await timeoutWait.setTimeoutWait(30);
+        await timeoutWait.waitForElement(this.incorrectExpiryText);
     }
 
-    
-    async editBatchRecallSerailzedFetch(){
-        // recalled text message
-        const recalledMsg=await this.recalledTxtMsg.getText();
-        console.log(recalledMsg);
+    async enableExpiryDateInvalidExpiryDateBatchFetch(){
+        //get text of Incorrect expiry date
+        await this.incorrectExpiryText.getText();
         await timeoutWait.setTimeoutTime(2);
-       // close button click
-        await this.closeBtnMsg.click();
+        await this.incorrectExpiryLearnMore.click();
+        await timeoutWait.setTimeoutTime(3);
+        await this.incorrectExpiryPopUpMsg.getText();
+        await timeoutWait.setTimeoutTime(3);
+        await this.closeIncorrectPopUpMsg.click();
+        await timeoutWait.setTimeoutTime(3);
+        //get text of product information
+        await this.productInfo.getText();
         await timeoutWait.setTimeoutTime(2);
-        // recalled text message 
-        await this.recalledTextBatch.getText();
+        //get text on product information description
+        await this.productInfoDescription.getText();
         await timeoutWait.setTimeoutTime(2);
-        // product info message
-        await this.prodInfoMsg.getText();
+        // click on leaflet shiled button
+        await this.leafletShieldBtn.click();
         await timeoutWait.setTimeoutTime(2);
-        await this.productDescription.getText();
+        // get batch info text
+        await this.batchInfo.getText();
         await timeoutWait.setTimeoutTime(2);
-        // click on leaflet shield button
-        await this.leafletShieldInfoBtn.click();
-        await timeoutWait.setTimeoutTime(2);
-        // btach info text message 
-        await this.batchInfoTxtMsg.getText();
-        await timeoutWait.setTimeoutTime(2);
-        // leaflet product information details
+        // get leaflet product details information
         await this.productLeafletInfoDetails.getText();
         await timeoutWait.setTimeoutTime(2);
 
@@ -91,18 +94,21 @@ class EditBatchRecallForSerialzed{
  
          await timeoutWait.setTimeoutTime(3);
 
+         const datebefore=leafletInfoDetailsFetch.match(expiryDatePattern)[0];
+         const dateafter=moment(datebefore, "DD-MMM-YYYY").format("YYMMDD")
+         console.log(dateafter);
+
          // chai assertions on expiry date, serial number, gtin number and batch Number pattern
          expect(leafletInfoDetailsFetch.match(gtinPattern)[0]).to.equal(testData.prodCode);
          expect(leafletInfoDetailsFetch.match(batchNumberPattern)[0]).to.equal(testData.batchValue);
          expect(leafletInfoDetailsFetch.match(serialNumberPattern)[0]).to.equal(testData.batchSerialNumber);
-        //  expect(expectedExpirydate.match(expiryDatePattern)[0]).to.equal(testData.expiryDate);
+         expect(dateafter).to.equal(testData.expiry);
         //  expect(this.LeafletInfo().match(gtinPattern)[0]).to.equal(testData.prodCode);
         //  expect(this.LeafletInfo().match(batchNumberPattern)[0]).to.equal(testData.batchValue);
          // expect(this.LeafletInfo().match(serialNumberPattern)[0]).to.equal(testData.batchSerialNumber);
          // expect(this.LeafletInfo().match(expiryDatePattern)[0]).to.equal(testData.expiryDate);
 
-    
-    }
 
+    }
 }
-module.exports=new EditBatchRecallForSerialzed();
+module.exports=new EnableExpiryDateCheckInvalidExpiryDate();

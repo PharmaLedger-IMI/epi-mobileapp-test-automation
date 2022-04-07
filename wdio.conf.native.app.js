@@ -38,14 +38,28 @@ exports.config = {
     specs: [
         [
            
-            'test/specs/createProductWithAddBatchTest.js',
-            'test/specs/editBatchCheckRecallMsgTest.js',
-            'test/specs/editProductSnRecallListTest.js',
-            'test/specs/enableSnCheckSnIsValidTest.js',
-            'test/specs/enableSnCheckSnIsInvalidTest.js',
-            'test/specs/disableSnCheckSnIsValidTest.js',
-            'test/specs/disableSnCheckWithoutSnValidTest.js'
-           // 'test/specs/uploadEPILeafletTest.js'
+            // 'test/specs/createProductWithAddBatchTest.js',
+            // 'test/specs/editBatchCheckRecallMsgTest.js',
+            // 'test/specs/editProductSnRecallListTest.js',
+            // 'test/specs/enableSnCheckSnIsValidTest.js',
+            // 'test/specs/enableSnCheckSnIsInvalidTest.js',
+            // 'test/specs/disableSnCheckSnIsValidTest.js',
+            // 'test/specs/disableSnCheckWithoutSnValidTest.js',
+           // 'test/specs/enableExpiryDateCheckValidExpiryDateTest.js'
+          // 'test/specs/enableExpiryDateCheckInvalidExpiryDateTest.js'
+         // 'test/specs/disableExpiryDateCheckInvalidExpiryDateTest.js',
+        // 'test/specs/createBatchWithNoBatchMsgTest.js',
+        //   'test/specs/createBatchWithBatchMsgTest.js',
+        // 'test/specs/createBatchWithBatchRecallMsgTest.js',
+       // 'test/specs/createBatchWithBatchMsgRecallMsgTest.js',
+       //  'test/specs/batchRecallWithSerializedSnTest.js',
+      //   'test/specs/batchUncheckRecallFlagWithSerializedTest.js',
+       //   'test/specs/batchRecallNonSerializedWithoutSnTest.js',
+        //   'test/specs/batchUncheckRecallMsgNonSerilaizedWithoutSnTest.js',
+             'test/specs/createBatchValidSnExpiryDateRecallMsgTest.js'
+         //   'test/specs/batchWithExpiryDateCheckWithExpiryDateTest.js' 
+
+
         ], 
         //'test/specs/nativeEpiQATest.js'
     ],
@@ -128,7 +142,7 @@ exports.config = {
     //
     // Default timeout in milliseconds for request
     // if browser driver or grid doesn't send response
-    connectionRetryTimeout: 200000,
+    connectionRetryTimeout: 400000,
     //
     // Default request retries count
     connectionRetryCount:5,

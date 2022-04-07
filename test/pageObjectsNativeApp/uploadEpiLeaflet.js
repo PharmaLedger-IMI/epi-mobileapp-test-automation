@@ -2,36 +2,33 @@ const LeafletFetchData = require('../utils/utilitiesReuseFunctions')
 const testData = require('../testdata/testExpectations.json')
 const expect = require('chai').expect
 const timeoutWait=require('../utils/setTimeout')
-
+const moment = require('moment')
 
 class LeafletEPIUpload{
     
 
     get productInfo(){
-        return $("//android.widget.TextView[@text='Cosentyx']")
+        return $("(//android.view.View[@resource-id='leaflet-header']/descendant::android.widget.TextView)[1]")
     }
     get ProductInfoDescription(){
-        return $("//android.widget.TextView[@text='Cosentyx 150mg/ml 2x1 PFS AT']")
+        return $("(//android.view.View/child::android.widget.TextView)[8]");
     }
 
     get leafletShieldBtn(){
-        return $("//android.widget.Image[@text='leaflet-verified']")
+        return $("(//android.view.View/child::android.widget.Image)[2]")
     }
 
     get batchInfo(){
-        return $("//android.widget.TextView[@text='Batch Info']")
-    }
-
-    get leafletEPIUploadText(){
-        return $("(//android.widget.TextView[@text='ENTRESTO (sacubitril and valsartan) is a combination of a neprilysin inhibitor and an angiotensin II receptor blocker.'])")
+        return $("(//android.app.Dialog/descendant::android.view.View/child::android.widget.TextView)[1]")
     }
 
     get leafletProdInfoDetails(){
-        return $("(//android.view.View[@text='Expiry:09 - Jan - 2002Serial number:654321Product code:09088884204609Batch number:WL6190'])")
+        return $("(//android.app.Dialog/descendant::android.view.View)[6]")
     }
 
     async waitTimeout(){
-        await timeoutWait.setTimeoutwait(30);
+        await timeoutWait.setTimeoutWait(30);
+        await timeoutWait.waitForElement(this.productInfo);
     }
 
     async uploadEPILeafletDetailsFetch(){
@@ -48,9 +45,7 @@ class LeafletEPIUpload{
         // get text of batch info
         await this.batchInfo.getText();
         await timeoutWait.setTimeoutTime(2);
-        //get text information of EPI Leaflet  
-        await this.leafletEPIUploadText.getText();
-        await timeoutWait.setTimeoutTime(2);
+        //get leaflet details
         await this.leafletProdInfoDetails.getText();
         await timeoutWait.setTimeoutTime(2);
 
@@ -70,12 +65,16 @@ class LeafletEPIUpload{
          // console.log(this.LeafletInfo().match(batchNumberPattern)[0]);
     
          await timeoutWait.setTimeoutTime(3);
+
+         const datebefore=leafletInfoDetailsFetch.match(expiryDatePattern)[0];
+         const dateafter=moment(datebefore, "DD-MMM-YYYY").format("YYMMDD")
+         console.log(dateafter);
     
          // chai assertions on expiry date, serial number, gtin number and batch Number pattern
          expect(leafletInfoDetailsFetch.match(gtinPattern)[0]).to.equal(testData.prodCode);
          expect(leafletInfoDetailsFetch.match(batchNumberPattern)[0]).to.equal(testData.batchValue);
          expect(leafletInfoDetailsFetch.match(serialNumberPattern)[0]).to.equal(testData.batchSerialNumber);
-        //  expect(expectedExpirydate.match(expiryDatePattern)[0]).to.equal(testData.expiryDate);
+         expect(dateafter).to.equal(testData.expiry);
         //  expect(this.LeafletInfo().match(gtinPattern)[0]).to.equal(testData.prodCode);
         //  expect(this.LeafletInfo().match(batchNumberPattern)[0]).to.equal(testData.batchValue);
          // expect(this.LeafletInfo().match(serialNumberPattern)[0]).to.equal(testData.batchSerialNumber);

@@ -1,7 +1,7 @@
-const LeafletFetchData = require('../utils/commonutilitiesFunctions')
 const testData = require('../testdata/testExpectations.json')
 const expect = require('chai').expect
 const timeoutWait=require('../utils/setTimeout')
+const moment = require('moment')
 
 const expiryDatePattern = /(?<=Expiry:)(.*)(?=Serial)/g
 const serialNumberPattern = /(?<=Serial number:)(.*)(?=Product)/g
@@ -21,19 +21,20 @@ class allCombinationBatchMsg{
     }
 
     get prodInfoMsg(){
-        return $("//android.widget.TextView[@text='Dolo-650']")
+        return $("(//android.view.View[@resource-id='leaflet-header']/descendant::android.widget.TextView)[1]")
     }
 
     get leafletShieldInfoBtn(){
-       return $("//android.widget.Image[@text='leaflet-verified']")
+        return $("(//android.view.View/child::android.widget.Image)[2]")
     }
 
     get productDescription(){
-        return $("(//android.widget.TextView[@text=\"Dolo-650 Tablet 15's contains 'Paracetamol' which is a mild analgesic and fever reducer\"])");
+        return $("(//android.view.View/child::android.widget.TextView)[8]");
+
     }
 
     get batchInfoTxtMsg(){
-        return $("//android.widget.TextView[@text='Batch Info']")
+        return $("(//android.app.Dialog/descendant::android.view.View/child::android.widget.TextView)[1]")
     }
 
 
@@ -42,12 +43,13 @@ class allCombinationBatchMsg{
     }
 
     async waitTimeout(){
-        await timeoutWait.setTimeoutwait(30)
+        await timeoutWait.setTimeoutWait(30)
+        await timeoutWait.waitForElement(this.recalledTxtMsg);
     }
 
     
 
-    async allCombinationBatchMsgFetch(){
+    async createBatchWthBatchMsgFetch(){
         // recalled text message
         const recalledMsg=await this.recalledTxtMsg.getText();
         console.log(recalledMsg);
@@ -87,11 +89,15 @@ class allCombinationBatchMsg{
  
          await timeoutWait.setTimeoutTime(3);
 
+         const datebefore=leafletInfoDetailsFetch.match(expiryDatePattern)[0];
+         const dateafter=moment(datebefore, "DD-MMM-YYYY").format("YYMMDD")
+         console.log(dateafter);
+
          // chai assertions on expiry date, serial number, gtin number and batch Number pattern
          expect(leafletInfoDetailsFetch.match(gtinPattern)[0]).to.equal(testData.prodCode);
          expect(leafletInfoDetailsFetch.match(batchNumberPattern)[0]).to.equal(testData.batchValue);
          expect(leafletInfoDetailsFetch.match(serialNumberPattern)[0]).to.equal(testData.batchSerialNumber);
-        //  expect(expectedExpirydate.match(expiryDatePattern)[0]).to.equal(testData.expiryDate);
+         expect(dateafter).to.equal(testData.expiry);
         //  expect(this.LeafletInfo().match(gtinPattern)[0]).to.equal(testData.prodCode);
         //  expect(this.LeafletInfo().match(batchNumberPattern)[0]).to.equal(testData.batchValue);
          // expect(this.LeafletInfo().match(serialNumberPattern)[0]).to.equal(testData.batchSerialNumber);

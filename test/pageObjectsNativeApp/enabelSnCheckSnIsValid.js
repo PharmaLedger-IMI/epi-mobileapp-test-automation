@@ -16,15 +16,15 @@ class EnableSNCheckSnIsValid{
         return $("(//android.view.View[@resource-id='leaflet-header']/descendant::android.widget.TextView)[1]")
     }
     get productDescription(){
-        return $("(//android.widget.TextView[@text='It is a mild analgesic and fever reducer'])");
+        return $("(//android.view.View/child::android.widget.TextView)[8]");
     }
 
     get leafletVerifiedShiledBtn(){
-        return $("//android.widget.Image[@text='leaflet-verified']")
+        return $("(//android.view.View/child::android.widget.Image)[2]")
     }
 
     get batchInfo(){
-        return $("//android.widget.TextView[@text='Batch Info']")
+        return $("(//android.app.Dialog/descendant::android.view.View/child::android.widget.TextView)[1]")
     }
 
     get productLeafletInfoDetails(){

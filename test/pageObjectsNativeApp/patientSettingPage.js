@@ -1,7 +1,8 @@
 const timeoutWait = require('../utils/setTimeout')
-const configData=require('../testdata/configTest.json')
+const configData=require('../testdata/config.json');
+const { AppiumDriver } = require('appium/build/lib/appium');
 
-//let val="epiqa"
+
 class PatientSettingPage{
 
     get allowCamera(){
@@ -28,6 +29,18 @@ class PatientSettingPage{
         return $("//android.widget.Button[@text='SAVE']")
     }
 
+    get clickRefreshTimePeriod(){
+        return $("//android.widget.Button[@text='Setup refresh period Application refresh period for status update']")
+    }
+
+    get setRefreshTimePeriod(){
+        return $("(//android.view.View[@resource-id='page-ion-content']/descendant::android.view.View/child::android.widget.EditText)[1]")
+    }
+
+    get saveRefreshTimePeriod(){
+        return $("//android.widget.Button[@text='SAVE']")
+    }
+
     get menuBackBtn(){
         return $("//android.widget.Image[@text='menu-back']")
     }
@@ -44,11 +57,6 @@ class PatientSettingPage{
         console.log("wait timeout")
         await timeoutWait.waitForElement(this.hoverMenuSettings);
     }
-
-
-//   blockchainval(){
-//    return val
-//   }
  
     async patientsettingsScan(){
         
@@ -69,14 +77,36 @@ class PatientSettingPage{
         await this.setupBlockChainNet.clearValue();
         await timeoutWait.setTimeoutTime(3);
         // set up the value epiqa for block chain 
-        await this.setupBlockChainNet.setValue(configData[0]['setBlockChainValue'].setUserBlockChainValue);
+        await this.setupBlockChainNet.setValue(configData.setBlockChainNetwork);
         await timeoutWait.setTimeoutTime(3);
        //click on save button to save the setting
         await this.saveBtnBlockChain.click();
         await timeoutWait.setTimeoutTime(3);
+
         // click on back button 
         await this.menuBackBtn.click();
         await timeoutWait.setTimeoutTime(3);
+
+
+        // set refresh time period
+        
+       // await this.browser.execute('mobile: scroll', {direction: 'down'});
+    //    await browser.touchAction({
+    //     action: 'tap', x:30, y:80, element: this.clickRefreshTimePeriod
+    //    })
+
+        // await browser.touchAction(['press',{ action: 'moveTo', x:0, y:200, element: this.clickRefreshTimePeriod },'release']);
+        // await timeoutWait.setTimeoutTime(3);
+        // await this.clickRefreshTimePeriod.click();
+        // await timeoutWait.setTimeoutTime(3);
+        // await this.setRefreshTimePeriod.click();
+        // await timeoutWait.setTimeoutTime(3);
+        // await this.setRefreshTimePeriod.clearValue();
+        // await timeoutWait.setTimeoutTime(3);
+        // await this.setRefreshTimePeriod.setValue(configData.setRefreshTimePeriod);
+        // await timeoutWait.setTimeoutTime(3);
+        // await this.saveRefreshTimePeriod.click();
+        // await timeoutWait.setTimeoutTime(3);
 
     }
 

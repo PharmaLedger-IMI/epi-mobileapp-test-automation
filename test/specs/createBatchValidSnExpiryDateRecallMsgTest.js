@@ -1,4 +1,4 @@
-const createBatchWithBatchMsgRecallMsg=require('../pageObjectsNativeApp/createBatchWithBatchMsgRecallMsg')
+const createBatchWithValidSnExpiryDateRecallMsg=require('../pageObjectsNativeApp/createBatchValidSnExpiryDateRecallMsg')
 const allureReporter = require('@wdio/allure-reporter').default
 const nativePatientPage = require('../pageObjectsNativeApp/patientSettingPage')
 const timeoutWait=require('../utils/setTimeout')
@@ -7,8 +7,8 @@ const timeoutWait=require('../utils/setTimeout')
 describe('ePI Native App Mobile Leaflet Automation Testing', () => {
 
     allureReporter.addSeverity('Critical');
-    allureReporter.addTestId('recalledBatch_LeafletDisplayed_Setup')
-    allureReporter.addDescription('Check that batch is recalled and Leaflet is displayed')
+    allureReporter.addTestId('recalledBatch_Non_Serialized_LeafletDisplayed_Setup')
+    allureReporter.addDescription('Check that batch is recalled and Leaflet is displayed for Non Serialized')
     allureReporter.startStep("Recalled Leaflet Details are Populated after Recalled Message Displayed")
  
     
@@ -23,17 +23,18 @@ describe('ePI Native App Mobile Leaflet Automation Testing', () => {
         // Scan the 2D matrix Data 
         await nativePatientPage.scan2DImageProcess();
         await timeoutWait.setTimeoutWait(4);
+
     });
 
-    it('should open LeafLet for edit Batch Recall Msg Info Page', async () => {
-        allureReporter.addFeature('Edit Batch Recall Msg Leaflet display Info Data');
+    it('should open LeafLet for Recalled Batch Info Page', async () => {
+        allureReporter.addFeature('Recalled Batch Leaflet display Info Data');
         //Wait timeout for Leaflet to be displayed 
-        await createBatchWithBatchMsgRecallMsg.waitTimeout();
-        await timeoutWait.setTimeoutWait(3);
+        await createBatchWithValidSnExpiryDateRecallMsg.waitTimeout();
+        await timeoutWait.setTimeoutWait(4);
         //display details on Leaflet for recalled batch scenario
-        await createBatchWithBatchMsgRecallMsg.createBatchWithBatchMsgRecallMsgFetch();
-        await timeoutWait.setTimeoutWait(3);
-
+        await createBatchWithValidSnExpiryDateRecallMsg.createBatchWithValidSnExpiryDateRecallMsgFetch();
+        await timeoutWait.setTimeoutWait(4);
+       
 });
 
 });

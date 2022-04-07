@@ -8,8 +8,34 @@ const serialNumberPattern = /(?<=Serial number:)(.*)(?=Product)/g
 const gtinPattern = /(?<=Product code:)(.*)(?=Batch)/g
 const batchNumberPattern = /(?<=Batch number:).*/g
 
-class CreateBatchWithNoBatchMsg{
 
+class CreateBatchWithValidSnExpiryDateRecallMsg{
+
+
+    get recalledTxtMsg(){
+        return $("(//android.app.Dialog/descendant::android.view.View)[5]")
+    }
+
+    get closeBtnMsg(){
+        return $("//android.widget.Button[@text='Close']")
+    }
+
+    //recalled Batch 
+    get recalledTextBatch(){
+        return $("(//android.view.View/child::android.widget.TextView)[5]")
+    }
+
+    get recalledBatchLearnMore(){
+        return $("(//android.view.View/child::android.widget.TextView)[6]")
+    }
+
+    get recalledPopUpMsg(){
+        return $("(//android.app.Dialog/descendant::android.view.View[5]/child::android.widget.TextView)")
+    }
+
+    get closeRecalledPopUpMsg(){
+        return $("(//android.view.View/child::android.widget.Button)[7]")
+    }
 
     get prodInfoMsg(){
         return $("(//android.view.View[@resource-id='leaflet-header']/descendant::android.widget.TextView)[1]")
@@ -20,7 +46,7 @@ class CreateBatchWithNoBatchMsg{
     }
 
     get leafletShieldInfoBtn(){
-        return $("(//android.view.View/child::android.widget.Image)[2]")
+       return $("(//android.view.View/child::android.widget.Image)[2]")
     }
 
     get batchInfoTxtMsg(){
@@ -33,13 +59,29 @@ class CreateBatchWithNoBatchMsg{
 
     async waitTimeout(){
         await timeoutWait.setTimeoutWait(30);
-        await timeoutWait.waitForElement(this.prodInfoMsg);
+        await timeoutWait.waitForElement(this.recalledTxtMsg);
+
     }
 
     
-    async createBatchWithNoBatchMsgFetch(){
-        
+    async createBatchWithValidSnExpiryDateRecallMsgFetch(){
+        // recalled text message
+        const recalledMsg=await this.recalledTxtMsg.getText();
+        console.log(recalledMsg);
+        await timeoutWait.setTimeoutTime(2);
+       // close button click
+        await this.closeBtnMsg.click();
+        await timeoutWait.setTimeoutTime(3);
+        // recalled text message 
+        await this.recalledTextBatch.getText();
+        await timeoutWait.setTimeoutTime(3);
         // product info message
+        await this.recalledBatchLearnMore.click();
+        await timeoutWait.setTimeoutTime(3);
+        await this.recalledPopUpMsg.getText();
+        await timeoutWait.setTimeoutTime(3);
+        await this.closeRecalledPopUpMsg.click();
+        await timeoutWait.setTimeoutTime(3);
         await this.prodInfoMsg.getText();
         await timeoutWait.setTimeoutTime(2);
         await this.productDescription.getText();
@@ -85,8 +127,8 @@ class CreateBatchWithNoBatchMsg{
          // expect(this.LeafletInfo().match(serialNumberPattern)[0]).to.equal(testData.batchSerialNumber);
          // expect(this.LeafletInfo().match(expiryDatePattern)[0]).to.equal(testData.expiryDate);
 
-
+    
     }
 
 }
-module.exports=new CreateBatchWithNoBatchMsg();
+module.exports=new CreateBatchWithValidSnExpiryDateRecallMsg();

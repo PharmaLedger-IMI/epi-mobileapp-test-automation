@@ -1,24 +1,40 @@
 const testData = require('../testdata/testExpectations.json')
 const expect = require('chai').expect
-const timeout=require('../utils/setTimeout')
+const timeoutWait=require('../utils/setTimeout')
 const moment = require('moment')
-const commonFunctions=require('../utils/commonutilitiesFunctions')
 
 const expiryDatePattern = /(?<=Expiry:)(.*)(?=Serial)/g
 const serialNumberPattern = /(?<=Serial number:)(.*)(?=Product)/g
 const gtinPattern = /(?<=Product code:)(.*)(?=Batch)/g
 const batchNumberPattern = /(?<=Batch number:).*/g
 
-class DisableSnCheckSnIsValid{
+
+class DisableExpiryDateCheckInvalidExpiryDate{
+
+    get incorrectExpiryText(){
+        return $("(//android.view.View/child::android.widget.TextView)[5]")
+    }
+
+    get incorrectExpiryLearnMore(){
+        return $("(//android.view.View/child::android.widget.TextView)[6]")
+    }
+
+    get incorrectExpiryPopUpMsg(){
+        return $("(//android.app.Dialog/descendant::android.view.View[5]/child::android.widget.TextView)")
+    }
+
+    get closeIncorrectPopUpMsg(){
+        return $("(//android.view.View/child::android.widget.Button)[7]")
+    }
 
     get productInfo(){
         return $("(//android.view.View[@resource-id='leaflet-header']/descendant::android.widget.TextView)[1]")
     }
-    get productDescription(){
+    get productInfoDescription(){
         return $("(//android.view.View/child::android.widget.TextView)[8]");
     }
 
-    get leafletVerifiedShiledBtn(){
+    get leafletShieldBtn(){
         return $("(//android.view.View/child::android.widget.Image)[2]")
     }
 
@@ -31,31 +47,36 @@ class DisableSnCheckSnIsValid{
     }
 
     async waitTimeout(){
-        await timeout.setTimeoutWait(30);
-        await timeout.waitForElement(this.productInfo);
-      // await browser.pause(30000);
+        await timeoutWait.setTimeoutWait(30);
+        await timeoutWait.waitForElement(this.incorrectExpiryText);
     }
 
- 
-    async disableSnCheckSnIsValidDetailsFetch(){
-
-        // commonFunctions.getLeafletDetails(true);
-        // await timeout.setTimeoutTime(3);
+    async disableExpiryDateInvalidExpiryDateFetch(){
+        //get text of Incorrect expiry date
+        await this.incorrectExpiryText.getText();
+        await timeoutWait.setTimeoutTime(2);
+        await this.incorrectExpiryLearnMore.click();
+        await timeoutWait.setTimeoutTime(3);
+        await this.incorrectExpiryPopUpMsg.getText();
+        await timeoutWait.setTimeoutTime(3);
+        await this.closeIncorrectPopUpMsg.click();
+        await timeoutWait.setTimeoutTime(3);
+        //get text of product information
         await this.productInfo.getText();
-       // expect(this.productInfo.getText()).to.not.equal(null);
-        await timeout.setTimeoutTime(3);
-        //get text of product information description
-        await this.productDescription.getText();
-        await timeout.setTimeoutTime(3);
-        //click on leaflet Shieled Button
-        await this.leafletVerifiedShiledBtn.click();
-        await timeout.setTimeoutTime(3);
+        await timeoutWait.setTimeoutTime(2);
+        //get text on product information description
+        await this.productInfoDescription.getText();
+        await timeoutWait.setTimeoutTime(2);
+        // click on leaflet shiled button
+        await this.leafletShieldBtn.click();
+        await timeoutWait.setTimeoutTime(2);
         // get batch info text
         await this.batchInfo.getText();
-        await timeout.setTimeoutTime(3);
+        await timeoutWait.setTimeoutTime(2);
         // get leaflet product details information
         await this.productLeafletInfoDetails.getText();
-        await timeout.setTimeoutTime(3);  
+        await timeoutWait.setTimeoutTime(2);
+
         const leafletInfoDetailsFetch = await this.productLeafletInfoDetails.getText();
         console.log("Prod Info Details of Leaflet is:"+" "+leafletInfoDetailsFetch)
         const leafletInfoFetch = leafletInfoDetailsFetch.replace(':',"=");
@@ -66,8 +87,12 @@ class DisableSnCheckSnIsValid{
          console.log(leafletInfoDetailsFetch.match(serialNumberPattern)[0]);
          console.log(leafletInfoDetailsFetch.match(gtinPattern)[0]);
          console.log(leafletInfoDetailsFetch.match(batchNumberPattern)[0]);
+         // console.log(this.LeafletInfo().expiryDatePattern[0].match(expiryDatePattern)[0]);
+         // console.log(this.LeafletInfo().match(serialNumberPattern)[0]);
+         // console.log(this.LeafletInfo().match(gtinPattern)[0]);
+         // console.log(this.LeafletInfo().match(batchNumberPattern)[0]);
  
-         await timeout.setTimeoutTime(3);
+         await timeoutWait.setTimeoutTime(3);
 
          const datebefore=leafletInfoDetailsFetch.match(expiryDatePattern)[0];
          const dateafter=moment(datebefore, "DD-MMM-YYYY").format("YYMMDD")
@@ -78,8 +103,12 @@ class DisableSnCheckSnIsValid{
          expect(leafletInfoDetailsFetch.match(batchNumberPattern)[0]).to.equal(testData.batchValue);
          expect(leafletInfoDetailsFetch.match(serialNumberPattern)[0]).to.equal(testData.batchSerialNumber);
          expect(dateafter).to.equal(testData.expiry);
-           
+        //  expect(this.LeafletInfo().match(gtinPattern)[0]).to.equal(testData.prodCode);
+        //  expect(this.LeafletInfo().match(batchNumberPattern)[0]).to.equal(testData.batchValue);
+         // expect(this.LeafletInfo().match(serialNumberPattern)[0]).to.equal(testData.batchSerialNumber);
+         // expect(this.LeafletInfo().match(expiryDatePattern)[0]).to.equal(testData.expiryDate);
+
+
     }
 }
-
-module.exports=new DisableSnCheckSnIsValid();
+module.exports=new DisableExpiryDateCheckInvalidExpiryDate();
