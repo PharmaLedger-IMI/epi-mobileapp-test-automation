@@ -29,11 +29,11 @@ class EditBatchRecallForSerialzedSN{
     }
 
     get productDescription(){
-        return $("(//android.view.View/child::android.widget.TextView)[8]");
+        return $("(//android.view.View[@resource-id='leaflet-header']/descendant::android.widget.TextView)[2]");
     }
 
     get leafletShieldInfoBtn(){
-        return $("(//android.view.View/child::android.widget.Image)[2]")
+        return $("(//android.view.View[@resource-id='leaflet-header']/descendant::android.widget.Image)[1]")
     }
 
     get batchInfoTxtMsg(){
@@ -41,7 +41,7 @@ class EditBatchRecallForSerialzedSN{
     }
 
     get productLeafletInfoDetails(){
-        return $("(//android.app.Dialog/descendant::android.view.View)[6]")
+        return $("(//android.app.Dialog/descendant::android.view.View)[5]/child::android.view.View")
     }
 
     async waitTimeout(){

@@ -4,14 +4,15 @@ const nativePatientPage = require('../pageObjectsNativeApp/patientSettingPage')
 const timeoutWait=require('../utils/setTimeout')
 
 
-describe('ePI Native App Mobile Leaflet Automation Testing', () => {
+describe('009_Edit batch and disable serial number check with valid SN', () => {
 
+    allureReporter.addFeature('Disable SN with Valid SN check')
     allureReporter.addSeverity('Critical');
-    allureReporter.addTestId('Add_productBatch_LeafletDisplayed_Setup')
-    allureReporter.addDescription('Check that Add_productBatch Leaflet displayed')
-    allureReporter.startStep("Add_productBatch leaflet Details are Populated when EPI_SMPC Leaflets for Batch is created")
+    allureReporter.addTestId('Basic Auth feature test_3')
+    allureReporter.addDescription('Check that disable SN and Check with SN Leaflet details are displayed')
+    allureReporter.startStep("leaflet Details are Populated with SN Valid details for Batch")
     
-    it('should open Patient Setting Scan Page', async() => {
+    it('Mobile App-should set Patient Settings Scan 2D Matrix', async() => {
        
             allureReporter.addFeature('Patient Setting Scan Page');
             // wait time for application to launch
@@ -26,7 +27,7 @@ describe('ePI Native App Mobile Leaflet Automation Testing', () => {
     
     });
 
-    it('should open Recalled LeafLet Batch Info Page', async () => {
+    it('Mobile App-LeafLet details after disable serial number check with valid SN', async () => {
         allureReporter.addFeature('LeafLet Recalled Batch Info Data');
         //wait timeout for Leaflet to be displayed
         await disableSnCheckSNIsValidTest.waitTimeout();

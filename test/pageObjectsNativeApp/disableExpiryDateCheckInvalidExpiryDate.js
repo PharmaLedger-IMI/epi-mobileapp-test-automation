@@ -31,7 +31,7 @@ class DisableExpiryDateCheckInvalidExpiryDate{
         return $("(//android.view.View[@resource-id='leaflet-header']/descendant::android.widget.TextView)[1]")
     }
     get productInfoDescription(){
-        return $("(//android.view.View/child::android.widget.TextView)[8]");
+        return $("(//android.view.View[@resource-id='leaflet-header']/descendant::android.widget.TextView)[2]");
     }
 
     get leafletShieldBtn(){
@@ -43,7 +43,7 @@ class DisableExpiryDateCheckInvalidExpiryDate{
     }
 
     get productLeafletInfoDetails(){
-        return $("(//android.app.Dialog/descendant::android.view.View)[6]")
+        return $("(//android.app.Dialog/descendant::android.view.View)[5]/child::android.view.View")
     }
 
     async waitTimeout(){

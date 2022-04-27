@@ -5,14 +5,15 @@ const timeoutWait=require('../utils/setTimeout')
 
 
 
-describe('ePI Native App Mobile Leaflet Automation Testing', () => {
+describe('007_Edit batch and enable serial number check with valid SN', () => {
 
+    allureReporter.addFeature('Enable SN, Check SN is valid details populated')
     allureReporter.addSeverity('Critical');
-    allureReporter.addTestId('Add_productBatch_LeafletDisplayed_Setup')
-    allureReporter.addDescription('Check that Add_productBatch Leaflet displayed')
-    allureReporter.startStep("Add_productBatch leaflet Details are Populated when EPI_SMPC Leaflets for Batch is created")
+    allureReporter.addTestId('Basic Auth feature test_1')
+    allureReporter.addDescription('Check that Leaflet are displayed with valid details when SN is enabled')
+    allureReporter.startStep("leaflet Details are Populated with Valid SN details")
     
-    it('should open Patient Setting Scan Page', async() => {
+    it('Mobile App-should set Patient Setting and Scan 2D Matrix', async() => {
        
             allureReporter.addFeature('Patient Setting Scan Page');
             // wait time for application to launch
@@ -27,7 +28,7 @@ describe('ePI Native App Mobile Leaflet Automation Testing', () => {
     
     });
 
-    it('should open Recalled LeafLet Batch Info Page', async () => {
+    it('Mobile App-should display LeafLet details for Enable SN Check SN is Valid for Batch', async () => {
         allureReporter.addFeature('LeafLet Recalled Batch Info Data');
         //wait timeout for Leaflet to be displayed
         await enableSnCheckSnValid.waitTimeout();

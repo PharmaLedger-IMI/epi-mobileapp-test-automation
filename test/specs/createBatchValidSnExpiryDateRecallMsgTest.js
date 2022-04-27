@@ -4,15 +4,16 @@ const nativePatientPage = require('../pageObjectsNativeApp/patientSettingPage')
 const timeoutWait=require('../utils/setTimeout')
 // const commonFunctions=require('../utils/commonutilitiesFunctions')
 
-describe('ePI Native App Mobile Leaflet Automation Testing', () => {
+describe('022_Create a batch with valid SN, expiry date and recall message', () => {
 
+    allureReporter.addFeature('Create Batch With Valid SN ExpiryDate and Recall Message')
     allureReporter.addSeverity('Critical');
-    allureReporter.addTestId('recalledBatch_Non_Serialized_LeafletDisplayed_Setup')
-    allureReporter.addDescription('Check that batch is recalled and Leaflet is displayed for Non Serialized')
-    allureReporter.startStep("Recalled Leaflet Details are Populated after Recalled Message Displayed")
+    allureReporter.addTestId('BatchRecall&Msg_Checks')
+    allureReporter.addDescription('Check that Leaflet are displayed for batch is Created with Valid ExpiryDate,SN and Recall Message')
+    allureReporter.startStep("Leaflet Details are Populated with Message as Expired Date on pack,SN and Recall Message Displayed")
  
     
-    it('should open Patient Setting Scan Page', async() => {
+    it('Mobile App-should set Patient Setting and Scan 2D Matrix', async() => {
         allureReporter.addFeature('Patient Setting Scan Page');
         // wait time for application to launch
         await nativePatientPage.waitLaunchURL();
@@ -26,7 +27,7 @@ describe('ePI Native App Mobile Leaflet Automation Testing', () => {
 
     });
 
-    it('should open LeafLet for Recalled Batch Info Page', async () => {
+    it('Mobile App-should display LeafLet Details with Valid SN,ExpiryDate and Batch is recalled Message', async () => {
         allureReporter.addFeature('Recalled Batch Leaflet display Info Data');
         //Wait timeout for Leaflet to be displayed 
         await createBatchWithValidSnExpiryDateRecallMsg.waitTimeout();

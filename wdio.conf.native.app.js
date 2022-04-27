@@ -1,8 +1,8 @@
-const  fs  = require('fs');
+const fs = require('fs');
 
 exports.config = {
 
-    runner:'local',
+    runner: 'local',
     port: 4723,
     //
     // ==================
@@ -21,15 +21,15 @@ exports.config = {
     // will be called from there.
     //
 
-    services : [
+    services: [
         [
             'appium',
             {
-            // For options see
-            // https://github.com/webdriverio/webdriverio/tree/master/packages/wdio-appium-service
-                args: {
-                // For arguments see
+                // For options see
                 // https://github.com/webdriverio/webdriverio/tree/master/packages/wdio-appium-service
+                args: {
+                    // For arguments see
+                    // https://github.com/webdriverio/webdriverio/tree/master/packages/wdio-appium-service
                 },
                 command: 'appium',
             },
@@ -37,7 +37,7 @@ exports.config = {
     ],
     specs: [
         [
-           
+
             // 'test/specs/createProductWithAddBatchTest.js',
             // 'test/specs/editBatchCheckRecallMsgTest.js',
             // 'test/specs/editProductSnRecallListTest.js',
@@ -45,22 +45,64 @@ exports.config = {
             // 'test/specs/enableSnCheckSnIsInvalidTest.js',
             // 'test/specs/disableSnCheckSnIsValidTest.js',
             // 'test/specs/disableSnCheckWithoutSnValidTest.js',
-           // 'test/specs/enableExpiryDateCheckValidExpiryDateTest.js'
-          // 'test/specs/enableExpiryDateCheckInvalidExpiryDateTest.js'
-         // 'test/specs/disableExpiryDateCheckInvalidExpiryDateTest.js',
-        // 'test/specs/createBatchWithNoBatchMsgTest.js',
-        //   'test/specs/createBatchWithBatchMsgTest.js',
-        // 'test/specs/createBatchWithBatchRecallMsgTest.js',
-       // 'test/specs/createBatchWithBatchMsgRecallMsgTest.js',
-       //  'test/specs/batchRecallWithSerializedSnTest.js',
-      //   'test/specs/batchUncheckRecallFlagWithSerializedTest.js',
-       //   'test/specs/batchRecallNonSerializedWithoutSnTest.js',
-        //   'test/specs/batchUncheckRecallMsgNonSerilaizedWithoutSnTest.js',
-             'test/specs/createBatchValidSnExpiryDateRecallMsgTest.js'
-         //   'test/specs/batchWithExpiryDateCheckWithExpiryDateTest.js' 
+            // 'test/specs/enableExpiryDateCheckValidExpiryDateTest.js'
+            // 'test/specs/enableExpiryDateCheckInvalidExpiryDateTest.js'
+            // 'test/specs/disableExpiryDateCheckInvalidExpiryDateTest.js',
+            //  'test/specs/batchRecallWithSerializedSnTest.js',
+            //   'test/specs/batchUncheckRecallFlagWithSerializedTest.js',
+            //   'test/specs/batchRecallNonSerializedWithoutSnTest.js',
+            //   'test/specs/batchUncheckRecallMsgNonSerilaizedWithoutSnTest.js',
+            // 'test/specs/createBatchWithNoBatchMsgTest.js',
+            //   'test/specs/createBatchWithBatchMsgTest.js',
+            // 'test/specs/createBatchWithBatchRecallMsgTest.js',
+            // 'test/specs/createBatchWithBatchMsgRecallMsgTest.js',
+            //    'test/specs/createBatchValidSnExpiryDateRecallMsgTest.js'
+            //   'test/specs/batchWithExpiryDateCheckWithExpiryDateTest.js' 
+            //    'test/specs/batchWithExpiredDateRecallMsgInvalidSnTest.js'
+            // 'test/specs/createBatchWithExpiredDateTest.js',
+            //  'test/specs/changeDayOnDateBatchTest.js',
+            //  'test/specs/changeMonthOnDateBatchTest.js',
+            //    'test/specs/changeYearOnDateBatchTest.js',
+             //    'test/specs/batchWithMonthYearOnDateTest.js',
+             //   'test/specs/disableDaySelectionIncorrectAndExpiredDateFlagTest.js',
+             //    'test/specs/disableDaySelectionIncorrectCheckExpiredDateFlagTest.js',
+            //     'test/specs/disableDaySelectionExpiredDateCheckIncorrectFlagTest.js',
+            //   'test/specs/enableDaySelectionDisableIncorrectAndExpiredDateFlagTest.js',
+            //      'test/specs/enableDaySelectionWithIncorrectAndDisableExpiredDateTest.js',
+            //       'test/specs/enableDaySelectionWithExpiredDateAndDisableIncorrectTest.js',
+            // 'test/specs/checkValidSerialNumberTest.js',
+            //    'test/specs/checkClearValidSerialNumberTest.js',
+            //    'test/specs/checkClearInVaildSerialNumberTest.js',
+            //      'test/specs/checkRecalledSerialNumberTest.js',
+            //  'test/specs/checkClearRecalledSerilaNumberTest.js',
+            //    'test/specs/decommissionedSerialNumberTest.js',
+            //    'test/specs/scanUpdateRecalledSNTest.js',
+            // 'test/specs/scanUpdateDecommissionedSNTest.js',
+            // 'test/specs/update10SNInRecalledSNTest.js',
+            //   'test/specs/update10SNInDecommissionedSNTest.js',
+            //    'test/specs/updateBatchWithoutSerialNumberTest.js',
+            //     'test/specs/updateBatchWithSerialNumberTest.js',
+            //   'test/specs/updateBatchToResetSerialNumberTest.js',
+            //  'test/specs/updateBatchWithDecommissioned&RecalledSNTest.js',
+            //   'test/specs/updateBatchWithoutDecommissionedRecalledSNTest.js',
+            //   'test/specs/createBatchWithoutEpiUpdateValidSNTest.js',
+            //   'test/specs/uploadNewVersionEpiInProductTest.js',
+            //    'test/specs/createBatchWithUploadLeafletTest.js',
+            //  'test/specs/versionOfEpiNotReplacedTest.js',
+            //   'test/specs/createProductWithUploadLeaflet&SMPCTest.js',
+            //    'test/specs/updateProductWithNewLeafletTest.js',
+            //    'test/specs/createBatchWithUploadLeaflet&SMPCTest.js'
+              'test/specs/deleteLeafletAndSMPCInBatchTest.js',
+            //   'test/specs/scanPreviousBatchTest.js',
+            //    'test/specs/checkBatchRecallInProduct&NotRecallInBatchTest.js',
+            //   'test/specs/checkBatchIsRecalledInProduct&BatchTest.js',
 
-
-        ], 
+            //      'test/specs/uncheckBatchIsRecallInProduct&RecalledInBatchTest.js',
+            //     'test/specs/unCheckBatchRecallInProduct&BatchTest.js',
+        
+        
+        
+            ],            
         //'test/specs/nativeEpiQATest.js'
     ],
 
@@ -84,7 +126,7 @@ exports.config = {
     // and 30 processes will get spawned. The property handles how many capabilities
     // from the same test should run tests.
     //
-    maxInstances:4,
+    maxInstances: 4,
     //
     // If you have trouble getting all important capabilities together, check out the
     // Sauce Labs platform configurator - a great tool to configure your capabilities:
@@ -102,8 +144,32 @@ exports.config = {
         "appium:unicodeKeyboard": "true",
         "appium:resetKeyboard": "true",
         'appium:newCommandTimeout': 240,
-        'appium:noReset':"false"
+        'appium:noReset': "false",
+        "appium:chromedriverExecutable":"C:/Users/naveeng/Downloads/chromedriver_win32/chromedriver.exe"
     }],
+
+    // capabilities: [
+    //     {
+    //     // The defaults you need to have in your config
+    //     "appium:platformName": "Android",
+    //     "appium: browserName": "chrome",
+    //     // We're using dynamic device allocation
+    //     // See https://docs.saucelabs.com/mobile-apps/automated-testing/appium/real-devices/#dynamic-device-allocation
+    //     "appium:deviceName": '(Samsung Galaxy S(7|8|9|10|20|21).*)|(Google Pixel.*)',
+    //     "appium:automationName": 'UIAutomator2',
+    //     "appium:user":"epitest",
+    //     "appium:key":"9a70ff23-3e81-42aa-b251-e4064b47eb50",
+    //     "appium:region":"(process.env.REGION || 'us') as SauceRegions",
+    //     // The name of the App in the Sauce Labs storage, for more info see
+    //     // https://docs.saucelabs.com/mobile-apps/app-storage/
+    //     "appium:appPackage": "eu.pharmaledger.epi",
+    //     "appium:appActivity": "eu.pharmaledger.epi.MainActivity",
+    //    // build: buildName,
+    //    "appium:newCommandTimeout": 240,
+    //     // Select only phone devices
+    //     // @ts-ignore
+    //     "appium:phoneOnly": true
+    //     }],
     //
     // ===================
     // Test Configurations
@@ -136,6 +202,7 @@ exports.config = {
     // If your `url` parameter starts without a scheme or `/` (like `some/path`), the base url
     // gets prepended directly.
     baseUrl: '',
+    //baseUrl: 'https://epitest:9a70ff23-3e81-42aa-b251-e4064b47eb50@ondemand.us-west-1.saucelabs.com:443/wd/hub',
     //npx
     // Default timeout for all waitFor* commands.
     waitforTimeout: 20000,
@@ -145,14 +212,14 @@ exports.config = {
     connectionRetryTimeout: 400000,
     //
     // Default request retries count
-    connectionRetryCount:5,
+    connectionRetryCount: 5,
     //
     // Test runner services
     // Services take over a specific job you don't want to take care of. They enhance
     // your test setup with almost no effort. Unlike plugins, they don't add new
     // commands. Instead, they hook themselves up into the test process.
     services: ['appium'],
-    
+
     // Framework you want to run your specs with.
     // The following are supported: Mocha, Jasmine, and Cucumber
     // see also: https://webdriver.io/docs/frameworks
@@ -179,13 +246,13 @@ exports.config = {
         outputDir: 'allure-results',
         disableWebdriverScreenshotsReporting: false,
     }]],
-    
+
     //
     // Options to be passed to Mocha.
     // See the full list at http://mochajs.org/
     mochaOpts: {
         ui: 'bdd',
-        timeout: 400000 
+        timeout: 400000
     },
     //
     // =====
@@ -222,31 +289,31 @@ exports.config = {
      * @param {String} cid worker id (e.g. 0-0)
      */
     //  beforeSession: function (config, capabilities, specs, cid) {
-       
+
     //  },
-     /**
-     * Gets executed before test execution begins. At this point you can access to all global
-     * variables like `browser`. It is the perfect place to define custom commands.
-     * @param {Array.<Object>} capabilities list of capabilities details
-     * @param {Array.<String>} specs        List of spec file paths that are to be run
-     * @param {Object}         browser      instance of created browser/device session
-     */
-//     before: function (capabilities, specs) {
-//         try{
-            
-//        driver.testExpectations = JSON.parse(fs.readFileSync('./test/testdata/testExpectations.json'));
-//        console.log("File is read successfully")     
-//   } catch(err) {
-            
-//             console.log("Error while reading file: ", err);
-            
-//             }
-//     },
-   /**
-     * Runs before a WebdriverIO command gets executed.
-     * @param {String} commandName hook command name
-     * @param {Array} args arguments that command would receive
-     */
+    /**
+    * Gets executed before test execution begins. At this point you can access to all global
+    * variables like `browser`. It is the perfect place to define custom commands.
+    * @param {Array.<Object>} capabilities list of capabilities details
+    * @param {Array.<String>} specs        List of spec file paths that are to be run
+    * @param {Object}         browser      instance of created browser/device session
+    */
+    //     before: function (capabilities, specs) {
+    //         try{
+
+    //        driver.testExpectations = JSON.parse(fs.readFileSync('./test/testdata/testExpectations.json'));
+    //        console.log("File is read successfully")     
+    //   } catch(err) {
+
+    //             console.log("Error while reading file: ", err);
+
+    //             }
+    //     },
+    /**
+      * Runs before a WebdriverIO command gets executed.
+      * @param {String} commandName hook command name
+      * @param {Array} args arguments that command would receive
+      */
     // beforeCommand: function (commandName, args) {
     // },
     /**
@@ -283,18 +350,18 @@ exports.config = {
      * @param {Boolean} result.passed    true if test has passed, otherwise false
      * @param {Object}  result.retries   informations to spec related retries, e.g. `{ attempts: 0, limit: 0 }`
      */
-     afterTest:async function(test, context, { error, result, duration, passed, retries }) {
-       
-        if(passed){
+    afterTest: async function (test, context, { error, result, duration, passed, retries }) {
+
+        if (passed) {
             // console.info("Starting Mobile Execution");
             // const { stdout1, stderr1 } =await exec('cd ../../../epi-mobileapp-test-automation && npm run addProductBatchLeaflet');
-        
+
             // console.log('stdout: ', stdout1);
-            
+
             // console.log('stderr: ', stderr1);
             console.log("Passed Mobile test execution")
         }
-        if(error){
+        if (error) {
             browser.takeScreenshot();
         }
     },

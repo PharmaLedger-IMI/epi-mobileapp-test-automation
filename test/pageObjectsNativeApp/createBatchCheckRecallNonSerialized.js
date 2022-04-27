@@ -40,7 +40,7 @@ class EditBatchRecallForNonSerialzed{
     }
 
     get productLeafletInfoDetails(){
-        return $("(//android.app.Dialog/descendant::android.view.View)[6]")
+        return $("(//android.app.Dialog/descendant::android.view.View)[5]/child::android.view.View")
     }
 
     async waitTimeout(){

@@ -41,7 +41,7 @@ class CreateBatchWithBatchRecallMsg{
     }
 
     get productDescription(){
-        return $("(//android.view.View/child::android.widget.TextView)[8]");
+        return $("(//android.view.View[@resource-id='leaflet-header']/descendant::android.widget.TextView)[2]");
     }
 
     get leafletShieldInfoBtn(){

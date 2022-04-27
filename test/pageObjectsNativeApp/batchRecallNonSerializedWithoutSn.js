@@ -13,7 +13,7 @@ class EditBatchRecallForNonSerialzedSN{
 
 
     get recalledTxtMsg(){
-        return $("(//android.app.Dialog/descendant::android.view.View)[5]")
+        return $("(//android.app.Dialog/descendant::android.view.View)[5]/child::android.widget.TextView")
     }
 
     get closeBtnMsg(){
@@ -22,11 +22,11 @@ class EditBatchRecallForNonSerialzedSN{
 
     //recalled Batch 
     get recalledTextBatch(){
-        return $("(//android.view.View/child::android.widget.TextView)[5]")
+        return $("(//android.view.View[@resource-id='page-ion-content']/descendant::android.widget.TextView)[2]")
     }
 
     get recalledBatchLearnMore(){
-        return $("(//android.view.View/child::android.widget.TextView)[6]")
+        return $("(//android.view.View[@resource-id='page-ion-content']/descendant::android.widget.TextView)[3]")
     }
 
     get recalledPopUpMsg(){
@@ -34,7 +34,7 @@ class EditBatchRecallForNonSerialzedSN{
     }
 
     get closeRecalledPopUpMsg(){
-        return $("(//android.view.View/child::android.widget.Button)[7]")
+        return $("(//android.app.Dialog/descendant::android.view.View)[3]/child::android.widget.Button")
     }
 
     get prodInfoMsg(){
@@ -42,11 +42,11 @@ class EditBatchRecallForNonSerialzedSN{
     }
 
     get productDescription(){
-        return $("(//android.view.View/child::android.widget.TextView)[8]");
+        return $("(//android.view.View[@resource-id='leaflet-header']/descendant::android.widget.TextView)[2]");
     }
 
     get leafletShieldInfoBtn(){
-       return $("(//android.view.View/child::android.widget.Image)[2]")
+        return $("(//android.view.View[@resource-id='leaflet-header']/descendant::android.widget.Image)[1]")
     }
 
     get batchInfoTxtMsg(){
@@ -54,7 +54,7 @@ class EditBatchRecallForNonSerialzedSN{
     }
 
     get productLeafletInfoDetails(){
-        return $("(//android.app.Dialog/descendant::android.view.View)[6]")
+        return $("(//android.app.Dialog/descendant::android.view.View)[5]/child::android.view.View")
     }
 
     async waitTimeout(){

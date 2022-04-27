@@ -31,7 +31,7 @@ class RecalledBatchLeaflet{
     }
 
     get productDescription(){
-        return $("(//android.widget.TextView[@text='It is a mild analgesic and fever reducer'])");
+        return $("(//android.view.View[@resource-id='leaflet-header']/descendant::android.widget.TextView)[2]");
     }
 
     get batchInfoTxtMsg(){

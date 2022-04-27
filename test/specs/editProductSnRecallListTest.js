@@ -4,15 +4,16 @@ const nativePatientPage = require('../pageObjectsNativeApp/patientSettingPage')
 const timeoutWait=require('../utils/setTimeout')
 
 
-describe('ePI Native App Mobile Leaflet Automation Testing', () => {
-
+describe('006_Edit product to check SN is in recalled list', () => {
+    
+    allureReporter.addFeature('Edit Product and Enable SN is Recall List')
     allureReporter.addSeverity('Critical');
-    allureReporter.addTestId('recalledBatch_LeafletDisplayed_Setup')
-    allureReporter.addDescription('Check that batch is recalled and Leaflet is displayed')
-    allureReporter.startStep("Recalled Leaflet Details are Populated after Recalled Message Displayed")
+    allureReporter.addTestId('ProdAndBatchSetup_1')
+    allureReporter.addDescription('Check that Product SN is recall List is enabled and Leaflet details are displayed for product')
+    allureReporter.startStep("Product Leaflet Details are Populated after SN is Recall List is enabled in Product")
  
     
-    it('should open Patient Setting Scan Page', async() => {
+    it('Mobile App-should open Patient Setting and Scan 2D Matrix', async() => {
         allureReporter.addFeature('Patient Setting Scan Page');
         // wait time for application to launch
         await nativePatientPage.waitLaunchURL();
@@ -25,7 +26,7 @@ describe('ePI Native App Mobile Leaflet Automation Testing', () => {
         await timeoutWait.setTimeoutWait(4);
     });
 
-    it('should open Product Update LeafLet for Recalled Batch Info Page', async () => {
+    it('Mobile App-should open LeafLet to check SN is Recalled list in Product', async () => {
         allureReporter.addFeature('Recalled Batch Leaflet display Info Data for Product');
         //Wait timeout for Leaflet to be displayed 
         await updateProductSnRecalledFlag.waitTimeout();

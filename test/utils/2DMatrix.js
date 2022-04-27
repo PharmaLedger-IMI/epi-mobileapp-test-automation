@@ -2,7 +2,7 @@ const fs = require('fs')
 
 const bwipjs = require('bwip-js')
 
-const barcode = '(01)53622270879197(17)210109(10)FI5191(21)259765'
+const barcode = '(01)44373623596132(17)280115(10)OI1970(21)298275'
 
 
 

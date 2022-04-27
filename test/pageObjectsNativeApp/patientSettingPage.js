@@ -1,8 +1,6 @@
 const timeoutWait = require('../utils/setTimeout')
 const configData=require('../testdata/config.json');
 const { AppiumDriver } = require('appium/build/lib/appium');
-
-
 class PatientSettingPage{
 
     get allowCamera(){
@@ -53,7 +51,7 @@ class PatientSettingPage{
 
         await this.allowCamera.click();
         console.log("Clicked on allow camera")
-        await timeoutWait.setTimeoutWait(55);
+        await timeoutWait.setTimeoutWait(75);
         console.log("wait timeout")
         await timeoutWait.waitForElement(this.hoverMenuSettings);
     }

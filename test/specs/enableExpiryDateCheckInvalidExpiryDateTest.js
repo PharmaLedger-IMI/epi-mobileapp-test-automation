@@ -4,14 +4,15 @@ const nativePatientPage = require('../pageObjectsNativeApp/patientSettingPage')
 const timeoutWait=require('../utils/setTimeout')
 
 
-describe('ePI Native App Mobile Leaflet Automation Testing', () => {
+describe('012_Edit batch and enable expiry date check with invalid expiry date', () => {
 
+    allureReporter.addFeature('Enable Expiry Date with Invalid Data')
     allureReporter.addSeverity('Critical');
-    allureReporter.addTestId('Add_productBatch_LeafletDisplayed_Setup')
+    allureReporter.addTestId('Basic Auth feature test_1')
     allureReporter.addDescription('Check that Add_productBatch Leaflet displayed')
-    allureReporter.startStep("Add_productBatch leaflet Details are Populated when EPI_SMPC Leaflets for Batch is created")
+    allureReporter.startStep("leaflet Details are Populated as Expired Date on Pack for Batch")
     
-    it('should open Patient Setting Scan Page', async() => {
+    it('Mobile App-should set Patient Setting and Scan 2D Matrix', async() => {
        
             allureReporter.addFeature('Patient Setting Scan Page');
             // wait time for application to launch
@@ -26,7 +27,7 @@ describe('ePI Native App Mobile Leaflet Automation Testing', () => {
     
     });
 
-    it('should open Recalled LeafLet Batch Info Page', async () => {
+    it('Mobile App-should open LeafLet after enable expiry date check with invalid expiry date', async () => {
         allureReporter.addFeature('LeafLet Recalled Batch Info Data');
         //wait timeout for Leaflet to be displayed
         await enableExpiryDateCheckInValidExpiryDate.waitTimeout();

@@ -4,15 +4,16 @@ const nativePatientPage = require('../pageObjectsNativeApp/patientSettingPage')
 const timeoutWait=require('../utils/setTimeout')
 // const commonFunctions=require('../utils/commonutilitiesFunctions')
 
-describe('ePI Native App Mobile Leaflet Automation Testing', () => {
+describe('018_Create a batch with no batch message', () => {
 
+    allureReporter.addFeature('Create Batch without Any Batch Message')
     allureReporter.addSeverity('Critical');
-    allureReporter.addTestId('recalledBatch_LeafletDisplayed_Setup')
-    allureReporter.addDescription('Check that batch is recalled and Leaflet is displayed')
-    allureReporter.startStep("Recalled Leaflet Details are Populated after Recalled Message Displayed")
+    allureReporter.addTestId('BatchRecall&Msg_1')
+    allureReporter.addDescription('Check that batch is created and Leaflet are displayed Without Batch Message')
+    allureReporter.startStep("Leaflet Details are Populated without Batch Message Displayed")
  
     
-    it('should open Patient Setting Scan Page', async() => {
+    it('Mobile App-should set Patient Setting and Scan 2D Matrix', async() => {
         allureReporter.addFeature('Patient Setting Scan Page');
         // wait time for application to launch
         await nativePatientPage.waitLaunchURL();
@@ -26,7 +27,7 @@ describe('ePI Native App Mobile Leaflet Automation Testing', () => {
 
     });
 
-    it('should open LeafLet for All Combination No Batch Msg Info Page', async () => {
+    it('Mobile App-should dsiplay LeafLet details without Batch Message', async () => {
         allureReporter.addFeature('All Combination No Batch Msg Leaflet display Info Data');
         //Wait timeout for Leaflet to be displayed 
         await createBatchWithNoBatchMsg.waitTimeout();

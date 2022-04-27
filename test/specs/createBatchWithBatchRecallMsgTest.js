@@ -4,15 +4,16 @@ const nativePatientPage = require('../pageObjectsNativeApp/patientSettingPage')
 const timeoutWait=require('../utils/setTimeout')
 // const commonFunctions=require('../utils/commonutilitiesFunctions')
 
-describe('ePI Native App Mobile Leaflet Automation Testing', () => {
+describe('020_Create a batch to set batch recall and recall message', () => {
 
+    allureReporter.addFeature('Create Batch With Batch Recall Message')
     allureReporter.addSeverity('Critical');
-    allureReporter.addTestId('recalledBatch_LeafletDisplayed_Setup')
-    allureReporter.addDescription('Check that batch is recalled and Leaflet is displayed')
-    allureReporter.startStep("Recalled Leaflet Details are Populated after Recalled Message Displayed")
+    allureReporter.addTestId('BatchRecall&Msg_1')
+    allureReporter.addDescription('Check that Leaflet are displayed with Batch Recalled Message')
+    allureReporter.startStep("Leaflet Details are Populated with Batch Recalled Message Displayed")
  
     
-    it('should open Patient Setting Scan Page', async() => {
+    it('Mobile App-should set Patient Setting and Scan 2D Matrix', async() => {
         allureReporter.addFeature('Patient Setting Scan Page');
         // wait time for application to launch
         await nativePatientPage.waitLaunchURL();
@@ -25,7 +26,7 @@ describe('ePI Native App Mobile Leaflet Automation Testing', () => {
         await timeoutWait.setTimeoutWait(4);
     });
 
-    it('should open LeafLet for edit Batch Recall Msg Info Page', async () => {
+    it('Mobile App-should dispaly LeafLet for Create Batch with Batch Recall Message', async () => {
         allureReporter.addFeature('Edit Batch Recall Msg Leaflet display Info Data');
         //Wait timeout for Leaflet to be displayed 
         await createBatchWithBatchRecallMsg.waitTimeout();
