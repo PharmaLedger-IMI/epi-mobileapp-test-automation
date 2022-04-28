@@ -8,7 +8,7 @@ describe('017_Edit batch to undo batch recall without SN', () => {
 
     allureReporter.addFeature('Uncheck Recall Message Without SN for Non Seriliazed')
     allureReporter.addSeverity('Critical');
-    allureReporter.addTestId('Batch recall for non-serialized_2')
+    allureReporter.addTestId('BatchRecallAndBatchMessage_10_2')
     allureReporter.addDescription('Check that Leaflet are displayed for Non Serialized Without Batch is Recalled Message')
     allureReporter.startStep("Recalled Leaflet Details are Populated as Non Serialized Batch is Recalled Message Displayed")
  

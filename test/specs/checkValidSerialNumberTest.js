@@ -6,8 +6,9 @@ const timeoutWait=require('../utils/setTimeout')
 
 describe('035_Create a batch and enable serial number verification and set valid serial numbers', () => {
 
+    allureReporter.addFeature('Create a batch and enable serial number verification and set valid serial numbers')
+    allureReporter.addTestId("SerialNumberChecks_1");
     allureReporter.addSeverity('Critical');
-    allureReporter.addTestId('Create a batch and enable serial number verification and set valid serial numbers')
     allureReporter.addDescription('Check that Leaflet is displayed for enable serial number verification and set valid serial numbers')
     allureReporter.startStep("Leaflet Details are Populated after enable serial number verification and set valid serial numbers")
  

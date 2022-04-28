@@ -13,7 +13,7 @@ class BatchWithExpiryDateInvalidSN{
 
 
     get recalledTxtMsg(){
-        return $("(//android.app.Dialog/descendant::android.view.View)[5]")
+        return $("(//android.app.Dialog/descendant::android.view.View)[5]/child::android.widget.TextView")
     }
 
     get closeBtnMsg(){
@@ -21,19 +21,19 @@ class BatchWithExpiryDateInvalidSN{
     }
 
     //recalled Batch 
-    get recalledTextBatch(){
+    get failedSNTextBatch(){
         return $("(//android.view.View[@resource-id='page-ion-content']/descendant::android.widget.TextView)[2]")
     }
 
-    get recalledBatchLearnMore(){
+    get failedSNLearnMore(){
         return $("(//android.view.View[@resource-id='page-ion-content']/descendant::android.widget.TextView)[3]")
     }
 
-    get recalledPopUpMsg(){
+    get failedSNPopUpMsg(){
         return $("(//android.app.Dialog/descendant::android.view.View[5]/child::android.widget.TextView)")
     }
 
-    get closeRecalledPopUpMsg(){
+    get closefailedSNPopUpMsg(){
         return $("(//android.app.Dialog/descendant::android.view.View)[3]/child::android.widget.Button")
     }
 
@@ -73,14 +73,14 @@ class BatchWithExpiryDateInvalidSN{
         await this.closeBtnMsg.click();
         await timeoutWait.setTimeoutTime(3);
         // recalled text message 
-        await this.recalledTextBatch.getText();
+        await this.failedSNTextBatch.getText();
         await timeoutWait.setTimeoutTime(3);
         // product info message
-        await this.recalledBatchLearnMore.click();
+        await this.failedSNLearnMore.click();
         await timeoutWait.setTimeoutTime(3);
-        await this.recalledPopUpMsg.getText();
+        await this.failedSNPopUpMsg.getText();
         await timeoutWait.setTimeoutTime(3);
-        await this.closeRecalledPopUpMsg.click();
+        await this.closefailedSNPopUpMsg.click();
         await timeoutWait.setTimeoutTime(3);
         await this.prodInfoMsg.getText();
         await timeoutWait.setTimeoutTime(2);

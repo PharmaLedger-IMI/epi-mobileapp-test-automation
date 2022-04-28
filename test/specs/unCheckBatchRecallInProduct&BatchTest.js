@@ -4,13 +4,13 @@ const nativePatientPage = require('../pageObjectsNativeApp/patientSettingPage')
 const timeoutWait=require('../utils/setTimeout')
 // const commonFunctions=require('../utils/commonutilitiesFunctions')
 
-describe('016-batchRecallForNonSerializedWithoutSN', () => {
+describe('065_Edit product to uncheck batch is recalled and edit batch to uncheck batch recall', () => {
 
-    allureReporter.addFeature('Batch Recall with Non Serialized Without SN')
+    allureReporter.addFeature('Edit product to uncheck batch is recalled and edit batch to uncheck batch recall')
     allureReporter.addSeverity('Critical');
-    allureReporter.addTestId('Batch recall for non-serialized_1')
-    allureReporter.addDescription('Check that batch is recalled and Leaflet are displayed for Non Serialized')
-    allureReporter.startStep("Leaflet Details are Populated as Batch is Recalled Message Displayed")
+    allureReporter.addTestId('ProductDisplayEpiFlag_1_5')
+    allureReporter.addDescription('Check that Leaflet are displayed for to uncheck batch is recalled and edit batch to uncheck batch recall')
+    allureReporter.startStep("Leaflet Details are Populated for to uncheck batch is recalled and edit batch to uncheck batch recall")
  
     
     it('Mobile App-should set Patient Setting and Scan 2D Matrix', async() => {
@@ -27,7 +27,7 @@ describe('016-batchRecallForNonSerializedWithoutSN', () => {
 
     });
 
-    it('Mobile App-should display LeafLet for Serialized as Recalled Batch Message Without SN', async () => {
+    it('Mobile App-should display LeafLet for to uncheck batch is recalled and edit batch to uncheck batch recall', async () => {
         allureReporter.addFeature('Recalled Batch Leaflet display Info Data');
         //Wait timeout for Leaflet to be displayed 
         await uncheckBatchIsRecallInProductAndBatchTest.waitTimeout();

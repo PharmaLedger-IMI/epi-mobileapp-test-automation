@@ -6,8 +6,9 @@ const timeoutWait=require('../utils/setTimeout')
 
 describe('037_Edit batch to reset serial number and scan with invalid serial number', () => {
 
+    allureReporter.addFeature('Edit batch to reset serial number and scan with invalid serial number')
+    allureReporter.addTestId("SerialNumberChecks_3");
     allureReporter.addSeverity('Critical');
-    allureReporter.addTestId('Edit batch to reset serial number and scan with invalid serial number')
     allureReporter.addDescription('Check that Leaflet is displayed for reset serial number and scan with invalid serial number')
     allureReporter.startStep("Leaflet Details are Populated after reset serial number and scan with invalid serial number")
  

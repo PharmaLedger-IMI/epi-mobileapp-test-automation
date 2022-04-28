@@ -8,7 +8,7 @@ describe('015_Edit batch to undo batch recall with valid SN', () => {
 
     allureReporter.addFeature('Batch Uncheck Recall Flag for Serilaized')
     allureReporter.addSeverity('Critical');
-    allureReporter.addTestId('Batch recall for non-serialized_2')
+    allureReporter.addTestId('BatchRecallAndBatchMessage_9_2')
     allureReporter.addDescription('Uncheck the Recall Flag in batch and Leaflet details are displayed')
     allureReporter.startStep("Leaflet Details are Populated without Recalled Message")
  

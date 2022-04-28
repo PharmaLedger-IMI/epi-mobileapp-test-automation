@@ -13,7 +13,7 @@ class EditBatchRecallForSerialzedSN{
 
 
     get recalledTxtMsg(){
-        return $("(//android.app.Dialog/descendant::android.view.View)[5]")
+        return $("(//android.app.Dialog/descendant::android.view.View)[5]/child::android.widget.TextView")
     }
 
     get closeBtnMsg(){
@@ -21,7 +21,19 @@ class EditBatchRecallForSerialzedSN{
     }
 
     get recalledTextBatch(){
-        return $("//android.widget.TextView[@text='Batch Recalled']")
+        return $("(//android.view.View[@resource-id='page-ion-content']/descendant::android.widget.TextView)[2]")
+    }
+
+    get recalledBatchLearnMore(){
+        return $("(//android.view.View[@resource-id='page-ion-content']/descendant::android.widget.TextView)[3]")
+    }
+
+    get recalledPopUpMsg(){
+        return $("(//android.app.Dialog/descendant::android.view.View[5]/child::android.widget.TextView)")
+    }
+
+    get closeRecalledPopUpMsg(){
+        return $("(//android.app.Dialog/descendant::android.view.View)[3]/child::android.widget.Button")
     }
 
     get prodInfoMsg(){
@@ -62,6 +74,12 @@ class EditBatchRecallForSerialzedSN{
         // recalled text message 
         await this.recalledTextBatch.getText();
         await timeoutWait.setTimeoutTime(2);
+        await this.recalledBatchLearnMore.click();
+        await timeoutWait.setTimeoutTime(3);
+        await this.recalledPopUpMsg.getText();
+        await timeoutWait.setTimeoutTime(3);
+        await this.closeRecalledPopUpMsg.click();
+        await timeoutWait.setTimeoutTime(3);
         // product info message
         await this.prodInfoMsg.getText();
         await timeoutWait.setTimeoutTime(2);

@@ -13,19 +13,19 @@ class BatchUncheckRecallMsgNonSerialzedWithoutSN{
 
 
     //recalled Batch 
-    get failedTextMsg(){
+    get failedSNTextMsg(){
         return $("(//android.view.View[@resource-id='page-ion-content']/descendant::android.widget.TextView)[2]")
     }
 
-    get recalledBatchLearnMore(){
+    get failedSNLearnMore(){
         return $("(//android.view.View[@resource-id='page-ion-content']/descendant::android.widget.TextView)[3]")
     }
 
-    get recalledPopUpMsg(){
+    get failedSNPopUpMsg(){
         return $("(//android.app.Dialog/descendant::android.view.View[5]/child::android.widget.TextView)")
     }
 
-    get closeRecalledPopUpMsg(){
+    get closefailedSNPopUpMsg(){
         return $("(//android.app.Dialog/descendant::android.view.View)[3]/child::android.widget.Button")
     }
 
@@ -62,11 +62,11 @@ class BatchUncheckRecallMsgNonSerialzedWithoutSN{
         await this.failedTextMsg.getText();
         await timeoutWait.setTimeoutTime(3);
         // product info message
-        await this.recalledBatchLearnMore.click();
+        await this.failedSNLearnMore.click();
         await timeoutWait.setTimeoutTime(3);
-        await this.recalledPopUpMsg.getText();
+        await this.failedSNPopUpMsg.getText();
         await timeoutWait.setTimeoutTime(3);
-        await this.closeRecalledPopUpMsg.click();
+        await this.closefailedSNPopUpMsg.click();
         await timeoutWait.setTimeoutTime(3);
         await this.prodInfoMsg.getText();
         await timeoutWait.setTimeoutTime(3);

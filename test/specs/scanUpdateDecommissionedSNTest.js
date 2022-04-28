@@ -6,8 +6,9 @@ const timeoutWait=require('../utils/setTimeout')
 
 describe('043_Edit a batch to update decommissioned SN and scan with decommissioned serial numbers', () => {
 
+    allureReporter.addFeature('Edit a batch to update decommissioned SN and scan with decommissioned serial numbers')
+    allureReporter.addTestId("SerialNumberChecks_9");
     allureReporter.addSeverity('Critical');
-    allureReporter.addTestId('Edit a batch to update decommissioned SN and scan with decommissioned serial numbers')
     allureReporter.addDescription('Check that Leaflet is displayed for to update decommissioned SN and scan with decommissioned serial numbers')
     allureReporter.startStep("Recalled Leaflet Details are Populated after to update decommissioned SN and scan with decommissioned serial numbers")
  

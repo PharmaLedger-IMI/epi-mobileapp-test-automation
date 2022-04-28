@@ -6,8 +6,9 @@ const timeoutWait=require('../utils/setTimeout')
 
 describe('044_Edit batch to remove 10 serial numbers from valid and upload 10 in recalled serial numbers', () => {
 
+    allureReporter.addFeature('Edit batch to remove 10 serial numbers from valid and upload 10 in recalled serial numbers')
+    allureReporter.addTestId("SerialNumberChecks_10");
     allureReporter.addSeverity('Critical');
-    allureReporter.addTestId('Edit batch to remove 10 serial numbers from valid and upload 10 in recalled serial numbers')
     allureReporter.addDescription('Check that Leaflet is displayed after to remove 10 serial numbers from valid and upload 10 in recalled serial numbers')
     allureReporter.startStep("Recalled Leaflet Details are Populated after to remove 10 serial numbers from valid and upload 10 in recalled serial numbers")
  

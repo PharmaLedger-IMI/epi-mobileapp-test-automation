@@ -7,9 +7,9 @@ const timeoutWait=require('../utils/setTimeout')
 describe('010_Edit batch and disable serial number check without SN', () => {
 
     allureReporter.addSeverity('Critical');
-    allureReporter.addTestId('Add_productBatch_LeafletDisplayed_Setup')
-    allureReporter.addDescription('Check that Add_productBatch Leaflet displayed')
-    allureReporter.startStep("Add_productBatch leaflet Details are Populated when EPI_SMPC Leaflets for Batch is created")
+    allureReporter.addTestId('BasicAuthFeatureTest_1_4')
+    allureReporter.addDescription('Check that Leaflet is displayed for disable serial number check without SN')
+    allureReporter.startStep("leaflet Details are Populated when disable serial number check without SN")
     
     it('Mobile App-should set Patient Setting and Scan 2D Matrix', async() => {
        

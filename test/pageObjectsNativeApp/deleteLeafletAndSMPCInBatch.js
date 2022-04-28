@@ -44,7 +44,7 @@ class DeleteLeafletandSMPCInBatch {
     }
 
     get smpcDocType() {
-        return $("(//h6[text()='SmPC'])")
+        return $("//h6[contains(text(),'SmPC')]")
     }
 
     get leafletType() {

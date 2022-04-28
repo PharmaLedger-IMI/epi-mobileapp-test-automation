@@ -5,9 +5,10 @@ const timeoutWait=require('../utils/setTimeout')
 // const commonFunctions=require('../utils/commonutilitiesFunctions')
 
 describe('026_change only the month on the new data matrix', () => {
-
+    
+    allureReporter.addFeature('change only the month on the new date in Batch')
+    allureReporter.addTestId("ExpiryDateChecks_1_3");
     allureReporter.addSeverity('Critical');
-    allureReporter.addTestId('change only the month on the new date in Batch')
     allureReporter.addDescription('Check that Leaflet is displayed for change only the month and new Date displayed')
     allureReporter.startStep("Leaflet Details are Populated after change on Month from Date")
  

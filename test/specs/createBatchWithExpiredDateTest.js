@@ -5,9 +5,10 @@ const timeoutWait=require('../utils/setTimeout')
 // const commonFunctions=require('../utils/commonutilitiesFunctions')
 
 describe('024_Create a batch with X expiry date and pass different date Y in matrix', () => {
-
+    
+    allureReporter.addFeature('Create a batch with expiry date and pass different date in matrix')
+    allureReporter.addTestId("ExpiryDateChecks_1_1")
     allureReporter.addSeverity('Critical');
-    allureReporter.addTestId('Create a batch with expiry date and pass different date in matrix')
     allureReporter.addDescription('Check that Leaflet is displayed for expiry date and different date')
     allureReporter.startStep("Recalled Leaflet Details are Populated after expiry date and different date")
  

@@ -13,7 +13,19 @@ const batchNumberPattern = /(?<=Batch number:).*/g
 class EnableSnCheckSnIsInvalid{
 
     get inValidText(){
-        return $("(//android.view.View/child::android.widget.TextView)[5]")
+        return $("(//android.view.View[@resource-id='page-ion-content']/descendant::android.widget.TextView)[2]")
+    }
+
+    get inValidSNLearnMore(){
+        return $("(//android.view.View[@resource-id='page-ion-content']/descendant::android.widget.TextView)[3]")
+    }
+
+    get inValidSNPopUpMsg(){
+        return $("(//android.app.Dialog/descendant::android.view.View[5]/child::android.widget.TextView)")
+    }
+
+    get closeinValidSNPopUpMsg(){
+        return $("(//android.app.Dialog/descendant::android.view.View)[3]/child::android.widget.Button")
     }
 
     get productInfo(){
@@ -24,7 +36,7 @@ class EnableSnCheckSnIsInvalid{
     }
 
     get leafletVerifiedShiledBtn(){
-        return $("(//android.view.View/child::android.widget.Image)[2]")
+        return $("(//android.view.View[@resource-id='leaflet-header']/descendant::android.widget.Image)[1]")
     }
 
     get batchInfo(){
@@ -46,6 +58,12 @@ class EnableSnCheckSnIsInvalid{
         // invalid leaflet text
         await this.inValidText.getText();
         await timeoutWait.setTimeoutTime(2);
+        await this.inValidSNLearnMore.click();
+        await timeoutWait.setTimeoutTime(3);
+        await this.inValidSNPopUpMsg.getText();
+        await timeoutWait.setTimeoutTime(3);
+        await this.closeinValidSNPopUpMsg.click();
+        await timeoutWait.setTimeoutTime(3);
         // get product info text
         await this.productInfo.getText();
         await timeoutWait.setTimeoutTime(2);

@@ -8,7 +8,7 @@ describe('022_Create a batch with valid SN, expiry date and recall message', () 
 
     allureReporter.addFeature('Create Batch With Valid SN ExpiryDate and Recall Message')
     allureReporter.addSeverity('Critical');
-    allureReporter.addTestId('BatchRecall&Msg_Checks')
+    allureReporter.addTestId('BatchRecallAndBatchMessage_12_1')
     allureReporter.addDescription('Check that Leaflet are displayed for batch is Created with Valid ExpiryDate,SN and Recall Message')
     allureReporter.startStep("Leaflet Details are Populated with Message as Expired Date on pack,SN and Recall Message Displayed")
  

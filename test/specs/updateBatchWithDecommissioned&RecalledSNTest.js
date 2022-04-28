@@ -1,13 +1,15 @@
 const updateBatchDecommissionedRecalledSNTest=require('../pageObjectsNativeApp/updateBatchWithDecommissioned&RecalledSN')
 const allureReporter = require('@wdio/allure-reporter').default
 const nativePatientPage = require('../pageObjectsNativeApp/patientSettingPage')
-const timeoutWait=require('../utils/setTimeout')
+const timeoutWait=require('../utils/setTimeout');
+const { all } = require('deepmerge');
 // const commonFunctions=require('../utils/commonutilitiesFunctions')
 
 describe('050_Edit batch to update with decommissioned and recalled serial number', () => {
 
+    allureReporter.addFeature('Edit batch to update with decommissioned and recalled serial number')
+    allureReporter.addTestId("SerialNumberChecks_11_4");
     allureReporter.addSeverity('Critical');
-    allureReporter.addTestId('Edit batch to update with decommissioned and recalled serial number')
     allureReporter.addDescription('Check that Leaflet is displayed for to update with decommissioned and recalled serial number')
     allureReporter.startStep("Recalled Leaflet Details are Populated after to update with decommissioned and recalled serial number")
  

@@ -8,7 +8,7 @@ describe('021_Create a batch to set batch recall and batch message', () => {
 
     allureReporter.addFeature('Create Batch With Batch Message and Recall Message')
     allureReporter.addSeverity('Critical');
-    allureReporter.addTestId('BatchRecall&Msg_1')
+    allureReporter.addTestId('BatchRecallAndBatchMessage_11_4')
     allureReporter.addDescription('Check that Leaflet are displayed for batch is recalled and Batch Message')
     allureReporter.startStep("Recalled Leaflet Details are Populated With batch is recalled and Batch Message")
  

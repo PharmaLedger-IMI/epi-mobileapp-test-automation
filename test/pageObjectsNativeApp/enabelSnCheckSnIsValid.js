@@ -20,7 +20,7 @@ class EnableSNCheckSnIsValid{
     }
 
     get leafletVerifiedShiledBtn(){
-        return $("(//android.view.View/child::android.widget.Image)[2]")
+        return $("(//android.view.View[@resource-id='leaflet-header']/descendant::android.widget.Image)[1]")
     }
 
     get batchInfo(){
@@ -28,7 +28,7 @@ class EnableSNCheckSnIsValid{
     }
 
     get productLeafletInfoDetails(){
-        return $("(//android.app.Dialog/descendant::android.view.View)[6]")
+        return $("(//android.app.Dialog/descendant::android.view.View)[5]/child::android.view.View")
     }
 
     async waitTimeout(){

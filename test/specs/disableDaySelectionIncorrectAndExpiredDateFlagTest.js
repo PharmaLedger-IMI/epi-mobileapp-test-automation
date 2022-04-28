@@ -1,3 +1,4 @@
+const { default: AllureReporter } = require('@wdio/allure-reporter');
 const disableDaySelectionWithIncorrectExpiredDateFlag=require('../pageObjectsNativeApp/disableDaySelectionAndIncorrectExpiredDateFlag.js')
 const allureReporter = require('@wdio/allure-reporter').default
 const nativePatientPage = require('../pageObjectsNativeApp/patientSettingPage')
@@ -6,8 +7,9 @@ const timeoutWait=require('../utils/setTimeout')
 
 describe('029_Create a batch with MonthYear as expiry date and disable day selection, incorrect and expired date flag', () => {
 
+    allureReporter.addFeature('Create a batch with MonthYear as expiry date and disable day selection, incorrect and expired date flag')
+    allureReporter.addTestId("ExpiryDateChecks_3_3")
     allureReporter.addSeverity('Critical');
-    allureReporter.addTestId('Create a batch with MonthYear as expiry date and disable day selection, incorrect and expired date flag')
     allureReporter.addDescription('Check that Leaflet is displayed for MonthYear as expiry date and disable day selection, incorrect and expired date flag')
     allureReporter.startStep("Leaflet Details are Populated after MonthYear as expiry date and disable day selection, incorrect and expired date flag")
  

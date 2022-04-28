@@ -8,7 +8,7 @@ describe('014_Edit batch to set batch recall with valid SN', () => {
 
     allureReporter.addFeature('BatchRecall with serialized SN Vaild Data')
     allureReporter.addSeverity('Critical');
-    allureReporter.addTestId('BatchRecall&Msg_1')
+    allureReporter.addTestId('BatchRecallAndBatchMessage_9_1')
     allureReporter.addDescription('Check that batch is recalled with serialized Leaflet are displayed')
     allureReporter.startStep("Leaflet Details are Populated as batch is Recalled Message")
  

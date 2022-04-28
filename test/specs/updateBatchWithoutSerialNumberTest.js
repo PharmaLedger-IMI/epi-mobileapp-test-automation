@@ -6,8 +6,9 @@ const timeoutWait=require('../utils/setTimeout')
 
 describe('047_Edit batch to update without serial number', () => {
 
+    allureReporter.addFeature('Edit batch to update without serial number')
+    allureReporter.addTestId("SerialNumberChecks_11_1");
     allureReporter.addSeverity('Critical');
-    allureReporter.addTestId('Edit batch to update without serial number')
     allureReporter.addDescription('Check that Leaflet is displayed for to update without serial number')
     allureReporter.startStep("Recalled Leaflet Details are Populated after to update without serial number")
  

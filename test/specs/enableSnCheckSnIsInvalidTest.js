@@ -8,7 +8,7 @@ describe('008_Edit batch and enable serial number check with invalid SN', () => 
 
     allureReporter.addFeature('Enable SN and Check with InvalidSN details')
     allureReporter.addSeverity('Critical');
-    allureReporter.addTestId('Basic Auth feature test_2')
+    allureReporter.addTestId('BasicAuthFeatureTest_1_2')
     allureReporter.addDescription('Check that Leaflet details are displayed when SN is Enabled and with SN is Invalid')
     allureReporter.startStep("leaflet Details are Populated and should populate leaflet details as failed to vaildate SN")
     

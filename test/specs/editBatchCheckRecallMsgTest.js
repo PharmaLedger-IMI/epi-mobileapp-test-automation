@@ -8,7 +8,7 @@ describe('005_Edit batch to set recall message', () => {
 
     allureReporter.addFeature('Edit Batch with Batch is Recalled')
     allureReporter.addSeverity('Critical');
-    allureReporter.addTestId('ProdAndBatchSetup_1')
+    allureReporter.addTestId('ProdAndBatchSetup_4')
     allureReporter.addDescription('Check that batch is recalled and Leaflet details are displayed')
     allureReporter.startStep("Recalled Leaflet Details are Populated after batch is recalled in edit batch")
  

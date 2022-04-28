@@ -8,7 +8,7 @@ describe('011_Edit batch and enable expiry date check with valid expiry date', (
 
     allureReporter.addFeature('Enable Expiry Date with Valid Data')
     allureReporter.addSeverity('Critical');
-    allureReporter.addTestId('Basic Auth feature test_2')
+    allureReporter.addTestId('BasicAuthFeatureTest_2_1')
     allureReporter.addDescription('Check that Leaflet details are displayed for Enable ExiryDate Valid Data')
     allureReporter.startStep("leaflet Details are Populated as Expired Date on pack for Batch")
     

@@ -6,8 +6,9 @@ const timeoutWait=require('../utils/setTimeout')
 
 describe('028_create a batch with only MonthYear as expiry date', () => {
 
+    allureReporter.addTestId("ExpiryDateChecks_3_1")
     allureReporter.addSeverity('Critical');
-    allureReporter.addTestId('create a batch with only MonthYear as expiry date')
+    allureReporter.addFeature('create a batch with only MonthYear as expiry date')
     allureReporter.addDescription('Check that Leaflet is displayed for MonthYear as expiry date')
     allureReporter.startStep("Leaflet Details are Populated after MonthYear as expiry date")
  

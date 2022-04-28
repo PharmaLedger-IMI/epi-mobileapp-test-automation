@@ -14,11 +14,11 @@ class CreateBatchWithExpiredDate{
 
     //recalled Batch 
     get expiredDateText(){
-        return $("(//android.view.View/child::android.widget.TextView)[5]")
+        return $("(//android.view.View[@resource-id='page-ion-content']/descendant::android.widget.TextView)[2]")
     }
 
     get expiredDateLearnMore(){
-        return $("(//android.view.View/child::android.widget.TextView)[6]")
+        return $("(//android.view.View[@resource-id='page-ion-content']/descendant::android.widget.TextView)[3]")
     }
 
     get expiredDatePopUpMsg(){
@@ -26,7 +26,7 @@ class CreateBatchWithExpiredDate{
     }
 
     get closeExpiredDatePopUpMsg(){
-        return $("(//android.view.View/child::android.widget.Button)[7]")
+        return $("(//android.app.Dialog/descendant::android.view.View)[3]/child::android.widget.Button")
     }
 
     get prodInfoMsg(){
@@ -38,7 +38,7 @@ class CreateBatchWithExpiredDate{
     }
 
     get leafletShieldInfoBtn(){
-       return $("(//android.view.View/child::android.widget.Image)[2]")
+        return $("(//android.view.View[@resource-id='leaflet-header']/descendant::android.widget.Image)[1]")
     }
 
     get batchInfoTxtMsg(){
@@ -46,7 +46,7 @@ class CreateBatchWithExpiredDate{
     }
 
     get productLeafletInfoDetails(){
-        return $("(//android.app.Dialog/descendant::android.view.View)[6]")
+        return $("(//android.app.Dialog/descendant::android.view.View)[5]/child::android.view.View")
     }
 
     async waitTimeout(){

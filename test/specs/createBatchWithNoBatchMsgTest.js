@@ -8,7 +8,7 @@ describe('018_Create a batch with no batch message', () => {
 
     allureReporter.addFeature('Create Batch without Any Batch Message')
     allureReporter.addSeverity('Critical');
-    allureReporter.addTestId('BatchRecall&Msg_1')
+    allureReporter.addTestId('BatchRecallAndBatchMessage_11_1')
     allureReporter.addDescription('Check that batch is created and Leaflet are displayed Without Batch Message')
     allureReporter.startStep("Leaflet Details are Populated without Batch Message Displayed")
  

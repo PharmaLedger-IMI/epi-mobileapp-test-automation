@@ -9,25 +9,36 @@ const batchNumberPattern = /(?<=Batch number:).*/g
 
 class RecalledBatchLeaflet{
 
-    get recalledTextBatch(){
-        return $("//android.widget.TextView[@text='Batch Recalled']")
-    }
-
     get recalledTxtMsg(){
-        return $("(//android.app.Dialog/descendant::android.view.View)[5]")
+        return $("(//android.app.Dialog/descendant::android.view.View)[5]/child::android.widget.TextView")
     }
 
     get closeBtnMsg(){
         return $("//android.widget.Button[@text='Close']")
     }
 
+    get recalledTextBatch(){
+        return $("(//android.view.View[@resource-id='page-ion-content']/descendant::android.widget.TextView)[2]")
+    }
+
+    get recalledBatchLearnMore(){
+        return $("(//android.view.View[@resource-id='page-ion-content']/descendant::android.widget.TextView)[3]")
+    }
+
+    get recalledPopUpMsg(){
+        return $("(//android.app.Dialog/descendant::android.view.View[5]/child::android.widget.TextView)")
+    }
+
+    get closeRecalledPopUpMsg(){
+        return $("(//android.app.Dialog/descendant::android.view.View)[3]/child::android.widget.Button")
+    }
 
     get productInfoMsg(){
         return $("(//android.view.View[@resource-id='leaflet-header']/descendant::android.widget.TextView)[1]")
     }
 
     get leafletShieldInfoBtn(){
-       return $("//android.widget.Image[@text='leaflet-verified']")
+        return $("(//android.view.View[@resource-id='leaflet-header']/descendant::android.widget.Image)[1]")
     }
 
     get productDescription(){
@@ -35,12 +46,12 @@ class RecalledBatchLeaflet{
     }
 
     get batchInfoTxtMsg(){
-        return $("//android.widget.TextView[@text='Batch Info']")
+        return $("(//android.app.Dialog/descendant::android.view.View/child::android.widget.TextView)[1]")
     }
 
 
     get productLeafletInfoDetails(){
-        return $("(//android.app.Dialog/descendant::android.view.View)[6]")
+        return $("(//android.app.Dialog/descendant::android.view.View)[5]/child::android.view.View")
     }
 
     async waitTimeout(){
@@ -61,6 +72,12 @@ class RecalledBatchLeaflet{
         // recalled text message 
         await this.recalledTextBatch.getText();
         await timeoutWait.setTimeoutTime(2);
+        await this.recalledBatchLearnMore.click();
+        await timeoutWait.setTimeoutTime(3);
+        await this.recalledPopUpMsg.getText();
+        await timeoutWait.setTimeoutTime(3);
+        await this.closeRecalledPopUpMsg.click();
+        await timeoutWait.setTimeoutTime(3);
         // product info message
         await this.productInfoMsg.getText();
         await timeoutWait.setTimeoutTime(2);

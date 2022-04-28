@@ -38,7 +38,7 @@ class UpdateBatchToResetSN{
     }
 
     get leafletShieldInfoBtn(){
-       return $("(//android.view.View/child::android.widget.Image)[2]")
+        return $("(//android.view.View[@resource-id='leaflet-header']/descendant::android.widget.Image)[1]")
     }
 
     get batchInfoTxtMsg(){

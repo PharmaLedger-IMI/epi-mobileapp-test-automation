@@ -5,9 +5,9 @@ const timeoutWait=require('../utils/setTimeout')
 // const commonFunctions=require('../utils/commonutilitiesFunctions')
 
 describe('023_Edit batch to select expired date', () => {
-
+    allureReporter.addFeature("Edit batch to select expired date");
     allureReporter.addSeverity('Critical');
-    allureReporter.addTestId('BatchRecall&Msg_Checks')
+    allureReporter.addTestId('BatchRecallAndBatchMessage_12_2')
     allureReporter.addDescription('Check that Leaflet is displayed for batch with Expired Date, Valid Details')
     allureReporter.startStep("Leaflet Details are Populated with Expired Date on pack Message Displayed")
  

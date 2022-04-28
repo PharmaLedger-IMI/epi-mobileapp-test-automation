@@ -5,9 +5,10 @@ const timeoutWait=require('../utils/setTimeout')
 // const commonFunctions=require('../utils/commonutilitiesFunctions')
 
 describe('032_Create a batch with MonthYear as expiry date and enable day selection, disable incorrect and expired date flag', () => {
-
+    
+    allureReporter.addFeature('Create a batch with MonthYear as expiry date and enable day selection, disable incorrect and expired date flag')
+    allureReporter.addTestId("ExpiryDateChecks_3_5");
     allureReporter.addSeverity('Critical');
-    allureReporter.addTestId('Create a batch with MonthYear as expiry date and enable day selection, disable incorrect and expired date flag')
     allureReporter.addDescription('Check that Leaflet is displayed for with MonthYear as expiry date and enable day selection, disable incorrect and expired date flag')
     allureReporter.startStep("Leaflet Details are Populated after with MonthYear as expiry date and enable day selection, disable incorrect and expired date flag")
  

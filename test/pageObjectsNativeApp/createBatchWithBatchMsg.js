@@ -13,7 +13,7 @@ class allCombinationBatchMsg{
 
 
     get recalledTxtMsg(){
-        return $("(//android.app.Dialog/descendant::android.view.View)[5]")
+        return $("(//android.app.Dialog/descendant::android.view.View)[5]/child::android.widget.TextView")
     }
 
     get closeBtnMsg(){
@@ -25,7 +25,7 @@ class allCombinationBatchMsg{
     }
 
     get leafletShieldInfoBtn(){
-        return $("(//android.view.View/child::android.widget.Image)[2]")
+        return $("(//android.view.View[@resource-id='leaflet-header']/descendant::android.widget.Image)[1]")
     }
 
     get productDescription(){

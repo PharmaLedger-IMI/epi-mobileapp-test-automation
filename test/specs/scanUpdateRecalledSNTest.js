@@ -6,8 +6,9 @@ const timeoutWait=require('../utils/setTimeout')
 
 describe('042_Edit a batch to update recalled SN and scan with recalled serial numbers', () => {
 
+    allureReporter.addFeature('Edit a batch to update recalled SN and scan with recalled serial numbers')
+    allureReporter.addTestId("SerialNumberChecks_8");
     allureReporter.addSeverity('Critical');
-    allureReporter.addTestId('Edit a batch to update recalled SN and scan with recalled serial numbers')
     allureReporter.addDescription('Check that Leaflet is displayed for to update recalled SN and scan with recalled serial numbers')
     allureReporter.startStep("Recalled Leaflet Details are Populated after to update recalled SN and scan with recalled serial numbers")
  

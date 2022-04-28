@@ -9,7 +9,7 @@ describe('007_Edit batch and enable serial number check with valid SN', () => {
 
     allureReporter.addFeature('Enable SN, Check SN is valid details populated')
     allureReporter.addSeverity('Critical');
-    allureReporter.addTestId('Basic Auth feature test_1')
+    allureReporter.addTestId('BasicAuthFeatureTest_1_1')
     allureReporter.addDescription('Check that Leaflet are displayed with valid details when SN is enabled')
     allureReporter.startStep("leaflet Details are Populated with Valid SN details")
     

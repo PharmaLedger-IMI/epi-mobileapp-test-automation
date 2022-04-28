@@ -8,7 +8,7 @@ describe('016_Edit batch to set batch recall without SN', () => {
 
     allureReporter.addFeature('Batch Recall with Non Serialized Without SN')
     allureReporter.addSeverity('Critical');
-    allureReporter.addTestId('Batch recall for non-serialized_1')
+    allureReporter.addTestId('BatchRecallAndBatchMessage_10_1')
     allureReporter.addDescription('Check that batch is recalled and Leaflet are displayed for Non Serialized')
     allureReporter.startStep("Leaflet Details are Populated as Batch is Recalled Message Displayed")
  

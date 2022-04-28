@@ -8,7 +8,7 @@ describe('006_Edit product to check SN is in recalled list', () => {
     
     allureReporter.addFeature('Edit Product and Enable SN is Recall List')
     allureReporter.addSeverity('Critical');
-    allureReporter.addTestId('ProdAndBatchSetup_1')
+    allureReporter.addTestId('ProdAndBatchSetup_2')
     allureReporter.addDescription('Check that Product SN is recall List is enabled and Leaflet details are displayed for product')
     allureReporter.startStep("Product Leaflet Details are Populated after SN is Recall List is enabled in Product")
  

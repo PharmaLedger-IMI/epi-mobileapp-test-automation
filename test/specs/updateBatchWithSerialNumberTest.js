@@ -6,8 +6,9 @@ const timeoutWait=require('../utils/setTimeout')
 
 describe('048_Edit batch to update valid serial number', () => {
 
+    allureReporter.addFeature('Edit batch to update valid serial number')
+    allureReporter.addTestId("SerialNumberChecks_11_2");
     allureReporter.addSeverity('Critical');
-    allureReporter.addTestId('Edit batch to update valid serial number')
     allureReporter.addDescription('Check that Leaflet is displayed for to update valid serial number')
     allureReporter.startStep("Recalled Leaflet Details are Populated after to update valid serial number")
  

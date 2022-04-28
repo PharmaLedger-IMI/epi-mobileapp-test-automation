@@ -6,8 +6,9 @@ const timeoutWait=require('../utils/setTimeout')
 
 describe('023_Edit batch to set expired date and invalid serial number', () => {
 
+    allureReporter.addFeature("Edit batch to set expired date, pass invalid serial number and Recall Message")
     allureReporter.addSeverity('Critical');
-    allureReporter.addTestId('Edit batch to set expired date, pass invalid serial number and Recall Message')
+    allureReporter.addTestId("BatchRecallAndBatchMessage_12_3");
     allureReporter.addDescription('Check Leaflet are displayed for expired date, pass invalid serial number and Recall Message')
     allureReporter.startStep("Leaflet Details are Populated for expiry date on pack, failed to Validate SN and Recall Message displayed")
  

@@ -4,12 +4,13 @@ const nativePatientPage = require('../pageObjectsNativeApp/patientSettingPage')
 const timeoutWait=require('../utils/setTimeout')
 
 
-describe('004-Create Batch', () => {
-    allureReporter.addFeature('Create Batch')
+describe('062_Edit Product to check batch is recalled and edit batch to set recall message', () => {
+    
+    allureReporter.addFeature('Edit Product to check batch is recalled and edit batch to set recall message')
     allureReporter.addSeverity('Critical');
-    allureReporter.addTestId('ProdAndBatchSetup_1')
-    allureReporter.addDescription('Check that Add_productBatch Leaflet details are displayed')
-    allureReporter.startStep("Add_productBatch leaflet Details are Populated when batch is created with specified details")
+    allureReporter.addTestId('ProductDisplayEpiFlag_1_2')
+    allureReporter.addDescription('Check that Leaflet details are displayed for check batch is recalled and edit batch to set recall message')
+    allureReporter.startStep("leaflet Details are Populated when check batch is recalled and edit batch to set recall message")
     
     it('Mobile App-should set Patient Setting and Scan 2D Matrix', async() => {
        
@@ -26,7 +27,7 @@ describe('004-Create Batch', () => {
     
     });
 
-    it('Mobile App-should display LeafLet details for product and btach created', async () => {
+    it('Mobile App-should display LeafLet details for check batch is recalled and edit batch to set recall message', async () => {
         allureReporter.addFeature('LeafLet Recalled Batch Info Data');
         //wait timeout for Leaflet to be displayed
         await checkBatchRecallInProductAndBatchTest.waitTimeout();

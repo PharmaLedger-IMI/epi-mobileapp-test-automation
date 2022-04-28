@@ -5,9 +5,10 @@ const timeoutWait=require('../utils/setTimeout')
 // const commonFunctions=require('../utils/commonutilitiesFunctions')
 
 describe('025_change only the day on the new data matrix', () => {
-
+    
+    allureReporter.addFeature('change only the day on the date in Batch')
+    allureReporter.addTestId("ExpiryDateChecks_1_2");
     allureReporter.addSeverity('Critical');
-    allureReporter.addTestId('change only the day on the date in Batch')
     allureReporter.addDescription('Check that Leaflet is displayed when day on date is changed')
     allureReporter.startStep("Leaflet Details are Populated after day on date new date is displayed")
  

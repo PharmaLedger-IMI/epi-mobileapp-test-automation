@@ -8,7 +8,7 @@ describe('009_Edit batch and disable serial number check with valid SN', () => {
 
     allureReporter.addFeature('Disable SN with Valid SN check')
     allureReporter.addSeverity('Critical');
-    allureReporter.addTestId('Basic Auth feature test_3')
+    allureReporter.addTestId('BasicAuthFeatureTest_1_3')
     allureReporter.addDescription('Check that disable SN and Check with SN Leaflet details are displayed')
     allureReporter.startStep("leaflet Details are Populated with SN Valid details for Batch")
     

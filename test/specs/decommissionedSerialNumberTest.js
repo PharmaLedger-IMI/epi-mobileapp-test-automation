@@ -6,8 +6,9 @@ const timeoutWait=require('../utils/setTimeout')
 
 describe('040_Create a batch and enable serial number verification and set decommissioned serial numbers and reason code', () => {
 
+    allureReporter.addFeature('Create a batch and enable serial number verification and set decommissioned serial numbers and reason code')
+    allureReporter.addTestId("SerialNumberChecks_6");
     allureReporter.addSeverity('Critical');
-    allureReporter.addTestId('Create a batch and enable serial number verification and set decommissioned serial numbers and reason code')
     allureReporter.addDescription('Check that Leaflet is displayed for enable serial number verification and set decommissioned serial numbers and reason code')
     allureReporter.startStep("Recalled Leaflet Details are Populated after Recalled Message Displayed")
  

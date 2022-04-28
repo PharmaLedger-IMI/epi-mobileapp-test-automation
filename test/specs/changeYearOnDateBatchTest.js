@@ -6,8 +6,9 @@ const timeoutWait=require('../utils/setTimeout')
 
 describe('027_change only the year on the new data matrix', () => {
 
+    allureReporter.addFeature('change only the year on the new data matrix')
+    allureReporter.addTestId("ExpiryDateChecks_1_4");
     allureReporter.addSeverity('Critical');
-    allureReporter.addTestId('change only the year on the new data matrix')
     allureReporter.addDescription('Check that Leaflet is displayed for change the year on the new date')
     allureReporter.startStep("Leaflet Details are Populated after change the year on the new date")
  

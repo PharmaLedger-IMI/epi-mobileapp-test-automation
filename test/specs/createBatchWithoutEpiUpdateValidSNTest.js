@@ -4,6 +4,7 @@ const nativePatientPage = require('../pageObjectsNativeApp/patientSettingPage')
 const timeoutWait=require('../utils/setTimeout')
 
 describe('052_Update product information', () => {
+        
     allureReporter.addFeature('Update product information')
     allureReporter.addSeverity('Critical');
     allureReporter.addTestId('ProductInfoUpdate_1_1')

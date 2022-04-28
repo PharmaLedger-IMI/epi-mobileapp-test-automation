@@ -3,12 +3,13 @@ const allureReporter = require('@wdio/allure-reporter').default
 const nativePatientPage = require('../pageObjectsNativeApp/patientSettingPage')
 const timeoutWait=require('../utils/setTimeout')
 
-describe('004-Create Batch', () => {
-    allureReporter.addFeature('Create Batch')
+describe('059_Edit batch to delete ePI and SMPC file.', () => {
+    
+    allureReporter.addFeature('Edit batch to delete ePI and SMPC file.')
     allureReporter.addSeverity('Critical');
-    allureReporter.addTestId('ProdAndBatchSetup_1')
-    allureReporter.addDescription('Check that Add_productBatch Leaflet details are displayed')
-    allureReporter.startStep("Add_productBatch leaflet Details are Populated when batch is created with specified details")
+    allureReporter.addTestId('ProductInfoUpdate_4_2')
+    allureReporter.addDescription('Check that Leaflet details are displayed for batch to delete ePI and SMPC file.')
+    allureReporter.startStep("leaflet Details are Populated when batch to delete ePI and SMPC file.")
     
     it('Mobile App-should set Patient Setting and Scan 2D Matrix', async() => {
        
@@ -25,7 +26,7 @@ describe('004-Create Batch', () => {
     
     });
 
-    it('Mobile App-should display LeafLet details for product and batch created', async () => {
+    it('Mobile App-should display LeafLet details for batch to delete ePI and SMPC file.', async () => {
         allureReporter.addFeature('LeafLet Recalled Batch Info Data');
         //wait timeout for Leaflet to be displayed
         await deleteBatchUploadLeafletSMPCTest.waitTimeout();

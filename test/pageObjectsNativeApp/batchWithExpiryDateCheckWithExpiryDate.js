@@ -13,7 +13,7 @@ class BatchWithExpiryDateCheckwithExpiryDate{
 
 
     get recalledTxtMsg(){
-        return $("(//android.app.Dialog/descendant::android.view.View)[5]")
+        return $("(//android.app.Dialog/descendant::android.view.View)[5]/child::android.widget.TextView")
     }
 
     get closeBtnMsg(){
@@ -34,7 +34,7 @@ class BatchWithExpiryDateCheckwithExpiryDate{
     }
 
     get closeRecalledPopUpMsg(){
-        return $("(//android.view.View/child::android.widget.Button)[7]")
+        return $("(//android.app.Dialog/descendant::android.view.View)[3]/child::android.widget.Button")
     }
 
     get prodInfoMsg(){
