@@ -8,24 +8,41 @@ const serialNumberPattern = /(?<=Serial number:)(.*)(?=Product)/g
 const gtinPattern = /(?<=Product code:)(.*)(?=Batch)/g
 const batchNumberPattern = /(?<=Batch number:).*/g
 
+const CONTEXT_REF = {
+    NATIVE: 'native',
+    WEBVIEW: 'webview',
+};
+const DOCUMENT_READY_STATE = {
+    COMPLETE: 'complete',
+    INTERACTIVE: 'interactive',
+    LOADING: 'loading',
+};
 
-class UncheckBatchIsRecallInProductAndBatch{
+class UncheckBatchExpiredInProductAndExpiredBatch{
 
+
+    get recalledTxtMsg(){
+        return $("(//android.app.Dialog/descendant::android.view.View)[5]/child::android.widget.TextView")
+    }
+
+    get closeBtnMsg(){
+        return $("//android.widget.Button[@text='Close']")
+    }
 
     //recalled Batch 
-    get failedSNBatch(){
+    get recalledTextBatch(){
         return $("(//android.view.View[@resource-id='page-ion-content']/descendant::android.widget.TextView)[2]")
     }
 
-    get failedSNBatchLearnMore(){
+    get recalledBatchLearnMore(){
         return $("(//android.view.View[@resource-id='page-ion-content']/descendant::android.widget.TextView)[3]")
     }
 
-    get failedSNPopUpMsg(){
+    get recalledPopUpMsg(){
         return $("(//android.app.Dialog/descendant::android.view.View[5]/child::android.widget.TextView)")
     }
 
-    get closeFailedSNPopUpMsg(){
+    get closeRecalledPopUpMsg(){
         return $("(//android.app.Dialog/descendant::android.view.View)[3]/child::android.widget.Button")
     }
 
@@ -49,24 +66,101 @@ class UncheckBatchIsRecallInProductAndBatch{
         return $("(//android.app.Dialog/descendant::android.view.View)[5]/child::android.view.View")
     }
 
-    async waitTimeout(){
-        await timeoutWait.setTimeoutWait(30);
-        await timeoutWait.waitForElement(this.recalledTxtMsg);
+    get closeLeafletBtn() {
+        return $("(//android.app.Dialog/descendant::android.view.View)[4]/following::android.widget.Button")
+    }
+
+    get smpcDocType() {
+        return $("//h6[contains(text(),'SmPC')]")
+    }
+
+    get leafletType() {
+        return $("//android.view.View[@resource-id='ion-sel-1']")
+    }
+
+    get leafletTypeEpi(){
+        return $("(//android.app.Dialog[@resource-id='ion-overlay-1']/descendant::android.view.View)[1]/child::android.widget.Button[2]")
+    }
+
+    get leafletProdDescriptionType(){
+        return $("(//android.view.View[@resource-id='leaflet-content']/descendant::android.view.View)[2]/child::android.widget.TextView[2]")
+    }
+
+    waitForWebViewContextLoaded() {
+        browser.waitUntil(
+            () => {
+                const currentContexts = this.getCurrentContexts();
+
+                return currentContexts.length > 1 &&
+                    currentContexts.find(context => context.toLowerCase().includes(CONTEXT_REF.WEBVIEW));
+            },
+            10000,
+            'Webview context not loaded',
+            100
+        );
+    }
+
+    switchToContext(context) {
+        browser.switchContext(this.getCurrentContexts()[context === CONTEXT_REF.WEBVIEW ? 1 : 0]);
+    }
+
+    getCurrentContexts() {
+        return browser.getContexts();
+    }
+
+    waitForDocumentFullyLoaded() {
+        browser.waitUntil(
+            () => driver.execute(() => document.readyState) === DOCUMENT_READY_STATE.COMPLETE,
+            15000,
+            'Website not loaded',
+            100
+        );
+    }
+
+    waitForWebsiteLoaded() {
+        this.waitForWebViewContextLoaded();
+        this.switchToContext(CONTEXT_REF.WEBVIEW);
+        this.waitForDocumentFullyLoaded();
+        this.switchToContext(CONTEXT_REF.NATIVE);
+    }
+
+    async waitTimeout() {
+        await timeout.setTimeoutWait(38);
+        await timeout.waitForElement(this.smpcDocType);
 
     }
 
     
-    async uncheckBatchIsRecallInProductAndBatchFetch(){
- 
+    async uncheckBatchExpiredInProductAndExpiredBatchFetch(){
+       
+        await this.getCurrentContexts();
+        await timeout.setTimeoutTime(5);
+      //  await this.waitForWebViewContextLoaded();
+        await this.switchToContext("WEBVIEW_eu.pharmaledger.epi");
+        await browser.getContexts();
+        await timeout.setTimeoutTime(10);
+        await this.smpcDocType.click();
+        await timeout.setTimeoutTime(6);
+
+     //   await this.waitForDocumentFullyLoaded();
+        await this.switchToContext("NATIVE_eu.pharmaledger.epi");
+        await timeout.setTimeoutTime(5);
+
+        const recalledMsg=await this.recalledTxtMsg.getText();
+        console.log(recalledMsg);
+        await timeoutWait.setTimeoutTime(2);
+       // close button click
+        await this.closeBtnMsg.click();
+        await timeoutWait.setTimeoutTime(3);
         // recalled text message 
-        await this.failedSNBatch.getText();
+        await this.recalledTextBatch.getText();
         await timeoutWait.setTimeoutTime(3);
         // product info message
-        await this.failedSNBatchLearnMore.click();
+        await this.recalledBatchLearnMore.click();
         await timeoutWait.setTimeoutTime(3);
-        await this.failedSNPopUpMsg.getText();
+        await this.recalledPopUpMsg.getText();
         await timeoutWait.setTimeoutTime(3);
-        await this.closeFailedSNPopUpMsg.click();
+        await this.closeRecalledPopUpMsg.click();
         await timeoutWait.setTimeoutTime(3);
         await this.prodInfoMsg.getText();
         await timeoutWait.setTimeoutTime(2);
@@ -112,9 +206,23 @@ class UncheckBatchIsRecallInProductAndBatch{
         //  expect(this.LeafletInfo().match(batchNumberPattern)[0]).to.equal(testData.batchValue);
          // expect(this.LeafletInfo().match(serialNumberPattern)[0]).to.equal(testData.batchSerialNumber);
          // expect(this.LeafletInfo().match(expiryDatePattern)[0]).to.equal(testData.expiryDate);
-
+        
+        //  await this.closeLeafletBtn.click();
+        //  await timeout.setTimeoutTime(3);
+ 
+        //  await this.leafletType.click();
+        //  await this.setTimeoutWait(3);
+ 
+        //  await this.leafletTypeEpi.click();
+        //  await this.setTimeoutWait(4);
+ 
+        //  await this.leafletProdDescriptionType.scrollIntoView();
+        //  await this.setTimeoutWait(4);
+ 
+        //  const prodLeafletDescription=await this.leafletProdDescriptionType.getText();
+        //  console.log(prodLeafletDescription);
     
     }
 
 }
-module.exports=new UncheckBatchIsRecallInProductAndBatch();
+module.exports=new UncheckBatchExpiredInProductAndExpiredBatch();

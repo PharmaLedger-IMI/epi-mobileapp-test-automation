@@ -10,7 +10,17 @@ const serialNumberPattern = /(?<=Serial number:)(.*)(?=Product)/g
 const gtinPattern = /(?<=Product code:)(.*)(?=Batch)/g
 const batchNumberPattern = /(?<=Batch number:).*/g
 
-class ScanPreviousBatchTest extends webView{
+const CONTEXT_REF = {
+    NATIVE: 'native',
+    WEBVIEW: 'webview',
+};
+const DOCUMENT_READY_STATE = {
+    COMPLETE: 'complete',
+    INTERACTIVE: 'interactive',
+    LOADING: 'loading',
+};
+
+class ScanPreviousBatchTest{
 
     get productInfo(){
         return $("(//android.view.View[@resource-id='leaflet-header']/descendant::android.widget.TextView)[1]")
@@ -31,8 +41,12 @@ class ScanPreviousBatchTest extends webView{
         return $("(//android.app.Dialog/descendant::android.view.View)[5]/child::android.view.View")
     }
 
-    get smpcDocType(){
-        return $("div:nth-child(2) > div.item-content-container")
+    get closeLeafletBtn() {
+        return $("(//android.app.Dialog/descendant::android.view.View)[4]/following::android.widget.Button")
+    }
+
+    get smpcDocType() {
+        return $("//h6[contains(text(),'SmPC')]")
     }
 
     get leafletType(){
@@ -47,13 +61,64 @@ class ScanPreviousBatchTest extends webView{
         return $("(//android.view.View[@resource-id='leaflet-content']/descendant::android.view.View)[2]/child::android.widget.TextView[2]")
     }
 
-    async waitTimeout(){
-        await timeout.setTimeoutWait(30);
-        await timeout.waitForElement(this.productInfo);
-   
+    waitForWebViewContextLoaded() {
+        browser.waitUntil(
+            () => {
+                const currentContexts = this.getCurrentContexts();
+
+                return currentContexts.length > 1 &&
+                    currentContexts.find(context => context.toLowerCase().includes(CONTEXT_REF.WEBVIEW));
+            },
+            10000,
+            'Webview context not loaded',
+            100
+        );
+    }
+
+    switchToContext(context) {
+        browser.switchContext(this.getCurrentContexts()[context === CONTEXT_REF.WEBVIEW ? 1 : 0]);
+    }
+
+    getCurrentContexts() {
+        return browser.getContexts();
+    }
+
+    waitForDocumentFullyLoaded() {
+        browser.waitUntil(
+            () => driver.execute(() => document.readyState) === DOCUMENT_READY_STATE.COMPLETE,
+            15000,
+            'Website not loaded',
+            100
+        );
+    }
+
+    waitForWebsiteLoaded() {
+        this.waitForWebViewContextLoaded();
+        this.switchToContext(CONTEXT_REF.WEBVIEW);
+        this.waitForDocumentFullyLoaded();
+        this.switchToContext(CONTEXT_REF.NATIVE);
+    }
+
+    async waitTimeout() {
+        await timeout.setTimeoutWait(38);
+        await timeout.waitForElement(this.smpcDocType);
+
     }
 
     async scanPreviousBatchDetailsFetch(){
+
+        await this.getCurrentContexts();
+        await timeout.setTimeoutTime(5);
+      //  await this.waitForWebViewContextLoaded();
+        await this.switchToContext("WEBVIEW_eu.pharmaledger.epi");
+        await browser.getContexts();
+        await timeout.setTimeoutTime(10);
+        await this.smpcDocType.click();
+        await timeout.setTimeoutTime(6);
+
+     //   await this.waitForDocumentFullyLoaded();
+        await this.switchToContext("NATIVE_eu.pharmaledger.epi");
+        await timeout.setTimeoutTime(5);
 
         // commonFunctions.getLeafletDetails(true);
         // await timeout.setTimeoutTime(3);
@@ -72,15 +137,8 @@ class ScanPreviousBatchTest extends webView{
         // get leaflet product details information
         await this.productLeafletInfoDetails.getText();
         await timeout.setTimeoutTime(3);
-
-        await this.waitForWebViewContextLoaded();
-        await this.switchToContext(CONTEXT_REF.WEBVIEW);
-
-        await this.smpcDocType.click();
-        await this.setTimeoutWait(8);
-
-        await this.waitForDocumentFullyLoaded();
-        await this.switchToContext(CONTEXT_REF.NATIVE);
+        await this.closeLeafletBtn.click();
+        await timeout.setTimeoutTime(3);
 
         await this.leafletType.click();
         await this.setTimeoutWait(3);

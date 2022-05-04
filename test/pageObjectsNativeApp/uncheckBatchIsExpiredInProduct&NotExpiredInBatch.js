@@ -9,8 +9,16 @@ const gtinPattern = /(?<=Product code:)(.*)(?=Batch)/g
 const batchNumberPattern = /(?<=Batch number:).*/g
 
 
-class UncheckBatchIsRecallInProductAndRecalledInBatch{
+class UncheckBatchIsExpiredInProductNotExpiredInBatch{
 
+
+    get recalledTxtMsg(){
+        return $("(//android.app.Dialog/descendant::android.view.View)[5]/child::android.widget.TextView")
+    }
+
+    get closeBtnMsg(){
+        return $("//android.widget.Button[@text='Close']")
+    }
 
     //recalled Batch 
     get recalledTextBatch(){
@@ -44,7 +52,7 @@ class UncheckBatchIsRecallInProductAndRecalledInBatch{
     }
 
     
-    async uncheckBatchIsRecallInProductAndRecalledInBatchFetch(){
+    async uncheckBatchIsExpiredInProductNotExpiredInBatchFetch(){
         // recalled text message
         const recalledMsg=await this.recalledTxtMsg.getText();
         console.log(recalledMsg);
@@ -76,4 +84,4 @@ class UncheckBatchIsRecallInProductAndRecalledInBatch{
     }
 
 }
-module.exports=new UncheckBatchIsRecallInProductAndRecalledInBatch();
+module.exports=new UncheckBatchIsExpiredInProductNotExpiredInBatch();

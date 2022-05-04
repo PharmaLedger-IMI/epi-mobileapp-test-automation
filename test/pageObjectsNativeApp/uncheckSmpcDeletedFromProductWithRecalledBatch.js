@@ -9,7 +9,7 @@ const gtinPattern = /(?<=Product code:)(.*)(?=Batch)/g
 const batchNumberPattern = /(?<=Batch number:).*/g
 
 
-class UncheckBatchIsRecallInProductAndRecalledInBatch{
+class UncheckSmpcDeletedFromProductWithRecalledBatch{
 
 
     //recalled Batch 
@@ -44,7 +44,7 @@ class UncheckBatchIsRecallInProductAndRecalledInBatch{
     }
 
     
-    async uncheckBatchIsRecallInProductAndRecalledInBatchFetch(){
+    async uncheckSmpcDeletedFromProductWithRecalledBatchFetch(){
         // recalled text message
         const recalledMsg=await this.recalledTxtMsg.getText();
         console.log(recalledMsg);
@@ -76,4 +76,4 @@ class UncheckBatchIsRecallInProductAndRecalledInBatch{
     }
 
 }
-module.exports=new UncheckBatchIsRecallInProductAndRecalledInBatch();
+module.exports=new UncheckSmpcDeletedFromProductWithRecalledBatch();

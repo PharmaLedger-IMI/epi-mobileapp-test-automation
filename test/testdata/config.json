@@ -23,8 +23,8 @@
        "recalledTxtMsg":"This is a sample recall message",
        "productInfoMsg":"epi-auto-",
        "leafletShieldInfoBtn":"leaflet-verified",
-       "leafletProductLevelDescription":"Leaflet Product Level",
-       "leafletBatchLevelDescription":"Leaflet Batch Level",
+       "leafletProductLevelDescription":"Leaflet at product level",
+       "leafletBatchLevelDescription":"Leaflet at batch level",
        "leafletUpdatedLevelDescription":"Leaflet Updated Level"
     },
 

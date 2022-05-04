@@ -9,25 +9,33 @@ const gtinPattern = /(?<=Product code:)(.*)(?=Batch)/g
 const batchNumberPattern = /(?<=Batch number:).*/g
 
 
-class UncheckBatchIsRecallInProductAndBatch{
+class CheckSmpcDeletedFromProductWithRecalledBatch{
 
+    get recalledTxtMsg(){
+        return $("(//android.app.Dialog/descendant::android.view.View)[5]/child::android.widget.TextView")
+    }
+
+    get closeBtnMsg(){
+        return $("//android.widget.Button[@text='Close']")
+    }
 
     //recalled Batch 
-    get failedSNBatch(){
+    get recalledTextBatch(){
         return $("(//android.view.View[@resource-id='page-ion-content']/descendant::android.widget.TextView)[2]")
     }
 
-    get failedSNBatchLearnMore(){
+    get recalledBatchLearnMore(){
         return $("(//android.view.View[@resource-id='page-ion-content']/descendant::android.widget.TextView)[3]")
     }
 
-    get failedSNPopUpMsg(){
+    get recalledPopUpMsg(){
         return $("(//android.app.Dialog/descendant::android.view.View[5]/child::android.widget.TextView)")
     }
 
-    get closeFailedSNPopUpMsg(){
+    get closeRecalledPopUpMsg(){
         return $("(//android.app.Dialog/descendant::android.view.View)[3]/child::android.widget.Button")
     }
+
 
     get prodInfoMsg(){
         return $("(//android.view.View[@resource-id='leaflet-header']/descendant::android.widget.TextView)[1]")
@@ -49,6 +57,14 @@ class UncheckBatchIsRecallInProductAndBatch{
         return $("(//android.app.Dialog/descendant::android.view.View)[5]/child::android.view.View")
     }
 
+    get closeLeafletBtn() {
+        return $("(//android.app.Dialog/descendant::android.view.View)[4]/following-sibling::android.widget.Button")
+    }
+
+    get leafletProdLevelDescType() {
+        return $("(//android.view.View[@resource-id='leaflet-content']/descendant::android.view.View)[2]/child::android.widget.TextView[2]")
+    }
+
     async waitTimeout(){
         await timeoutWait.setTimeoutWait(30);
         await timeoutWait.waitForElement(this.recalledTxtMsg);
@@ -56,17 +72,23 @@ class UncheckBatchIsRecallInProductAndBatch{
     }
 
     
-    async uncheckBatchIsRecallInProductAndBatchFetch(){
- 
+    async checkSmpcDeletedFromProductWithRecalledBatchFetch(){
+
+        const recalledMsg=await this.recalledTxtMsg.getText();
+        console.log(recalledMsg);
+        await timeoutWait.setTimeoutTime(2);
+       // close button click
+        await this.closeBtnMsg.click();
+        await timeoutWait.setTimeoutTime(3);
         // recalled text message 
-        await this.failedSNBatch.getText();
+        await this.recalledTextBatch.getText();
         await timeoutWait.setTimeoutTime(3);
         // product info message
-        await this.failedSNBatchLearnMore.click();
+        await this.recalledBatchLearnMore.click();
         await timeoutWait.setTimeoutTime(3);
-        await this.failedSNPopUpMsg.getText();
+        await this.recalledPopUpMsg.getText();
         await timeoutWait.setTimeoutTime(3);
-        await this.closeFailedSNPopUpMsg.click();
+        await this.closeRecalledPopUpMsg.click();
         await timeoutWait.setTimeoutTime(3);
         await this.prodInfoMsg.getText();
         await timeoutWait.setTimeoutTime(2);
@@ -82,6 +104,21 @@ class UncheckBatchIsRecallInProductAndBatch{
         await this.productLeafletInfoDetails.getText();
         await timeoutWait.setTimeoutTime(2);
 
+        await this.closeLeafletBtn.click();
+        await timeoutWait.setTimeoutTime(3);
+        // await this.leafletProdLevelDescType.scrollIntoView();
+        // await this.setTimeoutWait(4);
+    //    await browser.touchScroll({
+    //         element: this.leafletProdLevelDescType,
+    //         xOffset: 10,
+    //         yOffset: 100
+    //       });
+
+    //     await browser.scroll(10,100);
+          
+    //     const prodLeafletDescription = await this.leafletProdLevelDescType.getText();
+    //     console.log(prodLeafletDescription);
+
         const leafletInfoDetailsFetch = await this.productLeafletInfoDetails.getText();
         console.log("Prod Info Details of Leaflet is:"+" "+leafletInfoDetailsFetch)
         const leafletInfoFetch = leafletInfoDetailsFetch.replace(':',"=");
@@ -96,8 +133,7 @@ class UncheckBatchIsRecallInProductAndBatch{
          // console.log(this.LeafletInfo().match(serialNumberPattern)[0]);
          // console.log(this.LeafletInfo().match(gtinPattern)[0]);
          // console.log(this.LeafletInfo().match(batchNumberPattern)[0]);
- 
-         await timeoutWait.setTimeoutTime(3);
+
 
          const datebefore=leafletInfoDetailsFetch.match(expiryDatePattern)[0];
          const dateafter=moment(datebefore, "DD-MMM-YYYY").format("YYMMDD")
@@ -108,6 +144,9 @@ class UncheckBatchIsRecallInProductAndBatch{
          expect(leafletInfoDetailsFetch.match(batchNumberPattern)[0]).to.equal(testData.batchValue);
          expect(leafletInfoDetailsFetch.match(serialNumberPattern)[0]).to.equal(testData.batchSerialNumber);
          expect(dateafter).to.equal(testData.expiry);
+    
+
+        // expect(prodLeafletDescription).toHaveTextContaining("#Leaflet at product level#")
         //  expect(this.LeafletInfo().match(gtinPattern)[0]).to.equal(testData.prodCode);
         //  expect(this.LeafletInfo().match(batchNumberPattern)[0]).to.equal(testData.batchValue);
          // expect(this.LeafletInfo().match(serialNumberPattern)[0]).to.equal(testData.batchSerialNumber);
@@ -117,4 +156,4 @@ class UncheckBatchIsRecallInProductAndBatch{
     }
 
 }
-module.exports=new UncheckBatchIsRecallInProductAndBatch();
+module.exports=new CheckSmpcDeletedFromProductWithRecalledBatch();

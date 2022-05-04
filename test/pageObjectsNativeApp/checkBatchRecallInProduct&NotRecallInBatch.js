@@ -10,7 +10,33 @@ const serialNumberPattern = /(?<=Serial number:)(.*)(?=Product)/g
 const gtinPattern = /(?<=Product code:)(.*)(?=Batch)/g
 const batchNumberPattern = /(?<=Batch number:).*/g
 
-class CheckBatchRecallInProductAndNotRecallInBatch extends WebView{
+const CONTEXT_REF = {
+    NATIVE: 'native',
+    WEBVIEW: 'webview',
+};
+const DOCUMENT_READY_STATE = {
+    COMPLETE: 'complete',
+    INTERACTIVE: 'interactive',
+    LOADING: 'loading',
+};
+
+class CheckBatchRecallInProductAndNotRecallInBatch{
+
+    get recalledTextBatch(){
+        return $("(//android.view.View[@resource-id='page-ion-content']/descendant::android.widget.TextView)[2]")
+    }
+
+    get recalledBatchLearnMore(){
+        return $("(//android.view.View[@resource-id='page-ion-content']/descendant::android.widget.TextView)[3]")
+    }
+
+    get recalledPopUpMsg(){
+        return $("(//android.app.Dialog/descendant::android.view.View[5]/child::android.widget.TextView)")
+    }
+
+    get closeRecalledPopUpMsg(){
+        return $("(//android.app.Dialog/descendant::android.view.View)[3]/child::android.widget.Button")
+    }
 
     get productInfo(){
         return $("(//android.view.View[@resource-id='leaflet-header']/descendant::android.widget.TextView)[1]")
@@ -31,11 +57,11 @@ class CheckBatchRecallInProductAndNotRecallInBatch extends WebView{
         return $("(//android.app.Dialog/descendant::android.view.View)[5]/child::android.view.View")
     }
 
-    get smpcDocType(){
-        return $("div:nth-child(2) > div.item-content-container")
+    get smpcDocType() {
+        return $("//h6[contains(text(),'SmPC')]")
     }
 
-    get leafletType(){
+    get leafletType() {
         return $("//android.view.View[@resource-id='ion-sel-1']")
     }
 
@@ -47,17 +73,77 @@ class CheckBatchRecallInProductAndNotRecallInBatch extends WebView{
         return $("(//android.view.View[@resource-id='leaflet-content']/descendant::android.view.View)[2]/child::android.widget.TextView[2]")
     }
 
-    async waitTimeout(){
-        await timeout.setTimeoutWait(30);
-        await timeout.waitForElement(this.productInfo);
-   
+    waitForWebViewContextLoaded() {
+        browser.waitUntil(
+            () => {
+                const currentContexts = this.getCurrentContexts();
+
+                return currentContexts.length > 1 &&
+                    currentContexts.find(context => context.toLowerCase().includes(CONTEXT_REF.WEBVIEW));
+            },
+            10000,
+            'Webview context not loaded',
+            100
+        );
+    }
+
+    switchToContext(context) {
+        browser.switchContext(this.getCurrentContexts()[context === CONTEXT_REF.WEBVIEW ? 1 : 0]);
+    }
+
+    getCurrentContexts() {
+        return browser.getContexts();
+    }
+
+    waitForDocumentFullyLoaded() {
+        browser.waitUntil(
+            () => driver.execute(() => document.readyState) === DOCUMENT_READY_STATE.COMPLETE,
+            15000,
+            'Website not loaded',
+            100
+        );
+    }
+
+    waitForWebsiteLoaded() {
+        this.waitForWebViewContextLoaded();
+        this.switchToContext(CONTEXT_REF.WEBVIEW);
+        this.waitForDocumentFullyLoaded();
+        this.switchToContext(CONTEXT_REF.NATIVE);
+    }
+
+    async waitTimeout() {
+        await timeout.setTimeoutWait(38);
+        await timeout.waitForElement(this.smpcDocType);
+
     }
 
  
     async checkBatchRecallInProductAndNotRecallInBatchFetch(){
 
+        await this.getCurrentContexts();
+        await timeout.setTimeoutTime(5);
+      //  await this.waitForWebViewContextLoaded();
+        await this.switchToContext("WEBVIEW_eu.pharmaledger.epi");
+        await browser.getContexts();
+        await timeout.setTimeoutTime(10);
+        await this.smpcDocType.click();
+        await timeout.setTimeoutTime(6);
+
+     //   await this.waitForDocumentFullyLoaded();
+        await this.switchToContext("NATIVE_eu.pharmaledger.epi");
+        await timeout.setTimeoutTime(5);
+
         // commonFunctions.getLeafletDetails(true);
         // await timeout.setTimeoutTime(3);
+        await this.recalledTextBatch.getText();
+        await timeoutWait.setTimeoutTime(3);
+        // product info message
+        await this.recalledBatchLearnMore.click();
+        await timeoutWait.setTimeoutTime(3);
+        await this.recalledPopUpMsg.getText();
+        await timeoutWait.setTimeoutTime(3);
+        await this.closeRecalledPopUpMsg.click();
+        await timeoutWait.setTimeoutTime(3);
         await this.productInfo.getText();
        // expect(this.productInfo.getText()).to.not.equal(null);
         await timeout.setTimeoutTime(3);
@@ -73,27 +159,7 @@ class CheckBatchRecallInProductAndNotRecallInBatch extends WebView{
         // get leaflet product details information
         await this.productLeafletInfoDetails.getText();
         await timeout.setTimeoutTime(3);
-
-        await this.waitForWebViewContextLoaded();
-        await this.switchToContext(CONTEXT_REF.WEBVIEW);
-
-        await this.smpcDocType.click();
-        await this.setTimeoutWait(8);
-
-        await this.waitForDocumentFullyLoaded();
-        await this.switchToContext(CONTEXT_REF.NATIVE);
-
-        await this.leafletType.click();
-        await this.setTimeoutWait(3);
-
-        await this.leafletTypeEpi.click();
-        await this.setTimeoutWait(4);
-
-        await this.leafletProdDescriptionType.scrollIntoView();
-        await this.setTimeoutWait(4);
-
-        const prodLeafletDescription=await this.leafletProdDescriptionType.getText();
-        console.log(prodLeafletDescription);
+        
 
         const leafletInfoDetailsFetch = await this.productLeafletInfoDetails.getText();
         console.log("Prod Info Details of Leaflet is:"+" "+leafletInfoDetailsFetch)
@@ -117,6 +183,21 @@ class CheckBatchRecallInProductAndNotRecallInBatch extends WebView{
          expect(leafletInfoDetailsFetch.match(batchNumberPattern)[0]).to.equal(testData.batchValue);
          expect(leafletInfoDetailsFetch.match(serialNumberPattern)[0]).to.equal(testData.batchSerialNumber);
          expect(dateafter).to.equal(testData.expiry);
+
+         await this.closeLeafletBtn.click();
+        await timeout.setTimeoutTime(3);
+
+        await this.leafletType.click();
+        await this.setTimeoutWait(3);
+
+        await this.leafletTypeEpi.click();
+        await this.setTimeoutWait(4);
+
+        await this.leafletProdDescriptionType.scrollIntoView();
+        await this.setTimeoutWait(4);
+
+        const prodLeafletDescription=await this.leafletProdDescriptionType.getText();
+        console.log(prodLeafletDescription);
            
     }
         
