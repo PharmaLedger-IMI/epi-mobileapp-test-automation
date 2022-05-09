@@ -8,7 +8,8 @@ const serialNumberPattern = /(?<=Serial number:)(.*)(?=Product)/g
 const gtinPattern = /(?<=Product code:)(.*)(?=Batch)/g
 const batchNumberPattern = /(?<=Batch number:).*/g
 
-class UncheckExpirationDateInProductAndBatchWithCorrectExpiryDate{
+
+class UnCheckSNRecallInProductAndNotRecalledBatch{
 
 
     get recalledTxtMsg(){
@@ -56,46 +57,15 @@ class UncheckExpirationDateInProductAndBatchWithCorrectExpiryDate{
         return $("(//android.app.Dialog/descendant::android.view.View)[5]/child::android.view.View")
     }
 
-    get closeLeafletBtn() {
-        return $("(//android.app.Dialog/descendant::android.view.View)[4]/following::android.widget.Button")
-    }
-
-    get leafletType() {
-        return $("(//android.view.View[@resource-id='leaflet-header']/descendant::android.view.View)[3]/child::android.view.View[@resource-id='ion-sel-1']")
-    }
-
-    get leafletTypeEpi(){
-        return $("(//android.app.Dialog[@resource-id='ion-overlay-1']/descendant::android.view.View)[1]/child::android.widget.Button[2]")
-    }
-
-    get leafletProdDescriptionType(){
-        return $("(//android.view.View[@resource-id='leaflet-content']/descendant::android.view.View)[2]/child::android.widget.TextView[2]")
-    }
-
-
-    async waitTimeout() {
-        await timeout.setTimeoutWait(30);
-       // await timeout.waitForElement(this.smpcDocType);
+    async waitTimeout(){
+        await timeoutWait.setTimeoutWait(30);
+        await timeoutWait.waitForElement(this.recalledTxtMsg);
 
     }
 
     
-    async uncheckExpirationDateInProductAndBatchWithCorrectExpiryDateFetch(){
-       
-        let deviceScreenDimensions = await driver.getWindowRect();
-    
-        await driver.touchPerform([
-            {
-            action : 'tap',
-            options: {
-            x: Math.floor(deviceScreenDimensions.width * 0.49),
-            y: Math.floor(deviceScreenDimensions.height * 0.49)
-            }
-        }
-        ]);
-
-        await timeout.setTimeoutWait(8);
-
+    async unCheckSNRecallInProductAndNotRecalledBatchFetch(){
+        // recalled text message
         const recalledMsg=await this.recalledTxtMsg.getText();
         console.log(recalledMsg);
         await timeoutWait.setTimeoutTime(2);
@@ -156,32 +126,9 @@ class UncheckExpirationDateInProductAndBatchWithCorrectExpiryDate{
         //  expect(this.LeafletInfo().match(batchNumberPattern)[0]).to.equal(testData.batchValue);
          // expect(this.LeafletInfo().match(serialNumberPattern)[0]).to.equal(testData.batchSerialNumber);
          // expect(this.LeafletInfo().match(expiryDatePattern)[0]).to.equal(testData.expiryDate);
-        
-        await this.closeLeafletBtn.click();
-        await timeout.setTimeoutTime(3);
 
-        await this.leafletType.click();
-        await timeout.setTimeoutWait(3);
-
-        await this.leafletTypeEpi.click();
-        await timeout.setTimeoutWait(4);
-
-        let deviceScreenDimensions2 = await driver.getWindowRect();
-        await driver.touchPerform([
-            {
-            Element : this.leafletProdLevelDescType,
-            action : 'tap',
-            options: {
-            x: Math.floor(deviceScreenDimensions2.width * 0.49),
-            y: Math.floor(deviceScreenDimensions2.height * 0.60)
-            }
-        }
-        ]);
-
-        const prodLeafletDescription = await this.leafletProdLevelDescType.getText();
-        console.log(prodLeafletDescription);
     
     }
 
 }
-module.exports=new UncheckExpirationDateInProductAndBatchWithCorrectExpiryDate();
+module.exports=new UnCheckSNRecallInProductAndNotRecalledBatch();

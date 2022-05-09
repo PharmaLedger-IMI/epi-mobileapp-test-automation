@@ -10,16 +10,6 @@ const serialNumberPattern = /(?<=Serial number:)(.*)(?=Product)/g
 const gtinPattern = /(?<=Product code:)(.*)(?=Batch)/g
 const batchNumberPattern = /(?<=Batch number:).*/g
 
-const CONTEXT_REF = {
-    NATIVE: 'native',
-    WEBVIEW: 'webview',
-};
-const DOCUMENT_READY_STATE = {
-    COMPLETE: 'complete',
-    INTERACTIVE: 'interactive',
-    LOADING: 'loading',
-};
-
 class UpdateProductWithNewLeafletSMPC{
 
     get productInfo(){
@@ -45,12 +35,8 @@ class UpdateProductWithNewLeafletSMPC{
         return $("(//android.app.Dialog/descendant::android.view.View)[4]/following::android.widget.Button")
     }
 
-    get smpcDocType(){
-        return $("//h6[contains(text(),'SmPC')]")
-    }
-
     get leafletType(){
-        return $("//android.view.View[@resource-id='ion-sel-1']")
+        return $("(//android.view.View[@resource-id='leaflet-header']/descendant::android.view.View)[3]/child::android.view.View[@resource-id='ion-sel-1']")
     }
 
     get leafletTypeEpi(){
@@ -61,65 +47,28 @@ class UpdateProductWithNewLeafletSMPC{
         return $("(//android.view.View[@resource-id='leaflet-content']/descendant::android.view.View)[2]/child::android.widget.TextView[2]")
     }
 
-    waitForWebViewContextLoaded() {
-        browser.waitUntil(
-            () => {
-                const currentContexts = this.getCurrentContexts();
-
-                return currentContexts.length > 1 &&
-                    currentContexts.find(context => context.toLowerCase().includes(CONTEXT_REF.WEBVIEW));
-            },
-            10000,
-            'Webview context not loaded',
-            100
-        );
-    }
-
-    switchToContext(context) {
-        browser.switchContext(this.getCurrentContexts()[context === CONTEXT_REF.WEBVIEW ? 1 : 0]);
-    }
-
-    getCurrentContexts() {
-        return browser.getContexts();
-    }
-
-    waitForDocumentFullyLoaded() {
-        browser.waitUntil(
-            () => driver.execute(() => document.readyState) === DOCUMENT_READY_STATE.COMPLETE,
-            15000,
-            'Website not loaded',
-            100
-        );
-    }
-
-    waitForWebsiteLoaded() {
-        this.waitForWebViewContextLoaded();
-        this.switchToContext(CONTEXT_REF.WEBVIEW);
-        this.waitForDocumentFullyLoaded();
-        this.switchToContext(CONTEXT_REF.NATIVE);
-    }
-
     async waitTimeout() {
-        await timeout.setTimeoutWait(38);
-        await timeout.waitForElement(this.smpcDocType);
+        await timeout.setTimeoutWait(32);
+       // await timeout.waitForElement(this.smpcDocType);
 
     }
 
  
     async updateProductWithNewLeafletSMPCDetailsFetch(){
 
-        await this.getCurrentContexts();
-        await timeout.setTimeoutTime(5);
-      //  await this.waitForWebViewContextLoaded();
-        await this.switchToContext("WEBVIEW_eu.pharmaledger.epi");
-        await browser.getContexts();
-        await timeout.setTimeoutTime(10);
-        await this.smpcDocType.click();
-        await timeout.setTimeoutTime(6);
+        let deviceScreenDimensions = await driver.getWindowRect();
+    
+        await driver.touchPerform([
+            {
+            action : 'tap',
+            options: {
+            x: Math.floor(deviceScreenDimensions.width * 0.49),
+            y: Math.floor(deviceScreenDimensions.height * 0.49)
+            }
+        }
+        ]);
 
-     //   await this.waitForDocumentFullyLoaded();
-        await this.switchToContext("NATIVE_eu.pharmaledger.epi");
-        await timeout.setTimeoutTime(5); 
+        await timeout.setTimeoutWait(8); 
 
         // commonFunctions.getLeafletDetails(true);
         // await timeout.setTimeoutTime(3);
@@ -138,23 +87,10 @@ class UpdateProductWithNewLeafletSMPC{
         // get leaflet product details information
         await this.productLeafletInfoDetails.getText();
         await timeout.setTimeoutTime(3);
-        await this.closeLeafletBtn.click();
-        await timeout.setTimeoutTime(3);
-
-        await this.leafletType.click();
-        await this.setTimeoutWait(3);
-
-        await this.leafletTypeEpi.click();
-        await this.setTimeoutWait(4);
-
-        await this.leafletProdDescriptionType.scrollIntoView();
-        await this.setTimeoutWait(4);
-
-        const prodLeafletDescription=await this.leafletProdDescriptionType.getText();
-        console.log(prodLeafletDescription);
 
         const leafletInfoDetailsFetch = await this.productLeafletInfoDetails.getText();
         console.log("Prod Info Details of Leaflet is:"+" "+leafletInfoDetailsFetch)
+       
         const leafletInfoFetch = leafletInfoDetailsFetch.replace(':',"=");
         console.log("Batch Info Details of Leaflet is: "+ leafletInfoFetch);
 
@@ -175,6 +111,30 @@ class UpdateProductWithNewLeafletSMPC{
          expect(leafletInfoDetailsFetch.match(batchNumberPattern)[0]).to.equal(testData.batchValue);
          expect(leafletInfoDetailsFetch.match(serialNumberPattern)[0]).to.equal(testData.batchSerialNumber);
          expect(dateafter).to.equal(testData.expiry);
+
+         await this.closeLeafletBtn.click();
+        await timeout.setTimeoutTime(3);
+
+        await this.leafletType.click();
+        await timeout.setTimeoutWait(3);
+
+        await this.leafletTypeEpi.click();
+        await timeout.setTimeoutWait(4);
+
+        let deviceScreenDimensions2 = await driver.getWindowRect();
+        await driver.touchPerform([
+            {
+            Element : this.leafletProdLevelDescType,
+            action : 'tap',
+            options: {
+            x: Math.floor(deviceScreenDimensions2.width * 0.49),
+            y: Math.floor(deviceScreenDimensions2.height * 0.60)
+            }
+        }
+        ]);
+
+        const prodLeafletDescription = await this.leafletProdLevelDescType.getText();
+        console.log(prodLeafletDescription);
            
     }
 }

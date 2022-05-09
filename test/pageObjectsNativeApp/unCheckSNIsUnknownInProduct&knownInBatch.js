@@ -1,14 +1,16 @@
+
 const testData = require('../testdata/testExpectations.json')
 const expect = require('chai').expect
 const timeout=require('../utils/setTimeout')
 const moment = require('moment')
+
 
 const expiryDatePattern = /(?<=Expiry:)(.*)(?=Serial)/g
 const serialNumberPattern = /(?<=Serial number:)(.*)(?=Product)/g
 const gtinPattern = /(?<=Product code:)(.*)(?=Batch)/g
 const batchNumberPattern = /(?<=Batch number:).*/g
 
-class CheckBatchRecalledInProductAndBatch{
+class UncheckSNIsUnknownInProductAndKnownInBatch{
 
     get productInfo(){
         return $("(//android.view.View[@resource-id='leaflet-header']/descendant::android.widget.TextView)[1]")
@@ -18,7 +20,7 @@ class CheckBatchRecalledInProductAndBatch{
     }
 
     get leafletVerifiedShiledBtn(){
-        return $("(//android.view.View[@resource-id='leaflet-header']/descendant::android.widget.Image)[1]")
+        return $("(//android.view.View/child::android.widget.Image)[2]")
     }
 
     get batchInfo(){
@@ -29,49 +31,16 @@ class CheckBatchRecalledInProductAndBatch{
         return $("(//android.app.Dialog/descendant::android.view.View)[5]/child::android.view.View")
     }
 
-    get closeLeafletBtn() {
-        return $("(//android.app.Dialog/descendant::android.view.View)[4]/following::android.widget.Button")
-    }
-
-    get smpcDocType() {
-        return $("//h6[contains(text(),'SmPC')]")
-    }
-
-    get leafletType(){
-        return $("(//android.view.View[@resource-id='leaflet-header']/descendant::android.view.View)[3]/child::android.view.View[@resource-id='ion-sel-1']")
-    }
-
-    get leafletTypeEpi(){
-        return $("(//android.app.Dialog[@resource-id='ion-overlay-1']/descendant::android.view.View)[1]/child::android.widget.Button[2]")
-    }
-
-    get leafletProdDescriptionType(){
-        return $("(//android.view.View[@resource-id='leaflet-content']/descendant::android.view.View)[2]/child::android.widget.TextView[2]")
-    }
-
-    async waitTimeout() {
-        await timeout.setTimeoutWait(38);
-       // await timeout.waitForElement(this.smpcDocType);
-
+    async waitTimeout(){
+        await timeout.setTimeoutWait(30);
+        await timeout.waitForElement(this.productInfo);
+   
     }
 
  
-    async checkBatchRecalledInProductAndBatchFetch(){
+    async uncheckSNIsUnknownInProductAndKnownInBatchFetch(){
 
-        let deviceScreenDimensions = await driver.getWindowRect();
-    
-        await driver.touchPerform([
-            {
-            action : 'tap',
-            options: {
-            x: Math.floor(deviceScreenDimensions.width * 0.49),
-            y: Math.floor(deviceScreenDimensions.height * 0.49)
-            }
-        }
-        ]);
-
-        await timeout.setTimeoutWait(8);
-
+        // commonFunctions.getLeafletDetails(true);
         // await timeout.setTimeoutTime(3);
         await this.productInfo.getText();
        // expect(this.productInfo.getText()).to.not.equal(null);
@@ -87,8 +56,7 @@ class CheckBatchRecalledInProductAndBatch{
         await timeout.setTimeoutTime(3);
         // get leaflet product details information
         await this.productLeafletInfoDetails.getText();
-        await timeout.setTimeoutTime(3);
-    
+        await timeout.setTimeoutTime(3);  
         const leafletInfoDetailsFetch = await this.productLeafletInfoDetails.getText();
         console.log("Prod Info Details of Leaflet is:"+" "+leafletInfoDetailsFetch)
         const leafletInfoFetch = leafletInfoDetailsFetch.replace(':',"=");
@@ -111,33 +79,8 @@ class CheckBatchRecalledInProductAndBatch{
          expect(leafletInfoDetailsFetch.match(batchNumberPattern)[0]).to.equal(testData.batchValue);
          expect(leafletInfoDetailsFetch.match(serialNumberPattern)[0]).to.equal(testData.batchSerialNumber);
          expect(dateafter).to.equal(testData.expiry);
-
-         await this.closeLeafletBtn.click();
-         await timeout.setTimeoutTime(3);
- 
-         await this.leafletType.click();
-         await timeout.setTimeoutWait(3);
- 
-         await this.leafletTypeEpi.click();
-         await timeout.setTimeoutWait(4);
- 
-         let deviceScreenDimensions2 = await driver.getWindowRect();
-         await driver.touchPerform([
-             {
-             Element : this.leafletProdLevelDescType,
-             action : 'tap',
-             options: {
-             x: Math.floor(deviceScreenDimensions2.width * 0.49),
-             y: Math.floor(deviceScreenDimensions2.height * 0.60)
-             }
-         }
-         ]);
- 
-         const prodLeafletDescription = await this.leafletProdLevelDescType.getText();
-         console.log(prodLeafletDescription);
            
     }
-        
 }
 
-module.exports=new CheckBatchRecalledInProductAndBatch();
+module.exports=new UncheckSNIsUnknownInProductAndKnownInBatch();

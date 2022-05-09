@@ -1,15 +1,15 @@
-const deleteBatchUploadLeafletSMPCTest=require('../pageObjectsNativeApp/deleteLeafletAndSMPCInBatch')
+const unCheckSNIsUnknownInProductAndBatch=require('../pageObjectsNativeApp/unCheckSNIsUnknownInProductAndBatch')
 const allureReporter = require('@wdio/allure-reporter').default
 const nativePatientPage = require('../pageObjectsNativeApp/patientSettingPage')
 const timeoutWait=require('../utils/setTimeout')
 
-describe('059_Edit batch to delete ePI and SMPC file.', () => {
+describe('090_Edit product to uncheck SN is unknown and edit batch to have valid SN and pass invalid SN in matrix', () => {
     
-    allureReporter.addFeature('Edit batch to delete ePI and SMPC file.')
+    allureReporter.addFeature('Edit product to uncheck SN is unknown and edit batch to have valid SN and pass invalid SN in matrix')
     allureReporter.addSeverity('Critical');
-    allureReporter.addTestId('ProductInfoUpdate_4_2')
-    allureReporter.addDescription('Check that Leaflet details are displayed for batch to delete ePI and SMPC file.')
-    allureReporter.startStep("leaflet Details are Populated when batch to delete ePI and SMPC file.")
+    allureReporter.addTestId('ProductDisplayEpiFlag_6_5')
+    allureReporter.addDescription('Check that Leaflet details are displayed to uncheck SN is unknown and edit batch to have valid SN and pass invalid SN in matrix')
+    allureReporter.startStep("Add_productBatch leaflet Details are Populated to uncheck SN is unknown and edit batch to have valid SN and pass invalid SN in matrix")
     
     it('Mobile App - should set Patient Setting and Scan 2D Matrix', async() => {
        
@@ -26,18 +26,15 @@ describe('059_Edit batch to delete ePI and SMPC file.', () => {
     
     });
 
-    it('Mobile App - should display LeafLet details for batch to delete ePI and SMPC file.', async () => {
+    it('Mobile App - should display LeafLet details to uncheck SN is unknown and edit batch to have valid SN and pass invalid SN in matrix', async () => {
         allureReporter.addFeature('LeafLet Recalled Batch Info Data');
         //wait timeout for Leaflet to be displayed
-        await deleteBatchUploadLeafletSMPCTest.waitTimeout();
+        await unCheckSNIsUnknownInProductAndBatch.waitTimeout();
         await timeoutWait.setTimeoutWait(3);
         //display details on Add_productBatch Leaflet when Add_productBatch Leaflet for batch scenario created
-        await deleteBatchUploadLeafletSMPCTest.deleteLeafletandSMPCInBatchDetailsFetch();
+        await unCheckSNIsUnknownInProductAndBatch.uncheckSNIsUnknownInProductAndBatchFetch();
         await timeoutWait.setTimeoutWait(4);
-        // await setTimeout(() => {
-        //     console.log("inside timeout");
-        // }, 4000);
-  
+      
 });
 
 });

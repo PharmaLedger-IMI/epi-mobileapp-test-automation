@@ -119,15 +119,42 @@ exports.config = {
             //       'test/specs/uncheckIncorrectExpiryDateInProduct&BatchTest.js',
             //       'test/specs/uncheckExpirationDateInProduct&BatchWithCorrectExpiryDateTest.js',
             
-            //        'test/specs/checkBatchIsExpiredInProductAndBatchTest.js',
+            //       'test/specs/checkBatchIsExpiredInProductAndBatchTest.js',
             //       'test/specs/checkBatchIsExpiredInProductNotExpiredInBatchTest.js',
-            //       'test/specs/checkSmpcDeletedFromProductWithExpiredBatchTest.js'
-            //         'test/specs/uncheckBatchIsExpiredInProduct&ExpiredInBatchTest.js'
-            //         'test/specs/uncheckBatchIsExpiredInProduct&NotExpiredInBatchTest.js'
+            //       'test/specs/checkSmpcDeletedFromProductWithExpiredBatchTest.js',
+            //       'test/specs/uncheckBatchIsExpiredInProduct&ExpiredInBatchTest.js',
+            //       'test/specs/uncheckBatchIsExpiredInProduct&NotExpiredInBatchTest.js',
 
+            //      'test/specs/checkSNRecallInProductAndBatchTest.js',
+            //      'test/specs/checkSNRecallInProductAndNotRecalledInBatchTest.js',
+            //      'test/specs/checkSmpcDeletedInProductWithSNRecalledTest.js',
+            //      'test/specs/uncheckSNRecallInProduct&UpdateInBatchTest.js',
+            //      'test/specs/uncheckSNRecallInProduct&NotRecalledInBatchTest.js',
+                     
+            //     'test/specs/checkSNDecommissionedInProductAndBatchTest.js',
+            //    'test/specs/checkSNDecommissionedInProduct&NotInBatchTest.js',
+            //   'test/specs/checkSmpcDeletedFromProductWithSNDecommissonedTest.js',
+            //     'test/specs/unCheckSnDecommissionedInProduct&DecommissionedInBatchTest.js',
+            //      'test/specs/uncheckSnDecommissionedInProduct&NotDecommissionedInBatchTest.js',
+        
+            //    'test/specs/checkSNIsUnknownInProductAndBatchTest.js',
+            //    'test/specs/checkSNIsUnknownInProduct&KnownInBatchTest.js'
+            //    'test/specs/checkSmpcIsDeletedFromProductWithSnIsUnknownTest.js',
+            //    'test/specs/unCheckSNIsUnknownInProductAndBatchTest',
+            //    'test/specs/unCheckSNIsUnknownInProduct&KnownInBatchTest.js',
 
-            ],            
-        //'test/specs/nativeEpiQATest.js'
+             'test/specs/checkBatchIsUnknownInProductWithInValidMatrixTest.js',
+            // 'test/specs/checkBatchIsUnknownInProductWithValidMatrixTest.js'
+            //    'test/specs/checkSmpcIsDeletedFromProductWithBatchIsUnknownTest.js',
+            //    'test/specs/unCheckBatchIsUnknownInProductWithInValidBatchTest.js',
+            //    'test/specs/unCheckBatchIsUnknownInProductWithValidBatchTest.js'
+       
+            // 'test/specs/inValidSerialNumberAndInvalidExpiryDateTest.js',
+            // 'test/specs/checkUnknownBatchWithInvalidBatch&InvalidExpiryDateTest.js',
+            // 'test/specs/inValidSerialNumberWithBatchRecalledTest.js'
+
+        ],            
+        
     ],
 
     // Patterns to exclude.
@@ -169,7 +196,7 @@ exports.config = {
         "appium:resetKeyboard": "true",
         'appium:newCommandTimeout': 240,
         'appium:noReset': "false",
-        "appium:chromedriverExecutable":"C:/Users/naveeng/Downloads/chromedriver_win32/chromedriver.exe"
+       
     }],
 
     // capabilities: [
@@ -383,7 +410,7 @@ exports.config = {
             // console.log('stdout: ', stdout1);
 
             // console.log('stderr: ', stderr1);
-            console.log("Passed Mobile test execution")
+            console.log("Executing Mobile test cases")
         }
         if (error) {
             browser.takeScreenshot();

@@ -1,17 +1,18 @@
-const deleteBatchUploadLeafletSMPCTest=require('../pageObjectsNativeApp/deleteLeafletAndSMPCInBatch')
+const invalidSerialNumberWithBatchRecalled=require('../pageObjectsNativeApp/inValidSerialNumberWithBatchRecalled')
 const allureReporter = require('@wdio/allure-reporter').default
 const nativePatientPage = require('../pageObjectsNativeApp/patientSettingPage')
 const timeoutWait=require('../utils/setTimeout')
+const webView=require('../pageObjectsNativeApp/webView')
 
-describe('059_Edit batch to delete ePI and SMPC file.', () => {
+describe('099_Other tests', () => {
     
-    allureReporter.addFeature('Edit batch to delete ePI and SMPC file.')
+    allureReporter.addFeature('Other tests')
     allureReporter.addSeverity('Critical');
-    allureReporter.addTestId('ProductInfoUpdate_4_2')
-    allureReporter.addDescription('Check that Leaflet details are displayed for batch to delete ePI and SMPC file.')
-    allureReporter.startStep("leaflet Details are Populated when batch to delete ePI and SMPC file.")
+    allureReporter.addTestId('OtherTests_3')
+    allureReporter.addDescription('Check that Leaflet details are displayed for Other tests')
+    allureReporter.startStep("leaflet Details are Populated for Other tests")
     
-    it('Mobile App - should set Patient Setting and Scan 2D Matrix', async() => {
+    it('Mobile App-should set Patient Setting and Scan 2D Matrix', async() => {
        
             allureReporter.addFeature('Patient Setting Scan Page');
             // wait time for application to launch
@@ -26,13 +27,13 @@ describe('059_Edit batch to delete ePI and SMPC file.', () => {
     
     });
 
-    it('Mobile App - should display LeafLet details for batch to delete ePI and SMPC file.', async () => {
+    it('Mobile App-should display LeafLet details for Other tests', async () => {
         allureReporter.addFeature('LeafLet Recalled Batch Info Data');
         //wait timeout for Leaflet to be displayed
-        await deleteBatchUploadLeafletSMPCTest.waitTimeout();
+        await invalidSerialNumberWithBatchRecalled.waitTimeout();
         await timeoutWait.setTimeoutWait(3);
         //display details on Add_productBatch Leaflet when Add_productBatch Leaflet for batch scenario created
-        await deleteBatchUploadLeafletSMPCTest.deleteLeafletandSMPCInBatchDetailsFetch();
+        await invalidSerialNumberWithBatchRecalled.invalidSerailNumberWithBatchRecalledFetch();
         await timeoutWait.setTimeoutWait(4);
         // await setTimeout(() => {
         //     console.log("inside timeout");
