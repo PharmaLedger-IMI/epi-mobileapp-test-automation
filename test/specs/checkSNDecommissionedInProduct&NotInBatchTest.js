@@ -1,7 +1,7 @@
-const checkSNDecommissionedInProductAndNotInBatch=require('../pageObjectsNativeApp/checkSNDecommissionedInProduct&NotInBatch')
+const checkSNDecommissionedInProductAndNotInBatch = require('../pageObjectsNativeApp/checkSNDecommissionedInProduct&NotInBatch')
 const allureReporter = require('@wdio/allure-reporter').default
 const nativePatientPage = require('../pageObjectsNativeApp/patientSettingPage')
-const timeoutWait=require('../utils/setTimeout')
+const timeoutWait = require('../utils/setTimeout')
 // const commonFunctions=require('../utils/commonutilitiesFunctions')
 
 describe('083_Edit product to check SN is decommssioned and edit batch to reset decommissioned SN', () => {
@@ -11,9 +11,9 @@ describe('083_Edit product to check SN is decommssioned and edit batch to reset 
     allureReporter.addTestId('ProductDisplayEpiFlag_5_2')
     allureReporter.addDescription('Check that Leaflet are displayed to check SN is decommssioned and edit batch to reset decommissioned SN')
     allureReporter.startStep("Leaflet Details are Populated to check SN is decommssioned and edit batch to reset decommissioned SN")
- 
-    
-    it('Mobile App-should set Patient Setting and Scan 2D Matrix', async() => {
+
+
+    it('Mobile App-should set Patient Setting and Scan 2D Matrix', async () => {
         allureReporter.addFeature('Patient Setting Scan Page');
         // wait time for application to launch
         await nativePatientPage.waitLaunchURL();
@@ -35,7 +35,7 @@ describe('083_Edit product to check SN is decommssioned and edit batch to reset 
         //display details on Leaflet for recalled batch scenario
         await checkSNDecommissionedInProductAndNotInBatch.checkSNDecommissionedInProductAndNotInBatchFetch();
         await timeoutWait.setTimeoutWait(4);
-       
-});
+
+    });
 
 });

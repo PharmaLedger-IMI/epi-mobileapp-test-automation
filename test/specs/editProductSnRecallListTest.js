@@ -1,19 +1,19 @@
-const updateProductSnRecalledFlag=require('../pageObjectsNativeApp/editProductSnRecallList')
+const updateProductSnRecalledFlag = require('../pageObjectsNativeApp/editProductSnRecallList')
 const allureReporter = require('@wdio/allure-reporter').default
 const nativePatientPage = require('../pageObjectsNativeApp/patientSettingPage')
-const timeoutWait=require('../utils/setTimeout')
+const timeoutWait = require('../utils/setTimeout')
 
 
 describe('006_Edit product to check SN is in recalled list', () => {
-    
+
     allureReporter.addFeature('Edit Product and Enable SN is Recall List')
     allureReporter.addSeverity('Critical');
     allureReporter.addTestId('ProdAndBatchSetup_2')
     allureReporter.addDescription('Check that Product SN is recall List is enabled and Leaflet details are displayed for product')
     allureReporter.startStep("Product Leaflet Details are Populated after SN is Recall List is enabled in Product")
- 
-    
-    it('Mobile App-should open Patient Setting and Scan 2D Matrix', async() => {
+
+
+    it('Mobile App-should open Patient Setting and Scan 2D Matrix', async () => {
         allureReporter.addFeature('Patient Setting Scan Page');
         // wait time for application to launch
         await nativePatientPage.waitLaunchURL();
@@ -32,10 +32,12 @@ describe('006_Edit product to check SN is in recalled list', () => {
         await updateProductSnRecalledFlag.waitTimeout();
         await timeoutWait.setTimeoutWait(4);
         //display details on Leaflet for recalled batch scenario
-        await updateProductSnRecalledFlag.productUpdateLeafletRecalledBatchFetch();
-        await timeoutWait.setTimeoutWait(4);
-       
+        await updateProductSnRecalledFlag.editProductSnRecallFlagDetailsFetch();
+        await timeoutWait.setTimeoutWait(2);
+        await updateProductSnRecalledFlag.editProductSnRecallFlagLeafletDetailsFetch();
+        await timeoutWait.setTimeoutWait(2);
 
-});
+
+    });
 
 });

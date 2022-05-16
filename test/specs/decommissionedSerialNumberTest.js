@@ -1,7 +1,7 @@
-const checkDecommissionedSerialNumberTest=require('../pageObjectsNativeApp/decommissionedSerialNumber')
+const checkDecommissionedSerialNumberTest = require('../pageObjectsNativeApp/decommissionedSerialNumber')
 const allureReporter = require('@wdio/allure-reporter').default
 const nativePatientPage = require('../pageObjectsNativeApp/patientSettingPage')
-const timeoutWait=require('../utils/setTimeout')
+const timeoutWait = require('../utils/setTimeout')
 // const commonFunctions=require('../utils/commonutilitiesFunctions')
 
 describe('040_Create a batch and enable serial number verification and set decommissioned serial numbers and reason code', () => {
@@ -11,9 +11,9 @@ describe('040_Create a batch and enable serial number verification and set decom
     allureReporter.addSeverity('Critical');
     allureReporter.addDescription('Check that Leaflet is displayed for enable serial number verification and set decommissioned serial numbers and reason code')
     allureReporter.startStep("Recalled Leaflet Details are Populated after Recalled Message Displayed")
- 
-    
-    it('Mobile App-should open Patient Settings and Scan 2D Matrix', async() => {
+
+
+    it('Mobile App-should open Patient Settings and Scan 2D Matrix', async () => {
         allureReporter.addFeature('Patient Setting Scan Page');
         // wait time for application to launch
         await nativePatientPage.waitLaunchURL();
@@ -33,9 +33,11 @@ describe('040_Create a batch and enable serial number verification and set decom
         await checkDecommissionedSerialNumberTest.waitTimeout();
         await timeoutWait.setTimeoutWait(4);
         //display details on Leaflet for recalled batch scenario
-        await checkDecommissionedSerialNumberTest.checkDecommisionedSerialNumberFetch();
-        await timeoutWait.setTimeoutWait(4);
-       
-});
+        await checkDecommissionedSerialNumberTest.decommissionedSerialNumberDetailsFetch();
+        await timeoutWait.setTimeoutWait(3);
+        await checkDecommissionedSerialNumberTest.decommissionedSerialNumberLeafletDetailsFetch();
+        await timeoutWait.setTimeoutWait(3);
+
+    });
 
 });

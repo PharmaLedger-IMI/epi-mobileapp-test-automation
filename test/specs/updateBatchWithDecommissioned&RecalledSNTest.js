@@ -1,7 +1,7 @@
-const updateBatchDecommissionedRecalledSNTest=require('../pageObjectsNativeApp/updateBatchWithDecommissioned&RecalledSN')
+const updateBatchDecommissionedRecalledSNTest = require('../pageObjectsNativeApp/updateBatchWithDecommissioned&RecalledSN')
 const allureReporter = require('@wdio/allure-reporter').default
 const nativePatientPage = require('../pageObjectsNativeApp/patientSettingPage')
-const timeoutWait=require('../utils/setTimeout');
+const timeoutWait = require('../utils/setTimeout');
 const { all } = require('deepmerge');
 // const commonFunctions=require('../utils/commonutilitiesFunctions')
 
@@ -12,9 +12,9 @@ describe('050_Edit batch to update with decommissioned and recalled serial numbe
     allureReporter.addSeverity('Critical');
     allureReporter.addDescription('Check that Leaflet is displayed for to update with decommissioned and recalled serial number')
     allureReporter.startStep("Recalled Leaflet Details are Populated after to update with decommissioned and recalled serial number")
- 
-    
-    it('Mobile App-should open Patient Settings and Scan 2D Matrix', async() => {
+
+
+    it('Mobile App-should open Patient Settings and Scan 2D Matrix', async () => {
         allureReporter.addFeature('Patient Setting Scan Page');
         // wait time for application to launch
         await nativePatientPage.waitLaunchURL();
@@ -34,9 +34,11 @@ describe('050_Edit batch to update with decommissioned and recalled serial numbe
         await updateBatchDecommissionedRecalledSNTest.waitTimeout();
         await timeoutWait.setTimeoutWait(4);
         //display details on Leaflet for recalled batch scenario
-        await updateBatchDecommissionedRecalledSNTest.updateBatchDecommissionedAndRecalledSNFetch();
-        await timeoutWait.setTimeoutWait(4);
-       
-});
+        await updateBatchDecommissionedRecalledSNTest.updateBatchWithDecommissionedAndRecalledSNDetailsFetch();
+        await timeoutWait.setTimeoutWait(3);
+        await updateBatchDecommissionedRecalledSNTest.updateBatchWithDecommissionedAndRecalledSNLeafletDetailsFetch();
+        await timeoutWait.setTimeoutWait(3);
+
+    });
 
 });

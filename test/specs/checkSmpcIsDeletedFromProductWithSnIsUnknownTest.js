@@ -1,8 +1,8 @@
-const checkSmpcIsDeletedFromProductWithSnIsUnknown=require('../pageObjectsNativeApp/checkSmpcIsDeletedFromProductWithSnIsUnknown')
+const checkSmpcIsDeletedFromProductWithSnIsUnknown = require('../pageObjectsNativeApp/checkSmpcIsDeletedFromProductWithSnIsUnknown')
 const allureReporter = require('@wdio/allure-reporter').default
 const nativePatientPage = require('../pageObjectsNativeApp/patientSettingPage')
-const timeoutWait=require('../utils/setTimeout')
-// const commonFunctions=require('../utils/commonutilitiesFunctions')
+const timeoutWait = require('../utils/setTimeout')
+
 
 describe('089_Edit product to check SN is unknown and delete smpc. Pass unknown SN in matrix', () => {
 
@@ -11,9 +11,9 @@ describe('089_Edit product to check SN is unknown and delete smpc. Pass unknown 
     allureReporter.addTestId('ProductDisplayEpiFlag_6_3')
     allureReporter.addDescription('Check that Leaflet are displayed to check SN is unknown and delete smpc. Pass unknown SN in matrix')
     allureReporter.startStep("Leaflet Details are Populated to check SN is unknown and delete smpc. Pass unknown SN in matrix")
- 
-    
-    it('Mobile App-should set Patient Setting and Scan 2D Matrix', async() => {
+
+
+    it('Mobile App-should set Patient Setting and Scan 2D Matrix', async () => {
         allureReporter.addFeature('Patient Setting Scan Page');
         // wait time for application to launch
         await nativePatientPage.waitLaunchURL();
@@ -35,7 +35,7 @@ describe('089_Edit product to check SN is unknown and delete smpc. Pass unknown 
         //display details on Leaflet for recalled batch scenario
         await checkSmpcIsDeletedFromProductWithSnIsUnknown.checkSmpcDeletedFromProductWithSnIsUnknownFetch();
         await timeoutWait.setTimeoutWait(4);
-       
-});
+
+    });
 
 });

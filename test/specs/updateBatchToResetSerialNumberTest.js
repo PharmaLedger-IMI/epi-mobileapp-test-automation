@@ -1,8 +1,8 @@
-const updateBatchToResetSNTest=require('../pageObjectsNativeApp/updateBatchToResetSerialNumber')
+const updateBatchToResetSNTest = require('../pageObjectsNativeApp/updateBatchToResetSerialNumber')
 const allureReporter = require('@wdio/allure-reporter').default
 const nativePatientPage = require('../pageObjectsNativeApp/patientSettingPage')
-const timeoutWait=require('../utils/setTimeout')
-// const commonFunctions=require('../utils/commonutilitiesFunctions')
+const timeoutWait = require('../utils/setTimeout')
+
 
 describe('049_Edit batch to reset the serial Numbers', () => {
 
@@ -11,9 +11,9 @@ describe('049_Edit batch to reset the serial Numbers', () => {
     allureReporter.addSeverity('Critical');
     allureReporter.addDescription('Check that batch Leaflet is displayed for to reset the serial Numbers')
     allureReporter.startStep("Recalled Leaflet Details are Populated after to reset the serial Numbers")
- 
-    
-    it('Mobile App-should open Patient Settings and Scan 2D Matrix', async() => {
+
+
+    it('Mobile App-should open Patient Settings and Scan 2D Matrix', async () => {
         allureReporter.addFeature('Patient Setting Scan Page');
         // wait time for application to launch
         await nativePatientPage.waitLaunchURL();
@@ -35,7 +35,7 @@ describe('049_Edit batch to reset the serial Numbers', () => {
         //display details on Leaflet for recalled batch scenario
         await updateBatchToResetSNTest.updateBatchToResetSNFetch();
         await timeoutWait.setTimeoutWait(4);
-       
-});
+
+    });
 
 });

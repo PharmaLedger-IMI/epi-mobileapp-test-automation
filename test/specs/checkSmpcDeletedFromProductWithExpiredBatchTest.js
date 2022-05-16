@@ -1,7 +1,7 @@
-const checkSmpcDeletedFromProductWithExpiredBatchTest=require('../pageObjectsNativeApp/checkSmpcDeletedFromProductWithExpiredBatch')
+const checkSmpcDeletedFromProductWithExpiredBatchTest = require('../pageObjectsNativeApp/checkSmpcDeletedFromProductWithExpiredBatch')
 const allureReporter = require('@wdio/allure-reporter').default
 const nativePatientPage = require('../pageObjectsNativeApp/patientSettingPage')
-const timeoutWait=require('../utils/setTimeout')
+const timeoutWait = require('../utils/setTimeout')
 // const commonFunctions=require('../utils/commonutilitiesFunctions')
 
 describe('074_Edit product to check batch is expired and delete smpc. Edit batch to have expired date', () => {
@@ -11,9 +11,9 @@ describe('074_Edit product to check batch is expired and delete smpc. Edit batch
     allureReporter.addTestId('ProductDisplayEpiFlag_3_3')
     allureReporter.addDescription('Check that Leaflet are displayed for  to check batch is expired and delete smpc. Edit batch to have expired date')
     allureReporter.startStep("Leaflet Details are Populated  to check batch is expired and delete smpc. Edit batch to have expired date")
- 
-    
-    it('Mobile App-should set Patient Setting and Scan 2D Matrix', async() => {
+
+
+    it('Mobile App-should set Patient Setting and Scan 2D Matrix', async () => {
         allureReporter.addFeature('Patient Setting Scan Page');
         // wait time for application to launch
         await nativePatientPage.waitLaunchURL();
@@ -35,7 +35,7 @@ describe('074_Edit product to check batch is expired and delete smpc. Edit batch
         //display details on Leaflet for recalled batch scenario
         await checkSmpcDeletedFromProductWithExpiredBatchTest.checkSmpcDeletedFromProductWithExpiredBatchFetch();
         await timeoutWait.setTimeoutWait(4);
-       
-});
+
+    });
 
 });

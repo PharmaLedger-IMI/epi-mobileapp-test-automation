@@ -1,8 +1,8 @@
-const createBatchValidSNRecallSNDecommisonedSN=require('../pageObjectsNativeApp/createBatchValidSNRecalledSNDecommissionedSN')
+const createBatchValidSNRecallSNDecommisonedSN = require('../pageObjectsNativeApp/createBatchValidSNRecalledSNDecommissionedSN')
 const allureReporter = require('@wdio/allure-reporter').default
 const nativePatientPage = require('../pageObjectsNativeApp/patientSettingPage')
-const timeoutWait=require('../utils/setTimeout')
-// const commonFunctions=require('../utils/commonutilitiesFunctions')
+const timeoutWait = require('../utils/setTimeout')
+
 
 describe('041_Create a batch and enable serial number verification and set valid, recalled and decommissioned serial numbers', () => {
 
@@ -11,9 +11,9 @@ describe('041_Create a batch and enable serial number verification and set valid
     allureReporter.addSeverity('Critical');
     allureReporter.addDescription('Check that Leaflet is displayed for enable serial number verification and set valid, recalled and decommissioned serial numbers')
     allureReporter.startStep("Leaflet Details are Populated after enable serial number verification and set valid, recalled and decommissioned serial numbers")
- 
-    
-    it('Mobile App-should open Patient Settings and Scan 2D Matrix', async() => {
+
+
+    it('Mobile App-should open Patient Settings and Scan 2D Matrix', async () => {
         allureReporter.addFeature('Patient Setting Scan Page');
         // wait time for application to launch
         await nativePatientPage.waitLaunchURL();
@@ -33,9 +33,11 @@ describe('041_Create a batch and enable serial number verification and set valid
         await createBatchValidSNRecallSNDecommisonedSN.waitTimeout();
         await timeoutWait.setTimeoutWait(4);
         //display details on Leaflet for recalled batch scenario
-        await createBatchValidSNRecallSNDecommisonedSN.createBatchValidSNRecalledSNDecommisonedSNFetch();
-        await timeoutWait.setTimeoutWait(4);
-       
-});
+        await createBatchValidSNRecallSNDecommisonedSN.createBatchValidSNRecalledSNDecommissionedSNDetailsFetch();
+        await timeoutWait.setTimeoutWait(3);
+        await createBatchValidSNRecallSNDecommisonedSN.createBatchValidSNRecalledSNDecommissionedSNLeafletDetailsFetch();
+        await timeoutWait.setTimeoutWait(3);
+
+    });
 
 });

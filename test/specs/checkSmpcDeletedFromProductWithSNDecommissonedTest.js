@@ -1,8 +1,8 @@
-const checkSmpcDeletedInProductWithSNDecommissioned=require('../pageObjectsNativeApp/checkSmpcDeletedFromProductWithSNDecommissioned')
+const checkSmpcDeletedInProductWithSNDecommissioned = require('../pageObjectsNativeApp/checkSmpcDeletedFromProductWithSNDecommissioned')
 const allureReporter = require('@wdio/allure-reporter').default
 const nativePatientPage = require('../pageObjectsNativeApp/patientSettingPage')
-const timeoutWait=require('../utils/setTimeout')
-// const commonFunctions=require('../utils/commonutilitiesFunctions')
+const timeoutWait = require('../utils/setTimeout')
+
 
 describe('084_Edit product to check SN is decommissioned and delete smpc. Edit batch to set decommissioned serial number', () => {
 
@@ -11,9 +11,9 @@ describe('084_Edit product to check SN is decommissioned and delete smpc. Edit b
     allureReporter.addTestId('ProductDisplayEpiFlag_5_3')
     allureReporter.addDescription('Check that Leaflet are displayed to check SN is decommissioned and delete smpc. Edit batch to set decommissioned serial number')
     allureReporter.startStep("Leaflet Details are Populated to check SN is decommissioned and delete smpc. Edit batch to set decommissioned serial number")
- 
-    
-    it('Mobile App-should set Patient Setting and Scan 2D Matrix', async() => {
+
+
+    it('Mobile App-should set Patient Setting and Scan 2D Matrix', async () => {
         allureReporter.addFeature('Patient Setting Scan Page');
         // wait time for application to launch
         await nativePatientPage.waitLaunchURL();
@@ -35,7 +35,7 @@ describe('084_Edit product to check SN is decommissioned and delete smpc. Edit b
         //display details on Leaflet for recalled batch scenario
         await checkSmpcDeletedInProductWithSNDecommissioned.checkSmpcIsDeletedFromProductWithSNDecommissionedFetch();
         await timeoutWait.setTimeoutWait(4);
-       
-});
+
+    });
 
 });

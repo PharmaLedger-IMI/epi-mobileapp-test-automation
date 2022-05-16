@@ -1,6 +1,6 @@
 const testData = require('../testdata/testExpectations.json')
 const expect = require('chai').expect
-const timeoutWait=require('../utils/setTimeout')
+const timeoutWait = require('../utils/setTimeout')
 const moment = require('moment')
 
 const expiryDatePattern = /(?<=Expiry:)(.*)(?=Serial)/g
@@ -9,55 +9,55 @@ const gtinPattern = /(?<=Product code:)(.*)(?=Batch)/g
 const batchNumberPattern = /(?<=Batch number:).*/g
 
 
-class InvalidSerailNumberWithBatchRecalled{
+class InvalidSerailNumberWithBatchRecalled {
 
-    get recalledTxtMsg(){
+    get recalledTxtMsg() {
         return $("(//android.app.Dialog/descendant::android.view.View)[5]/child::android.widget.TextView")
     }
 
-    get closeBtnMsg(){
+    get closeBtnMsg() {
         return $("//android.widget.Button[@text='Close']")
     }
 
     //recalled Batch 
-    get recalledTextBatch(){
+    get recalledTextBatch() {
         return $("(//android.view.View[@resource-id='page-ion-content']/descendant::android.widget.TextView)[2]")
     }
 
-    get recalledBatchLearnMore(){
+    get recalledBatchLearnMore() {
         return $("(//android.view.View[@resource-id='page-ion-content']/descendant::android.widget.TextView)[3]")
     }
 
-    get recalledPopUpMsg(){
+    get recalledPopUpMsg() {
         return $("(//android.app.Dialog/descendant::android.view.View[5]/child::android.widget.TextView)")
     }
 
-    get closeRecalledPopUpMsg(){
+    get closeRecalledPopUpMsg() {
         return $("(//android.app.Dialog/descendant::android.view.View)[3]/child::android.widget.Button")
     }
 
-    get leafletNotFoundText(){
+    get leafletNotFoundText() {
         return $("(//android.view.View[@resource-id='page-ion-content']/descendant::android.view.View)[2]/child::android.widget.TextView[3]")
     }
 
-    get leafletNotFoundProdDesc(){
+    get leafletNotFoundProdDesc() {
         return $("(//android.view.View[@resource-id='page-ion-content']/descendant::android.view.View)[2]/child::android.widget.TextView[4]")
     }
 
-    async waitTimeout(){
+    async waitTimeout() {
         await timeoutWait.setTimeoutWait(30);
         await timeoutWait.waitForElement(this.recalledTxtMsg);
 
     }
 
-    
-    async invalidSerailNumberWithBatchRecalledFetch(){
+
+    async invalidSerailNumberWithBatchRecalledFetch() {
 
         // recalled text message
-        const recalledMsg=await this.recalledTxtMsg.getText();
+        const recalledMsg = await this.recalledTxtMsg.getText();
         console.log(recalledMsg);
         await timeoutWait.setTimeoutTime(2);
-       // close button click
+        // close button click
         await this.closeBtnMsg.click();
         await timeoutWait.setTimeoutTime(3);
         // recalled text message 
@@ -76,12 +76,12 @@ class InvalidSerailNumberWithBatchRecalled{
         await timeoutWait.setTimeoutTime(2);
         // click on leaflet shield button
 
-         // chai assertions on expiry date, serial number, gtin number and batch Number pattern
-         expect(leafletNotFoundText).to.equal("Leaflet Not Displayed");
-         expect(leafletNotFoundProdDesc).to.equal("The leaflet for this product can't be displayed due to validation settings.");        
+        // chai assertions on expiry date, serial number, gtin number and batch Number pattern
+        expect(leafletNotFoundText).to.equal("Leaflet Not Displayed");
+        expect(leafletNotFoundProdDesc).to.equal("The leaflet for this product can't be displayed due to validation settings.");
 
-    
+
     }
 
 }
-module.exports=new InvalidSerailNumberWithBatchRecalled();
+module.exports = new InvalidSerailNumberWithBatchRecalled();

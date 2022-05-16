@@ -1,7 +1,7 @@
-const uncheckSmpcDeletedFromProductWithRecalledBatchTest=require('../pageObjectsNativeApp/uncheckSmpcDeletedFromProductWithRecalledBatch')
+const uncheckSmpcDeletedFromProductWithRecalledBatchTest = require('../pageObjectsNativeApp/uncheckSmpcDeletedFromProductWithRecalledBatch')
 const allureReporter = require('@wdio/allure-reporter').default
 const nativePatientPage = require('../pageObjectsNativeApp/patientSettingPage')
-const timeoutWait=require('../utils/setTimeout')
+const timeoutWait = require('../utils/setTimeout')
 // const commonFunctions=require('../utils/commonutilitiesFunctions')
 
 describe('066_Edit product to uncheck batch recall and delete SMPC and edit batch to have batch recall', () => {
@@ -11,9 +11,9 @@ describe('066_Edit product to uncheck batch recall and delete SMPC and edit batc
     allureReporter.addTestId('ProductDisplayEpiFlag_1_6')
     allureReporter.addDescription('Check that Leaflet are displayed for to uncheck batch recall and delete SMPC and edit batch to have batch recall')
     allureReporter.startStep("Leaflet Details are Populated to uncheck batch recall and delete SMPC and edit batch to have batch recall")
- 
-    
-    it('Mobile App-should set Patient Setting and Scan 2D Matrix', async() => {
+
+
+    it('Mobile App-should set Patient Setting and Scan 2D Matrix', async () => {
         allureReporter.addFeature('Patient Setting Scan Page');
         // wait time for application to launch
         await nativePatientPage.waitLaunchURL();
@@ -35,7 +35,7 @@ describe('066_Edit product to uncheck batch recall and delete SMPC and edit batc
         //display details on Leaflet for recalled batch scenario
         await uncheckSmpcDeletedFromProductWithRecalledBatchTest.uncheckSmpcDeletedFromProductWithRecalledBatchFetch();
         await timeoutWait.setTimeoutWait(4);
-       
-});
+
+    });
 
 });
