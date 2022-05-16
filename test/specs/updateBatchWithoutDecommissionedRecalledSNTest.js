@@ -1,7 +1,7 @@
-const updateBatchWithoutDecommissionedRecalledSNTest=require('../pageObjectsNativeApp/updateBatchWithoutDecommissionedRecalledSN')
+const updateBatchWithoutDecommissionedRecalledSNTest = require('../pageObjectsNativeApp/updateBatchWithoutDecommissionedRecalledSN')
 const allureReporter = require('@wdio/allure-reporter').default
 const nativePatientPage = require('../pageObjectsNativeApp/patientSettingPage')
-const timeoutWait=require('../utils/setTimeout')
+const timeoutWait = require('../utils/setTimeout')
 // const commonFunctions=require('../utils/commonutilitiesFunctions')
 
 describe('051_Edit batch to update without decommissioned and recalled serial number', () => {
@@ -11,9 +11,9 @@ describe('051_Edit batch to update without decommissioned and recalled serial nu
     allureReporter.addSeverity('Critical');
     allureReporter.addDescription('Check that Leaflet is displayed to update without decommissioned and recalled serial number')
     allureReporter.startStep("Recalled Leaflet Details are Populated after to update without decommissioned and recalled serial number")
- 
-    
-    it('Mobile App-should open Patient Settings and Scan 2D Matrix', async() => {
+
+
+    it('Mobile App-should open Patient Settings and Scan 2D Matrix', async () => {
         allureReporter.addFeature('Patient Setting Scan Page');
         // wait time for application to launch
         await nativePatientPage.waitLaunchURL();
@@ -33,9 +33,11 @@ describe('051_Edit batch to update without decommissioned and recalled serial nu
         await updateBatchWithoutDecommissionedRecalledSNTest.waitTimeout();
         await timeoutWait.setTimeoutWait(4);
         //display details on Leaflet for recalled batch scenario
-        await updateBatchWithoutDecommissionedRecalledSNTest.updateBatchWithoutDecommissionedRecalledSNFetch();
-        await timeoutWait.setTimeoutWait(4);
-       
-});
+        await updateBatchWithoutDecommissionedRecalledSNTest.updateBatchWithoutDecommissionedAndRecalledDetailsFetch();
+        await timeoutWait.setTimeoutWait(3);
+        await updateBatchWithoutDecommissionedRecalledSNTest.updateBatchWithoutDecommissionedAndRecalledLeafletDetailsFetch();
+        await timeoutWait.setTimeoutWait(3);
+
+    });
 
 });

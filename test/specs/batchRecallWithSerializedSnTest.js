@@ -1,7 +1,7 @@
-const editBatchRecallSerailizedSN=require('../pageObjectsNativeApp/batchRecallWithSerializedSn')
+const editBatchRecallSerailizedSN = require('../pageObjectsNativeApp/batchRecallWithSerializedSn')
 const allureReporter = require('@wdio/allure-reporter').default
 const nativePatientPage = require('../pageObjectsNativeApp/patientSettingPage')
-const timeoutWait=require('../utils/setTimeout')
+const timeoutWait = require('../utils/setTimeout')
 // const commonFunctions=require('../utils/commonutilitiesFunctions')
 
 describe('014_Edit batch to set batch recall with valid SN', () => {
@@ -11,9 +11,9 @@ describe('014_Edit batch to set batch recall with valid SN', () => {
     allureReporter.addTestId('BatchRecallAndBatchMessage_9_1')
     allureReporter.addDescription('Check that batch is recalled with serialized Leaflet are displayed')
     allureReporter.startStep("Leaflet Details are Populated as batch is Recalled Message")
- 
-    
-    it('Mobile App-should set Patient Setting and Scan 2D Matrix', async() => {
+
+
+    it('Mobile App-should set Patient Setting and Scan 2D Matrix', async () => {
         allureReporter.addFeature('Patient Setting Scan Page');
         // wait time for application to launch
         await nativePatientPage.waitLaunchURL();
@@ -33,9 +33,11 @@ describe('014_Edit batch to set batch recall with valid SN', () => {
         await editBatchRecallSerailizedSN.waitTimeout();
         await timeoutWait.setTimeoutWait(4);
         //display details on Leaflet for recalled batch scenario
-        await editBatchRecallSerailizedSN.editBatchRecallWithSerialzedSNFetch();
-        await timeoutWait.setTimeoutWait(4);
-       
-});
+        await editBatchRecallSerailizedSN.batchRecallWithSerailizedDetailsFetch();
+        await timeoutWait.setTimeoutWait(2);
+        await editBatchRecallSerailizedSN.batchRecallWithSerailizedLeafletDetailsFetch();
+        await timeoutWait.setTimeoutWait(2);
+
+    });
 
 });

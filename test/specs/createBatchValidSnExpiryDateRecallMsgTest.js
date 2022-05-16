@@ -1,8 +1,7 @@
-const createBatchWithValidSnExpiryDateRecallMsg=require('../pageObjectsNativeApp/createBatchValidSnExpiryDateRecallMsg')
+const createBatchWithValidSnExpiryDateRecallMsg = require('../pageObjectsNativeApp/createBatchValidSnExpiryDateRecallMsg')
 const allureReporter = require('@wdio/allure-reporter').default
 const nativePatientPage = require('../pageObjectsNativeApp/patientSettingPage')
-const timeoutWait=require('../utils/setTimeout')
-// const commonFunctions=require('../utils/commonutilitiesFunctions')
+const timeoutWait = require('../utils/setTimeout')
 
 describe('022_Create a batch with valid SN, expiry date and recall message', () => {
 
@@ -11,9 +10,9 @@ describe('022_Create a batch with valid SN, expiry date and recall message', () 
     allureReporter.addTestId('BatchRecallAndBatchMessage_12_1')
     allureReporter.addDescription('Check that Leaflet are displayed for batch is Created with Valid ExpiryDate,SN and Recall Message')
     allureReporter.startStep("Leaflet Details are Populated with Message as Expired Date on pack,SN and Recall Message Displayed")
- 
-    
-    it('Mobile App-should set Patient Setting and Scan 2D Matrix', async() => {
+
+
+    it('Mobile App-should set Patient Setting and Scan 2D Matrix', async () => {
         allureReporter.addFeature('Patient Setting Scan Page');
         // wait time for application to launch
         await nativePatientPage.waitLaunchURL();
@@ -28,14 +27,16 @@ describe('022_Create a batch with valid SN, expiry date and recall message', () 
     });
 
     it('Mobile App-should display LeafLet Details with Valid SN,ExpiryDate and Batch is recalled Message', async () => {
-        allureReporter.addFeature('Recalled Batch Leaflet display Info Data');
+        allureReporter.addFeature('Create Batch With Valid SN ExpiryDate and Recall Message');
         //Wait timeout for Leaflet to be displayed 
         await createBatchWithValidSnExpiryDateRecallMsg.waitTimeout();
         await timeoutWait.setTimeoutWait(4);
         //display details on Leaflet for recalled batch scenario
-        await createBatchWithValidSnExpiryDateRecallMsg.createBatchWithValidSnExpiryDateRecallMsgFetch();
-        await timeoutWait.setTimeoutWait(4);
-       
-});
+        await createBatchWithValidSnExpiryDateRecallMsg.createBatchValidSNExpiryDateRecallMsgDetailsFetch();
+        await timeoutWait.setTimeoutWait(3);
+        await createBatchWithValidSnExpiryDateRecallMsg.createBatchValidSNExpiryDateRecallMsgLeafletDetailsFetch();
+        await timeoutWait.setTimeoutWait(3);
+
+    });
 
 });

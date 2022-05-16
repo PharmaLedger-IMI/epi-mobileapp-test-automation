@@ -1,8 +1,8 @@
-const checkValidSerialNumberTest=require('../pageObjectsNativeApp/checkValidSerialNumber')
+const checkValidSerialNumberTest = require('../pageObjectsNativeApp/checkValidSerialNumber')
 const allureReporter = require('@wdio/allure-reporter').default
 const nativePatientPage = require('../pageObjectsNativeApp/patientSettingPage')
-const timeoutWait=require('../utils/setTimeout')
-// const commonFunctions=require('../utils/commonutilitiesFunctions')
+const timeoutWait = require('../utils/setTimeout')
+
 
 describe('035_Create a batch and enable serial number verification and set valid serial numbers', () => {
 
@@ -11,9 +11,9 @@ describe('035_Create a batch and enable serial number verification and set valid
     allureReporter.addSeverity('Critical');
     allureReporter.addDescription('Check that Leaflet is displayed for enable serial number verification and set valid serial numbers')
     allureReporter.startStep("Leaflet Details are Populated after enable serial number verification and set valid serial numbers")
- 
-    
-    it('Mobile App-should open Patient Settings and Scan 2D Matrix', async() => {
+
+
+    it('Mobile App-should open Patient Settings and Scan 2D Matrix', async () => {
         allureReporter.addFeature('Patient Setting Scan Page');
         // wait time for application to launch
         await nativePatientPage.waitLaunchURL();
@@ -33,9 +33,11 @@ describe('035_Create a batch and enable serial number verification and set valid
         await checkValidSerialNumberTest.waitTimeout();
         await timeoutWait.setTimeoutWait(4);
         //display details on Leaflet for recalled batch scenario
-        await checkValidSerialNumberTest.checkValidSerilaNumberFetch();
+        await checkValidSerialNumberTest.checkValidSerialNumberDetailsFetch();
+        await timeoutWait.setTimeoutWait(3);
+        await checkValidSerialNumberTest.checkValidSerialNumberLeafletDataFetch();
         await timeoutWait.setTimeoutWait(4);
-       
-});
+
+    });
 
 });

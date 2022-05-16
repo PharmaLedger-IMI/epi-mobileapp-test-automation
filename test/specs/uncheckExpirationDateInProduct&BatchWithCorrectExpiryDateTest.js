@@ -1,7 +1,7 @@
-const uncheckExpirationDateInProductAndBatchWithCorrectExpirydateTest=require('../pageObjectsNativeApp/uncheckExpirationDateInProduct&BatchWithCorrectExpiryDate')
+const uncheckExpirationDateInProductAndBatchWithCorrectExpirydateTest = require('../pageObjectsNativeApp/uncheckExpirationDateInProduct&BatchWithCorrectExpiryDate')
 const allureReporter = require('@wdio/allure-reporter').default
 const nativePatientPage = require('../pageObjectsNativeApp/patientSettingPage')
-const timeoutWait=require('../utils/setTimeout')
+const timeoutWait = require('../utils/setTimeout')
 // const commonFunctions=require('../utils/commonutilitiesFunctions')
 
 describe('071_Edit product to uncheck expiration date in incorrect and edit batch to have valid expiry date', () => {
@@ -11,9 +11,9 @@ describe('071_Edit product to uncheck expiration date in incorrect and edit batc
     allureReporter.addTestId('ProductDisplayEpiFlag_2_5')
     allureReporter.addDescription('Check that Leaflet are displayed for uncheck expiration date in incorrect and edit batch to have valid expiry date')
     allureReporter.startStep("Leaflet Details are Populated for uncheck expiration date in incorrect and edit batch to have valid expiry date")
- 
-    
-    it('Mobile App-should set Patient Setting and Scan 2D Matrix', async() => {
+
+
+    it('Mobile App-should set Patient Setting and Scan 2D Matrix', async () => {
         allureReporter.addFeature('Patient Setting Scan Page');
         // wait time for application to launch
         await nativePatientPage.waitLaunchURL();
@@ -35,7 +35,7 @@ describe('071_Edit product to uncheck expiration date in incorrect and edit batc
         //display details on Leaflet for recalled batch scenario
         await uncheckExpirationDateInProductAndBatchWithCorrectExpirydateTest.uncheckExpirationDateInProductAndBatchWithCorrectExpiryDateFetch();
         await timeoutWait.setTimeoutWait(4);
-       
-});
+
+    });
 
 });

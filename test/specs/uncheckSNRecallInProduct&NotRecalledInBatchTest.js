@@ -1,7 +1,7 @@
-const uncheckSNRecallInProductAndNotRecalledInBatch=require('../pageObjectsNativeApp/uncheckSNRecallInProduct&NotRecalledInBatch')
+const uncheckSNRecallInProductAndNotRecalledInBatch = require('../pageObjectsNativeApp/uncheckSNRecallInProduct&NotRecalledInBatch')
 const allureReporter = require('@wdio/allure-reporter').default
 const nativePatientPage = require('../pageObjectsNativeApp/patientSettingPage')
-const timeoutWait=require('../utils/setTimeout')
+const timeoutWait = require('../utils/setTimeout')
 // const commonFunctions=require('../utils/commonutilitiesFunctions')
 
 describe('081_Edit product to uncheck SN is in recall and edit batch to reset recalled serial number', () => {
@@ -11,9 +11,9 @@ describe('081_Edit product to uncheck SN is in recall and edit batch to reset re
     allureReporter.addSeverity('Critical');
     allureReporter.addDescription('Check that Leaflet is displayed for to uncheck SN is in recall and edit batch to reset recalled serial number')
     allureReporter.startStep("Recalled Leaflet Details are Populated after to uncheck SN is in recall and edit batch to reset recalled serial number")
- 
-    
-    it('Mobile App-should open Patient Settings and Scan 2D Matrix', async() => {
+
+
+    it('Mobile App-should open Patient Settings and Scan 2D Matrix', async () => {
         allureReporter.addFeature('Patient Setting Scan Page');
         // wait time for application to launch
         await nativePatientPage.waitLaunchURL();
@@ -35,7 +35,7 @@ describe('081_Edit product to uncheck SN is in recall and edit batch to reset re
         //display details on Leaflet for recalled batch scenario
         await uncheckSNRecallInProductAndNotRecalledInBatch.unCheckSNRecallInProductAndNotRecalledBatchFetch();
         await timeoutWait.setTimeoutWait(4);
-       
-});
+
+    });
 
 });

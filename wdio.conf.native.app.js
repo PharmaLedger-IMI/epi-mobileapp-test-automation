@@ -38,7 +38,7 @@ exports.config = {
     specs: [
         [
 
-            // 'test/specs/createProductWithAddBatchTest.js',
+           // 'test/specs/createProductWithAddBatchTest.js',
             
             // 'test/specs/editBatchCheckRecallMsgTest.js',
             // 'test/specs/editProductSnRecallListTest.js',
@@ -48,8 +48,8 @@ exports.config = {
             // 'test/specs/disableSnCheckSnIsValidTest.js',
             // 'test/specs/disableSnCheckWithoutSnValidTest.js',
             
-            // 'test/specs/enableExpiryDateCheckValidExpiryDateTest.js'
-            // 'test/specs/enableExpiryDateCheckInvalidExpiryDateTest.js'
+            // 'test/specs/enableExpiryDateCheckValidExpiryDateTest.js',
+            // 'test/specs/enableExpiryDateCheckInvalidExpiryDateTest.js',
             // 'test/specs/disableExpiryDateCheckInvalidExpiryDateTest.js',
             
             //  'test/specs/batchRecallWithSerializedSnTest.js',
@@ -57,9 +57,9 @@ exports.config = {
             //   'test/specs/batchRecallNonSerializedWithoutSnTest.js',
             //   'test/specs/batchUncheckRecallMsgNonSerilaizedWithoutSnTest.js',
             
-            // 'test/specs/createBatchWithNoBatchMsgTest.js',
+            //  'test/specs/createBatchWithNoBatchMsgTest.js',
             //   'test/specs/createBatchWithBatchMsgTest.js',
-            // 'test/specs/createBatchWithBatchRecallMsgTest.js',
+            //  'test/specs/createBatchWithBatchRecallMsgTest.js',
             // 'test/specs/createBatchWithBatchMsgRecallMsgTest.js',
             
             //    'test/specs/createBatchValidSnExpiryDateRecallMsgTest.js'
@@ -71,22 +71,22 @@ exports.config = {
             //  'test/specs/changeMonthOnDateBatchTest.js',
             //    'test/specs/changeYearOnDateBatchTest.js',
              
-            //    'test/specs/batchWithMonthYearOnDateTest.js',
+             //   'test/specs/batchWithMonthYearAndExpiryDateTest.js',
              //   'test/specs/disableDaySelectionIncorrectAndExpiredDateFlagTest.js',
              //    'test/specs/disableDaySelectionIncorrectCheckExpiredDateFlagTest.js',
-            //     'test/specs/disableDaySelectionExpiredDateCheckIncorrectFlagTest.js',
+             //    'test/specs/disableDaySelectionExpiredDateCheckIncorrectFlagTest.js',
             //   'test/specs/enableDaySelectionDisableIncorrectAndExpiredDateFlagTest.js',
             //      'test/specs/enableDaySelectionWithIncorrectAndDisableExpiredDateTest.js',
             //       'test/specs/enableDaySelectionWithExpiredDateAndDisableIncorrectTest.js',
             
             // 'test/specs/checkValidSerialNumberTest.js',
             //    'test/specs/checkClearValidSerialNumberTest.js',
-            //    'test/specs/checkClearInVaildSerialNumberTest.js',
+            //    'test/specs/checkClearInValidSerialNumberTest.js',
             //      'test/specs/checkRecalledSerialNumberTest.js',
             //  'test/specs/checkClearRecalledSerilaNumberTest.js',
             //    'test/specs/decommissionedSerialNumberTest.js',
             //   'test/specs/createBatchValidSNRecallSNDecommisonedSNTest.js'
-            //    'test/specs/scanUpdateRecalledSNTest.js',
+                'test/specs/scanUpdateRecalledSNTest.js',
             // 'test/specs/scanUpdateDecommissionedSNTest.js',
             // 'test/specs/update10SNInRecalledSNTest.js',
             //   'test/specs/update10SNInDecommissionedSNTest.js',
@@ -143,7 +143,7 @@ exports.config = {
             //    'test/specs/unCheckSNIsUnknownInProductAndBatchTest',
             //    'test/specs/unCheckSNIsUnknownInProduct&KnownInBatchTest.js',
 
-             'test/specs/checkBatchIsUnknownInProductWithInValidMatrixTest.js',
+            // 'test/specs/checkBatchIsUnknownInProductWithInValidMatrixTest.js',
             // 'test/specs/checkBatchIsUnknownInProductWithValidMatrixTest.js'
             //    'test/specs/checkSmpcIsDeletedFromProductWithBatchIsUnknownTest.js',
             //    'test/specs/unCheckBatchIsUnknownInProductWithInValidBatchTest.js',

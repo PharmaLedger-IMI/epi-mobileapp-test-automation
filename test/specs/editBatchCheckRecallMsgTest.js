@@ -1,7 +1,7 @@
-const editBatchRecallMsg=require('../pageObjectsNativeApp/editBatchCheckRecallMsg')
+const editBatchRecallMsg = require('../pageObjectsNativeApp/editBatchCheckRecallMsg')
 const allureReporter = require('@wdio/allure-reporter').default
 const nativePatientPage = require('../pageObjectsNativeApp/patientSettingPage')
-const timeoutWait=require('../utils/setTimeout')
+const timeoutWait = require('../utils/setTimeout')
 
 
 describe('005_Edit batch to set recall message', () => {
@@ -11,9 +11,9 @@ describe('005_Edit batch to set recall message', () => {
     allureReporter.addTestId('ProdAndBatchSetup_4')
     allureReporter.addDescription('Check that batch is recalled and Leaflet details are displayed')
     allureReporter.startStep("Recalled Leaflet Details are Populated after batch is recalled in edit batch")
- 
-    
-    it('Mobile App-should set Patient Setting and Scan 2D Matrix', async() => {
+
+
+    it('Mobile App-should set Patient Setting and Scan 2D Matrix', async () => {
         allureReporter.addFeature('Patient Setting Scan Page');
         // wait time for application to launch
         await nativePatientPage.waitLaunchURL();
@@ -32,9 +32,11 @@ describe('005_Edit batch to set recall message', () => {
         await editBatchRecallMsg.waitTimeout();
         await timeoutWait.setTimeoutWait(4);
         //display details on Leaflet for recalled batch scenario
-        await editBatchRecallMsg.editBatchRecallMsgFetch();
-        await timeoutWait.setTimeoutWait(4);
+        await editBatchRecallMsg.editBatchRecallMsgDetailsFetch();
+        await timeoutWait.setTimeoutWait(2);
+        await editBatchRecallMsg.editBatchRecallMsgLeafletDetailsFetch();
+        await timeoutWait.setTimeoutWait(2);
 
-});
+    });
 
 });

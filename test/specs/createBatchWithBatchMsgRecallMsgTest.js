@@ -1,8 +1,7 @@
-const createBatchWithBatchMsgRecallMsg=require('../pageObjectsNativeApp/createBatchWithBatchMsgRecallMsg')
+const createBatchWithBatchMsgRecallMsg = require('../pageObjectsNativeApp/createBatchWithBatchMsgRecallMsg')
 const allureReporter = require('@wdio/allure-reporter').default
 const nativePatientPage = require('../pageObjectsNativeApp/patientSettingPage')
-const timeoutWait=require('../utils/setTimeout')
-// const commonFunctions=require('../utils/commonutilitiesFunctions')
+const timeoutWait = require('../utils/setTimeout')
 
 describe('021_Create a batch to set batch recall and batch message', () => {
 
@@ -11,9 +10,9 @@ describe('021_Create a batch to set batch recall and batch message', () => {
     allureReporter.addTestId('BatchRecallAndBatchMessage_11_4')
     allureReporter.addDescription('Check that Leaflet are displayed for batch is recalled and Batch Message')
     allureReporter.startStep("Recalled Leaflet Details are Populated With batch is recalled and Batch Message")
- 
-    
-    it('Mobile App-should set Patient Setting and Scan 2D Matrix', async() => {
+
+
+    it('Mobile App - should set Patient Setting and Scan 2D Matrix', async () => {
         allureReporter.addFeature('Patient Setting Scan Page');
         // wait time for application to launch
         await nativePatientPage.waitLaunchURL();
@@ -27,14 +26,16 @@ describe('021_Create a batch to set batch recall and batch message', () => {
     });
 
     it('Mobile App-should display LeafLet with Batch Message and Recall Message Info Page', async () => {
-        allureReporter.addFeature('Edit Batch Recall Msg Leaflet display Info Data');
+        allureReporter.addFeature('Create Batch With Batch Message and Recall Message');
         //Wait timeout for Leaflet to be displayed 
         await createBatchWithBatchMsgRecallMsg.waitTimeout();
         await timeoutWait.setTimeoutWait(3);
         //display details on Leaflet for recalled batch scenario
-        await createBatchWithBatchMsgRecallMsg.createBatchWithBatchMsgRecallMsgFetch();
+        await createBatchWithBatchMsgRecallMsg.createBatchWithBatchRecallMsgDetailsFetch();
+        await timeoutWait.setTimeoutWait(3);
+        await createBatchWithBatchMsgRecallMsg.createBatchWithBatchRecallMsgLeafletDetailsFetch();
         await timeoutWait.setTimeoutWait(3);
 
-});
+    });
 
 });

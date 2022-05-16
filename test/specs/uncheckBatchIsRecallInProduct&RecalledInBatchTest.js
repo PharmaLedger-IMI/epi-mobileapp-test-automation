@@ -1,7 +1,7 @@
-const uncheckBatchIsRecallInProductAndRecalledInBatchTest=require('../pageObjectsNativeApp/uncheckBatchIsRecallInProduct&RecalledInBatch')
+const uncheckBatchIsRecallInProductAndRecalledInBatchTest = require('../pageObjectsNativeApp/uncheckBatchIsRecallInProduct&RecalledInBatch')
 const allureReporter = require('@wdio/allure-reporter').default
 const nativePatientPage = require('../pageObjectsNativeApp/patientSettingPage')
-const timeoutWait=require('../utils/setTimeout')
+const timeoutWait = require('../utils/setTimeout')
 // const commonFunctions=require('../utils/commonutilitiesFunctions')
 
 describe('064_Edit product to uncheck batch is recalled and edit batch to set recall message', () => {
@@ -11,9 +11,9 @@ describe('064_Edit product to uncheck batch is recalled and edit batch to set re
     allureReporter.addTestId('ProductDisplayEpiFlag_1_4')
     allureReporter.addDescription('Check that Leaflet are displayed for uncheck batch is recalled and edit batch to set recall message')
     allureReporter.startStep("Leaflet Details are Populated as uncheck batch is recalled and edit batch to set recall message")
- 
-    
-    it('Mobile App-should set Patient Setting and Scan 2D Matrix', async() => {
+
+
+    it('Mobile App-should set Patient Setting and Scan 2D Matrix', async () => {
         allureReporter.addFeature('Patient Setting Scan Page');
         // wait time for application to launch
         await nativePatientPage.waitLaunchURL();
@@ -35,7 +35,7 @@ describe('064_Edit product to uncheck batch is recalled and edit batch to set re
         //display details on Leaflet for recalled batch scenario
         await uncheckBatchIsRecallInProductAndRecalledInBatchTest.uncheckBatchIsRecallInProductAndRecalledInBatchFetch();
         await timeoutWait.setTimeoutWait(4);
-       
-});
+
+    });
 
 });

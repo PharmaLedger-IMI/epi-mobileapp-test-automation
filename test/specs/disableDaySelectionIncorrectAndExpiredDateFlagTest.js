@@ -1,8 +1,8 @@
 const { default: AllureReporter } = require('@wdio/allure-reporter');
-const disableDaySelectionWithIncorrectExpiredDateFlag=require('../pageObjectsNativeApp/disableDaySelectionAndIncorrectExpiredDateFlag.js')
+const disableDaySelectionWithIncorrectExpiredDateFlag = require('../pageObjectsNativeApp/disableDaySelectionAndIncorrectExpiredDateFlag.js')
 const allureReporter = require('@wdio/allure-reporter').default
 const nativePatientPage = require('../pageObjectsNativeApp/patientSettingPage')
-const timeoutWait=require('../utils/setTimeout')
+const timeoutWait = require('../utils/setTimeout')
 // const commonFunctions=require('../utils/commonutilitiesFunctions')
 
 describe('029_Create a batch with MonthYear as expiry date and disable day selection, incorrect and expired date flag', () => {
@@ -12,9 +12,9 @@ describe('029_Create a batch with MonthYear as expiry date and disable day selec
     allureReporter.addSeverity('Critical');
     allureReporter.addDescription('Check that Leaflet is displayed for MonthYear as expiry date and disable day selection, incorrect and expired date flag')
     allureReporter.startStep("Leaflet Details are Populated after MonthYear as expiry date and disable day selection, incorrect and expired date flag")
- 
-    
-    it('Mobile App-should open Patient Settings and Scan 2D Matrix', async() => {
+
+
+    it('Mobile App-should open Patient Settings and Scan 2D Matrix', async () => {
         allureReporter.addFeature('Patient Setting Scan Page');
         // wait time for application to launch
         await nativePatientPage.waitLaunchURL();
@@ -34,9 +34,11 @@ describe('029_Create a batch with MonthYear as expiry date and disable day selec
         await disableDaySelectionWithIncorrectExpiredDateFlag.waitTimeout();
         await timeoutWait.setTimeoutWait(4);
         //display details on Leaflet for recalled batch scenario
-        await disableDaySelectionWithIncorrectExpiredDateFlag.disableDaySelectionWithIncorrectAndExpiredDateFlagFetch();
-        await timeoutWait.setTimeoutWait(4);
-       
-});
+        await disableDaySelectionWithIncorrectExpiredDateFlag.disableDaySelectionAndIncorrectExpiredDateFlagDetailsFetch();
+        await timeoutWait.setTimeoutWait(3);
+        await disableDaySelectionWithIncorrectExpiredDateFlag.disableDaySelectionAndIncorrectExpiredDateFlagLeafletDataFetch();
+        await timeoutWait.setTimeoutWait(3);
+
+    });
 
 });

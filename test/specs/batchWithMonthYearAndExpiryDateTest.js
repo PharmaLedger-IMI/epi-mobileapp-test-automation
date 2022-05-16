@@ -1,8 +1,8 @@
-const batchWithMonthYearOnDate=require('../pageObjectsNativeApp/batchWithMonthYearAndExpiryDate')
+const batchWithMonthYearOnDate = require('../pageObjectsNativeApp/batchWithMonthYearAndExpiryDate')
 const allureReporter = require('@wdio/allure-reporter').default
 const nativePatientPage = require('../pageObjectsNativeApp/patientSettingPage')
-const timeoutWait=require('../utils/setTimeout')
-// const commonFunctions=require('../utils/commonutilitiesFunctions')
+const timeoutWait = require('../utils/setTimeout')
+
 
 describe('028_create a batch with only MonthYear as expiry date', () => {
 
@@ -11,9 +11,9 @@ describe('028_create a batch with only MonthYear as expiry date', () => {
     allureReporter.addFeature('create a batch with only MonthYear as expiry date')
     allureReporter.addDescription('Check that Leaflet is displayed for MonthYear as expiry date')
     allureReporter.startStep("Leaflet Details are Populated after MonthYear as expiry date")
- 
-    
-    it('Mobile App-should open Patient Settings and Scan 2D Matrix', async() => {
+
+
+    it('Mobile App-should open Patient Settings and Scan 2D Matrix', async () => {
         allureReporter.addFeature('Patient Setting Scan Page');
         // wait time for application to launch
         await nativePatientPage.waitLaunchURL();
@@ -35,7 +35,7 @@ describe('028_create a batch with only MonthYear as expiry date', () => {
         //display details on Leaflet for recalled batch scenario
         await batchWithMonthYearOnDate.batchWithMonthYearOnDateFetch();
         await timeoutWait.setTimeoutWait(4);
-       
-});
+
+    });
 
 });

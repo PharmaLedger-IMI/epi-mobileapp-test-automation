@@ -1,8 +1,8 @@
-const editBatchWithExpiryDateCheckWithExpiryDate=require('../pageObjectsNativeApp/batchWithExpiryDateCheckWithExpiryDate')
+const editBatchWithExpiryDateCheckWithExpiryDate = require('../pageObjectsNativeApp/batchWithExpiryDateCheckWithExpiryDate')
 const allureReporter = require('@wdio/allure-reporter').default
 const nativePatientPage = require('../pageObjectsNativeApp/patientSettingPage')
-const timeoutWait=require('../utils/setTimeout')
-// const commonFunctions=require('../utils/commonutilitiesFunctions')
+const timeoutWait = require('../utils/setTimeout')
+
 
 describe('023_Edit batch to select expired date', () => {
     allureReporter.addFeature("Edit batch to select expired date");
@@ -10,9 +10,9 @@ describe('023_Edit batch to select expired date', () => {
     allureReporter.addTestId('BatchRecallAndBatchMessage_12_2')
     allureReporter.addDescription('Check that Leaflet is displayed for batch with Expired Date, Valid Details')
     allureReporter.startStep("Leaflet Details are Populated with Expired Date on pack Message Displayed")
- 
-    
-    it('Mobile App-should set Patient Setting and Scan 2D Matrix', async() => {
+
+
+    it('Mobile App-should set Patient Setting and Scan 2D Matrix', async () => {
         allureReporter.addFeature('Patient Setting Scan Page');
         // wait time for application to launch
         await nativePatientPage.waitLaunchURL();
@@ -32,9 +32,11 @@ describe('023_Edit batch to select expired date', () => {
         await editBatchWithExpiryDateCheckWithExpiryDate.waitTimeout();
         await timeoutWait.setTimeoutWait(4);
         //display details on Leaflet for recalled batch scenario
-        await editBatchWithExpiryDateCheckWithExpiryDate.batchWithExpiredDateCheckWithExpiryDateFetch();
-        await timeoutWait.setTimeoutWait(4);
-       
-});
+        await editBatchWithExpiryDateCheckWithExpiryDate.batchWithExpiryDateCheckWithExpiryDateDetailsFetch();
+        await timeoutWait.setTimeoutWait(3);
+        await editBatchWithExpiryDateCheckWithExpiryDate.batchWithExpiryDateCheckWithExpiryDateLeafletDetailsFetch();
+        await timeoutWait.setTimeoutWait(3);
+
+    });
 
 });

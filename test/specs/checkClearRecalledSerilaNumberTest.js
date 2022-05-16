@@ -1,7 +1,7 @@
-const checkClearRecalledSerialNumberTest=require('../pageObjectsNativeApp/checkClearRecalledSerialNumber')
+const checkClearRecalledSerialNumberTest = require('../pageObjectsNativeApp/checkClearRecalledSerialNumber')
 const allureReporter = require('@wdio/allure-reporter').default
 const nativePatientPage = require('../pageObjectsNativeApp/patientSettingPage')
-const timeoutWait=require('../utils/setTimeout')
+const timeoutWait = require('../utils/setTimeout')
 // const commonFunctions=require('../utils/commonutilitiesFunctions')
 
 describe('039_Edit batch to reset recalled serial number and scan with recalled serial number', () => {
@@ -11,9 +11,9 @@ describe('039_Edit batch to reset recalled serial number and scan with recalled 
     allureReporter.addSeverity('Critical');
     allureReporter.addDescription('Check that Leaflet is displayed for reset recalled serial number and scan with recalled serial number')
     allureReporter.startStep("Recalled Leaflet Details are Populated after reset recalled serial number and scan with recalled serial number")
- 
-    
-    it('Mobile App-should open Patient Settings and Scan 2D Matrix', async() => {
+
+
+    it('Mobile App-should open Patient Settings and Scan 2D Matrix', async () => {
         allureReporter.addFeature('Patient Setting Scan Page');
         // wait time for application to launch
         await nativePatientPage.waitLaunchURL();
@@ -33,9 +33,11 @@ describe('039_Edit batch to reset recalled serial number and scan with recalled 
         await checkClearRecalledSerialNumberTest.waitTimeout();
         await timeoutWait.setTimeoutWait(4);
         //display details on Leaflet for recalled batch scenario
-        await checkClearRecalledSerialNumberTest.checkClearRecalledSerialNumberFetch();
-        await timeoutWait.setTimeoutWait(4);
-       
-});
+        await checkClearRecalledSerialNumberTest.checkClearRecalledSerialNumberDetailsFetch();
+        await timeoutWait.setTimeoutWait(3);
+        await checkClearRecalledSerialNumberTest.checkClearRecalledSerialNumberLeafletDetailsFetch();
+        await timeoutWait.setTimeoutWait(3);
+
+    });
 
 });

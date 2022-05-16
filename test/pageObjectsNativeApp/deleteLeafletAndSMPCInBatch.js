@@ -49,22 +49,22 @@ class DeleteLeafletandSMPCInBatch {
 
     async waitTimeout() {
         await timeout.setTimeoutWait(30);
-       // await timeout.waitForElement(this.productInfo);
+        // await timeout.waitForElement(this.productInfo);
 
     }
 
     async deleteLeafletandSMPCInBatchDetailsFetch() {
-  
+
         let deviceScreenDimensions = await driver.getWindowRect();
-    
+
         await driver.touchPerform([
             {
-            action : 'tap',
-            options: {
-            x: Math.floor(deviceScreenDimensions.width * 0.49),
-            y: Math.floor(deviceScreenDimensions.height * 0.49)
+                action: 'tap',
+                options: {
+                    x: Math.floor(deviceScreenDimensions.width * 0.49),
+                    y: Math.floor(deviceScreenDimensions.height * 0.49)
+                }
             }
-        }
         ]);
 
         await timeout.setTimeoutWait(8);
@@ -86,7 +86,7 @@ class DeleteLeafletandSMPCInBatch {
         // get leaflet product details information
         await this.productLeafletInfoDetails.getText();
         await timeout.setTimeoutTime(3);
-        
+
 
         const leafletInfoDetailsFetch = await this.productLeafletInfoDetails.getText();
         console.log("Prod Info Details of Leaflet is:" + " " + leafletInfoDetailsFetch)
@@ -128,8 +128,8 @@ class DeleteLeafletandSMPCInBatch {
                 options: {
                     x: Math.floor(deviceScreenDimensions2.width * 0.49),
                     y: Math.floor(deviceScreenDimensions2.height * 0.60)
+                }
             }
-        }
         ]);
 
         const prodLeafletDescription = await this.leafletProdLevelDescType.getText();

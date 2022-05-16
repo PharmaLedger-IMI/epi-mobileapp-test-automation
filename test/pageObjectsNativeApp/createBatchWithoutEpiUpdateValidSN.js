@@ -1,7 +1,7 @@
 
 const testData = require('../testdata/testExpectations.json')
 const expect = require('chai').expect
-const timeout=require('../utils/setTimeout')
+const timeout = require('../utils/setTimeout')
 const moment = require('moment')
 
 
@@ -10,40 +10,40 @@ const serialNumberPattern = /(?<=Serial number:)(.*)(?=Product)/g
 const gtinPattern = /(?<=Product code:)(.*)(?=Batch)/g
 const batchNumberPattern = /(?<=Batch number:).*/g
 
-class CreateBatchWithoutEpiUpdateValidSN{
+class CreateBatchWithoutEpiUpdateValidSN {
 
-    get productInfo(){
+    get productInfo() {
         return $("(//android.view.View[@resource-id='leaflet-header']/descendant::android.widget.TextView)[1]")
     }
-    get productDescription(){
+    get productDescription() {
         return $("(//android.view.View[@resource-id='leaflet-header']/descendant::android.widget.TextView)[2]");
     }
 
-    get leafletVerifiedShiledBtn(){
+    get leafletVerifiedShiledBtn() {
         return $("(//android.view.View[@resource-id='leaflet-header']/descendant::android.widget.Image)[1]")
     }
 
-    get batchInfo(){
+    get batchInfo() {
         return $("(//android.app.Dialog/descendant::android.view.View/child::android.widget.TextView)[1]")
     }
 
-    get productLeafletInfoDetails(){
+    get productLeafletInfoDetails() {
         return $("(//android.app.Dialog/descendant::android.view.View)[5]/child::android.view.View")
     }
 
-    async waitTimeout(){
+    async waitTimeout() {
         await timeout.setTimeoutWait(30);
         await timeout.waitForElement(this.productInfo);
-   
+
     }
 
- 
-    async createBatchWithoutEpiUpdateValidSNFetch(){
+
+    async createBatchWithoutEpiUpdateValidSNFetch() {
 
         // commonFunctions.getLeafletDetails(true);
         // await timeout.setTimeoutTime(3);
         await this.productInfo.getText();
-       // expect(this.productInfo.getText()).to.not.equal(null);
+        // expect(this.productInfo.getText()).to.not.equal(null);
         await timeout.setTimeoutTime(3);
         //get text of product information description
         await this.productDescription.getText();
@@ -56,31 +56,31 @@ class CreateBatchWithoutEpiUpdateValidSN{
         await timeout.setTimeoutTime(3);
         // get leaflet product details information
         await this.productLeafletInfoDetails.getText();
-        await timeout.setTimeoutTime(3);  
+        await timeout.setTimeoutTime(3);
         const leafletInfoDetailsFetch = await this.productLeafletInfoDetails.getText();
-        console.log("Prod Info Details of Leaflet is:"+" "+leafletInfoDetailsFetch)
-        const leafletInfoFetch = leafletInfoDetailsFetch.replace(':',"=");
-        console.log("Batch Info Details of Leaflet is: "+ leafletInfoFetch);
+        console.log("Prod Info Details of Leaflet is:" + " " + leafletInfoDetailsFetch)
+        const leafletInfoFetch = leafletInfoDetailsFetch.replace(':', "=");
+        console.log("Batch Info Details of Leaflet is: " + leafletInfoFetch);
 
-         // log output for expiry date, serial number, gtin number and batch Number pattern
-         console.log(leafletInfoDetailsFetch.match(expiryDatePattern)[0]);
-         console.log(leafletInfoDetailsFetch.match(serialNumberPattern)[0]);
-         console.log(leafletInfoDetailsFetch.match(gtinPattern)[0]);
-         console.log(leafletInfoDetailsFetch.match(batchNumberPattern)[0]);
- 
-         await timeout.setTimeoutTime(3);
+        // log output for expiry date, serial number, gtin number and batch Number pattern
+        console.log(leafletInfoDetailsFetch.match(expiryDatePattern)[0]);
+        console.log(leafletInfoDetailsFetch.match(serialNumberPattern)[0]);
+        console.log(leafletInfoDetailsFetch.match(gtinPattern)[0]);
+        console.log(leafletInfoDetailsFetch.match(batchNumberPattern)[0]);
 
-         const datebefore=leafletInfoDetailsFetch.match(expiryDatePattern)[0];
-         const dateafter=moment(datebefore, "DD-MMM-YYYY").format("YYMMDD")
-         console.log(dateafter);
+        await timeout.setTimeoutTime(3);
 
-         // chai assertions on expiry date, serial number, gtin number and batch Number pattern
-         expect(leafletInfoDetailsFetch.match(gtinPattern)[0]).to.equal(testData.prodCode);
-         expect(leafletInfoDetailsFetch.match(batchNumberPattern)[0]).to.equal(testData.batchValue);
-         expect(leafletInfoDetailsFetch.match(serialNumberPattern)[0]).to.equal(testData.batchSerialNumber);
-         expect(dateafter).to.equal(testData.expiry);
-           
+        const datebefore = leafletInfoDetailsFetch.match(expiryDatePattern)[0];
+        const dateafter = moment(datebefore, "DD-MMM-YYYY").format("YYMMDD")
+        console.log(dateafter);
+
+        // chai assertions on expiry date, serial number, gtin number and batch Number pattern
+        expect(leafletInfoDetailsFetch.match(gtinPattern)[0]).to.equal(testData.prodCode);
+        expect(leafletInfoDetailsFetch.match(batchNumberPattern)[0]).to.equal(testData.batchValue);
+        expect(leafletInfoDetailsFetch.match(serialNumberPattern)[0]).to.equal(testData.batchSerialNumber);
+        expect(dateafter).to.equal(testData.expiry);
+
     }
 }
 
-module.exports=new CreateBatchWithoutEpiUpdateValidSN();
+module.exports = new CreateBatchWithoutEpiUpdateValidSN();

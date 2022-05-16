@@ -1,7 +1,7 @@
-const update10SNInRecalledSNTest=require('../pageObjectsNativeApp/update10SNInRecalledSN')
+const update10SNInRecalledSNTest = require('../pageObjectsNativeApp/update10SNInRecalledSN')
 const allureReporter = require('@wdio/allure-reporter').default
 const nativePatientPage = require('../pageObjectsNativeApp/patientSettingPage')
-const timeoutWait=require('../utils/setTimeout')
+const timeoutWait = require('../utils/setTimeout')
 // const commonFunctions=require('../utils/commonutilitiesFunctions')
 
 describe('044_Edit batch to remove 10 serial numbers from valid and upload 10 in recalled serial numbers', () => {
@@ -11,9 +11,9 @@ describe('044_Edit batch to remove 10 serial numbers from valid and upload 10 in
     allureReporter.addSeverity('Critical');
     allureReporter.addDescription('Check that Leaflet is displayed after to remove 10 serial numbers from valid and upload 10 in recalled serial numbers')
     allureReporter.startStep("Recalled Leaflet Details are Populated after to remove 10 serial numbers from valid and upload 10 in recalled serial numbers")
- 
-    
-    it('Mobile App-should open Patient Settings and Scan 2D Matrix', async() => {
+
+
+    it('Mobile App-should open Patient Settings and Scan 2D Matrix', async () => {
         allureReporter.addFeature('Patient Setting Scan Page');
         // wait time for application to launch
         await nativePatientPage.waitLaunchURL();
@@ -33,9 +33,11 @@ describe('044_Edit batch to remove 10 serial numbers from valid and upload 10 in
         await update10SNInRecalledSNTest.waitTimeout();
         await timeoutWait.setTimeoutWait(4);
         //display details on Leaflet for recalled batch scenario
-        await update10SNInRecalledSNTest.update10SNInRecalledSNFetch();
-        await timeoutWait.setTimeoutWait(4);
-       
-});
+        await update10SNInRecalledSNTest.update10SNInRecalledSNDetailsFetch();
+        await timeoutWait.setTimeoutWait(3);
+        await update10SNInRecalledSNTest.update10SNInRecalledSNLeafletDetailsFetch();
+        await timeoutWait.setTimeoutWait(3);
+
+    });
 
 });
