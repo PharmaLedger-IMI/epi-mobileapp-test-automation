@@ -34,7 +34,7 @@ $ npm install
 
 Config file can be edited according to your Requirement as follows:
 
-1)setup the blockchain value in patients settings wallet.
+1)setup the blockchain network value in patients settings wallet.
 2)setup all the required fields that can be edited according to requirement of the project.
  
 
@@ -42,7 +42,7 @@ Config file can be edited according to your Requirement as follows:
 
 Follow the steps to add in wdio.conf.native.app file:
 
-1) set the Capabilities settings required for Appium.
+1) set the capabilities settings required for Appium.
 2) set the specs files to execute all specs files in serial mode.
 3) set the services and allure reporter dependencies for Appium.
 4) set the Mochaopts timeout and Connection retry timeout as required to execute both web based and mobile native application 

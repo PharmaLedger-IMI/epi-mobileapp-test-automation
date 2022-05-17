@@ -33,8 +33,12 @@ describe('070_Edit product to uncheck incorrect expiry date and edit batch to ha
         await uncheckIncorrectExpiryDateInInProductAndBatchTest.waitTimeout();
         await timeoutWait.setTimeoutWait(4);
         //display details on Leaflet for recalled batch scenario
-        await uncheckIncorrectExpiryDateInInProductAndBatchTest.unCheckIncorrectExpiryDateInProductAndBatchFetch();
-        await timeoutWait.setTimeoutWait(4);
+        await uncheckIncorrectExpiryDateInInProductAndBatchTest.unCheckIncorrectExpiryDateInProductAndBatchDetailsFetch();
+        await timeoutWait.setTimeoutWait(3);
+        await uncheckIncorrectExpiryDateInInProductAndBatchTest.unCheckIncorrectExpiryDateInProductAndBatchLeafletDetailsFetch();
+        await timeoutWait.setTimeoutWait(3);
+        await uncheckIncorrectExpiryDateInInProductAndBatchTest.getLeafletTypesAndLevel();
+        await timeoutWait.setTimeoutWait(3);
 
     });
 

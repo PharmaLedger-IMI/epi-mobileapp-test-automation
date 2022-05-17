@@ -1,4 +1,5 @@
 const testData = require('../testdata/testExpectations.json')
+const configData=require('../testdata/config.json')
 const expect = require('chai').expect
 const timeoutWait = require('../utils/setTimeout')
 const moment = require('moment')

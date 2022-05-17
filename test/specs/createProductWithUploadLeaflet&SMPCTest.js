@@ -33,10 +33,11 @@ describe('056_SMPC update on the product Non- batch specific version', () => {
                 await timeoutWait.setTimeoutWait(3);
                 //display details on Add_productBatch Leaflet when Add_productBatch Leaflet for batch scenario created
                 await createProductWithUploadLeafletSMPCTest.createProductWithLeafletandSMPCDetailsFetch();
-                await timeoutWait.setTimeoutWait(4);
-                // await setTimeout(() => {
-                //     console.log("inside timeout");
-                // }, 4000);
+                await timeoutWait.setTimeoutWait(3);
+                await createProductWithUploadLeafletSMPCTest.createProductWithLeafletandSMPCLeafletDetailsFetch();
+                await timeoutWait.setTimeoutWait(3);
+                await createProductWithUploadLeafletSMPCTest.getLeafletTypesAndLevel();
+                await timeoutWait.setTimeoutWait(3);
 
         });
 

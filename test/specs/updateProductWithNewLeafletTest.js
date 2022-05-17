@@ -32,11 +32,13 @@ describe('057_Edit product to upload SMPC with another leaflet', () => {
                 await updateProductWithNewLeafletTest.waitTimeout();
                 await timeoutWait.setTimeoutWait(3);
                 //display details on Add_productBatch Leaflet when Add_productBatch Leaflet for batch scenario created
-                await updateProductWithNewLeafletTest.updateProductWithNewLeafletSMPCDetailsFetch();
-                await timeoutWait.setTimeoutWait(4);
-                // await setTimeout(() => {
-                //     console.log("inside timeout");
-                // }, 4000);
+                await updateProductWithNewLeafletTest.updateProductWithNewLeafletDetailsFetch();
+                await timeoutWait.setTimeoutWait(3);
+                await updateProductWithNewLeafletTest.updateProductWithNewLeafletWithLeafletDetailsFetch();
+                await timeoutWait.setTimeoutWait(3);
+                await updateProductWithNewLeafletTest.getLeafletTypesAndLevel();
+                await timeoutWait.setTimeoutWait(3);
+
 
         });
 

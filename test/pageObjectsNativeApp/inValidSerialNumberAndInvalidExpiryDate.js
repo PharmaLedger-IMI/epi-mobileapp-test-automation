@@ -1,4 +1,5 @@
 const testData = require('../testdata/testExpectations.json')
+const configData = require('../testdata/config.json')
 const expect = require('chai').expect
 const timeoutWait = require('../utils/setTimeout')
 const moment = require('moment')
@@ -47,7 +48,7 @@ class InvalidSerialNumberAndInvalidExpiryDate {
     async invalidSerialNumberAndInvalidExpiryDateFetch() {
 
         // recalled text message 
-        await this.incorrectExpDateTxtBatch.getText();
+        const incorrectBatch = await this.incorrectExpDateTxtBatch.getText();
         await timeoutWait.setTimeoutTime(3);
         // product info message
         await this.incorrectExpDateBatchLearnMore.click();
@@ -56,15 +57,16 @@ class InvalidSerialNumberAndInvalidExpiryDate {
         await timeoutWait.setTimeoutTime(3);
         await this.closeIncorrectExpDatePopUpMsg.click();
         await timeoutWait.setTimeoutTime(3);
-        await this.leafletNotFoundText.getText();
+        const leafletNotFound = await this.leafletNotFoundText.getText();
         await timeoutWait.setTimeoutTime(2);
-        await this.leafletNotFoundProdDesc.getText();
+        const LeafletNotFoundDesc = await this.leafletNotFoundProdDesc.getText();
         await timeoutWait.setTimeoutTime(2);
         // click on leaflet shield button
 
         // chai assertions on expiry date, serial number, gtin number and batch Number pattern
-        expect(leafletNotFoundText).to.equal("Leaflet Not Displayed");
-        expect(leafletNotFoundProdDesc).to.equal("The leaflet for this product can't be displayed due to validation settings.");
+        expect(incorrectBatch).to.equal(configData.wrongBatchLabelMessage)
+        expect(leafletNotFound).to.equal(configData.leafletNotFoundMessage);
+        expect(LeafletNotFoundDesc).to.equal(configData.leafletNotFoundDescription);
 
 
     }

@@ -2,7 +2,7 @@ const uncheckBatchIsUnknownInProductWithvalidBatch = require('../pageObjectsNati
 const allureReporter = require('@wdio/allure-reporter').default
 const nativePatientPage = require('../pageObjectsNativeApp/patientSettingPage')
 const timeoutWait = require('../utils/setTimeout')
-// const commonFunctions=require('../utils/commonutilitiesFunctions')
+
 
 describe('096_Edit product to uncheck batch is unknown and edit batch to have valid batch', () => {
 
@@ -33,8 +33,10 @@ describe('096_Edit product to uncheck batch is unknown and edit batch to have va
         await uncheckBatchIsUnknownInProductWithvalidBatch.waitTimeout();
         await timeoutWait.setTimeoutWait(4);
         //display details on Leaflet for recalled batch scenario
-        await uncheckBatchIsUnknownInProductWithvalidBatch.uncheckBatchIsUnknownInProductWithValidBatchFetch();
-        await timeoutWait.setTimeoutWait(4);
+        await uncheckBatchIsUnknownInProductWithvalidBatch.unCheckBatchIsUnknownInProductWithValidBatchDetailsFetch();
+        await timeoutWait.setTimeoutWait(3);
+        await uncheckBatchIsUnknownInProductWithvalidBatch.unCheckBatchIsUnknownInProductWithValidBatchLeafletDataFetch();
+        await timeoutWait.setTimeoutWait(3);
 
     });
 

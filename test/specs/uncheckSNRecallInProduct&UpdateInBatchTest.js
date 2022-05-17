@@ -2,7 +2,7 @@ const uncheckSNRecallInProductAndUpdateInBatch = require('../pageObjectsNativeAp
 const allureReporter = require('@wdio/allure-reporter').default
 const nativePatientPage = require('../pageObjectsNativeApp/patientSettingPage')
 const timeoutWait = require('../utils/setTimeout')
-// const commonFunctions=require('../utils/commonutilitiesFunctions')
+
 
 describe('080_Edit product to uncheck SN is in recall and edit batch to update valid SN', () => {
 

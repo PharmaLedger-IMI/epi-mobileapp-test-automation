@@ -33,11 +33,12 @@ describe('062_Edit Product to check batch is recalled and edit batch to set reca
                 await checkBatchRecallInProductAndBatchTest.waitTimeout();
                 await timeoutWait.setTimeoutWait(3);
                 //display details on Add_productBatch Leaflet when Add_productBatch Leaflet for batch scenario created
-                await checkBatchRecallInProductAndBatchTest.checkBatchRecalledInProductAndBatchFetch();
-                await timeoutWait.setTimeoutWait(4);
-                // await setTimeout(() => {
-                //     console.log("inside timeout");
-                // }, 4000);
+                await checkBatchRecallInProductAndBatchTest.checkBatchIsRecalledInProductAndBatchDetailsFetch();
+                await timeoutWait.setTimeoutWait(3);
+                await checkBatchRecallInProductAndBatchTest.checkBatchIsRecalledInProductAndBatchLeafletDetailsFetch();
+                await timeoutWait.setTimeoutWait(3);
+                await checkBatchRecallInProductAndBatchTest.getLeafletTypesAndLevel();
+                await timeoutWait.setTimeoutWait(3);
 
         });
 

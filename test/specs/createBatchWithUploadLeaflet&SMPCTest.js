@@ -32,11 +32,12 @@ describe('058_Leaflet updates on the product Batch specific version', () => {
                 await createBatchWithUploadLeafletSMPCTest.waitTimeout();
                 await timeoutWait.setTimeoutWait(3);
                 //display details on Add_productBatch Leaflet when Add_productBatch Leaflet for batch scenario created
-                await createBatchWithUploadLeafletSMPCTest.createBatchWithLeafletSMPCDetailsFetch();
-                await timeoutWait.setTimeoutWait(4);
-                // await setTimeout(() => {
-                //     console.log("inside timeout");
-                // }, 4000);
+                await createBatchWithUploadLeafletSMPCTest.createBatchWithUploadLeafletAndSMPCDetailsFetch();
+                await timeoutWait.setTimeoutWait(3);
+                await createBatchWithUploadLeafletSMPCTest.createBatchWithUploadLeafletAndSMPCLeafletDetailsFetch();
+                await timeoutWait.setTimeoutWait(3);
+                await createBatchWithUploadLeafletSMPCTest.getLeafletTypesAndLevel();
+                await timeoutWait.setTimeoutWait(3);
 
         });
 

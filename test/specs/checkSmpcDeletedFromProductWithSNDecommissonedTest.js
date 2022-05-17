@@ -33,8 +33,10 @@ describe('084_Edit product to check SN is decommissioned and delete smpc. Edit b
         await checkSmpcDeletedInProductWithSNDecommissioned.waitTimeout();
         await timeoutWait.setTimeoutWait(4);
         //display details on Leaflet for recalled batch scenario
-        await checkSmpcDeletedInProductWithSNDecommissioned.checkSmpcIsDeletedFromProductWithSNDecommissionedFetch();
-        await timeoutWait.setTimeoutWait(4);
+        await checkSmpcDeletedInProductWithSNDecommissioned.checkSmpcDeletedFromProductWithSNdecommissionedDetailsFetch();
+        await timeoutWait.setTimeoutWait(3);
+        await checkSmpcDeletedInProductWithSNDecommissioned.checkSmpcDeletedFromProductWithSNdecommissionedLeafletDetailsFetch();
+        await timeoutWait.setTimeoutWait(3);
 
     });
 

@@ -33,8 +33,10 @@ describe('089_Edit product to check SN is unknown and delete smpc. Pass unknown 
         await checkSmpcIsDeletedFromProductWithSnIsUnknown.waitTimeout();
         await timeoutWait.setTimeoutWait(4);
         //display details on Leaflet for recalled batch scenario
-        await checkSmpcIsDeletedFromProductWithSnIsUnknown.checkSmpcDeletedFromProductWithSnIsUnknownFetch();
-        await timeoutWait.setTimeoutWait(4);
+        await checkSmpcIsDeletedFromProductWithSnIsUnknown.checkSmpcIsDeletedFromProductWithSnIsUnknownDetailsFetch();
+        await timeoutWait.setTimeoutWait(3);
+        await checkSmpcIsDeletedFromProductWithSnIsUnknown.checkSmpcIsDeletedFromProductWithSnIsUnknownLeafletDetailsFetch();
+        await timeoutWait.setTimeoutWait(3);
 
     });
 

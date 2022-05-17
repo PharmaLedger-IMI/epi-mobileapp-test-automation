@@ -35,9 +35,10 @@ describe('072_Edit Product to check batch is expired and edit batch to set expir
                 //display details on Add_productBatch Leaflet when Add_productBatch Leaflet for batch scenario created
                 await checkBatchIsExpiredInProductAndBatchTest.checkBatchIsExpiredInProductAndBatchFetch();
                 await timeoutWait.setTimeoutWait(4);
-                // await setTimeout(() => {
-                //     console.log("inside timeout");
-                // }, 4000);
+                await checkBatchIsExpiredInProductAndBatchTest.checkBatchIsExpiredInProductAndBatchTest();
+                await timeoutWait.setTimeoutWait(4);
+                await checkBatchIsExpiredInProductAndBatchTest.checkBatchIsExpiredInProductAndBatchFetch();
+                await timeoutWait.setTimeoutWait(4);
 
         });
 

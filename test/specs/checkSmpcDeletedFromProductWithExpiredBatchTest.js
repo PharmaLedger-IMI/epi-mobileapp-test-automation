@@ -33,8 +33,11 @@ describe('074_Edit product to check batch is expired and delete smpc. Edit batch
         await checkSmpcDeletedFromProductWithExpiredBatchTest.waitTimeout();
         await timeoutWait.setTimeoutWait(4);
         //display details on Leaflet for recalled batch scenario
-        await checkSmpcDeletedFromProductWithExpiredBatchTest.checkSmpcDeletedFromProductWithExpiredBatchFetch();
-        await timeoutWait.setTimeoutWait(4);
+        await checkSmpcDeletedFromProductWithExpiredBatchTest.checkSmpcDeletedFromProductWithExpiredBatchDetailsFetch();
+        await timeoutWait.setTimeoutWait(3);
+        await checkSmpcDeletedFromProductWithExpiredBatchTest.checkSmpcDeletedFromProductWithExpiredBatchLeafletDetailsFetch();
+        await timeoutWait.setTimeoutWait(3);
+
 
     });
 

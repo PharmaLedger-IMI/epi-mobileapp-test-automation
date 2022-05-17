@@ -1,4 +1,5 @@
 const testData = require('../testdata/testExpectations.json')
+const configData = require('../testdata/config.json')
 const expect = require('chai').expect
 const timeoutWait = require('../utils/setTimeout')
 const moment = require('moment')
@@ -25,7 +26,7 @@ class UncheckSNDecommissionedInProductAndNotDecommissonedInBatch {
         return $("(//android.app.Dialog/descendant::android.view.View[5]/child::android.widget.TextView)")
     }
 
-    get closeFaliedSNPopUpMsg() {
+    get closeFailedSNPopUpMsg() {
         return $("(//android.app.Dialog/descendant::android.view.View)[3]/child::android.widget.Button")
     }
 
@@ -56,32 +57,42 @@ class UncheckSNDecommissionedInProductAndNotDecommissonedInBatch {
     }
 
 
-    async uncheckSNDecommissionedInProductAndNotDecommissonedInBatchFetch() {
+    async unCheckSNDecommissionedInProductAndNotDecommissionedInBatchDetailsFetch() {
 
         // recalled text message 
-        await this.faliedSNTextBatch.getText();
-        await timeoutWait.setTimeoutTime(3);
-        // product info message
+        const failedSNTextBatch = await this.faliedSNTextBatch.getText();
+        await timeoutWait.setTimeoutTime(2);
         await this.faliedSNBatchLearnMore.click();
         await timeoutWait.setTimeoutTime(3);
         await this.faliedSNPopUpMsg.getText();
         await timeoutWait.setTimeoutTime(3);
-        await this.closeFaliedSNPopUpMsg.click();
+        await this.closeFailedSNPopUpMsg.click();
         await timeoutWait.setTimeoutTime(3);
-        await this.prodInfoMsg.getText();
+        // product info message
+        const productInfoMsg = await this.prodInfoMsg.getText();
         await timeoutWait.setTimeoutTime(2);
         await this.productDescription.getText();
         await timeoutWait.setTimeoutTime(2);
+
+        console.log(productInfoMsg);
+        expect(productInfoMsg).includes(configData.prodName);
+        console.log(failedSNTextBatch);
+        expect(failedSNTextBatch).to.equal(configData.invalidSNTextBatch);
+
+    }
+
+    async unCheckSNDecommissionedInProductAndNotDecommissionedInBatchLeafletDetailsFetch() {
+
+
         // click on leaflet shield button
         await this.leafletShieldInfoBtn.click();
         await timeoutWait.setTimeoutTime(2);
         // btach info text message 
-        await this.batchInfoTxtMsg.getText();
+        const batchInfoText = await this.batchInfoTxtMsg.getText();
         await timeoutWait.setTimeoutTime(2);
         // leaflet product information details
         await this.productLeafletInfoDetails.getText();
         await timeoutWait.setTimeoutTime(2);
-        // click on leaflet shield button
 
         const leafletInfoDetailsFetch = await this.productLeafletInfoDetails.getText();
         console.log("Prod Info Details of Leaflet is:" + " " + leafletInfoDetailsFetch)
@@ -93,10 +104,6 @@ class UncheckSNDecommissionedInProductAndNotDecommissonedInBatch {
         console.log(leafletInfoDetailsFetch.match(serialNumberPattern)[0]);
         console.log(leafletInfoDetailsFetch.match(gtinPattern)[0]);
         console.log(leafletInfoDetailsFetch.match(batchNumberPattern)[0]);
-        // console.log(this.LeafletInfo().expiryDatePattern[0].match(expiryDatePattern)[0]);
-        // console.log(this.LeafletInfo().match(serialNumberPattern)[0]);
-        // console.log(this.LeafletInfo().match(gtinPattern)[0]);
-        // console.log(this.LeafletInfo().match(batchNumberPattern)[0]);
 
         await timeoutWait.setTimeoutTime(3);
 
@@ -109,13 +116,12 @@ class UncheckSNDecommissionedInProductAndNotDecommissonedInBatch {
         expect(leafletInfoDetailsFetch.match(batchNumberPattern)[0]).to.equal(testData.batchValue);
         expect(leafletInfoDetailsFetch.match(serialNumberPattern)[0]).to.equal(testData.batchSerialNumber);
         expect(dateafter).to.equal(testData.expiry);
-        //  expect(this.LeafletInfo().match(gtinPattern)[0]).to.equal(testData.prodCode);
-        //  expect(this.LeafletInfo().match(batchNumberPattern)[0]).to.equal(testData.batchValue);
-        // expect(this.LeafletInfo().match(serialNumberPattern)[0]).to.equal(testData.batchSerialNumber);
-        // expect(this.LeafletInfo().match(expiryDatePattern)[0]).to.equal(testData.expiryDate);
 
+        console.log(batchInfoText);
+        expect(batchInfoText).to.equal(configData.batchInfoMessage)
 
     }
+
 
 }
 module.exports = new UncheckSNDecommissionedInProductAndNotDecommissonedInBatch();

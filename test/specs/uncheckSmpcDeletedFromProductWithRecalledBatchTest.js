@@ -2,7 +2,7 @@ const uncheckSmpcDeletedFromProductWithRecalledBatchTest = require('../pageObjec
 const allureReporter = require('@wdio/allure-reporter').default
 const nativePatientPage = require('../pageObjectsNativeApp/patientSettingPage')
 const timeoutWait = require('../utils/setTimeout')
-// const commonFunctions=require('../utils/commonutilitiesFunctions')
+
 
 describe('066_Edit product to uncheck batch recall and delete SMPC and edit batch to have batch recall', () => {
 

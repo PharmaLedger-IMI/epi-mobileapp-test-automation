@@ -33,8 +33,12 @@ describe('075_Edit product to uncheck batch is expired and edit batch to set exp
         await uncheckBatchExpiredInProductAndExpiredInBatchTest.waitTimeout();
         await timeoutWait.setTimeoutWait(4);
         //display details on Leaflet for recalled batch scenario
-        await uncheckBatchExpiredInProductAndExpiredInBatchTest.uncheckBatchExpiredInProductAndExpiredBatchFetch();
-        await timeoutWait.setTimeoutWait(4);
+        await uncheckBatchExpiredInProductAndExpiredInBatchTest.uncheckBatchIsExpiredInProductAndExpiredInBatchDetailsFetch();
+        await timeoutWait.setTimeoutWait(3);
+        await uncheckBatchExpiredInProductAndExpiredInBatchTest.uncheckBatchIsExpiredInProductAndExpiredInBatchLeafletDetailsFetch();
+        await timeoutWait.setTimeoutWait(3);
+        await uncheckBatchExpiredInProductAndExpiredInBatchTest.getLeafletTypesAndLevel();
+        await timeoutWait.setTimeoutWait(3);
 
     });
 
