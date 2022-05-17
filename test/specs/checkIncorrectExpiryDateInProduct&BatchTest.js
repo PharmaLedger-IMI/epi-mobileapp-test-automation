@@ -33,11 +33,10 @@ describe('068_Edit product to check expiration date is incorrect and edit batch 
                 await checkIncorrectExpiryDateInProductAndBatchTest.waitTimeout();
                 await timeoutWait.setTimeoutWait(3);
                 //display details on Add_productBatch Leaflet when Add_productBatch Leaflet for batch scenario created
-                await checkIncorrectExpiryDateInProductAndBatchTest.checkIncorrectDateInProductAndBatchFetch();
-                await timeoutWait.setTimeoutWait(4);
-                // await setTimeout(() => {
-                //     console.log("inside timeout");
-                // }, 4000);
+                await checkIncorrectExpiryDateInProductAndBatchTest.checkIncorrectExpiryDateInProductAndBatchDetailsFetch();
+                await timeoutWait.setTimeoutWait(3);
+                await checkIncorrectExpiryDateInProductAndBatchTest.checkIncorrectExpiryDateInProductAndBatchLeafletDetailsFetch();
+                await timeoutWait.setTimeoutWait(3);
 
         });
 

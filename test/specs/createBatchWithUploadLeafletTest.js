@@ -31,11 +31,11 @@ describe('054_Update product information -Batch specific', () => {
                 await createBatchWithUploadLeafletTest.waitTimeout();
                 await timeoutWait.setTimeoutWait(3);
                 //display details on Add_productBatch Leaflet when Add_productBatch Leaflet for batch scenario created
-                await createBatchWithUploadLeafletTest.createBatchWithUploadLeafletDetailsFetch();
-                await timeoutWait.setTimeoutWait(4);
-                // await setTimeout(() => {
-                //     console.log("inside timeout");
-                // }, 4000);
+                await createBatchWithUploadLeafletTest.createBatchWithLeafletUploadDetailsFetch();
+                await timeoutWait.setTimeoutWait(3);
+                await createBatchWithUploadLeafletTest.createBatchWithLeafletUploadLeafletDataFetch();
+                await timeoutWait.setTimeoutWait(3);
+
 
         });
 

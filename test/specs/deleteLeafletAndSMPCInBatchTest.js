@@ -32,11 +32,13 @@ describe('059_Edit batch to delete ePI and SMPC file.', () => {
                 await deleteBatchUploadLeafletSMPCTest.waitTimeout();
                 await timeoutWait.setTimeoutWait(3);
                 //display details on Add_productBatch Leaflet when Add_productBatch Leaflet for batch scenario created
-                await deleteBatchUploadLeafletSMPCTest.deleteLeafletandSMPCInBatchDetailsFetch();
-                await timeoutWait.setTimeoutWait(4);
-                // await setTimeout(() => {
-                //     console.log("inside timeout");
-                // }, 4000);
+                await deleteBatchUploadLeafletSMPCTest.deleteLeafletAndSMPCInBatchDetailsFetch();
+                await timeoutWait.setTimeoutWait(3);
+                await deleteBatchUploadLeafletSMPCTest.deleteLeafletAndSMPCInBatchLeafletDetailsFetch();
+                await timeoutWait.setTimeoutWait(3);
+                await deleteBatchUploadLeafletSMPCTest.getLeafletTypesAndLevel();
+                await timeoutWait.setTimeoutWait(3);
+
 
         });
 

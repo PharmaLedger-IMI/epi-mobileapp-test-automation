@@ -33,8 +33,10 @@ describe('098_Edit product to check batch is unknown and pass invalid batch and 
         await checkUnknownBatchWithInavledBatchAndInavlidExpiryDate.waitTimeout();
         await timeoutWait.setTimeoutWait(4);
         //display details on Leaflet for recalled batch scenario
-        await checkUnknownBatchWithInavledBatchAndInavlidExpiryDate.checkUnkownBatchWithInvalidBatchAndInvalidExpiryDateFetch();
-        await timeoutWait.setTimeoutWait(4);
+        await checkUnknownBatchWithInavledBatchAndInavlidExpiryDate.checkUnknownBatchWithInvalidBatchAndInvalidExpiryDateDetailsFetch();
+        await timeoutWait.setTimeoutWait(3);
+        await checkUnknownBatchWithInavledBatchAndInavlidExpiryDate.checkUnknownBatchWithInvalidBatchAndInvalidExpiryDateLeafletDataFetch();
+        await timeoutWait.setTimeoutWait(3);
 
     });
 

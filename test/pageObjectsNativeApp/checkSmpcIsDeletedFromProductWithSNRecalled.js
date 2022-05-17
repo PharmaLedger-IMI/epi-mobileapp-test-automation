@@ -1,4 +1,5 @@
 const testData = require('../testdata/testExpectations.json')
+const configData = require('../testdata/config.json')
 const expect = require('chai').expect
 const timeoutWait = require('../utils/setTimeout')
 const moment = require('moment')
@@ -64,33 +65,47 @@ class CheckSmpcIsDeletedFromProductWithSNRecalled {
     }
 
 
-    async checkSmpcIsDeletedFromProductWithSNRecalledFetch() {
+
+    async checkSmpcDeletedFromProductWithSNRecalledDetailsFetch() {
         // recalled text message
         const recalledMsg = await this.recalledTxtMsg.getText();
         console.log(recalledMsg);
         await timeoutWait.setTimeoutTime(2);
         // close button click
         await this.closeBtnMsg.click();
-        await timeoutWait.setTimeoutTime(3);
+        await timeoutWait.setTimeoutTime(2);
         // recalled text message 
-        await this.recalledTextBatch.getText();
-        await timeoutWait.setTimeoutTime(3);
-        // product info message
+        const recalledTxtBatch = await this.recalledTextBatch.getText();
+        await timeoutWait.setTimeoutTime(2);
         await this.recalledBatchLearnMore.click();
         await timeoutWait.setTimeoutTime(3);
         await this.recalledPopUpMsg.getText();
         await timeoutWait.setTimeoutTime(3);
         await this.closeRecalledPopUpMsg.click();
         await timeoutWait.setTimeoutTime(3);
-        await this.prodInfoMsg.getText();
+        // product info message
+        const prodInfoMsg = await this.productInfoMsg.getText();
         await timeoutWait.setTimeoutTime(2);
         await this.productDescription.getText();
         await timeoutWait.setTimeoutTime(2);
+
+        console.log(prodInfoMsg);
+        expect(prodInfoMsg).includes(configData.prodName);
+        console.log(recalledMsg);
+        expect(recalledMsg).to.equal(configData.recalledMessage);
+        console.log(recalledTxtBatch);
+        expect(recalledTxtBatch).to.equal(configData.recalledBatchTextBatch)
+
+    }
+
+    async checkSmpcDeletedFromProductWithSNRecalledLeafletDetailsFetch() {
+
+
         // click on leaflet shield button
         await this.leafletShieldInfoBtn.click();
         await timeoutWait.setTimeoutTime(2);
         // btach info text message 
-        await this.batchInfoTxtMsg.getText();
+        const batchInfo = await this.batchInfoTxtMsg.getText();
         await timeoutWait.setTimeoutTime(2);
         // leaflet product information details
         await this.productLeafletInfoDetails.getText();
@@ -122,13 +137,10 @@ class CheckSmpcIsDeletedFromProductWithSNRecalled {
         expect(leafletInfoDetailsFetch.match(batchNumberPattern)[0]).to.equal(testData.batchValue);
         expect(leafletInfoDetailsFetch.match(serialNumberPattern)[0]).to.equal(testData.batchSerialNumber);
         expect(dateafter).to.equal(testData.expiry);
-        //  expect(this.LeafletInfo().match(gtinPattern)[0]).to.equal(testData.prodCode);
-        //  expect(this.LeafletInfo().match(batchNumberPattern)[0]).to.equal(testData.batchValue);
-        // expect(this.LeafletInfo().match(serialNumberPattern)[0]).to.equal(testData.batchSerialNumber);
-        // expect(this.LeafletInfo().match(expiryDatePattern)[0]).to.equal(testData.expiryDate);
 
+        console.log(batchInfo);
+        expect(batchInfo).to.equal(configData.batchInfoMessage)
 
     }
-
 }
 module.exports = new CheckSmpcIsDeletedFromProductWithSNRecalled();

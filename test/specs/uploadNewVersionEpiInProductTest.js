@@ -33,11 +33,11 @@ describe('053_Edit product to upload a new version of the ePI', () => {
                 await uploadNewVersionEpiInProductTest.waitTimeout();
                 await timeoutWait.setTimeoutWait(3);
                 //display details on Add_productBatch Leaflet when Add_productBatch Leaflet for batch scenario created
-                await uploadNewVersionEpiInProductTest.uploadNewVersionEpiInProductDetailsFetch();
-                await timeoutWait.setTimeoutWait(4);
-                // await setTimeout(() => {
-                //     console.log("inside timeout");
-                // }, 4000);
+                await uploadNewVersionEpiInProductTest.uploadNewVersionEPIInProductDetailsFetch();
+                await timeoutWait.setTimeoutWait(3);
+                await uploadNewVersionEpiInProductTest.uploadNewVersionEPIInProductLeafletDataFetch();
+                await timeoutWait.setTimeoutWait(3);
+
 
         });
 

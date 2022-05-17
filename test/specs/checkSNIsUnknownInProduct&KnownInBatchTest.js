@@ -32,11 +32,10 @@ describe('088_Edit product to check SN is unknown and edit batch to update valid
                 await checkSNIsUnkownInProductAndKnownInBatch.waitTimeout();
                 await timeoutWait.setTimeoutWait(3);
                 //display details on Add_productBatch Leaflet when Add_productBatch Leaflet for batch scenario created
-                await checkSNIsUnkownInProductAndKnownInBatch.checkSNIsUnknownAndKnownInBatchFetch();
-                await timeoutWait.setTimeoutWait(4);
-                // await setTimeout(() => {
-                //     console.log("inside timeout");
-                // }, 4000);
+                await checkSNIsUnkownInProductAndKnownInBatch.checkSNIsUnknownAndKnownInBatchDetailsFetch();
+                await timeoutWait.setTimeoutWait(3);
+                await checkSNIsUnkownInProductAndKnownInBatch.checkSNIsUnknownAndKnownInBatchLeafletDataFetch();
+                await timeoutWait.setTimeoutWait(3);
 
         });
 

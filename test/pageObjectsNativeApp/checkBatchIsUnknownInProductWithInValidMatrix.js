@@ -46,10 +46,10 @@ class checkBatchIsUnknownInProductWithInValidMatrix {
         console.log(prodTitleOfText);
         await timeout.setTimeoutTime(3);
 
-        await expect(this.statusMsg).to.not.equal("Batch Unknown");
-        await expect(this.learnMore).to.not.equal("Batch learn more");
-        await expect(this.prodTitle).to.not.equal("Unknown Batch");
-        await expect(this.prodTitleText).to.not.equal("Batch Unknown");
+        await expect(statusMessage).to.not.equal("Batch Unknown");
+        await expect(learnMoreStatus).to.not.equal("Batch learn more");
+        await expect(productTitle).to.not.equal("Unknown Batch");
+        await expect(prodTitleOfText).to.not.equal("Batch Unknown");
 
     }
 

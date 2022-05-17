@@ -32,11 +32,11 @@ describe('093_Edit Product to check batch is unknown and edit batch to have vali
                 await checkbatchIsUnkownInProductWithValidMatrix.waitTimeout();
                 await timeoutWait.setTimeoutWait(3);
                 //display details on Add_productBatch Leaflet when Add_productBatch Leaflet for batch scenario created
-                await checkbatchIsUnkownInProductWithValidMatrix.checkBatchIsUnkownInProductWithvalidMatrixFetch();
-                await timeoutWait.setTimeoutWait(4);
-                // await setTimeout(() => {
-                //     console.log("inside timeout");
-                // }, 4000);
+                await checkbatchIsUnkownInProductWithValidMatrix.checkBatchIsUnknownInProductWithValidMatrixDetailsFetch();
+                await timeoutWait.setTimeoutWait(3);
+                await checkbatchIsUnkownInProductWithValidMatrix.checkBatchIsUnknownInProductWithValidMatrixLeafletDataFetch();
+                await timeoutWait.setTimeoutWait(3);
+
 
         });
 

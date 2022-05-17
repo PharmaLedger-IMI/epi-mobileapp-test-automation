@@ -33,8 +33,10 @@ describe('087_Edit product to check SN is unknown and pass unknown SN in matrix'
         await checkSnIsUnknownInProductAndBatch.waitTimeout();
         await timeoutWait.setTimeoutWait(4);
         //display details on Leaflet for recalled batch scenario
-        await checkSnIsUnknownInProductAndBatch.checkSNIsUnknownInProductAndBatchFetch();
-        await timeoutWait.setTimeoutWait(4);
+        await checkSnIsUnknownInProductAndBatch.checkSNIsUnknownInProductAndBatchDetailsFetch();
+        await timeoutWait.setTimeoutWait(3);
+        await checkSnIsUnknownInProductAndBatch.checkSNIsUnknownInProductAndBatchLeafletDetailsFetch();
+        await timeoutWait.setTimeoutWait(3);
 
     });
 

@@ -1,5 +1,5 @@
-const WebView = require('../helpers/webView')
 const testData = require('../testdata/testExpectations.json')
+const configData = require('../testdata/config.json')
 const expect = require('chai').expect
 const timeout = require('../utils/setTimeout')
 const moment = require('moment')
@@ -76,55 +76,50 @@ class CheckIncorrectDateInProductAndBatch {
     }
 
 
-    async checkIncorrectDateInProductAndBatchFetch() {
-
-
-        // commonFunctions.getLeafletDetails(true);
-        // await timeout.setTimeoutTime(3);
+    async checkIncorrectExpiryDateInProductAndBatchDetailsFetch() {
+        // recalled text message
         const recalledMsg = await this.recalledTxtMsg.getText();
         console.log(recalledMsg);
         await timeoutWait.setTimeoutTime(2);
         // close button click
         await this.closeBtnMsg.click();
-        await timeoutWait.setTimeoutTime(3);
-        await this.recalledTextBatch.getText();
-        await timeoutWait.setTimeoutTime(3);
-        // product info message
+        await timeoutWait.setTimeoutTime(2);
+        // recalled text message 
+        const recalledTxtBatch = await this.recalledTextBatch.getText();
+        await timeoutWait.setTimeoutTime(2);
         await this.recalledBatchLearnMore.click();
         await timeoutWait.setTimeoutTime(3);
         await this.recalledPopUpMsg.getText();
         await timeoutWait.setTimeoutTime(3);
         await this.closeRecalledPopUpMsg.click();
         await timeoutWait.setTimeoutTime(3);
-        await this.productInfo.getText();
-        // expect(this.productInfo.getText()).to.not.equal(null);
-        await timeout.setTimeoutTime(3);
-        //get text of product information description
+        // product info message
+        const prodInfoMsg = await this.productInfo.getText();
+        await timeoutWait.setTimeoutTime(2);
         await this.productDescription.getText();
-        await timeout.setTimeoutTime(3);
-        //click on leaflet Shieled Button
-        await this.leafletVerifiedShiledBtn.click();
-        await timeout.setTimeoutTime(3);
-        // get batch info text
-        await this.batchInfo.getText();
-        await timeout.setTimeoutTime(3);
-        // get leaflet product details information
+        await timeoutWait.setTimeoutTime(2);
+
+        console.log(prodInfoMsg);
+        expect(prodInfoMsg).includes(configData.prodName);
+        console.log(recalledMsg);
+        expect(recalledMsg).to.equal(configData.recalledMessage);
+        console.log(recalledTxtBatch);
+        expect(recalledTxtBatch).to.equal(configData.recalledBatch)
+
+    }
+
+    async checkIncorrectExpiryDateInProductAndBatchLeafletDetailsFetch() {
+
+
+        // click on leaflet shield button
+        await this.leafletShieldInfoBtn.click();
+        await timeoutWait.setTimeoutTime(2);
+        // btach info text message 
+        await this.batchInfoTxtMsg.getText();
+        await timeoutWait.setTimeoutTime(2);
+        // leaflet product information details
         await this.productLeafletInfoDetails.getText();
-        await timeout.setTimeoutTime(3);
-        await this.closeLeafletBtn.click();
-        await timeout.setTimeoutTime(3);
-
-        await this.leafletType.click();
-        await this.setTimeoutWait(3);
-
-        await this.leafletTypeEpi.click();
-        await this.setTimeoutWait(4);
-
-        await this.leafletProdDescriptionType.scrollIntoView();
-        await this.setTimeoutWait(4);
-
-        const prodLeafletDescription = await this.leafletProdDescriptionType.getText();
-        console.log(prodLeafletDescription);
+        await timeoutWait.setTimeoutTime(2);
 
         const leafletInfoDetailsFetch = await this.productLeafletInfoDetails.getText();
         console.log("Prod Info Details of Leaflet is:" + " " + leafletInfoDetailsFetch)
@@ -136,8 +131,54 @@ class CheckIncorrectDateInProductAndBatch {
         console.log(leafletInfoDetailsFetch.match(serialNumberPattern)[0]);
         console.log(leafletInfoDetailsFetch.match(gtinPattern)[0]);
         console.log(leafletInfoDetailsFetch.match(batchNumberPattern)[0]);
+        // console.log(this.LeafletInfo().expiryDatePattern[0].match(expiryDatePattern)[0]);
+        // console.log(this.LeafletInfo().match(serialNumberPattern)[0]);
+        // console.log(this.LeafletInfo().match(gtinPattern)[0]);
+        // console.log(this.LeafletInfo().match(batchNumberPattern)[0]);
 
-        await timeout.setTimeoutTime(3);
+        await timeoutWait.setTimeoutTime(3);
+
+        const datebefore = leafletInfoDetailsFetch.match(expiryDatePattern)[0];
+        const dateafter = moment(datebefore, "DD-MMM-YYYY").format("YYMMDD")
+        console.log(dateafter);
+
+        // chai assertions on expiry date, serial number, gtin number and batch Number pattern
+        expect(leafletInfoDetailsFetch.match(gtinPattern)[0]).to.equal(testData.prodCode);
+        expect(leafletInfoDetailsFetch.match(batchNumberPattern)[0]).to.equal(testData.batchValue);
+        expect(leafletInfoDetailsFetch.match(serialNumberPattern)[0]).to.equal(testData.batchSerialNumber);
+        expect(dateafter).to.equal(testData.expiry);
+
+    }
+
+    async checkIncorrectExpiryDateInProductAndBatchLeafletDetailsFetch() {
+
+
+        // click on leaflet shield button
+        await this.leafletShieldInfoBtn.click();
+        await timeoutWait.setTimeoutTime(2);
+        // btach info text message 
+        await this.batchInfoTxtMsg.getText();
+        await timeoutWait.setTimeoutTime(2);
+        // leaflet product information details
+        await this.productLeafletInfoDetails.getText();
+        await timeoutWait.setTimeoutTime(2);
+
+        const leafletInfoDetailsFetch = await this.productLeafletInfoDetails.getText();
+        console.log("Prod Info Details of Leaflet is:" + " " + leafletInfoDetailsFetch)
+        const leafletInfoFetch = leafletInfoDetailsFetch.replace(':', "=");
+        console.log("Batch Info Details of Leaflet is: " + leafletInfoFetch);
+
+        // log output for expiry date, serial number, gtin number and batch Number pattern
+        console.log(leafletInfoDetailsFetch.match(expiryDatePattern)[0]);
+        console.log(leafletInfoDetailsFetch.match(serialNumberPattern)[0]);
+        console.log(leafletInfoDetailsFetch.match(gtinPattern)[0]);
+        console.log(leafletInfoDetailsFetch.match(batchNumberPattern)[0]);
+        // console.log(this.LeafletInfo().expiryDatePattern[0].match(expiryDatePattern)[0]);
+        // console.log(this.LeafletInfo().match(serialNumberPattern)[0]);
+        // console.log(this.LeafletInfo().match(gtinPattern)[0]);
+        // console.log(this.LeafletInfo().match(batchNumberPattern)[0]);
+
+        await timeoutWait.setTimeoutTime(3);
 
         const datebefore = leafletInfoDetailsFetch.match(expiryDatePattern)[0];
         const dateafter = moment(datebefore, "DD-MMM-YYYY").format("YYMMDD")

@@ -35,9 +35,7 @@ describe('097_Other tests', () => {
                 //display details on Add_productBatch Leaflet when Add_productBatch Leaflet for batch scenario created
                 await invalidSerialNumberAndInvalidExpiryDate.invalidSerialNumberAndInvalidExpiryDateFetch();
                 await timeoutWait.setTimeoutWait(4);
-                // await setTimeout(() => {
-                //     console.log("inside timeout");
-                // }, 4000);
+
 
         });
 

@@ -31,11 +31,10 @@ describe('055_Update product information that the version of ePI is not impacted
                 await versionEpiNotReplacedTest.waitTimeout();
                 await timeoutWait.setTimeoutWait(3);
                 //display details on Add_productBatch Leaflet when Add_productBatch Leaflet for batch scenario created
-                await versionEpiNotReplacedTest.versionEpiNotReplacedDetailsFetch();
-                await timeoutWait.setTimeoutWait(4);
-                // await setTimeout(() => {
-                //     console.log("inside timeout");
-                // }, 4000);
+                await versionEpiNotReplacedTest.versionOfEPINotReplacedDetailsFetch();
+                await timeoutWait.setTimeoutWait(3);
+                await versionEpiNotReplacedTest.versionOfEPINotReplacedLeafletDataFetch();
+                await timeoutWait.setTimeoutWait(3);
 
         });
 

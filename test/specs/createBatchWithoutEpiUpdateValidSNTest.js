@@ -1,4 +1,4 @@
-const createBatchEpiUpdateValidSNTest = require('../pageObjectsNativeApp/createBatchWithoutEpiUpdateValidSN')
+const createBatchWithoutEpiUpdateValidSNTest = require('../pageObjectsNativeApp/createBatchWithoutEpiUpdateValidSN')
 const allureReporter = require('@wdio/allure-reporter').default
 const nativePatientPage = require('../pageObjectsNativeApp/patientSettingPage')
 const timeoutWait = require('../utils/setTimeout')
@@ -29,14 +29,13 @@ describe('052_Update product information', () => {
         it('Mobile App-should display LeafLet details without Epi Leaflet and with Valid SN', async () => {
                 allureReporter.addFeature('LeafLet Recalled Batch Info Data');
                 //wait timeout for Leaflet to be displayed
-                await createBatchEpiUpdateValidSNTest.waitTimeout();
+                await createBatchWithoutEpiUpdateValidSNTest.waitTimeout();
                 await timeoutWait.setTimeoutWait(3);
                 //display details on Add_productBatch Leaflet when Add_productBatch Leaflet for batch scenario created
-                await createBatchEpiUpdateValidSNTest.createBatchWithoutEpiUpdateValidSNFetch();
-                await timeoutWait.setTimeoutWait(4);
-                // await setTimeout(() => {
-                //     console.log("inside timeout");
-                // }, 4000);
+                await createBatchWithoutEpiUpdateValidSNTest.createBatchWithoutEpiUpdateValidSNDetailsFetch();
+                await timeoutWait.setTimeoutWait(3);
+                await createBatchWithoutEpiUpdateValidSNTest.createBatchWithoutEpiUpdateValidSNLeafletDataFetch();
+                await timeoutWait.setTimeoutWait(3);
 
         });
 

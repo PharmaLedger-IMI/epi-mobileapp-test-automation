@@ -33,8 +33,10 @@ describe('079_Edit product to check SN is recalled and delete smpc. Pass recalle
         await checkSmpcDeletedInProductWithSNRecalled.waitTimeout();
         await timeoutWait.setTimeoutWait(4);
         //display details on Leaflet for recalled batch scenario
-        await checkSmpcDeletedInProductWithSNRecalled.checkSmpcIsDeletedFromProductWithSNRecalledFetch();
-        await timeoutWait.setTimeoutWait(4);
+        await checkSmpcDeletedInProductWithSNRecalled.checkSmpcDeletedFromProductWithSNRecalledDetailsFetch();
+        await timeoutWait.setTimeoutWait(3);
+        await checkSmpcDeletedInProductWithSNRecalled.checkSmpcDeletedFromProductWithSNRecalledLeafletDetailsFetch();
+        await timeoutWait.setTimeoutWait(3);
 
     });
 

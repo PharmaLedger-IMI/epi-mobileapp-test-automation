@@ -33,11 +33,12 @@ describe('061_Edit product to check batch is recalled and edit batch to uncheck 
                 await checkBatchRecallInProductAndNotRecallInBatchTest.waitTimeout();
                 await timeoutWait.setTimeoutWait(3);
                 //display details on Add_productBatch Leaflet when Add_productBatch Leaflet for batch scenario created
-                await checkBatchRecallInProductAndNotRecallInBatchTest.checkBatchRecallInProductAndNotRecallInBatchFetch();
-                await timeoutWait.setTimeoutWait(4);
-                // await setTimeout(() => {
-                //     console.log("inside timeout");
-                // }, 4000);
+                await checkBatchRecallInProductAndNotRecallInBatchTest.checkBatchRecallInProductAndNotRecalledInBatchDetailsFetch();
+                await timeoutWait.setTimeoutWait(3);
+                await checkBatchRecallInProductAndNotRecallInBatchTest.checkBatchRecallInProductAndNotRecalledInBatchLeafletDetailsFetch();
+                await timeoutWait.setTimeoutWait(3);
+                await checkBatchRecallInProductAndNotRecallInBatchTest.getLeafletTypesAndLevel();
+                await timeoutWait.setTimeoutWait(3);
 
         });
 

@@ -1,4 +1,5 @@
 const testData = require('../testdata/testExpectations.json')
+const configData = require('../testdata/config.json')
 const expect = require('chai').expect
 const timeoutWait = require('../utils/setTimeout')
 const moment = require('moment')
@@ -45,15 +46,9 @@ class UncheckBatchIsRecallInProductAndRecalledInBatch {
 
 
     async uncheckBatchIsRecallInProductAndRecalledInBatchFetch() {
-        // recalled text message
-        const recalledMsg = await this.recalledTxtMsg.getText();
-        console.log(recalledMsg);
-        await timeoutWait.setTimeoutTime(2);
-        // close button click
-        await this.closeBtnMsg.click();
-        await timeoutWait.setTimeoutTime(3);
+
         // recalled text message 
-        await this.recalledTextBatch.getText();
+        const recalledBatch = await this.recalledTextBatch.getText();
         await timeoutWait.setTimeoutTime(3);
         // product info message
         await this.recalledBatchLearnMore.click();
@@ -62,15 +57,16 @@ class UncheckBatchIsRecallInProductAndRecalledInBatch {
         await timeoutWait.setTimeoutTime(3);
         await this.closeRecalledPopUpMsg.click();
         await timeoutWait.setTimeoutTime(3);
-        await this.leafletNotFoundText.getText();
+        const leafletNotFound = await this.leafletNotFoundText.getText();
         await timeoutWait.setTimeoutTime(2);
-        await this.leafletNotFoundProdDesc.getText();
+        const LeafletNotFoundDesc = await this.leafletNotFoundProdDesc.getText();
         await timeoutWait.setTimeoutTime(2);
         // click on leaflet shield button
 
         // chai assertions on expiry date, serial number, gtin number and batch Number pattern
-        expect(leafletNotFoundText).to.equal("Leaflet Not Displayed");
-        expect(leafletNotFoundProdDesc).to.equal("The leaflet for this product can't be displayed due to validation settings.");
+        expect(recalledBatch).to.equal(configData.recalledBatch)
+        expect(leafletNotFound).to.equal(configData.leafletNotFoundMessage);
+        expect(LeafletNotFoundDesc).to.equal(configData.leafletNotFoundDescription);
 
 
     }

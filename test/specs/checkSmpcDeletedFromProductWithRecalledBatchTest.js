@@ -33,8 +33,12 @@ describe('063_Edit product to check batch is recalled and delete smpc. Edit batc
         await checkSmpcDeletedFromProductWithRecalledBatchTest.waitTimeout();
         await timeoutWait.setTimeoutWait(4);
         //display details on Leaflet for recalled batch scenario
-        await checkSmpcDeletedFromProductWithRecalledBatchTest.checkSmpcDeletedFromProductWithRecalledBatchFetch();
-        await timeoutWait.setTimeoutWait(4);
+        await checkSmpcDeletedFromProductWithRecalledBatchTest.checkSmpcDeletedFromProductWithRecalledBatchDetailsFetch();
+        await timeoutWait.setTimeoutWait(3);
+        await checkSmpcDeletedFromProductWithRecalledBatchTest.checkSmpcDeletedFromProductWithRecalledBatchLeafletDetailsFetch();
+        await timeoutWait.setTimeoutWait(3);
+        await checkSmpcDeletedFromProductWithRecalledBatchTest.getLeafletTypesAndLevel();
+        await timeoutWait.setTimeoutWait(3);
 
     });
 

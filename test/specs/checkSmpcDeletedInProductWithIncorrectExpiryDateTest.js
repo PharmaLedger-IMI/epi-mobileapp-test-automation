@@ -33,8 +33,10 @@ describe('069_Edit product to check expiration date is incorrect and delete smpc
         await checkSmpcDeletedInProductWithIncorrectExpiryDateTest.waitTimeout();
         await timeoutWait.setTimeoutWait(4);
         //display details on Leaflet for recalled batch scenario
-        await checkSmpcDeletedInProductWithIncorrectExpiryDateTest.checkSmpcDeletedFromProductWithIncorrectExpiryDateFetch();
-        await timeoutWait.setTimeoutWait(4);
+        await checkSmpcDeletedInProductWithIncorrectExpiryDateTest.checkSmpcDeletedFromProductWithIncorrectExpiryDateDetailsFetch();
+        await timeoutWait.setTimeoutWait(3);
+        await checkSmpcDeletedInProductWithIncorrectExpiryDateTest.checkSmpcDeletedInProductWithIncorrectExpiryDateTest();
+        await timeoutWait.setTimeoutWait(3);
 
     });
 

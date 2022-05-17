@@ -45,18 +45,18 @@ class CheckBatchRecalledInProductAndBatch {
         return $("(//android.app.Dialog[@resource-id='ion-overlay-1']/descendant::android.view.View)[1]/child::android.widget.Button[2]")
     }
 
-    get leafletProdDescriptionType() {
+    get leafletLevelDescriptionType() {
         return $("(//android.view.View[@resource-id='leaflet-content']/descendant::android.view.View)[2]/child::android.widget.TextView[2]")
     }
 
     async waitTimeout() {
-        await timeout.setTimeoutWait(38);
+        await timeout.setTimeoutWait(32);
         // await timeout.waitForElement(this.smpcDocType);
 
     }
 
 
-    async checkBatchRecalledInProductAndBatchFetch() {
+    async checkBatchIsRecalledInProductAndBatchDetailsFetch() {
 
         let deviceScreenDimensions = await driver.getWindowRect();
 
@@ -72,19 +72,33 @@ class CheckBatchRecalledInProductAndBatch {
 
         await timeout.setTimeoutWait(8);
 
-        // await timeout.setTimeoutTime(3);
-        await this.productInfo.getText();
+        const prodInfo = await this.productInfo.getText();
         // expect(this.productInfo.getText()).to.not.equal(null);
         await timeout.setTimeoutTime(3);
         //get text of product information description
-        await this.productDescription.getText();
+        const prodDesc = await this.productDescription.getText();
         await timeout.setTimeoutTime(3);
         //click on leaflet Shieled Button
         await this.leafletVerifiedShiledBtn.click();
         await timeout.setTimeoutTime(3);
         // get batch info text
-        await this.batchInfo.getText();
+        const batchInfoTxt = await this.batchInfo.getText();
         await timeout.setTimeoutTime(3);
+
+        //get prod info text and assert 
+        console.log(prodInfo);
+        expect(prodInfo).includes(configData.prodName);
+        //get prod Desc text and assert 
+        console.log(prodDesc);
+        expect(prodDesc).to.equal(configData.prodDesc);
+        //get batch Info text and assert 
+        console.log(batchInfoTxt);
+        expect(batchInfoTxt).to.equal(configData.batchInfo);
+
+    }
+
+    async checkBatchIsRecalledInProductAndBatchLeafletDetailsFetch() {
+        
         // get leaflet product details information
         await this.productLeafletInfoDetails.getText();
         await timeout.setTimeoutTime(3);
@@ -112,6 +126,11 @@ class CheckBatchRecalledInProductAndBatch {
         expect(leafletInfoDetailsFetch.match(serialNumberPattern)[0]).to.equal(testData.batchSerialNumber);
         expect(dateafter).to.equal(testData.expiry);
 
+
+    }
+
+    async getLeafletTypesAndLevel() {
+
         await this.closeLeafletBtn.click();
         await timeout.setTimeoutTime(3);
 
@@ -121,20 +140,21 @@ class CheckBatchRecalledInProductAndBatch {
         await this.leafletTypeEpi.click();
         await timeout.setTimeoutWait(4);
 
-        let deviceScreenDimensions2 = await driver.getWindowRect();
+        let deviceScreenDimensionofLeafletType = await driver.getWindowRect();
         await driver.touchPerform([
             {
                 Element: this.leafletProdLevelDescType,
                 action: 'tap',
                 options: {
-                    x: Math.floor(deviceScreenDimensions2.width * 0.49),
-                    y: Math.floor(deviceScreenDimensions2.height * 0.60)
+                    x: Math.floor(deviceScreenDimensionofLeafletType.width * 0.49),
+                    y: Math.floor(deviceScreenDimensionofLeafletType.height * 0.60)
                 }
             }
         ]);
 
-        const prodLeafletDescription = await this.leafletProdLevelDescType.getText();
-        console.log(prodLeafletDescription);
+        const leafletLevelDescription = await this.leafletLevelDescriptionType.getText();
+        console.log(leafletLevelDescription);
+        expect(leafletLevelDescription).includes(configData.leafletProductLevelDescription)
 
     }
 
