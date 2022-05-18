@@ -21,19 +21,19 @@ class CheckIncorrectDateInProductAndBatch {
         return $("//android.widget.Button[@text='Close']")
     }
 
-    get recalledTextBatch() {
+    get incorrectExpiryDateTextBatch() {
         return $("(//android.view.View[@resource-id='page-ion-content']/descendant::android.widget.TextView)[2]")
     }
 
-    get recalledBatchLearnMore() {
+    get incorrectExpiryDateBatchLearnMore() {
         return $("(//android.view.View[@resource-id='page-ion-content']/descendant::android.widget.TextView)[3]")
     }
 
-    get recalledPopUpMsg() {
+    get incorrectExpiryDatePopUpMsg() {
         return $("(//android.app.Dialog/descendant::android.view.View[5]/child::android.widget.TextView)")
     }
 
-    get closeRecalledPopUpMsg() {
+    get closeIncorrectExpiryDatePopUpMsg() {
         return $("(//android.app.Dialog/descendant::android.view.View)[3]/child::android.widget.Button")
     }
 
@@ -56,6 +56,10 @@ class CheckIncorrectDateInProductAndBatch {
         return $("(//android.app.Dialog/descendant::android.view.View)[5]/child::android.view.View")
     }
 
+    get closeLeafletBtn() {
+        return $("(//android.app.Dialog/descendant::android.view.View)[4]/following::android.widget.Button")
+    }
+
     get leafletType() {
         return $("//android.view.View[@resource-id='ion-sel-1']")
     }
@@ -64,7 +68,7 @@ class CheckIncorrectDateInProductAndBatch {
         return $("(//android.app.Dialog[@resource-id='ion-overlay-1']/descendant::android.view.View)[1]/child::android.widget.Button[2]")
     }
 
-    get leafletProdDescriptionType() {
+    get leafletLevelDescriptionType() {
         return $("(//android.view.View[@resource-id='leaflet-content']/descendant::android.view.View)[2]/child::android.widget.TextView[2]")
     }
 
@@ -77,49 +81,62 @@ class CheckIncorrectDateInProductAndBatch {
 
 
     async checkIncorrectExpiryDateInProductAndBatchDetailsFetch() {
-        // recalled text message
-        const recalledMsg = await this.recalledTxtMsg.getText();
-        console.log(recalledMsg);
-        await timeoutWait.setTimeoutTime(2);
-        // close button click
-        await this.closeBtnMsg.click();
-        await timeoutWait.setTimeoutTime(2);
-        // recalled text message 
-        const recalledTxtBatch = await this.recalledTextBatch.getText();
-        await timeoutWait.setTimeoutTime(2);
-        await this.recalledBatchLearnMore.click();
-        await timeoutWait.setTimeoutTime(3);
-        await this.recalledPopUpMsg.getText();
-        await timeoutWait.setTimeoutTime(3);
-        await this.closeRecalledPopUpMsg.click();
-        await timeoutWait.setTimeoutTime(3);
-        // product info message
-        const prodInfoMsg = await this.productInfo.getText();
-        await timeoutWait.setTimeoutTime(2);
-        await this.productDescription.getText();
-        await timeoutWait.setTimeoutTime(2);
 
-        console.log(prodInfoMsg);
-        expect(prodInfoMsg).includes(configData.prodName);
-        console.log(recalledMsg);
-        expect(recalledMsg).to.equal(configData.recalledMessage);
-        console.log(recalledTxtBatch);
-        expect(recalledTxtBatch).to.equal(configData.recalledBatch)
+        let deviceScreenDimensions = await driver.getWindowRect();
+
+        await driver.touchPerform([
+            {
+                action: 'tap',
+                options: {
+                    x: Math.floor(deviceScreenDimensions.width * 0.49),
+                    y: Math.floor(deviceScreenDimensions.height * 0.49)
+                }
+            }
+        ]);
+
+        await timeout.setTimeoutWait(8);
+
+        const incorrectExpiryDateTxtBatch = await this.incorrectExpiryDateTextBatch.getText();
+        await timeoutWait.setTimeoutTime(2);
+        await this.incorrectExpiryDateBatchLearnMore.click();
+        await timeoutWait.setTimeoutTime(3);
+        await this.incorrectExpiryDatePopUpMsg.getText();
+        await timeoutWait.setTimeoutTime(3);
+        await this.closeIncorrectExpiryDatePopUpMsg.click();
+        await timeoutWait.setTimeoutTime(3);
+        const prodInfo = await this.productInfo.getText();
+        // expect(this.productInfo.getText()).to.not.equal(null);
+        await timeout.setTimeoutTime(3);
+        //get text of product information description
+        const prodDesc = await this.productDescription.getText();
+        await timeout.setTimeoutTime(3);
+        //click on leaflet Shieled Button
+        await this.leafletVerifiedShiledBtn.click();
+        await timeout.setTimeoutTime(3);
+        // get batch info text
+        const batchInfoTxt = await this.batchInfo.getText();
+        await timeout.setTimeoutTime(3);
+
+        //get prod info text and assert 
+        console.log(prodInfo);
+        expect(prodInfo).includes(configData.prodName);
+        //get prod Desc text and assert 
+        console.log(prodDesc);
+        expect(prodDesc).to.equal(configData.prodDesc);
+        //get batch Info text and assert 
+        console.log(batchInfoTxt);
+        expect(batchInfoTxt).to.equal(configData.batchInfo);
+        //get incorrect Expiry date assert
+        console.log(incorrectExpiryDateTxtBatch);
+        expect(incorrectExpiryDateTxtBatch).to.equal(configData.incorrectExpiryDateLabelMessage);
 
     }
 
     async checkIncorrectExpiryDateInProductAndBatchLeafletDetailsFetch() {
-
-
-        // click on leaflet shield button
-        await this.leafletShieldInfoBtn.click();
-        await timeoutWait.setTimeoutTime(2);
-        // btach info text message 
-        await this.batchInfoTxtMsg.getText();
-        await timeoutWait.setTimeoutTime(2);
-        // leaflet product information details
+        // get leaflet product details information
         await this.productLeafletInfoDetails.getText();
-        await timeoutWait.setTimeoutTime(2);
+        await timeout.setTimeoutTime(3);
+
 
         const leafletInfoDetailsFetch = await this.productLeafletInfoDetails.getText();
         console.log("Prod Info Details of Leaflet is:" + " " + leafletInfoDetailsFetch)
@@ -131,12 +148,8 @@ class CheckIncorrectDateInProductAndBatch {
         console.log(leafletInfoDetailsFetch.match(serialNumberPattern)[0]);
         console.log(leafletInfoDetailsFetch.match(gtinPattern)[0]);
         console.log(leafletInfoDetailsFetch.match(batchNumberPattern)[0]);
-        // console.log(this.LeafletInfo().expiryDatePattern[0].match(expiryDatePattern)[0]);
-        // console.log(this.LeafletInfo().match(serialNumberPattern)[0]);
-        // console.log(this.LeafletInfo().match(gtinPattern)[0]);
-        // console.log(this.LeafletInfo().match(batchNumberPattern)[0]);
 
-        await timeoutWait.setTimeoutTime(3);
+        await timeout.setTimeoutTime(3);
 
         const datebefore = leafletInfoDetailsFetch.match(expiryDatePattern)[0];
         const dateafter = moment(datebefore, "DD-MMM-YYYY").format("YYMMDD")
@@ -148,49 +161,44 @@ class CheckIncorrectDateInProductAndBatch {
         expect(leafletInfoDetailsFetch.match(serialNumberPattern)[0]).to.equal(testData.batchSerialNumber);
         expect(dateafter).to.equal(testData.expiry);
 
-    }
-
-    async checkIncorrectExpiryDateInProductAndBatchLeafletDetailsFetch() {
-
-
-        // click on leaflet shield button
-        await this.leafletShieldInfoBtn.click();
-        await timeoutWait.setTimeoutTime(2);
-        // btach info text message 
-        await this.batchInfoTxtMsg.getText();
-        await timeoutWait.setTimeoutTime(2);
-        // leaflet product information details
-        await this.productLeafletInfoDetails.getText();
-        await timeoutWait.setTimeoutTime(2);
-
-        const leafletInfoDetailsFetch = await this.productLeafletInfoDetails.getText();
-        console.log("Prod Info Details of Leaflet is:" + " " + leafletInfoDetailsFetch)
-        const leafletInfoFetch = leafletInfoDetailsFetch.replace(':', "=");
-        console.log("Batch Info Details of Leaflet is: " + leafletInfoFetch);
-
-        // log output for expiry date, serial number, gtin number and batch Number pattern
-        console.log(leafletInfoDetailsFetch.match(expiryDatePattern)[0]);
-        console.log(leafletInfoDetailsFetch.match(serialNumberPattern)[0]);
-        console.log(leafletInfoDetailsFetch.match(gtinPattern)[0]);
-        console.log(leafletInfoDetailsFetch.match(batchNumberPattern)[0]);
-        // console.log(this.LeafletInfo().expiryDatePattern[0].match(expiryDatePattern)[0]);
-        // console.log(this.LeafletInfo().match(serialNumberPattern)[0]);
-        // console.log(this.LeafletInfo().match(gtinPattern)[0]);
-        // console.log(this.LeafletInfo().match(batchNumberPattern)[0]);
-
-        await timeoutWait.setTimeoutTime(3);
-
-        const datebefore = leafletInfoDetailsFetch.match(expiryDatePattern)[0];
-        const dateafter = moment(datebefore, "DD-MMM-YYYY").format("YYMMDD")
-        console.log(dateafter);
-
-        // chai assertions on expiry date, serial number, gtin number and batch Number pattern
-        expect(leafletInfoDetailsFetch.match(gtinPattern)[0]).to.equal(testData.prodCode);
-        expect(leafletInfoDetailsFetch.match(batchNumberPattern)[0]).to.equal(testData.batchValue);
-        expect(leafletInfoDetailsFetch.match(serialNumberPattern)[0]).to.equal(testData.batchSerialNumber);
-        expect(dateafter).to.equal(testData.expiry);
 
     }
+
+    async getLeafletTypesAndLevel() {
+
+        await this.closeLeafletBtn.click();
+        await timeout.setTimeoutTime(3);
+
+        const leafletLevelSMPCDescription = await this.leafletLevelDescriptionType.getText();
+        console.log(leafletLevelSMPCDescription);
+        expect(leafletLevelSMPCDescription).includes(configData.leafletProductLevelDescription)
+
+
+        await this.leafletType.click();
+        await timeout.setTimeoutWait(3);
+
+        await this.leafletTypeEpi.click();
+        await timeout.setTimeoutWait(4);
+
+        let deviceScreenDimensionofLeafletType = await driver.getWindowRect();
+        await driver.touchPerform([
+            {
+                Element: this.leafletProdLevelDescType,
+                action: 'tap',
+                options: {
+                    x: Math.floor(deviceScreenDimensionofLeafletType.width * 0.49),
+                    y: Math.floor(deviceScreenDimensionofLeafletType.height * 0.60)
+                }
+            }
+        ]);
+
+        const leafletLevelDescription = await this.leafletLevelDescriptionType.getText();
+        console.log(leafletLevelDescription);
+        expect(leafletLevelDescription).includes(configData.leafletProductLevelDescription)
+
+    }
+
+
 
 }
 

@@ -13,14 +13,6 @@ const batchNumberPattern = /(?<=Batch number:).*/g
 class UnCheckSNRecallInProductAndNotRecalledBatch {
 
 
-    get recalledTxtMsg() {
-        return $("(//android.app.Dialog/descendant::android.view.View)[5]/child::android.widget.TextView")
-    }
-
-    get closeBtnMsg() {
-        return $("//android.widget.Button[@text='Close']")
-    }
-
     //recalled Batch 
     get recalledTextBatch() {
         return $("(//android.view.View[@resource-id='page-ion-content']/descendant::android.widget.TextView)[2]")
@@ -120,10 +112,6 @@ class UnCheckSNRecallInProductAndNotRecalledBatch {
         console.log(leafletInfoDetailsFetch.match(serialNumberPattern)[0]);
         console.log(leafletInfoDetailsFetch.match(gtinPattern)[0]);
         console.log(leafletInfoDetailsFetch.match(batchNumberPattern)[0]);
-        // console.log(this.LeafletInfo().expiryDatePattern[0].match(expiryDatePattern)[0]);
-        // console.log(this.LeafletInfo().match(serialNumberPattern)[0]);
-        // console.log(this.LeafletInfo().match(gtinPattern)[0]);
-        // console.log(this.LeafletInfo().match(batchNumberPattern)[0]);
 
         await timeoutWait.setTimeoutTime(3);
 

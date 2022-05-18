@@ -38,15 +38,15 @@ exports.config = {
     specs: [
         [
 
-           // 'test/specs/createProductWithAddBatchTest.js',
+             'test/specs/createProductWithAddBatchTest.js',
             
             // 'test/specs/editBatchCheckRecallMsgTest.js',
             // 'test/specs/editProductSnRecallListTest.js',
             
-            // 'test/specs/enableSnCheckSnIsValidTest.js',
-            // 'test/specs/enableSnCheckSnIsInvalidTest.js',
-            // 'test/specs/disableSnCheckSnIsValidTest.js',
-            // 'test/specs/disableSnCheckWithoutSnValidTest.js',
+           //   'test/specs/enableSnCheckSnIsValidTest.js',
+           //  'test/specs/enableSnCheckSnIsInvalidTest.js',
+           //  'test/specs/disableSnCheckSnIsValidTest.js',
+           //    'test/specs/disableSnCheckWithoutSnValidTest.js',
             
             // 'test/specs/enableExpiryDateCheckValidExpiryDateTest.js',
             // 'test/specs/enableExpiryDateCheckInvalidExpiryDateTest.js',
@@ -86,7 +86,7 @@ exports.config = {
             //  'test/specs/checkClearRecalledSerilaNumberTest.js',
             //    'test/specs/decommissionedSerialNumberTest.js',
             //   'test/specs/createBatchValidSNRecallSNDecommisonedSNTest.js'
-                'test/specs/scanUpdateRecalledSNTest.js',
+            //    'test/specs/scanUpdateRecalledSNTest.js',
             // 'test/specs/scanUpdateDecommissionedSNTest.js',
             // 'test/specs/update10SNInRecalledSNTest.js',
             //   'test/specs/update10SNInDecommissionedSNTest.js',

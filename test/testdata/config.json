@@ -1,6 +1,6 @@
 {
 
-    "setBlockChainNetwork":"epiqa",
+    "setBlockChainNetwork":"sandbox.epi.nvs",
 
     "setRefreshTimePeriod":"10",
 
@@ -35,6 +35,10 @@
     "leafletProductLevelDescription":"Leaflet at product level",
 
     "leafletBatchLevelDescription":"Leaflet at batch level",
+
+    "leafletUpdatedAtProductLevelDescription":"Updated Leaflet at product level",
+
+    "leafletUpdatedAtBatchLevelDescription":"Updated Leaflet at batch level",
 
     "leafletNotFoundMessage":"Leaflet Not Displayed",
 

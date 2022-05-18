@@ -31,16 +31,47 @@ class CheckSNIsUnknownAndKnownInBatch {
         return $("(//android.app.Dialog/descendant::android.view.View)[5]/child::android.view.View")
     }
 
+    get closeLeafletBtn() {
+        return $("(//android.app.Dialog/descendant::android.view.View)[4]/following-sibling::android.widget.Button")
+    }
+
+    get leafletType() {
+        return $("(//android.view.View[@resource-id='leaflet-header']/descendant::android.view.View)[3]/child::android.view.View[@resource-id='ion-sel-1']")
+    }
+
+    get leafletTypeEpi() {
+        return $("(//android.app.Dialog[@resource-id='ion-overlay-1']/descendant::android.view.View)[1]/child::android.widget.Button[2]")
+    }
+
+    get leafletLevelDescriptionType() {
+        return $("(//android.view.View[@resource-id='leaflet-content']/descendant::android.view.View)[2]/child::android.widget.TextView[2]")
+    }
+
     async waitTimeout() {
-        await timeout.setTimeoutWait(30);
-        await timeout.waitForElement(this.productInfo);
+        await timeout.setTimeoutWait(32);
+        // await timeout.waitForElement(this.smpcDocType);
 
     }
 
 
-    async checkSNIsUnknownAndKnownInBatchDetailsFetch() {
+    async checkSNIsUnknownInProductAndKnownInBatchDetailsFetch() {
+
+        let deviceScreenDimensions = await driver.getWindowRect();
+
+        await driver.touchPerform([
+            {
+                action: 'tap',
+                options: {
+                    x: Math.floor(deviceScreenDimensions.width * 0.49),
+                    y: Math.floor(deviceScreenDimensions.height * 0.49)
+                }
+            }
+        ]);
+
+        await timeout.setTimeoutWait(8);
 
         const prodInfo = await this.productInfo.getText();
+        // expect(this.productInfo.getText()).to.not.equal(null);
         await timeout.setTimeoutTime(3);
         //get text of product information description
         const prodDesc = await this.productDescription.getText();
@@ -64,11 +95,12 @@ class CheckSNIsUnknownAndKnownInBatch {
 
     }
 
-    async checkSNIsUnknownAndKnownInBatchLeafletDataFetch() {
-
+    async checkSNIsUnknownInProductAndKnownInBatchLeafletDetailsFetch() {
         // get leaflet product details information
         await this.productLeafletInfoDetails.getText();
         await timeout.setTimeoutTime(3);
+
+
         const leafletInfoDetailsFetch = await this.productLeafletInfoDetails.getText();
         console.log("Prod Info Details of Leaflet is:" + " " + leafletInfoDetailsFetch)
         const leafletInfoFetch = leafletInfoDetailsFetch.replace(':', "=");
@@ -92,8 +124,42 @@ class CheckSNIsUnknownAndKnownInBatch {
         expect(leafletInfoDetailsFetch.match(serialNumberPattern)[0]).to.equal(testData.batchSerialNumber);
         expect(dateafter).to.equal(testData.expiry);
 
+
     }
 
+    async getLeafletTypesAndLevel() {
+
+        await this.closeLeafletBtn.click();
+        await timeout.setTimeoutTime(3);
+
+        const leafletLevelSMPCDescription = await this.leafletLevelDescriptionType.getText();
+        console.log(leafletLevelSMPCDescription);
+        expect(leafletLevelSMPCDescription).includes(configData.leafletProductLevelDescription)
+
+
+        await this.leafletType.click();
+        await timeout.setTimeoutWait(3);
+
+        await this.leafletTypeEpi.click();
+        await timeout.setTimeoutWait(4);
+
+        let deviceScreenDimensionofLeafletType = await driver.getWindowRect();
+        await driver.touchPerform([
+            {
+                Element: this.leafletProdLevelDescType,
+                action: 'tap',
+                options: {
+                    x: Math.floor(deviceScreenDimensionofLeafletType.width * 0.49),
+                    y: Math.floor(deviceScreenDimensionofLeafletType.height * 0.60)
+                }
+            }
+        ]);
+
+        const leafletLevelDescription = await this.leafletLevelDescriptionType.getText();
+        console.log(leafletLevelDescription);
+        expect(leafletLevelDescription).includes(configData.leafletProductLevelDescription)
+
+    }
 }
 
 module.exports = new CheckSNIsUnknownAndKnownInBatch();

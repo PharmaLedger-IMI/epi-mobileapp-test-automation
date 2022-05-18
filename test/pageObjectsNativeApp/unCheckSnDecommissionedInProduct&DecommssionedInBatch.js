@@ -13,20 +13,20 @@ const batchNumberPattern = /(?<=Batch number:).*/g
 class UncheckSNDecommissionedInProductAndDecommissonedInBatch {
 
 
-    //recalled Batch 
-    get recalledTextBatch() {
+    //snDecommissioned Batch 
+    get snDecommissionedTextBatch() {
         return $("(//android.view.View[@resource-id='page-ion-content']/descendant::android.widget.TextView)[2]")
     }
 
-    get recalledBatchLearnMore() {
+    get snDecommissionedBatchLearnMore() {
         return $("(//android.view.View[@resource-id='page-ion-content']/descendant::android.widget.TextView)[3]")
     }
 
-    get recalledPopUpMsg() {
+    get snDecommissionedPopUpMsg() {
         return $("(//android.app.Dialog/descendant::android.view.View[5]/child::android.widget.TextView)")
     }
 
-    get closeRecalledPopUpMsg() {
+    get closeSNDecommissionedPopUpMsg() {
         return $("(//android.app.Dialog/descendant::android.view.View)[3]/child::android.widget.Button")
     }
 
@@ -40,28 +40,22 @@ class UncheckSNDecommissionedInProductAndDecommissonedInBatch {
 
     async waitTimeout() {
         await timeoutWait.setTimeoutWait(30);
-        await timeoutWait.waitForElement(this.recalledTxtMsg);
+        await timeoutWait.waitForElement(this.snDecommissionedTextBatch);
 
     }
 
 
     async uncheckSNDecommissionedInProductAndDecommissonedInBatchFetch() {
-        // recalled text message
-        const recalledMsg = await this.recalledTxtMsg.getText();
-        console.log(recalledMsg);
-        await timeoutWait.setTimeoutTime(2);
-        // close button click
-        await this.closeBtnMsg.click();
-        await timeoutWait.setTimeoutTime(3);
+
         // recalled text message 
-        const recalledBatch = await this.recalledTextBatch.getText();
+        const snDecommissionedBatch = await this.snDecommissionedTextBatch.getText();
         await timeoutWait.setTimeoutTime(3);
         // product info message
-        await this.recalledBatchLearnMore.click();
+        await this.snDecommissionedBatchLearnMore.click();
         await timeoutWait.setTimeoutTime(3);
-        await this.recalledPopUpMsg.getText();
+        await this.snDecommissionedPopUpMsg.getText();
         await timeoutWait.setTimeoutTime(3);
-        await this.closeRecalledPopUpMsg.click();
+        await this.closeSNDecommissionedPopUpMsg.click();
         await timeoutWait.setTimeoutTime(3);
         const leafletNotFound = await this.leafletNotFoundText.getText();
         await timeoutWait.setTimeoutTime(2);
@@ -70,7 +64,7 @@ class UncheckSNDecommissionedInProductAndDecommissonedInBatch {
         // click on leaflet shield button
 
         // chai assertions on expiry date, serial number, gtin number and batch Number pattern
-        expect(recalledBatch).to.equal(configData.recalledBatch)
+        expect(snDecommissionedBatch).to.equal(configData.serialNumberDecommissionedLabelMessage)
         expect(leafletNotFound).to.equal(configData.leafletNotFoundMessage);
         expect(LeafletNotFoundDesc).to.equal(configData.leafletNotFoundDescription);
 

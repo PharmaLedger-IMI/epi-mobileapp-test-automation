@@ -33,9 +33,11 @@ describe('082_Edit product to check SN is decommssioned and edit batch to update
         await checkSNDecommissionedInProductAndBatch.waitTimeout();
         await timeoutWait.setTimeoutWait(4);
         //display details on Leaflet for recalled batch scenario
-        await checkSNDecommissionedInProductAndBatch.checkSNdecommissionedInProductAndBatchDetailsFetch();
+        await checkSNDecommissionedInProductAndBatch.checkSNDecommissionedInProductAndBatchDetailsFetch();
         await timeoutWait.setTimeoutWait(3);
-        await checkSNDecommissionedInProductAndBatch.checkSNdecommissionedInProductAndBatchLeafletDetailsFetch();
+        await checkSNDecommissionedInProductAndBatch.checkSNDecommissionedInProductAndBatchLeafletDetailsFetch();
+        await timeoutWait.setTimeoutWait(3);
+        await checkSNDecommissionedInProductAndBatch.getLeafletTypesAndLevel();
         await timeoutWait.setTimeoutWait(3);
 
     });

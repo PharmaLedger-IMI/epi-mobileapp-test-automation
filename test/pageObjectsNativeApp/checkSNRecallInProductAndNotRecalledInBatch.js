@@ -58,57 +58,85 @@ class CheckSNRecallInProductAndNotRecalledInBatch {
         return $("(//android.app.Dialog/descendant::android.view.View)[5]/child::android.view.View")
     }
 
+    get closeLeafletBtn() {
+        return $("(//android.app.Dialog/descendant::android.view.View)[4]/following-sibling::android.widget.Button")
+    }
+
+    get leafletType() {
+        return $("(//android.view.View[@resource-id='leaflet-header']/descendant::android.view.View)[3]/child::android.view.View[@resource-id='ion-sel-1']")
+    }
+
+    get leafletTypeEpi() {
+        return $("(//android.app.Dialog[@resource-id='ion-overlay-1']/descendant::android.view.View)[1]/child::android.widget.Button[2]")
+    }
+
+    get leafletLevelDescriptionType() {
+        return $("(//android.view.View[@resource-id='leaflet-content']/descendant::android.view.View)[2]/child::android.widget.TextView[2]")
+    }
+
     async waitTimeout() {
-        await timeoutWait.setTimeoutWait(30);
-        await timeoutWait.waitForElement(this.recalledTxtMsg);
+        await timeout.setTimeoutWait(32);
+        // await timeout.waitForElement(this.smpcDocType);
 
     }
 
 
-    async checkSNRecallInProductAndNotRecalledInBatchDetailsFetch() {
-        // recalled text message
-        const recalledMsg = await this.recalledTxtMsg.getText();
-        console.log(recalledMsg);
-        await timeoutWait.setTimeoutTime(2);
-        // close button click
-        await this.closeBtnMsg.click();
-        await timeoutWait.setTimeoutTime(2);
-        // recalled text message 
-        const recalledTxtBatch = await this.recalledTextBatch.getText();
-        await timeoutWait.setTimeoutTime(2);
-        await this.recalledBatchLearnMore.click();
-        await timeoutWait.setTimeoutTime(3);
-        await this.recalledPopUpMsg.getText();
-        await timeoutWait.setTimeoutTime(3);
-        await this.closeRecalledPopUpMsg.click();
-        await timeoutWait.setTimeoutTime(3);
-        // product info message
+    async checkSNRecallInProductNotRecalledInBatchDetailsFetch() {
+
+        let deviceScreenDimensions = await driver.getWindowRect();
+
+        await driver.touchPerform([
+            {
+                action: 'tap',
+                options: {
+                    x: Math.floor(deviceScreenDimensions.width * 0.49),
+                    y: Math.floor(deviceScreenDimensions.height * 0.49)
+                }
+            }
+        ]);
+
+        await timeout.setTimeoutWait(8);
+
+        // const snRecallTxtBatch = await this.snRecallTextBatch.getText();
+        // await timeoutWait.setTimeoutTime(2);
+        // await this.snRecallBatchLearnMore.click();
+        // await timeoutWait.setTimeoutTime(3);
+        // await this.snRecallPopUpMsg.getText();
+        // await timeoutWait.setTimeoutTime(3);
+        // await this.closeSNRecallPopUpMsg.click();
+        // await timeoutWait.setTimeoutTime(3);
+        // const prodInfo = await this.productInfo.getText();
+
         const prodInfoMsg = await this.prodInfo.getText();
         await timeoutWait.setTimeoutTime(2);
-        await this.productDescription.getText();
+        const prodDesc = await this.productDescription.getText();
         await timeoutWait.setTimeoutTime(2);
+        //click on leaflet Shieled Button
+        await this.leafletVerifiedShiledBtn.click();
+        await timeout.setTimeoutTime(3);
+        // get batch info text
+        const batchInfoTxt = await this.batchInfo.getText();
+        await timeout.setTimeoutTime(3);
 
-        console.log(prodInfoMsg);
-        expect(prodInfoMsg).includes(configData.prodName);
-        console.log(recalledMsg);
-        expect(recalledMsg).to.equal(configData.recalledMessage);
-        console.log(recalledTxtBatch);
-        expect(recalledTxtBatch).to.equal(configData.recalledBatchTextBatch)
+        //get prod info text and assert 
+        console.log(prodInfo);
+        expect(prodInfo).includes(configData.prodName);
+        //get prod Desc text and assert 
+        console.log(prodDesc);
+        expect(prodDesc).to.equal(configData.prodDesc);
+        //get batch Info text and assert 
+        console.log(batchInfoTxt);
+        expect(batchInfoTxt).to.equal(configData.batchInfoMessage);
+        // console.log(snRecallTxtBatch);
+        // expect(snRecallTxtBatch).to.equal(configData.serialNumberRecallLabelMessage);
 
     }
 
-    async checkSNRecallInProductAndNotRecalledInBatchLeafletDetailsFetch() {
-
-
-        // click on leaflet shield button
-        await this.leafletShieldInfoBtn.click();
-        await timeoutWait.setTimeoutTime(2);
-        // btach info text message 
-        const batchInfo = await this.batchInfoTxtMsg.getText();
-        await timeoutWait.setTimeoutTime(2);
-        // leaflet product information details
+    async checkSNRecallInProductNotRecalledInBatchLeafletDetailsFetch() {
+        // get leaflet product details information
         await this.productLeafletInfoDetails.getText();
-        await timeoutWait.setTimeoutTime(2);
+        await timeout.setTimeoutTime(3);
+
 
         const leafletInfoDetailsFetch = await this.productLeafletInfoDetails.getText();
         console.log("Prod Info Details of Leaflet is:" + " " + leafletInfoDetailsFetch)
@@ -120,12 +148,8 @@ class CheckSNRecallInProductAndNotRecalledInBatch {
         console.log(leafletInfoDetailsFetch.match(serialNumberPattern)[0]);
         console.log(leafletInfoDetailsFetch.match(gtinPattern)[0]);
         console.log(leafletInfoDetailsFetch.match(batchNumberPattern)[0]);
-        // console.log(this.LeafletInfo().expiryDatePattern[0].match(expiryDatePattern)[0]);
-        // console.log(this.LeafletInfo().match(serialNumberPattern)[0]);
-        // console.log(this.LeafletInfo().match(gtinPattern)[0]);
-        // console.log(this.LeafletInfo().match(batchNumberPattern)[0]);
 
-        await timeoutWait.setTimeoutTime(3);
+        await timeout.setTimeoutTime(3);
 
         const datebefore = leafletInfoDetailsFetch.match(expiryDatePattern)[0];
         const dateafter = moment(datebefore, "DD-MMM-YYYY").format("YYMMDD")
@@ -137,8 +161,40 @@ class CheckSNRecallInProductAndNotRecalledInBatch {
         expect(leafletInfoDetailsFetch.match(serialNumberPattern)[0]).to.equal(testData.batchSerialNumber);
         expect(dateafter).to.equal(testData.expiry);
 
-        console.log(batchInfo);
-        expect(batchInfo).to.equal(configData.batchInfoMessage)
+
+    }
+
+    async getLeafletTypesAndLevel() {
+
+        await this.closeLeafletBtn.click();
+        await timeout.setTimeoutTime(3);
+
+        const leafletLevelSMPCDescription = await this.leafletLevelDescriptionType.getText();
+        console.log(leafletLevelSMPCDescription);
+        expect(leafletLevelSMPCDescription).includes(configData.leafletProductLevelDescription)
+
+
+        await this.leafletType.click();
+        await timeout.setTimeoutWait(3);
+
+        await this.leafletTypeEpi.click();
+        await timeout.setTimeoutWait(4);
+
+        let deviceScreenDimensionofLeafletType = await driver.getWindowRect();
+        await driver.touchPerform([
+            {
+                Element: this.leafletProdLevelDescType,
+                action: 'tap',
+                options: {
+                    x: Math.floor(deviceScreenDimensionofLeafletType.width * 0.49),
+                    y: Math.floor(deviceScreenDimensionofLeafletType.height * 0.60)
+                }
+            }
+        ]);
+
+        const leafletLevelDescription = await this.leafletLevelDescriptionType.getText();
+        console.log(leafletLevelDescription);
+        expect(leafletLevelDescription).includes(configData.leafletProductLevelDescription)
 
     }
 

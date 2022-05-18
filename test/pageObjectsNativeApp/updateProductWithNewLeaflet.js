@@ -1,5 +1,5 @@
-const WebView = require('../helpers/webView')
 const testData = require('../testdata/testExpectations.json')
+const configData=require('../testdata/config.json')
 const expect = require('chai').expect
 const timeout = require('../utils/setTimeout')
 const moment = require('moment')
@@ -131,6 +131,10 @@ class UpdateProductWithNewLeafletSMPC {
 
         await this.closeLeafletBtn.click();
         await timeout.setTimeoutTime(3);
+
+        const leafletLevelSMPCDescription = await this.leafletLevelDescriptionType.getText();
+        console.log(leafletLevelSMPCDescription);
+        expect(leafletLevelSMPCDescription).includes(configData.leafletUpdatedAtProductLevelDescription);
 
         await this.leafletType.click();
         await timeout.setTimeoutWait(3);

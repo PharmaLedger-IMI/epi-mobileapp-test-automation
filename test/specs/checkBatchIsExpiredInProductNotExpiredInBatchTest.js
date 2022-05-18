@@ -33,11 +33,13 @@ describe('073_Edit Product to check batch is expired and edit batch to check bat
                 await checkBatchIsExpiredInProductNotExpiredInBatchTest.waitTimeout();
                 await timeoutWait.setTimeoutWait(3);
                 //display details on Add_productBatch Leaflet when Add_productBatch Leaflet for batch scenario created
-                await checkBatchIsExpiredInProductNotExpiredInBatchTest.checkBatchIsExpiredInProductNotExpiredInBatchFetch();
-                await timeoutWait.setTimeoutWait(4);
-                // await setTimeout(() => {
-                //     console.log("inside timeout");
-                // }, 4000);
+                await checkBatchIsExpiredInProductNotExpiredInBatchTest.checkBatchIsExpiredInProductAndNotExpiredInBatchDetailsFetch();
+                await timeoutWait.setTimeoutWait(3);
+                await checkBatchIsExpiredInProductNotExpiredInBatchTest.checkBatchIsExpiredInProductAndNotExpiredInBatchLeafletDetailsFetch();
+                await timeoutWait.setTimeoutWait(3);
+                await checkBatchIsExpiredInProductNotExpiredInBatchTest.getLeafletTypesAndLevel();
+                await timeoutWait.setTimeoutWait(3);
+
 
         });
 

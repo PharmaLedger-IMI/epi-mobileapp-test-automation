@@ -1,4 +1,5 @@
 const testData = require('../testdata/testExpectations.json')
+const configData=require('../testdata/config.json')
 const expect = require('chai').expect
 const timeout = require('../utils/setTimeout')
 const moment = require('moment')
@@ -11,13 +12,6 @@ const batchNumberPattern = /(?<=Batch number:).*/g
 
 class CheckBatchIsExpiredInProductAndBatch {
 
-    get incorrectTxtMsg() {
-        return $("(//android.app.Dialog/descendant::android.view.View)[5]/child::android.widget.TextView")
-    }
-
-    get closeBtnMsg() {
-        return $("//android.widget.Button[@text='Close']")
-    }
 
     get incorrectTextBatch() {
         return $("(//android.view.View[@resource-id='page-ion-content']/descendant::android.widget.TextView)[2]")
@@ -31,7 +25,7 @@ class CheckBatchIsExpiredInProductAndBatch {
         return $("(//android.app.Dialog/descendant::android.view.View[5]/child::android.widget.TextView)")
     }
 
-    get closeincorrectPopUpMsg() {
+    get closeIncorrectPopUpMsg() {
         return $("(//android.app.Dialog/descendant::android.view.View)[3]/child::android.widget.Button")
     }
 
@@ -73,7 +67,7 @@ class CheckBatchIsExpiredInProductAndBatch {
     }
 
 
-    async checkBatchIsExpiredInProductAndBatchFetch() {
+    async checkBatchIsExpiredInProductAndBatchDetailsFetch() {
 
         let deviceScreenDimensions = await driver.getWindowRect();
 
@@ -89,33 +83,52 @@ class CheckBatchIsExpiredInProductAndBatch {
 
         await timeout.setTimeoutWait(8);
 
-        const incorrectMsg = await this.incorrectTxtMsg.getText();
-        console.log(incorrectMsg);
-        await timeoutWait.setTimeoutTime(2);
-        // close button click
-        await this.closeBtnMsg.click();
-        await timeoutWait.setTimeoutTime(3);
-        await this.incorrectTextBatch.getText();
-        await timeoutWait.setTimeoutTime(3);
-        // product info message
-        await this.incorrectBatchLearnMore.click();
-        await timeoutWait.setTimeoutTime(3);
+        // const recalledTxtBatch = await this.recalledTextBatch.getText();
+        // await timeoutWait.setTimeoutTime(2);
+        // await this.recalledBatchLearnMore.click();
+        // await timeoutWait.setTimeoutTime(3);
+        // await this.recalledPopUpMsg.getText();
+        // await timeoutWait.setTimeoutTime(3);
+        // await this.closeRecalledPopUpMsg.click();
+        // await timeoutWait.setTimeoutTime(3);
+
+        const incorrectTxtBatch = await this.incorrectTextBatch.getText();
+        await timeout.setTimeoutTime(3);
+        await this.incorrectBatchLearnMore.getText();
+        await timeout.setTimeoutTime(3);
         await this.incorrectPopUpMsg.getText();
-        await timeoutWait.setTimeoutTime(3);
-        await this.closeincorrectPopUpMsg.click();
-        await timeoutWait.setTimeoutTime(3);
-        await this.productInfo.getText();
+        await timeout.setTimeoutTime(3);
+        await this.closeIncorrectPopUpMsg.getText();
+        await timeout.setTimeoutTime(3);
+        const prodInfo = await this.productInfo.getText();
         // expect(this.productInfo.getText()).to.not.equal(null);
         await timeout.setTimeoutTime(3);
         //get text of product information description
-        await this.productDescription.getText();
+        const prodDesc = await this.productDescription.getText();
         await timeout.setTimeoutTime(3);
         //click on leaflet Shieled Button
         await this.leafletVerifiedShiledBtn.click();
         await timeout.setTimeoutTime(3);
         // get batch info text
-        await this.batchInfo.getText();
+        const batchInfoTxt = await this.batchInfo.getText();
         await timeout.setTimeoutTime(3);
+
+        //get prod info text and assert 
+        console.log(prodInfo);
+        expect(prodInfo).includes(configData.prodName);
+        //get prod Desc text and assert 
+        console.log(prodDesc);
+        expect(prodDesc).to.equal(configData.prodDesc);
+        //get batch Info text and assert 
+        console.log(batchInfoTxt);
+        expect(batchInfoTxt).to.equal(configData.batchInfo);
+        //get recalled Text Batch
+        console.log(incorrectTxtBatch);
+        expect(incorrectTxtBatch).to.equal(configData.incorrectExpiryDateLabelMessage);
+
+    }
+
+    async checkBatchIsExpiredInProductAndBatchLeafletDetailsFetch() {
         // get leaflet product details information
         await this.productLeafletInfoDetails.getText();
         await timeout.setTimeoutTime(3);
@@ -144,8 +157,17 @@ class CheckBatchIsExpiredInProductAndBatch {
         expect(leafletInfoDetailsFetch.match(serialNumberPattern)[0]).to.equal(testData.batchSerialNumber);
         expect(dateafter).to.equal(testData.expiry);
 
+
+    }
+
+    async getLeafletTypesAndLevel() {
+
         await this.closeLeafletBtn.click();
         await timeout.setTimeoutTime(3);
+
+        const leafletLevelSMPCDescription = await this.leafletLevelDescriptionType.getText();
+        console.log(leafletLevelSMPCDescription);
+        expect(leafletLevelSMPCDescription).includes(configData.leafletProductLevelDescription)
 
         await this.leafletType.click();
         await timeout.setTimeoutWait(3);
@@ -153,23 +175,23 @@ class CheckBatchIsExpiredInProductAndBatch {
         await this.leafletTypeEpi.click();
         await timeout.setTimeoutWait(4);
 
-        let deviceScreenDimensions2 = await driver.getWindowRect();
+        let deviceScreenDimensionofLeafletType = await driver.getWindowRect();
         await driver.touchPerform([
             {
                 Element: this.leafletProdLevelDescType,
                 action: 'tap',
                 options: {
-                    x: Math.floor(deviceScreenDimensions2.width * 0.49),
-                    y: Math.floor(deviceScreenDimensions2.height * 0.60)
+                    x: Math.floor(deviceScreenDimensionofLeafletType.width * 0.49),
+                    y: Math.floor(deviceScreenDimensionofLeafletType.height * 0.60)
                 }
             }
         ]);
 
-        const prodLeafletDescription = await this.leafletProdLevelDescType.getText();
-        console.log(prodLeafletDescription);
+        const leafletLevelDescription = await this.leafletLevelDescriptionType.getText();
+        console.log(leafletLevelDescription);
+        expect(leafletLevelDescription).includes(configData.leafletProductLevelDescription)
 
     }
-
 }
 
 module.exports = new CheckBatchIsExpiredInProductAndBatch();

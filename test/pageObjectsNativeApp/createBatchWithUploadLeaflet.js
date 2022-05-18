@@ -1,5 +1,5 @@
 const testData = require('../testdata/testExpectations.json')
-const configData=require('../testdata/config.json')
+const configData = require('../testdata/config.json')
 const expect = require('chai').expect
 const timeout = require('../utils/setTimeout')
 const moment = require('moment')
@@ -31,6 +31,15 @@ class CreateBatchWithUploadLeaflet {
         return $("(//android.app.Dialog/descendant::android.view.View)[5]/child::android.view.View")
     }
 
+    get closeLeafletBtn() {
+        return $("(//android.app.Dialog/descendant::android.view.View)[4]/following-sibling::android.widget.Button")
+    }
+
+
+    get leafletLevelDescriptionType() {
+        return $("(//android.view.View[@resource-id='leaflet-content']/descendant::android.view.View)[2]/child::android.widget.TextView[2]")
+    }
+
     async waitTimeout() {
         await timeout.setTimeoutWait(30);
         await timeout.waitForElement(this.productInfo);
@@ -43,24 +52,24 @@ class CreateBatchWithUploadLeaflet {
         const prodInfo = await this.productInfo.getText();
         await timeout.setTimeoutTime(3);
         //get text of product information description
-        const prodDesc=await this.productDescription.getText();
+        const prodDesc = await this.productDescription.getText();
         await timeout.setTimeoutTime(3);
         //click on leaflet Shieled Button
         await this.leafletVerifiedShiledBtn.click();
         await timeout.setTimeoutTime(3);
         // get batch info text
-        const batchInfoTxt= await this.batchInfo.getText();
+        const batchInfoTxt = await this.batchInfo.getText();
         await timeout.setTimeoutTime(3);
 
-         //get prod info text and assert 
-         console.log(prodInfo);
-         expect(prodInfo).includes(configData.prodName);
-         //get prod Desc text and assert 
-         console.log(prodDesc);
-         expect(prodDesc).to.equal(configData.prodDesc);
-         //get batch Info text and assert 
-         console.log(batchInfoTxt);
-         expect(batchInfoTxt).to.equal(configData.batchInfo);
+        //get prod info text and assert 
+        console.log(prodInfo);
+        expect(prodInfo).includes(configData.prodName);
+        //get prod Desc text and assert 
+        console.log(prodDesc);
+        expect(prodDesc).to.equal(configData.prodDesc);
+        //get batch Info text and assert 
+        console.log(batchInfoTxt);
+        expect(batchInfoTxt).to.equal(configData.batchInfo);
 
     }
 
@@ -91,6 +100,25 @@ class CreateBatchWithUploadLeaflet {
         expect(leafletInfoDetailsFetch.match(batchNumberPattern)[0]).to.equal(testData.batchValue);
         expect(leafletInfoDetailsFetch.match(serialNumberPattern)[0]).to.equal(testData.batchSerialNumber);
         expect(dateafter).to.equal(testData.expiry);
+
+        await this.closeLeafletBtn.click();
+        await timeout.setTimeoutWait(3);
+
+        let deviceScreenDimensionofLeafletType = await driver.getWindowRect();
+        await driver.touchPerform([
+            {
+                Element: this.leafletLevelDescriptionType,
+                action: 'tap',
+                options: {
+                    x: Math.floor(deviceScreenDimensionofLeafletType.width * 0.49),
+                    y: Math.floor(deviceScreenDimensionofLeafletType.height * 0.60)
+                }
+            }
+        ]);
+
+        const leafletLevelDescription = await this.leafletLevelDescriptionType.getText();
+        console.log(leafletLevelDescription);
+        expect(leafletLevelDescription).includes(configData.leafletBatchLevelDescription)
 
     }
 }

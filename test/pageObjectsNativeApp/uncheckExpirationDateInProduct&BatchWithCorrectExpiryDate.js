@@ -96,14 +96,14 @@ class UncheckExpirationDateInProductAndBatchWithCorrectExpiryDate {
 
         await timeout.setTimeoutWait(8);
 
-        const recalledTxtBatch = await this.recalledTextBatch.getText();
-        await timeoutWait.setTimeoutTime(2);
-        await this.recalledBatchLearnMore.click();
-        await timeoutWait.setTimeoutTime(3);
-        await this.recalledPopUpMsg.getText();
-        await timeoutWait.setTimeoutTime(3);
-        await this.closeRecalledPopUpMsg.click();
-        await timeoutWait.setTimeoutTime(3);
+        // const recalledTxtBatch = await this.recalledTextBatch.getText();
+        // await timeoutWait.setTimeoutTime(2);
+        // await this.recalledBatchLearnMore.click();
+        // await timeoutWait.setTimeoutTime(3);
+        // await this.recalledPopUpMsg.getText();
+        // await timeoutWait.setTimeoutTime(3);
+        // await this.closeRecalledPopUpMsg.click();
+        // await timeoutWait.setTimeoutTime(3);
 
         const prodInfo = await this.productInfo.getText();
         // expect(this.productInfo.getText()).to.not.equal(null);
@@ -128,8 +128,8 @@ class UncheckExpirationDateInProductAndBatchWithCorrectExpiryDate {
         console.log(batchInfoTxt);
         expect(batchInfoTxt).to.equal(configData.batchInfo);
         //get recalled Text Batch
-        console.log(recalledTxtBatch);
-        expect(recalledTxtBatch).to.equal(configData.recalledBatch);
+        // console.log(recalledTxtBatch);
+        // expect(recalledTxtBatch).to.equal(configData.recalledBatch);
 
     }
 
@@ -169,6 +169,10 @@ class UncheckExpirationDateInProductAndBatchWithCorrectExpiryDate {
 
         await this.closeLeafletBtn.click();
         await timeout.setTimeoutTime(3);
+
+        const leafletLevelSMPCDescription = await this.leafletLevelDescriptionType.getText();
+        console.log(leafletLevelSMPCDescription);
+        expect(leafletLevelSMPCDescription).includes(configData.leafletProductLevelDescription)
 
         await this.leafletType.click();
         await timeout.setTimeoutWait(3);

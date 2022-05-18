@@ -13,28 +13,20 @@ const batchNumberPattern = /(?<=Batch number:).*/g
 class CheckSmpcIsDeletedFromProductWithSNRecalled {
 
 
-    get recalledTxtMsg() {
-        return $("(//android.app.Dialog/descendant::android.view.View)[5]/child::android.widget.TextView")
-    }
-
-    get closeBtnMsg() {
-        return $("//android.widget.Button[@text='Close']")
-    }
-
     //recalled Batch 
-    get recalledTextBatch() {
+    get snrecalledTextBatch() {
         return $("(//android.view.View[@resource-id='page-ion-content']/descendant::android.widget.TextView)[2]")
     }
 
-    get recalledBatchLearnMore() {
+    get snrecalledBatchLearnMore() {
         return $("(//android.view.View[@resource-id='page-ion-content']/descendant::android.widget.TextView)[3]")
     }
 
-    get recalledPopUpMsg() {
+    get snrecalledPopUpMsg() {
         return $("(//android.app.Dialog/descendant::android.view.View[5]/child::android.widget.TextView)")
     }
 
-    get closeRecalledPopUpMsg() {
+    get closeSNRecalledPopUpMsg() {
         return $("(//android.app.Dialog/descendant::android.view.View)[3]/child::android.widget.Button")
     }
 
@@ -58,9 +50,17 @@ class CheckSmpcIsDeletedFromProductWithSNRecalled {
         return $("(//android.app.Dialog/descendant::android.view.View)[5]/child::android.view.View")
     }
 
+    get closeLeafletBtn() {
+        return $("(//android.app.Dialog/descendant::android.view.View)[4]/following-sibling::android.widget.Button")
+    }
+
+    get leafletLevelDescriptionType() {
+        return $("(//android.view.View[@resource-id='leaflet-content']/descendant::android.view.View)[2]/child::android.widget.TextView[2]")
+    }
+
     async waitTimeout() {
         await timeoutWait.setTimeoutWait(30);
-        await timeoutWait.waitForElement(this.recalledTxtMsg);
+        await timeoutWait.waitForElement(this.snrecalledTextBatch);
 
     }
 
@@ -68,33 +68,28 @@ class CheckSmpcIsDeletedFromProductWithSNRecalled {
 
     async checkSmpcDeletedFromProductWithSNRecalledDetailsFetch() {
         // recalled text message
-        const recalledMsg = await this.recalledTxtMsg.getText();
-        console.log(recalledMsg);
-        await timeoutWait.setTimeoutTime(2);
-        // close button click
-        await this.closeBtnMsg.click();
-        await timeoutWait.setTimeoutTime(2);
+
         // recalled text message 
-        const recalledTxtBatch = await this.recalledTextBatch.getText();
+        const snrecalledTxtBatch = await this.snrecalledTextBatch.getText();
         await timeoutWait.setTimeoutTime(2);
-        await this.recalledBatchLearnMore.click();
+        await this.snrecalledBatchLearnMore.click();
         await timeoutWait.setTimeoutTime(3);
-        await this.recalledPopUpMsg.getText();
+        await this.snrecalledPopUpMsg.getText();
         await timeoutWait.setTimeoutTime(3);
-        await this.closeRecalledPopUpMsg.click();
+        await this.closeSNRecalledPopUpMsg.click();
         await timeoutWait.setTimeoutTime(3);
         // product info message
         const prodInfoMsg = await this.productInfoMsg.getText();
         await timeoutWait.setTimeoutTime(2);
-        await this.productDescription.getText();
+        const prodDesc = await this.productDescription.getText();
         await timeoutWait.setTimeoutTime(2);
 
         console.log(prodInfoMsg);
         expect(prodInfoMsg).includes(configData.prodName);
-        console.log(recalledMsg);
-        expect(recalledMsg).to.equal(configData.recalledMessage);
-        console.log(recalledTxtBatch);
-        expect(recalledTxtBatch).to.equal(configData.recalledBatchTextBatch)
+        console.log(prodDesc);
+        expect(prodDesc).includes(configData.prodDesc);
+        console.log(snrecalledTxtBatch);
+        expect(snrecalledTxtBatch).to.equal(configData.serialNumberRecallLabelMessage)
 
     }
 
@@ -139,7 +134,26 @@ class CheckSmpcIsDeletedFromProductWithSNRecalled {
         expect(dateafter).to.equal(testData.expiry);
 
         console.log(batchInfo);
-        expect(batchInfo).to.equal(configData.batchInfoMessage)
+        expect(batchInfo).to.equal(configData.batchInfoMessage);
+
+        await this.closeLeafletBtn.click();
+        await timeoutWait.setTimeoutWait(3);
+
+        let deviceScreenDimensionofLeafletType = await driver.getWindowRect();
+        await driver.touchPerform([
+            {
+                Element: this.leafletProdLevelDescType,
+                action: 'tap',
+                options: {
+                    x: Math.floor(deviceScreenDimensionofLeafletType.width * 0.49),
+                    y: Math.floor(deviceScreenDimensionofLeafletType.height * 0.60)
+                }
+            }
+        ]);
+
+        const leafletLevelDescription = await this.leafletLevelDescriptionType.getText();
+        console.log(leafletLevelDescription);
+        expect(leafletLevelDescription).includes(configData.leafletProductLevelDescription)
 
     }
 }
