@@ -33,9 +33,11 @@ describe('078_Edit product to check SN is recalled and edit batch to reset valid
         await createSnRecallInProductAndNotRecalledInBatch.waitTimeout();
         await timeoutWait.setTimeoutWait(4);
         //display details on Leaflet for recalled batch scenario
-        await createSnRecallInProductAndNotRecalledInBatch.checkSNRecallInProductAndNotRecalledInBatchDetailsFetch();
+        await createSnRecallInProductAndNotRecalledInBatch.checkSNRecallInProductNotRecalledInBatchDetailsFetch();
         await timeoutWait.setTimeoutWait(3);
-        await createSnRecallInProductAndNotRecalledInBatch.checkSNRecallInProductAndNotRecalledInBatchLeafletDetailsFetch();
+        await createSnRecallInProductAndNotRecalledInBatch.checkSNRecallInProductNotRecalledInBatchLeafletDetailsFetch();
+        await timeoutWait.setTimeoutWait(3);
+        await createSnRecallInProductAndNotRecalledInBatch.getLeafletTypesAndLevel();
         await timeoutWait.setTimeoutWait(3);
 
     });

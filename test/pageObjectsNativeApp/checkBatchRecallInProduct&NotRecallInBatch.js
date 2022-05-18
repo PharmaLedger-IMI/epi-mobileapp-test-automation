@@ -13,6 +13,7 @@ const batchNumberPattern = /(?<=Batch number:).*/g
 
 class CheckBatchRecallInProductAndNotRecallInBatch {
 
+
     get recalledTextBatch() {
         return $("(//android.view.View[@resource-id='page-ion-content']/descendant::android.widget.TextView)[2]")
     }
@@ -84,6 +85,19 @@ class CheckBatchRecallInProductAndNotRecallInBatch {
 
         await timeout.setTimeoutWait(8);
 
+        // const recalledTxtBatch = await this.recalledTextBatch.getText();
+        // await timeoutWait.setTimeoutTime(2);
+        // await this.recalledBatchLearnMore.click();
+        // await timeoutWait.setTimeoutTime(3);
+        // await this.recalledPopUpMsg.getText();
+        // await timeoutWait.setTimeoutTime(3);
+        // await this.closeRecalledPopUpMsg.click();
+        // await timeoutWait.setTimeoutTime(3);
+        // product info message
+        const prodInfoMsg = await this.productInfo.getText();
+        await timeoutWait.setTimeoutTime(2);
+        await this.productDescription.getText();
+        await timeoutWait.setTimeoutTime(2);
         const prodInfo = await this.productInfo.getText();
         // expect(this.productInfo.getText()).to.not.equal(null);
         await timeout.setTimeoutTime(3);
@@ -106,6 +120,9 @@ class CheckBatchRecallInProductAndNotRecallInBatch {
         //get batch Info text and assert 
         console.log(batchInfoTxt);
         expect(batchInfoTxt).to.equal(configData.batchInfo);
+        // console.log(recalledTxtBatch);
+        // expect(recalledTxtBatch).to.equal(configData.recalledBatchLabelMessage)
+
 
     }
 
@@ -113,7 +130,6 @@ class CheckBatchRecallInProductAndNotRecallInBatch {
         // get leaflet product details information
         await this.productLeafletInfoDetails.getText();
         await timeout.setTimeoutTime(3);
-
 
         const leafletInfoDetailsFetch = await this.productLeafletInfoDetails.getText();
         console.log("Prod Info Details of Leaflet is:" + " " + leafletInfoDetailsFetch)
@@ -145,6 +161,10 @@ class CheckBatchRecallInProductAndNotRecallInBatch {
 
         await this.closeLeafletBtn.click();
         await timeout.setTimeoutTime(3);
+
+        const leafletLevelSMPCDescription = await this.leafletLevelDescriptionType.getText();
+        console.log(leafletLevelSMPCDescription);
+        expect(leafletLevelSMPCDescription).includes(configData.leafletProductLevelDescription)
 
         await this.leafletType.click();
         await timeout.setTimeoutWait(3);

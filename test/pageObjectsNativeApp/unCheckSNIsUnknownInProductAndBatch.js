@@ -13,20 +13,20 @@ const batchNumberPattern = /(?<=Batch number:).*/g
 class UncheckSNIsUnknownInProductAndBatch {
 
 
-    //failedSN Batch 
-    get failedSNTextBatch() {
+    //snIsUnknown Batch 
+    get snIsUnknownTextBatch() {
         return $("(//android.view.View[@resource-id='page-ion-content']/descendant::android.widget.TextView)[2]")
     }
 
-    get failedSNBatchLearnMore() {
+    get snIsUnknownBatchLearnMore() {
         return $("(//android.view.View[@resource-id='page-ion-content']/descendant::android.widget.TextView)[3]")
     }
 
-    get failedSNPopUpMsg() {
+    get snIsUnknownPopUpMsg() {
         return $("(//android.app.Dialog/descendant::android.view.View[5]/child::android.widget.TextView)")
     }
 
-    get closeFailedSNPopUpMsg() {
+    get closeSNIsUnknownPopUpMsg() {
         return $("(//android.app.Dialog/descendant::android.view.View)[3]/child::android.widget.Button")
     }
 
@@ -40,7 +40,7 @@ class UncheckSNIsUnknownInProductAndBatch {
 
     async waitTimeout() {
         await timeoutWait.setTimeoutWait(30);
-        await timeoutWait.waitForElement(this.failedSNTextBatch);
+        await timeoutWait.waitForElement(this.snIsUnknownTextBatch);
 
     }
 
@@ -48,14 +48,14 @@ class UncheckSNIsUnknownInProductAndBatch {
     async uncheckSNIsUnknownInProductAndBatchFetch() {
 
         // failedSN text message 
-        const failedBatch = await this.failedSNTextBatch.getText();
+        const snIsUnknownBatch = await this.snIsUnknownTextBatch.getText();
         await timeoutWait.setTimeoutTime(3);
         // product info message
-        await this.failedSNBatchLearnMore.click();
+        await this.snIsUnknownBatchLearnMore.click();
         await timeoutWait.setTimeoutTime(3);
-        await this.failedSNPopUpMsg.getText();
+        await this.snIsUnknownPopUpMsg.getText();
         await timeoutWait.setTimeoutTime(3);
-        await this.closeFailedSNPopUpMsg.click();
+        await this.closeSNIsUnknownPopUpMsg.click();
         await timeoutWait.setTimeoutTime(3);
         const leafletNotFound = await this.leafletNotFoundText.getText();
         await timeoutWait.setTimeoutTime(2);
@@ -64,7 +64,7 @@ class UncheckSNIsUnknownInProductAndBatch {
         // click on leaflet shield button
 
         // chai assertions on expiry date, serial number, gtin number and batch Number pattern
-        expect(failedBatch).to.equal(configData.wrongBatchLabelMessage)
+        expect(snIsUnknownBatch).to.equal(configData.serialNumberUnknownLabelMessagerongBatchLabelMessage)
         expect(leafletNotFound).to.equal(configData.leafletNotFoundMessage);
         expect(LeafletNotFoundDesc).to.equal(configData.leafletNotFoundDescription);
 

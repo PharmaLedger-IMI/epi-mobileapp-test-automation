@@ -41,6 +41,20 @@ class UncheckBatchIsUnknownInProductWithValidBatch {
 
     async unCheckBatchIsUnknownInProductWithValidBatchDetailsFetch() {
 
+        let deviceScreenDimensions = await driver.getWindowRect();
+
+        await driver.touchPerform([
+            {
+                action: 'tap',
+                options: {
+                    x: Math.floor(deviceScreenDimensions.width * 0.49),
+                    y: Math.floor(deviceScreenDimensions.height * 0.49)
+                }
+            }
+        ]);
+
+        await timeout.setTimeoutWait(8); 
+
         const prodInfo = await this.productInfo.getText();
         await timeout.setTimeoutTime(3);
         //get text of product information description
@@ -65,11 +79,13 @@ class UncheckBatchIsUnknownInProductWithValidBatch {
 
     }
 
-    async unCheckBatchIsUnknownInProductWithValidBatchLeafletDataFetch() {
-
+    async unCheckBatchIsUnknownInProductWithValidBatchLeafletDetailsFetch() {
+        
         // get leaflet product details information
         await this.productLeafletInfoDetails.getText();
         await timeout.setTimeoutTime(3);
+
+
         const leafletInfoDetailsFetch = await this.productLeafletInfoDetails.getText();
         console.log("Prod Info Details of Leaflet is:" + " " + leafletInfoDetailsFetch)
         const leafletInfoFetch = leafletInfoDetailsFetch.replace(':', "=");
@@ -92,6 +108,41 @@ class UncheckBatchIsUnknownInProductWithValidBatch {
         expect(leafletInfoDetailsFetch.match(batchNumberPattern)[0]).to.equal(testData.batchValue);
         expect(leafletInfoDetailsFetch.match(serialNumberPattern)[0]).to.equal(testData.batchSerialNumber);
         expect(dateafter).to.equal(testData.expiry);
+
+
+    }
+
+    async getLeafletTypesAndLevel() {
+
+        await this.closeLeafletBtn.click();
+        await timeout.setTimeoutTime(3);
+
+        const leafletLevelSMPCDescription = await this.leafletLevelDescriptionType.getText();
+        console.log(leafletLevelSMPCDescription);
+        expect(leafletLevelSMPCDescription).includes(configData.leafletProductLevelDescription)
+
+
+        await this.leafletType.click();
+        await timeout.setTimeoutWait(3);
+
+        await this.leafletTypeEpi.click();
+        await timeout.setTimeoutWait(4);
+
+        let deviceScreenDimensionofLeafletType = await driver.getWindowRect();
+        await driver.touchPerform([
+            {
+                Element: this.leafletLevelDescriptionType,
+                action: 'tap',
+                options: {
+                    x: Math.floor(deviceScreenDimensionofLeafletType.width * 0.49),
+                    y: Math.floor(deviceScreenDimensionofLeafletType.height * 0.60)
+                }
+            }
+        ]);
+
+        const leafletLevelDescription = await this.leafletLevelDescriptionType.getText();
+        console.log(leafletLevelDescription);
+        expect(leafletLevelDescription).includes(configData.leafletProductLevelDescription)
 
     }
 }

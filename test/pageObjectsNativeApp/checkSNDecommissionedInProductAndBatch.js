@@ -14,19 +14,19 @@ class CheckSNDecommissionedInProductAndBatch {
 
 
     //decommissioned Batch 
-    get decommissionedTextBatch() {
+    get sndecommissionedTextBatch() {
         return $("(//android.view.View[@resource-id='page-ion-content']/descendant::android.widget.TextView)[2]")
     }
 
-    get decommissionedBatchLearnMore() {
+    get sndecommissionedBatchLearnMore() {
         return $("(//android.view.View[@resource-id='page-ion-content']/descendant::android.widget.TextView)[3]")
     }
 
-    get decommissionedPopUpMsg() {
+    get sndecommissionedPopUpMsg() {
         return $("(//android.app.Dialog/descendant::android.view.View[5]/child::android.widget.TextView)")
     }
 
-    get closeDecommissionedPopUpMsg() {
+    get closeSNDecommissionedPopUpMsg() {
         return $("(//android.app.Dialog/descendant::android.view.View)[3]/child::android.widget.Button")
     }
 
@@ -50,50 +50,76 @@ class CheckSNDecommissionedInProductAndBatch {
         return $("(//android.app.Dialog/descendant::android.view.View)[5]/child::android.view.View")
     }
 
+    get closeLeafletBtn() {
+        return $("(//android.app.Dialog/descendant::android.view.View)[4]/following-sibling::android.widget.Button")
+    }
+
+    get leafletType() {
+        return $("(//android.view.View[@resource-id='leaflet-header']/descendant::android.view.View)[3]/child::android.view.View[@resource-id='ion-sel-1']")
+    }
+
+    get leafletTypeEpi() {
+        return $("(//android.app.Dialog[@resource-id='ion-overlay-1']/descendant::android.view.View)[1]/child::android.widget.Button[2]")
+    }
+
+    get leafletLevelDescriptionType() {
+        return $("(//android.view.View[@resource-id='leaflet-content']/descendant::android.view.View)[2]/child::android.widget.TextView[2]")
+    }
+
     async waitTimeout() {
-        await timeoutWait.setTimeoutWait(30);
-        await timeoutWait.waitForElement(this.decommissionedTextBatch);
+        await timeout.setTimeoutWait(32);
+        // await timeout.waitForElement(this.smpcDocType);
 
     }
 
 
+    async checkSNDecommissionedInProductAndBatchDetailsFetch() {
 
-    async checkSNdecommissionedInProductAndBatchDetailsFetch() {
+        let deviceScreenDimensions = await driver.getWindowRect();
+
+        await driver.touchPerform([
+            {
+                action: 'tap',
+                options: {
+                    x: Math.floor(deviceScreenDimensions.width * 0.49),
+                    y: Math.floor(deviceScreenDimensions.height * 0.49)
+                }
+            }
+        ]);
+
+        await timeout.setTimeoutWait(8);
 
         // recalled text message 
-        const decommisionedInfoTxtBatch = await this.decommissionedTextBatch.getText();
+        const sndecommisionedInfoTxtBatch = await this.sndecommissionedTextBatch.getText();
         await timeoutWait.setTimeoutTime(2);
-        await this.decommissionedBatchLearnMore.click();
+        await this.sndecommissionedBatchLearnMore.click();
         await timeoutWait.setTimeoutTime(3);
-        await this.decommissionedPopUpMsg.getText();
+        await this.sndecommissionedPopUpMsg.getText();
         await timeoutWait.setTimeoutTime(3);
-        await this.closeDecommissionedPopUpMsg.click();
+        await this.closeSNDecommissionedPopUpMsg.click();
         await timeoutWait.setTimeoutTime(3);
         // product info message
         const productInfoMsg = await this.prodInfoMsg.getText();
         await timeoutWait.setTimeoutTime(2);
-        await this.productDescription.getText();
+        const prodDesc = await this.productDescription.getText();
+        await timeoutWait.setTimeoutTime(2);
+        await this.leafletShieldInfoBtn.click();
         await timeoutWait.setTimeoutTime(2);
 
         console.log(productInfoMsg);
         expect(productInfoMsg).includes(configData.prodName);
-        console.log(decommisionedInfoTxtBatch);
-        expect(decommisionedInfoTxtBatch).to.equal(configData.decommisionedInfoTextBatch);
+        console.log(prodDesc);
+        expect(prodDesc).includes(configData.prodDesc);
+        console.log(sndecommisionedInfoTxtBatch);
+        expect(sndecommisionedInfoTxtBatch).to.equal(configData.serialNumberDecommissionedLabelMessage);
 
     }
 
-    async checkSNdecommissionedInProductAndBatchLeafletDetailsFetch() {
-
-
-        // click on leaflet shield button
-        await this.leafletShieldInfoBtn.click();
-        await timeoutWait.setTimeoutTime(2);
-        // btach info text message 
-        const batchInfoText = await this.batchInfoTxtMsg.getText();
-        await timeoutWait.setTimeoutTime(2);
-        // leaflet product information details
+    async checkSNDecommissionedInProductAndBatchLeafletDetailsFetch() {
+        // get leaflet product details information
         await this.productLeafletInfoDetails.getText();
-        await timeoutWait.setTimeoutTime(2);
+        await timeout.setTimeoutTime(3);
+
 
         const leafletInfoDetailsFetch = await this.productLeafletInfoDetails.getText();
         console.log("Prod Info Details of Leaflet is:" + " " + leafletInfoDetailsFetch)
@@ -106,7 +132,7 @@ class CheckSNDecommissionedInProductAndBatch {
         console.log(leafletInfoDetailsFetch.match(gtinPattern)[0]);
         console.log(leafletInfoDetailsFetch.match(batchNumberPattern)[0]);
 
-        await timeoutWait.setTimeoutTime(3);
+        await timeout.setTimeoutTime(3);
 
         const datebefore = leafletInfoDetailsFetch.match(expiryDatePattern)[0];
         const dateafter = moment(datebefore, "DD-MMM-YYYY").format("YYMMDD")
@@ -118,8 +144,40 @@ class CheckSNDecommissionedInProductAndBatch {
         expect(leafletInfoDetailsFetch.match(serialNumberPattern)[0]).to.equal(testData.batchSerialNumber);
         expect(dateafter).to.equal(testData.expiry);
 
-        console.log(batchInfoText);
-        expect(batchInfoText).to.equal(configData.batchInfo)
+
+    }
+
+    async getLeafletTypesAndLevel() {
+
+        await this.closeLeafletBtn.click();
+        await timeout.setTimeoutTime(3);
+
+        const leafletLevelSMPCDescription = await this.leafletLevelDescriptionType.getText();
+        console.log(leafletLevelSMPCDescription);
+        expect(leafletLevelSMPCDescription).includes(configData.leafletProductLevelDescription)
+
+
+        await this.leafletType.click();
+        await timeout.setTimeoutWait(3);
+
+        await this.leafletTypeEpi.click();
+        await timeout.setTimeoutWait(4);
+
+        let deviceScreenDimensionofLeafletType = await driver.getWindowRect();
+        await driver.touchPerform([
+            {
+                Element: this.leafletProdLevelDescType,
+                action: 'tap',
+                options: {
+                    x: Math.floor(deviceScreenDimensionofLeafletType.width * 0.49),
+                    y: Math.floor(deviceScreenDimensionofLeafletType.height * 0.60)
+                }
+            }
+        ]);
+
+        const leafletLevelDescription = await this.leafletLevelDescriptionType.getText();
+        console.log(leafletLevelDescription);
+        expect(leafletLevelDescription).includes(configData.leafletProductLevelDescription)
 
     }
 

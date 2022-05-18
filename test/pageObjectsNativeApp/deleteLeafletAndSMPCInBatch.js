@@ -132,6 +132,11 @@ class DeleteLeafletandSMPCInBatch {
         await this.closeLeafletBtn.click();
         await timeout.setTimeoutTime(3);
 
+        const leafletLevelSMPCDescription = await this.leafletLevelDescriptionType.getText();
+        console.log(leafletLevelSMPCDescription);
+        expect(leafletLevelSMPCDescription).includes(configData.leafletProductLevelDescription)
+
+
         await this.leafletType.click();
         await timeout.setTimeoutWait(3);
 
@@ -141,7 +146,7 @@ class DeleteLeafletandSMPCInBatch {
         let deviceScreenDimensionofLeafletType = await driver.getWindowRect();
         await driver.touchPerform([
             {
-                Element: this.leafletProdLevelDescType,
+                Element: this.leafletLevelDescriptionType,
                 action: 'tap',
                 options: {
                     x: Math.floor(deviceScreenDimensionofLeafletType.width * 0.49),

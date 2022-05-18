@@ -13,6 +13,22 @@ const batchNumberPattern = /(?<=Batch number:).*/g
 
 class CheckUnkownBatchWithInvalidBatchAndInvalidExpiryDate {
 
+    get snIsUnknownTextBatch() {
+        return $("(//android.view.View[@resource-id='page-ion-content']/descendant::android.widget.TextView)[2]")
+    }
+
+    get snIsUnknownBatchLearnMore() {
+        return $("(//android.view.View[@resource-id='page-ion-content']/descendant::android.widget.TextView)[3]")
+    }
+
+    get snIsUnknownPopUpMsg() {
+        return $("(//android.app.Dialog/descendant::android.view.View[5]/child::android.widget.TextView)")
+    }
+
+    get closeSNIsUnknownPopUpMsg() {
+        return $("(//android.app.Dialog/descendant::android.view.View)[3]/child::android.widget.Button")
+    } 
+
     get productInfo() {
         return $("(//android.view.View[@resource-id='leaflet-header']/descendant::android.widget.TextView)[1]")
     }
@@ -32,14 +48,33 @@ class CheckUnkownBatchWithInvalidBatchAndInvalidExpiryDate {
         return $("(//android.app.Dialog/descendant::android.view.View)[5]/child::android.view.View")
     }
 
+    get closeLeafletBtn() {
+        return $("(//android.app.Dialog/descendant::android.view.View)[4]/following-sibling::android.widget.Button")
+    }
+
+    get leafletLevelDescriptionType() {
+        return $("(//android.view.View[@resource-id='leaflet-content']/descendant::android.view.View)[2]/child::android.widget.TextView[2]")
+    }
+
     async waitTimeout() {
         await timeout.setTimeoutWait(30);
-        await timeout.waitForElement(this.productInfo);
+        await timeout.waitForElement(this.snIsUnknownTextBatch);
 
     }
 
 
     async checkUnknownBatchWithInvalidBatchAndInvalidExpiryDateDetailsFetch() {
+
+        await timeout.setTimeoutWait(8);
+        // recalled text message 
+        const snIsUnknownTextBatch = await this.snIsUnknownTextBatch.getText();
+        await timeoutWait.setTimeoutTime(2);
+        await this.snIsUnknownBatchLearnMore.click();
+        await timeoutWait.setTimeoutTime(3);
+        await this.snIsUnknownPopUpMsg.getText();
+        await timeoutWait.setTimeoutTime(3);
+        await this.closeSNIsUnknownPopUpMsg.click();
+        await timeoutWait.setTimeoutTime(3);
 
         const prodInfo = await this.productInfo.getText();
         await timeout.setTimeoutTime(3);
@@ -62,7 +97,8 @@ class CheckUnkownBatchWithInvalidBatchAndInvalidExpiryDate {
         //get batch Info text and assert 
         console.log(batchInfoTxt);
         expect(batchInfoTxt).to.equal(configData.batchInfo);
-
+        console.log(snIsUnknownTextBatch);
+        expect(snIsUnknownTextBatch).to.equal(configData.serialNumberUnknownLabelMessage);
     }
 
     async checkUnknownBatchWithInvalidBatchAndInvalidExpiryDateLeafletDataFetch() {
@@ -92,6 +128,25 @@ class CheckUnkownBatchWithInvalidBatchAndInvalidExpiryDate {
         expect(leafletInfoDetailsFetch.match(batchNumberPattern)[0]).to.equal(testData.batchValue);
         expect(leafletInfoDetailsFetch.match(serialNumberPattern)[0]).to.equal(testData.batchSerialNumber);
         expect(dateafter).to.equal(testData.expiry);
+
+        await this.closeLeafletBtn.click();
+        await timeout.setTimeoutTime(3);
+
+        let deviceScreenDimensionofLeafletType = await driver.getWindowRect();
+        await driver.touchPerform([
+            {
+                Element: this.leafletProdLevelDescType,
+                action: 'tap',
+                options: {
+                    x: Math.floor(deviceScreenDimensionofLeafletType.width * 0.49),
+                    y: Math.floor(deviceScreenDimensionofLeafletType.height * 0.60)
+                }
+            }
+        ]);
+
+        const leafletLevelDescription = await this.leafletLevelDescriptionType.getText();
+        console.log(leafletLevelDescription);
+        expect(leafletLevelDescription).includes(configData.leafletProductLevelDescription)
 
     }
 }

@@ -14,19 +14,19 @@ class CheckSmpcDeletedFromProductWithSnIsUnknown {
 
 
     //faliedSN Batch 
-    get faliedSNTextBatch() {
+    get snIsUnknownTextBatch() {
         return $("(//android.view.View[@resource-id='page-ion-content']/descendant::android.widget.TextView)[2]")
     }
 
-    get faliedSNBatchLearnMore() {
+    get snIsUnknownBatchLearnMore() {
         return $("(//android.view.View[@resource-id='page-ion-content']/descendant::android.widget.TextView)[3]")
     }
 
-    get failedSNPopUpMsg() {
+    get snIsUnknownPopUpMsg() {
         return $("(//android.app.Dialog/descendant::android.view.View[5]/child::android.widget.TextView)")
     }
 
-    get closeFailedSNPopUpMsg() {
+    get closeSNIsUnknownPopUpMsg() {
         return $("(//android.app.Dialog/descendant::android.view.View)[3]/child::android.widget.Button")
     }
 
@@ -50,9 +50,17 @@ class CheckSmpcDeletedFromProductWithSnIsUnknown {
         return $("(//android.app.Dialog/descendant::android.view.View)[5]/child::android.view.View")
     }
 
+    get closeLeafletBtn() {
+        return $("(//android.app.Dialog/descendant::android.view.View)[4]/following-sibling::android.widget.Button")
+    }
+
+    get leafletLevelDescriptionType() {
+        return $("(//android.view.View[@resource-id='leaflet-content']/descendant::android.view.View)[2]/child::android.widget.TextView[2]")
+    }
+
     async waitTimeout() {
         await timeoutWait.setTimeoutWait(30);
-        await timeoutWait.waitForElement(this.faliedSNTextBatch);
+        await timeoutWait.waitForElement(this.snIsUnknownTextBatch);
 
     }
 
@@ -60,24 +68,26 @@ class CheckSmpcDeletedFromProductWithSnIsUnknown {
     async checkSmpcIsDeletedFromProductWithSnIsUnknownDetailsFetch() {
 
         // recalled text message 
-        const failedSNTextBatch = await this.faliedSNTextBatch.getText();
+        const snIsUnknownTextBatch = await this.snIsUnknownTextBatch.getText();
         await timeoutWait.setTimeoutTime(2);
-        await this.faliedSNBatchLearnMore.click();
+        await this.snIsUnknownBatchLearnMore.click();
         await timeoutWait.setTimeoutTime(3);
-        await this.failedSNPopUpMsg.getText();
+        await this.snIsUnknownPopUpMsg.getText();
         await timeoutWait.setTimeoutTime(3);
-        await this.closeFailedSNPopUpMsg.click();
+        await this.closeSNIsUnknownPopUpMsg.click();
         await timeoutWait.setTimeoutTime(3);
         // product info message
         const productInfoMsg = await this.prodInfoMsg.getText();
         await timeoutWait.setTimeoutTime(2);
-        await this.productDescription.getText();
+        const prodDesc = await this.productDescription.getText();
         await timeoutWait.setTimeoutTime(2);
 
         console.log(productInfoMsg);
         expect(productInfoMsg).includes(configData.prodName);
-        console.log(failedSNTextBatch);
-        expect(failedSNTextBatch).to.equal(configData.invalidSNTextBatch);
+        console.log(prodDesc);
+        expect(prodDesc).includes(configData.prodName);
+        console.log(snIsUnknownTextBatch);
+        expect(snIsUnknownTextBatch).to.equal(configData.serialNumberUnknownLabelMessage);
 
     }
 
@@ -119,6 +129,26 @@ class CheckSmpcDeletedFromProductWithSnIsUnknown {
 
         console.log(batchInfoText);
         expect(batchInfoText).to.equal(configData.batchInfoMessage)
+
+        await this.closeLeafletBtn.click();
+        await timeout.setTimeoutTime(3);
+
+        let deviceScreenDimensionofLeafletType = await driver.getWindowRect();
+        await driver.touchPerform([
+            {
+                Element: this.leafletLevelDescriptionType,
+                action: 'tap',
+                options: {
+                    x: Math.floor(deviceScreenDimensionofLeafletType.width * 0.49),
+                    y: Math.floor(deviceScreenDimensionofLeafletType.height * 0.60)
+                }
+            }
+        ]);
+
+        const leafletLevelDescription = await this.leafletLevelDescriptionType.getText();
+        console.log(leafletLevelDescription);
+        expect(leafletLevelDescription).includes(configData.leafletProductLevelDescription)
+
 
     }
 

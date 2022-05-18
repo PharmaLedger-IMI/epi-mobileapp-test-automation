@@ -88,6 +88,22 @@ class CheckSmpcDeletedFromProductWithRecalledBatch {
 
         await timeout.setTimeoutWait(8);
 
+        const recalledMsg = await this.recalledTxtMsg.getText();
+        console.log(recalledMsg);
+        await timeoutWait.setTimeoutTime(2);
+        // close button click
+        await this.closeBtnMsg.click();
+        await timeoutWait.setTimeoutTime(2);
+        // recalled text message 
+        const recalledTxtBatch = await this.recalledTextBatch.getText();
+        await timeoutWait.setTimeoutTime(2);
+        await this.recalledBatchLearnMore.click();
+        await timeoutWait.setTimeoutTime(3);
+        await this.recalledPopUpMsg.getText();
+        await timeoutWait.setTimeoutTime(3);
+        await this.closeRecalledPopUpMsg.click();
+        await timeoutWait.setTimeoutTime(3);
+
         const prodInfo = await this.productInfo.getText();
         // expect(this.productInfo.getText()).to.not.equal(null);
         await timeout.setTimeoutTime(3);
@@ -110,6 +126,10 @@ class CheckSmpcDeletedFromProductWithRecalledBatch {
         //get batch Info text and assert 
         console.log(batchInfoTxt);
         expect(batchInfoTxt).to.equal(configData.batchInfo);
+        console.log(recalledMsg);
+        expect(recalledMsg).to.equal(configData.recalledMessage);
+        console.log(recalledTxtBatch);
+        expect(recalledTxtBatch).to.equal(configData.recalledBatchTextBatch)
 
     }
 

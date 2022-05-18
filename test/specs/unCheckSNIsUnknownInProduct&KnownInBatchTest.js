@@ -34,7 +34,9 @@ describe('091_Edit product to uncheck SN is unknown and edit batch to have valid
                 //display details on Add_productBatch Leaflet when Add_productBatch Leaflet for batch scenario created
                 await unCheckSNIsUnknownInProductAndKnownInBatch.unCheckSNIsUnknownInProductAndKnownInBatchDetailsFetch();
                 await timeoutWait.setTimeoutWait(3);
-                await unCheckSNIsUnknownInProductAndKnownInBatch.unCheckSNIsUnknownInProductAndKnownInBatchLeafletDataFetch();
+                await unCheckSNIsUnknownInProductAndKnownInBatch.unCheckSNIsUnknownInProductAndKnownInBatchLeafletDetailsFetch();
+                await timeoutWait.setTimeoutWait(3);
+                await unCheckSNIsUnknownInProductAndKnownInBatch.getLeafletTypesAndLevel();
                 await timeoutWait.setTimeoutWait(3);
 
         });

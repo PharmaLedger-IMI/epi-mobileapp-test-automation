@@ -35,7 +35,9 @@ describe('096_Edit product to uncheck batch is unknown and edit batch to have va
         //display details on Leaflet for recalled batch scenario
         await uncheckBatchIsUnknownInProductWithvalidBatch.unCheckBatchIsUnknownInProductWithValidBatchDetailsFetch();
         await timeoutWait.setTimeoutWait(3);
-        await uncheckBatchIsUnknownInProductWithvalidBatch.unCheckBatchIsUnknownInProductWithValidBatchLeafletDataFetch();
+        await uncheckBatchIsUnknownInProductWithvalidBatch.unCheckBatchIsUnknownInProductWithValidBatchLeafletDetailsFetch();
+        await timeoutWait.setTimeoutWait(3);
+        await uncheckBatchIsUnknownInProductWithvalidBatch.getLeafletTypesAndLevel();
         await timeoutWait.setTimeoutWait(3);
 
     });

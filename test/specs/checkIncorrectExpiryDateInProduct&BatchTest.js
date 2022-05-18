@@ -37,6 +37,8 @@ describe('068_Edit product to check expiration date is incorrect and edit batch 
                 await timeoutWait.setTimeoutWait(3);
                 await checkIncorrectExpiryDateInProductAndBatchTest.checkIncorrectExpiryDateInProductAndBatchLeafletDetailsFetch();
                 await timeoutWait.setTimeoutWait(3);
+                await checkIncorrectExpiryDateInProductAndBatchTest.getLeafletTypesAndLevel();
+                await timeoutWait.setTimeoutWait(3);
 
         });
 

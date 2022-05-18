@@ -1,4 +1,5 @@
 const testData = require('../testdata/testExpectations.json')
+const configData = require('../testdata/config.json')
 const expect = require('chai').expect
 const timeout = require('../utils/setTimeout')
 const moment = require('moment')
@@ -9,6 +10,31 @@ const gtinPattern = /(?<=Product code:)(.*)(?=Batch)/g
 const batchNumberPattern = /(?<=Batch number:).*/g
 
 class CheckBatchRecalledInProductAndBatch {
+
+    get recalledTxtMsg() {
+        return $("(//android.app.Dialog/descendant::android.view.View)[5]/child::android.widget.TextView")
+    }
+
+    get closeBtnMsg() {
+        return $("//android.widget.Button[@text='Close']")
+    }
+
+    //recalled Batch 
+    get recalledTextBatch() {
+        return $("(//android.view.View[@resource-id='page-ion-content']/descendant::android.widget.TextView)[2]")
+    }
+
+    get recalledBatchLearnMore() {
+        return $("(//android.view.View[@resource-id='page-ion-content']/descendant::android.widget.TextView)[3]")
+    }
+
+    get recalledPopUpMsg() {
+        return $("(//android.app.Dialog/descendant::android.view.View[5]/child::android.widget.TextView)")
+    }
+
+    get closeRecalledPopUpMsg() {
+        return $("(//android.app.Dialog/descendant::android.view.View)[3]/child::android.widget.Button")
+    }
 
     get productInfo() {
         return $("(//android.view.View[@resource-id='leaflet-header']/descendant::android.widget.TextView)[1]")
@@ -31,10 +57,6 @@ class CheckBatchRecalledInProductAndBatch {
 
     get closeLeafletBtn() {
         return $("(//android.app.Dialog/descendant::android.view.View)[4]/following::android.widget.Button")
-    }
-
-    get smpcDocType() {
-        return $("//h6[contains(text(),'SmPC')]")
     }
 
     get leafletType() {
@@ -72,6 +94,22 @@ class CheckBatchRecalledInProductAndBatch {
 
         await timeout.setTimeoutWait(8);
 
+        const recalledMsg = await this.recalledTxtMsg.getText();
+        console.log(recalledMsg);
+        await timeoutWait.setTimeoutTime(2);
+        // close button click
+        await this.closeBtnMsg.click();
+        await timeoutWait.setTimeoutTime(2);
+        // recalled text message 
+        const recalledTxtBatch = await this.recalledTextBatch.getText();
+        await timeoutWait.setTimeoutTime(2);
+        await this.recalledBatchLearnMore.click();
+        await timeoutWait.setTimeoutTime(3);
+        await this.recalledPopUpMsg.getText();
+        await timeoutWait.setTimeoutTime(3);
+        await this.closeRecalledPopUpMsg.click();
+        await timeoutWait.setTimeoutTime(3);
+
         const prodInfo = await this.productInfo.getText();
         // expect(this.productInfo.getText()).to.not.equal(null);
         await timeout.setTimeoutTime(3);
@@ -94,11 +132,15 @@ class CheckBatchRecalledInProductAndBatch {
         //get batch Info text and assert 
         console.log(batchInfoTxt);
         expect(batchInfoTxt).to.equal(configData.batchInfo);
+        console.log(recalledMsg);
+        expect(recalledMsg).to.equal(configData.recalledMessage);
+        console.log(recalledTxtBatch);
+        expect(recalledTxtBatch).to.equal(configData.recalledBatchTextBatch)
 
     }
 
     async checkBatchIsRecalledInProductAndBatchLeafletDetailsFetch() {
-        
+
         // get leaflet product details information
         await this.productLeafletInfoDetails.getText();
         await timeout.setTimeoutTime(3);
@@ -133,6 +175,10 @@ class CheckBatchRecalledInProductAndBatch {
 
         await this.closeLeafletBtn.click();
         await timeout.setTimeoutTime(3);
+
+        const leafletLevelSMPCDescription = await this.leafletLevelDescriptionType.getText();
+        console.log(leafletLevelSMPCDescription);
+        expect(leafletLevelSMPCDescription).includes(configData.leafletProductLevelDescription)
 
         await this.leafletType.click();
         await timeout.setTimeoutWait(3);

@@ -12,13 +12,7 @@ const batchNumberPattern = /(?<=Batch number:).*/g
 
 class CheckSmpcDeletedFromProductWithExpiredBatch {
 
-    get recalledTxtMsg() {
-        return $("(//android.app.Dialog/descendant::android.view.View)[5]/child::android.widget.TextView")
-    }
 
-    get closeBtnMsg() {
-        return $("//android.widget.Button[@text='Close']")
-    }
 
     //recalled Batch 
     get incorrectTextBatch() {
@@ -61,7 +55,7 @@ class CheckSmpcDeletedFromProductWithExpiredBatch {
         return $("(//android.app.Dialog/descendant::android.view.View)[4]/following-sibling::android.widget.Button")
     }
 
-    get leafletProdLevelDescType() {
+    get leafletLevelDescriptionType() {
         return $("(//android.view.View[@resource-id='leaflet-content']/descendant::android.view.View)[2]/child::android.widget.TextView[2]")
     }
 
@@ -72,15 +66,9 @@ class CheckSmpcDeletedFromProductWithExpiredBatch {
     }
 
     async checkSmpcDeletedFromProductWithExpiredBatchDetailsFetch() {
-        // recalled text message
-        const recalledMsg = await this.recalledTxtMsg.getText();
-        console.log(recalledMsg);
-        await timeoutWait.setTimeoutTime(2);
-        // close button click
-        await this.closeBtnMsg.click();
-        await timeoutWait.setTimeoutTime(2);
+
         // recalled text message 
-        const recalledTxtBatch = await this.incorrectTextBatch.getText();
+        const incorrectTxtBatch = await this.incorrectTextBatch.getText();
         await timeoutWait.setTimeoutTime(2);
         await this.incorrectBatchLearnMore.click();
         await timeoutWait.setTimeoutTime(3);
@@ -98,8 +86,8 @@ class CheckSmpcDeletedFromProductWithExpiredBatch {
         expect(prodInfoMsg).includes(configData.prodName);
         console.log(recalledMsg);
         expect(recalledMsg).to.equal(configData.recalledMessage);
-        console.log(recalledTxtBatch);
-        expect(recalledTxtBatch).to.equal(configData.recalledBatchTextBatch)
+        console.log(incorrectTxtBatch);
+        expect(incorrectTxtBatch).to.equal(configData.incorrectExpiryDateLabelMessage)
 
     }
 
@@ -142,6 +130,24 @@ class CheckSmpcDeletedFromProductWithExpiredBatch {
         expect(leafletInfoDetailsFetch.match(batchNumberPattern)[0]).to.equal(testData.batchValue);
         expect(leafletInfoDetailsFetch.match(serialNumberPattern)[0]).to.equal(testData.batchSerialNumber);
         expect(dateafter).to.equal(testData.expiry);
+
+        await this.closeLeafletBtn.click();
+
+        let deviceScreenDimensionofLeafletType = await driver.getWindowRect();
+        await driver.touchPerform([
+            {
+                Element: this.leafletLevelDescriptionType,
+                action: 'tap',
+                options: {
+                    x: Math.floor(deviceScreenDimensionofLeafletType.width * 0.49),
+                    y: Math.floor(deviceScreenDimensionofLeafletType.height * 0.60)
+                }
+            }
+        ]);
+
+        const leafletLevelDescription = await this.leafletLevelDescriptionType.getText();
+        console.log(leafletLevelDescription);
+        expect(leafletLevelDescription).includes(configData.leafletProductLevelDescription)
 
     }
 

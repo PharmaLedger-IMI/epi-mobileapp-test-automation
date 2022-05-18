@@ -32,7 +32,7 @@ class UnCheckIncorrectExpiryDateInProductAndBatch {
         return $("(//android.app.Dialog/descendant::android.view.View[5]/child::android.widget.TextView)")
     }
 
-    get closeincorrectPopUpMsg() {
+    get closeIncorrectPopUpMsg() {
         return $("(//android.app.Dialog/descendant::android.view.View)[3]/child::android.widget.Button")
     }
 
@@ -90,8 +90,15 @@ class UnCheckIncorrectExpiryDateInProductAndBatch {
 
         await timeout.setTimeoutWait(8);
 
+        const incorrectTxtBatch = await this.incorrectTextBatch.getText();
+        await timeout.setTimeoutTime(3);
+        await this.incorrectBatchLearnMore.getText();
+        await timeout.setTimeoutTime(3);
+        await this.incorrectPopUpMsg.getText();
+        await timeout.setTimeoutTime(3);
+        await this.closeIncorrectPopUpMsg.getText();
+        await timeout.setTimeoutTime(3);
         const prodInfo = await this.productInfo.getText();
-        // expect(this.productInfo.getText()).to.not.equal(null);
         await timeout.setTimeoutTime(3);
         //get text of product information description
         const prodDesc = await this.productDescription.getText();
@@ -112,6 +119,8 @@ class UnCheckIncorrectExpiryDateInProductAndBatch {
         //get batch Info text and assert 
         console.log(batchInfoTxt);
         expect(batchInfoTxt).to.equal(configData.batchInfo);
+        console.log(incorrectTxtBatch);
+        expect(incorrectTxtBatch).to.equal(configData.incorrectExpiryDateLabelMessage);
 
     }
 
@@ -151,6 +160,10 @@ class UnCheckIncorrectExpiryDateInProductAndBatch {
 
         await this.closeLeafletBtn.click();
         await timeout.setTimeoutTime(3);
+
+        const leafletLevelSMPCDescription = await this.leafletLevelDescriptionType.getText();
+        console.log(leafletLevelSMPCDescription);
+        expect(leafletLevelSMPCDescription).includes(configData.leafletProductLevelDescription)
 
         await this.leafletType.click();
         await timeout.setTimeoutWait(3);

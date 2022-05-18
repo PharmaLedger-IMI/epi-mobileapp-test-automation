@@ -13,14 +13,6 @@ const batchNumberPattern = /(?<=Batch number:).*/g
 class UncheckSNRecallInProductAndUpdateInBatch {
 
 
-    get recalledTxtMsg() {
-        return $("(//android.app.Dialog/descendant::android.view.View)[5]/child::android.widget.TextView")
-    }
-
-    get closeBtnMsg() {
-        return $("//android.widget.Button[@text='Close']")
-    }
-
     //recalled Batch 
     get recalledTextBatch() {
         return $("(//android.view.View[@resource-id='page-ion-content']/descendant::android.widget.TextView)[2]")
@@ -54,12 +46,7 @@ class UncheckSNRecallInProductAndUpdateInBatch {
 
 
     async uncheckSNRecallInProductAndUpdateInBatchFetch() {
-        // recalled text message
-        const recalledMsg = await this.recalledTxtMsg.getText();
-        console.log(recalledMsg);
-        await timeoutWait.setTimeoutTime(2);
-        // close button click
-        await this.closeBtnMsg.click();
+  
         await timeoutWait.setTimeoutTime(3);
         // recalled text message 
         const recalledBatch = await this.recalledTextBatch.getText();
@@ -78,7 +65,7 @@ class UncheckSNRecallInProductAndUpdateInBatch {
         // click on leaflet shield button
 
         // chai assertions on expiry date, serial number, gtin number and batch Number pattern
-        expect(recalledMsg).to.equal(configData.recalledMessage)
+       // expect(recalledMsg).to.equal(configData.recalledMessage)
         expect(recalledBatch).to.equal(configData.recalledBatch)
         expect(leafletNotFound).to.equal(configData.leafletNotFoundMessage);
         expect(LeafletNotFoundDesc).to.equal(configData.leafletNotFoundDescription);
