@@ -81,13 +81,13 @@ class CheckSmpcIsDeletedFromProductWithSNRecalled {
         // product info message
         const prodInfoMsg = await this.productInfoMsg.getText();
         await timeoutWait.setTimeoutTime(2);
-        const prodDesc = await this.productDescription.getText();
+        const prodDescMsg = await this.productDescription.getText();
         await timeoutWait.setTimeoutTime(2);
 
         console.log(prodInfoMsg);
         expect(prodInfoMsg).includes(configData.prodName);
-        console.log(prodDesc);
-        expect(prodDesc).includes(configData.prodDesc);
+        console.log(prodDescMsg);
+        expect(prodDescMsg).includes(configData.prodDesc);
         console.log(snrecalledTxtBatch);
         expect(snrecalledTxtBatch).to.equal(configData.serialNumberRecallLabelMessage)
 

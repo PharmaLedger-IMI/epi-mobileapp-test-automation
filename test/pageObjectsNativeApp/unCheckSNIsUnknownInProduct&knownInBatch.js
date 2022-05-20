@@ -126,6 +126,20 @@ class UncheckSNIsUnknownInProductAndKnownInBatch {
         await this.closeLeafletBtn.click();
         await timeout.setTimeoutTime(3);
 
+
+        let deviceScreenDimensionofSMPCLeafletType = await driver.getWindowRect();
+        await driver.touchPerform([
+            {
+                Element: this.leafletLevelDescriptionType,
+                action: 'tap',
+                options: {
+                    x: Math.floor(deviceScreenDimensionofSMPCLeafletType.width * 0.49),
+                    y: Math.floor(deviceScreenDimensionofSMPCLeafletType.height * 0.60)
+                }
+            }
+        ]);
+
+
         const leafletLevelSMPCDescription = await this.leafletLevelDescriptionType.getText();
         console.log(leafletLevelSMPCDescription);
         expect(leafletLevelSMPCDescription).includes(configData.leafletProductLevelDescription)

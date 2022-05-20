@@ -100,7 +100,7 @@ class CheckSNIsUnknownInProductAndBatch {
         // product info message
         const productInfoMsg = await this.prodInfoMsg.getText();
         await timeoutWait.setTimeoutTime(2);
-        const prodDesc = await this.productDescription.getText();
+        const prodDescMsg = await this.productDescription.getText();
         await timeoutWait.setTimeoutTime(2);
 
         //click on leaflet Shieled Button
@@ -113,12 +113,12 @@ class CheckSNIsUnknownInProductAndBatch {
         //Assertions 
         console.log(productInfoMsg);
         expect(productInfoMsg).includes(configData.prodName);
-        console.log(prodDesc);
-        expect(prodDesc).includes(configData.prodDesc);
+        console.log(prodDescMsg);
+        expect(prodDescMsg).includes(configData.prodDesc);
         console.log(failedSNTextBatch);
-        expect(failedSNTextBatch).to.equal(configData.invalidSNTextBatch);
+        expect(failedSNTextBatch).to.equal(configData.invalidSerialNumberLabelMessage);
         console.log(batchInfoTxt);
-        expect(batchInfoTxt).to.equal(configData.batchInfo);
+        expect(batchInfoTxt).to.equal(configData.batchInfoMessage);
 
     }
 
@@ -158,6 +158,19 @@ class CheckSNIsUnknownInProductAndBatch {
 
         await this.closeLeafletBtn.click();
         await timeout.setTimeoutTime(3);
+
+        let deviceScreenDimensionofSMPCLeafletType = await driver.getWindowRect();
+        await driver.touchPerform([
+            {
+                Element: this.leafletLevelDescriptionType,
+                action: 'tap',
+                options: {
+                    x: Math.floor(deviceScreenDimensionofSMPCLeafletType.width * 0.49),
+                    y: Math.floor(deviceScreenDimensionofSMPCLeafletType.height * 0.60)
+                }
+            }
+        ]);
+
 
         const leafletLevelSMPCDescription = await this.leafletLevelDescriptionType.getText();
         console.log(leafletLevelSMPCDescription);

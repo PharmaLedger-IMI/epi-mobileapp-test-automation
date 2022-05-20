@@ -11,7 +11,16 @@ const batchNumberPattern = /(?<=Batch number:).*/g
 
 class BatchWithExpiryDateInvalidSN {
 
-    //recalled Batch 
+    //recalled Batch
+    get recalledTxtMsg() {
+        return $("(//android.app.Dialog/descendant::android.view.View)[5]/child::android.widget.TextView")
+    }
+
+    get closeBtnMsg() {
+        return $("//android.widget.Button[@text='Close']")
+    }
+
+    // product Expired 
     get prodExpTextBatch() {
         return $("(//android.view.View[@resource-id='page-ion-content']/descendant::android.widget.TextView)[2]")
     }
@@ -56,6 +65,14 @@ class BatchWithExpiryDateInvalidSN {
 
     async batchWithExpiryDateRecallMsgInvalidSNDetailsFetch() {
 
+        // recalled text message
+        const recalledMsg = await this.recalledTxtMsg.getText();
+        console.log(recalledMsg);
+        await timeoutWait.setTimeoutTime(2);
+        // close button click
+        await this.closeBtnMsg.click();
+        await timeoutWait.setTimeoutTime(2);
+
         // recalled text message 
         const productExpTextBatch = await this.prodExpTextBatch.getText();
         await timeoutWait.setTimeoutTime(2);
@@ -68,13 +85,17 @@ class BatchWithExpiryDateInvalidSN {
         // product info message
         const productInfoMsg = await this.prodInfoMsg.getText();
         await timeoutWait.setTimeoutTime(2);
-        await this.productDescription.getText();
+        const prodDesc = await this.productDescription.getText();
         await timeoutWait.setTimeoutTime(2);
 
         console.log(productInfoMsg);
         expect(productInfoMsg).includes(configData.prodName);
+        console.log(prodDesc);
+        expect(prodDesc).to.equal(configData.prodDesc);
+        console.log(recalledMsg);
+        expect(recalledMsg).to.equal(configData.recalledMessage);
         console.log(productExpTextBatch);
-        expect(productExpTextBatch).to.equal(configData.productExpiryTextBatch);
+        expect(productExpTextBatch).to.equal(configData.expiredProductLabelMessage);
 
     }
 
@@ -115,7 +136,7 @@ class BatchWithExpiryDateInvalidSN {
         expect(dateafter).to.equal(testData.expiry);
 
         console.log(batchInfoText);
-        expect(batchInfoText).to.equal(configData.batchInfo)
+        expect(batchInfoText).to.equal(configData.batchInfoMessage)
 
     }
 

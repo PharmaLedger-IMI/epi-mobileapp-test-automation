@@ -62,16 +62,16 @@ class UncheckBatchIsRecallInProductAndRecalledInBatch {
         // close button click
         await this.closeBtnMsg.click();
         await timeoutWait.setTimeoutTime(2);
-        //recalledTextBatch
-        // const recalledBatch= await this.recalledTextBatch.getText();
-        //  await timeoutWait.setTimeoutTime(3);
-        // // product info message
-        // await this.recalledBatchLearnMore.click();
-        // await timeoutWait.setTimeoutTime(3);
-        // await this.recalledPopUpMsg.getText();
-        // await timeoutWait.setTimeoutTime(3);
-        // await this.closeRecalledPopUpMsg.click();
-        // await timeoutWait.setTimeoutTime(3);
+        // recalledTextBatch
+        const recalledBatch = await this.recalledTextBatch.getText();
+        await timeoutWait.setTimeoutTime(3);
+        // product info message
+        await this.recalledBatchLearnMore.click();
+        await timeoutWait.setTimeoutTime(3);
+        await this.recalledPopUpMsg.getText();
+        await timeoutWait.setTimeoutTime(3);
+        await this.closeRecalledPopUpMsg.click();
+        await timeoutWait.setTimeoutTime(3);
         const leafletNotFound = await this.leafletNotFoundText.getText();
         await timeoutWait.setTimeoutTime(2);
         const LeafletNotFoundDesc = await this.leafletNotFoundProdDesc.getText();
@@ -80,6 +80,7 @@ class UncheckBatchIsRecallInProductAndRecalledInBatch {
 
         // chai assertions on expiry date, serial number, gtin number and batch Number pattern
         expect(recalledMsg).to.equal(configData.recalledMessage)
+        expect(recalledBatch).to.equal(configData.recalledBatchLabelMessage)
         expect(leafletNotFound).to.equal(configData.leafletNotFoundMessage);
         expect(LeafletNotFoundDesc).to.equal(configData.leafletNotFoundDescription);
 

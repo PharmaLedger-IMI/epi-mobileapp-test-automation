@@ -85,11 +85,13 @@ class EditBatchRecallForNonSerialzedSN {
         // product info message
         const prodInfoMsg = await this.productInfoMsg.getText();
         await timeoutWait.setTimeoutTime(2);
-        await this.productDescription.getText();
+        const prodDesc = await this.productDescription.getText();
         await timeoutWait.setTimeoutTime(2);
 
         console.log(prodInfoMsg);
         expect(prodInfoMsg).includes(configData.prodName);
+        console.log(prodDesc);
+        expect(prodDesc).to.equal(configData.prodDesc);
         console.log(recalledMsg);
         expect(recalledMsg).to.equal(configData.recalledMessage);
         console.log(recalledTxtBatch);
@@ -104,7 +106,7 @@ class EditBatchRecallForNonSerialzedSN {
         await this.leafletShieldInfoBtn.click();
         await timeoutWait.setTimeoutTime(2);
         // btach info text message 
-        await this.batchInfoTxtMsg.getText();
+        const batchInfo = await this.batchInfoTxtMsg.getText();
         await timeoutWait.setTimeoutTime(2);
         // leaflet product information details
         await this.productLeafletInfoDetails.getText();
@@ -136,6 +138,9 @@ class EditBatchRecallForNonSerialzedSN {
         expect(leafletInfoDetailsFetch.match(batchNumberPattern)[0]).to.equal(testData.batchValue);
         expect(leafletInfoDetailsFetch.match(serialNumberPattern)[0]).to.equal(testData.batchSerialNumber);
         expect(dateafter).to.equal(testData.expiry);
+
+        console.log(batchInfo);
+        expect(batchInfo).to.equal(configData.batchInfoMessage);
 
     }
 

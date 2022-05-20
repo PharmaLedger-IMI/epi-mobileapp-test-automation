@@ -2,7 +2,7 @@ const uncheckBatchIsRecallInProductAndBatchTest = require('../pageObjectsNativeA
 const allureReporter = require('@wdio/allure-reporter').default
 const nativePatientPage = require('../pageObjectsNativeApp/patientSettingPage')
 const timeoutWait = require('../utils/setTimeout')
-// const commonFunctions=require('../utils/commonutilitiesFunctions')
+
 
 describe('065_Edit product to uncheck batch is recalled and edit batch to uncheck batch recall', () => {
 
@@ -33,8 +33,12 @@ describe('065_Edit product to uncheck batch is recalled and edit batch to unchec
         await uncheckBatchIsRecallInProductAndBatchTest.waitTimeout();
         await timeoutWait.setTimeoutWait(4);
         //display details on Leaflet for recalled batch scenario
-        await uncheckBatchIsRecallInProductAndBatchTest.uncheckBatchIsRecallInProductAndBatchFetch();
-        await timeoutWait.setTimeoutWait(4);
+        await uncheckBatchIsRecallInProductAndBatchTest.unCheckBatchRecallInProductAndBatchDetailsFetch();
+        await timeoutWait.setTimeoutWait(3);
+        await uncheckBatchIsRecallInProductAndBatchTest.unCheckBatchRecallInProductAndBatchLeafletDetailsFetch();
+        await timeoutWait.setTimeoutWait(3);
+        await uncheckBatchIsRecallInProductAndBatchTest.getLeafletTypesAndLevel();
+        await timeoutWait.setTimeoutWait(3);
 
     });
 

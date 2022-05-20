@@ -79,13 +79,15 @@ class CheckSmpcDeletedFromProductWithExpiredBatch {
         // product info message
         const prodInfoMsg = await this.prodInfo.getText();
         await timeoutWait.setTimeoutTime(2);
-        await this.productDescription.getText();
+        const prodDescMsg = await this.productDescription.getText();
         await timeoutWait.setTimeoutTime(2);
 
         console.log(prodInfoMsg);
         expect(prodInfoMsg).includes(configData.prodName);
-        console.log(recalledMsg);
-        expect(recalledMsg).to.equal(configData.recalledMessage);
+        console.log(prodDescMsg);
+        expect(prodDescMsg).to.equal(configData.prodDesc);
+        // console.log(recalledMsg);
+        // expect(recalledMsg).to.equal(configData.recalledMessage);
         console.log(incorrectTxtBatch);
         expect(incorrectTxtBatch).to.equal(configData.incorrectExpiryDateLabelMessage)
 

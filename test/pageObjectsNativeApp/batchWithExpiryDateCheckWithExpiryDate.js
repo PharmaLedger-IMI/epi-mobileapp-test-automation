@@ -12,6 +12,13 @@ const batchNumberPattern = /(?<=Batch number:).*/g
 
 class BatchWithExpiryDateCheckwithExpiryDate {
 
+    get recalledTxtMsg() {
+        return $("(//android.app.Dialog/descendant::android.view.View)[5]/child::android.widget.TextView")
+    }
+
+    get closeBtnMsg() {
+        return $("//android.widget.Button[@text='Close']")
+    }
 
     //recalled Batch 
     get expiryDateTextBatch() {
@@ -59,6 +66,13 @@ class BatchWithExpiryDateCheckwithExpiryDate {
 
     async batchWithExpiryDateCheckWithExpiryDateDetailsFetch() {
 
+        // recalled text message
+        const recalledMsg = await this.recalledTxtMsg.getText();
+        console.log(recalledMsg);
+        await timeoutWait.setTimeoutTime(2);
+        // close button click
+        await this.closeBtnMsg.click();
+        await timeoutWait.setTimeoutTime(2);
         // recalled text message 
         const expiryDateTxtBatch = await this.expiryDateTextBatch.getText();
         await timeoutWait.setTimeoutTime(2);
@@ -71,13 +85,18 @@ class BatchWithExpiryDateCheckwithExpiryDate {
         // product info message
         const productInfoMsg = await this.prodInfoMsg.getText();
         await timeoutWait.setTimeoutTime(2);
-        await this.productDescription.getText();
+        const prodDesc = await this.productDescription.getText();
         await timeoutWait.setTimeoutTime(2);
 
+        //Assertions 
         console.log(productInfoMsg);
         expect(productInfoMsg).includes(configData.prodName);
+        console.log(prodDesc);
+        expect(prodDesc).to.equal(configData.prodDesc);
         console.log(expiryDateTxtBatch);
-        expect(expiryDateTxtBatch).to.equal(configData.expiryDateTextBatchVal);
+        expect(expiryDateTxtBatch).to.equal(configData.expiredBatchLabelMessage);
+        console.log(recalledMsg);
+        expect(recalledMsg).to.equal(configData.recalledMessage);
 
     }
 
@@ -118,7 +137,7 @@ class BatchWithExpiryDateCheckwithExpiryDate {
         expect(dateafter).to.equal(testData.expiry);
 
         console.log(batchInfoText);
-        expect(batchInfoText).to.equal(configData.batchInfo)
+        expect(batchInfoText).to.equal(configData.batchInfoMessage)
 
     }
 }

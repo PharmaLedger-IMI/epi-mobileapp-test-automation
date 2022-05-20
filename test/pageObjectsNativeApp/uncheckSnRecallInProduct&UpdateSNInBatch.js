@@ -46,8 +46,8 @@ class UncheckSNRecallInProductAndUpdateInBatch {
 
 
     async uncheckSNRecallInProductAndUpdateInBatchFetch() {
-  
-        await timeoutWait.setTimeoutTime(3);
+
+
         // recalled text message 
         const recalledBatch = await this.recalledTextBatch.getText();
         await timeoutWait.setTimeoutTime(3);
@@ -65,8 +65,8 @@ class UncheckSNRecallInProductAndUpdateInBatch {
         // click on leaflet shield button
 
         // chai assertions on expiry date, serial number, gtin number and batch Number pattern
-       // expect(recalledMsg).to.equal(configData.recalledMessage)
-        expect(recalledBatch).to.equal(configData.recalledBatch)
+        // expect(recalledMsg).to.equal(configData.recalledMessage)
+        expect(recalledBatch).to.equal(configData.recalledBatchLabelMessage)
         expect(leafletNotFound).to.equal(configData.leafletNotFoundMessage);
         expect(LeafletNotFoundDesc).to.equal(configData.leafletNotFoundDescription);
 

@@ -38,9 +38,7 @@ describe('007_Edit batch and enable serial number check with valid SN', () => {
                 await timeoutWait.setTimeoutWait(2);
                 await enableSnCheckSnValid.enableSNCheckSNIsValidLeafletDataFetch();
                 await timeoutWait.setTimeoutWait(2);
-                // await setTimeout(() => {
-                //     console.log("inside timeout");
-                // }, 4000);
+
 
         });
 

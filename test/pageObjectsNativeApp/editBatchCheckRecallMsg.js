@@ -89,7 +89,7 @@ class RecalledBatchLeaflet {
         console.log(recalledMsg);
         expect(recalledMsg).to.equal(configData.recalledMessage);
         console.log(recalledTxtBatch);
-        expect(recalledTxtBatch).to.equal(configData.recalledBatchTextBatch)
+        expect(recalledTxtBatch).to.equal(configData.recalledBatchLabelMessage)
 
     }
 
@@ -100,7 +100,7 @@ class RecalledBatchLeaflet {
         await this.leafletShieldInfoBtn.click();
         await timeoutWait.setTimeoutTime(2);
         // btach info text message 
-        await this.batchInfoTxtMsg.getText();
+        const batchInfo = await this.batchInfoTxtMsg.getText();
         await timeoutWait.setTimeoutTime(2);
         // leaflet product information details
         await this.productLeafletInfoDetails.getText();
@@ -128,6 +128,10 @@ class RecalledBatchLeaflet {
         expect(leafletInfoDetailsFetch.match(batchNumberPattern)[0]).to.equal(testData.batchValue);
         expect(leafletInfoDetailsFetch.match(serialNumberPattern)[0]).to.equal(testData.batchSerialNumber);
         expect(dateafter).to.equal(testData.expiry);
+
+        console.log(batchInfo);
+        expect(batchInfo).to.equal(configData.batchInfoMessage);
+
 
     }
 

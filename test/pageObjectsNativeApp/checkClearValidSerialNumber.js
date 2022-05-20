@@ -1,5 +1,5 @@
 const testData = require('../testdata/testExpectations.json')
-const configData=require('../testdata/config.json')
+const configData = require('../testdata/config.json')
 const expect = require('chai').expect
 const timeoutWait = require('../utils/setTimeout')
 const moment = require('moment')
@@ -13,7 +13,7 @@ const batchNumberPattern = /(?<=Batch number:).*/g
 class CheckClearValidSerailNumber {
 
 
-    //recalled Batch 
+    //failedSN Batch 
     get failedSNBatch() {
         return $("(//android.view.View[@resource-id='page-ion-content']/descendant::android.widget.TextView)[2]")
     }
@@ -71,13 +71,15 @@ class CheckClearValidSerailNumber {
         // product info message
         const productInfoMsg = await this.prodInfoMsg.getText();
         await timeoutWait.setTimeoutTime(2);
-        await this.productDescription.getText();
+        const prodDescMsg = await this.productDescription.getText();
         await timeoutWait.setTimeoutTime(2);
 
         console.log(productInfoMsg);
         expect(productInfoMsg).includes(configData.prodName);
+        console.log(prodDescMsg);
+        expect(prodDescMsg).to.equal(configData.prodDesc);
         console.log(failedSNTextBatch);
-        expect(failedSNTextBatch).to.equal(configData.invalidSNTextBatch);
+        expect(failedSNTextBatch).to.equal(configData.invalidSerialNumberLabelMessage);
 
     }
 
@@ -118,7 +120,7 @@ class CheckClearValidSerailNumber {
         expect(dateafter).to.equal(testData.expiry);
 
         console.log(batchInfoText);
-        expect(batchInfoText).to.equal(configData.batchInfo)
+        expect(batchInfoText).to.equal(configData.batchInfoMessage)
 
     }
 

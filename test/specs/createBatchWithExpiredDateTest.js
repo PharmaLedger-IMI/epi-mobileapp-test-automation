@@ -34,7 +34,9 @@ describe('024_Create a batch with X expiry date and pass different date Y in mat
         await timeoutWait.setTimeoutWait(4);
         //display details on Leaflet for recalled batch scenario
         await createBatchWithExpiredDate.createBatchWithExpiredDateFetch();
-        await timeoutWait.setTimeoutWait(4);
+        await timeoutWait.setTimeoutWait(3);
+        await createBatchWithExpiredDate.createBatchWithExpiredLeafletDetailsFetch();
+        await timeoutWait.setTimeoutWait(3);
 
     });
 

@@ -89,35 +89,35 @@ class UncheckSNDecommissionedInProductAndNotDecommissonedInBatch {
 
         await timeout.setTimeoutWait(8);
 
-               // recalled text message 
-               const failedSNTextBatch = await this.failedSNTextBatch.getText();
-               await timeoutWait.setTimeoutTime(2);
-               await this.failedSNBatchLearnMore.click();
-               await timeoutWait.setTimeoutTime(3);
-               await this.failedSNPopUpMsg.getText();
-               await timeoutWait.setTimeoutTime(3);
-               await this.closeFailedSNPopUpMsg.click();
-               await timeoutWait.setTimeoutTime(3);
-               // product info message
-               const productInfoMsg = await this.prodInfoMsg.getText();
-               await timeoutWait.setTimeoutTime(2);
-               const prodDesc= await this.productDescription.getText();
-               await timeoutWait.setTimeoutTime(2);
-               await this.leafletShieldInfoBtn.click();
-               await timeoutWait.setTimeoutTime(2);
-               const batchInfo = await this.batchInfoTxtMsg.getText();
-               await timeoutWait.setTimeoutTime(2);
-               
-               //Aseertions 
-               console.log(productInfoMsg);
-               expect(productInfoMsg).includes(configData.prodName);
-               console.log(prodDesc);
-               expect(prodDesc).includes(configData.prodDesc);
-               console.log(batchInfo);
-               expect(batchInfo).includes(configData.batchInfoMessage);
-               console.log(failedSNTextBatch);
-               expect(failedSNTextBatch).to.equal(configData.invalidSNTextBatch);
-       
+        // recalled text message 
+        const failedSNTextBatch = await this.failedSNTextBatch.getText();
+        await timeoutWait.setTimeoutTime(2);
+        await this.failedSNBatchLearnMore.click();
+        await timeoutWait.setTimeoutTime(3);
+        await this.failedSNPopUpMsg.getText();
+        await timeoutWait.setTimeoutTime(3);
+        await this.closeFailedSNPopUpMsg.click();
+        await timeoutWait.setTimeoutTime(3);
+        // product info message
+        const productInfoMsg = await this.prodInfoMsg.getText();
+        await timeoutWait.setTimeoutTime(2);
+        const prodDesc = await this.productDescription.getText();
+        await timeoutWait.setTimeoutTime(2);
+        await this.leafletShieldInfoBtn.click();
+        await timeoutWait.setTimeoutTime(2);
+        const batchInfo = await this.batchInfoTxtMsg.getText();
+        await timeoutWait.setTimeoutTime(2);
+
+        //Aseertions 
+        console.log(productInfoMsg);
+        expect(productInfoMsg).includes(configData.prodName);
+        console.log(prodDesc);
+        expect(prodDesc).includes(configData.prodDesc);
+        console.log(batchInfo);
+        expect(batchInfo).includes(configData.batchInfoMessage);
+        console.log(failedSNTextBatch);
+        expect(failedSNTextBatch).to.equal(configData.invalidSNTextBatch);
+
 
     }
 
@@ -157,6 +157,18 @@ class UncheckSNDecommissionedInProductAndNotDecommissonedInBatch {
 
         await this.closeLeafletBtn.click();
         await timeout.setTimeoutTime(3);
+
+        let deviceScreenDimensionofSMPCLeafletType = await driver.getWindowRect();
+        await driver.touchPerform([
+            {
+                Element: this.leafletLevelDescriptionType,
+                action: 'tap',
+                options: {
+                    x: Math.floor(deviceScreenDimensionofSMPCLeafletType.width * 0.49),
+                    y: Math.floor(deviceScreenDimensionofSMPCLeafletType.height * 0.60)
+                }
+            }
+        ]);
 
         const leafletLevelSMPCDescription = await this.leafletLevelDescriptionType.getText();
         console.log(leafletLevelSMPCDescription);

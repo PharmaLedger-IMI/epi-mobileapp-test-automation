@@ -1,5 +1,5 @@
 const testData = require('../testdata/testExpectations.json')
-const configData=require('../testdata/config.json')
+const configData = require('../testdata/config.json')
 const expect = require('chai').expect
 const timeoutWait = require('../utils/setTimeout')
 const moment = require('moment')
@@ -83,15 +83,17 @@ class CreateBatchWithBatchRecallMsg {
         // product info message
         const prodInfoMsg = await this.productInfoMsg.getText();
         await timeoutWait.setTimeoutTime(2);
-        await this.productDescription.getText();
+        const prodDesc = await this.productDescription.getText();
         await timeoutWait.setTimeoutTime(2);
 
         console.log(prodInfoMsg);
         expect(prodInfoMsg).includes(configData.prodName);
+        console.log(prodDesc);
+        expect(prodDesc).to.equal(configData.prodDesc);
         console.log(recalledMsg);
         expect(recalledMsg).to.equal(configData.recalledMessage);
         console.log(recalledTxtBatch);
-        expect(recalledTxtBatch).to.equal(configData.recalledBatchTextBatch)
+        expect(recalledTxtBatch).to.equal(configData.recalledBatchLabelMessage)
 
     }
 
@@ -102,7 +104,7 @@ class CreateBatchWithBatchRecallMsg {
         await this.leafletShieldInfoBtn.click();
         await timeoutWait.setTimeoutTime(2);
         // btach info text message 
-        const batchInfoText=await this.batchInfoTxtMsg.getText();
+        const batchInfoText = await this.batchInfoTxtMsg.getText();
         await timeoutWait.setTimeoutTime(2);
         // leaflet product information details
         await this.productLeafletInfoDetails.getText();
@@ -136,7 +138,7 @@ class CreateBatchWithBatchRecallMsg {
         expect(dateafter).to.equal(testData.expiry);
 
         console.log(batchInfoText);
-        expect(batchInfoText).to.equal(configData.batchInfo)
+        expect(batchInfoText).to.equal(configData.batchInfoMessage)
 
     }
 

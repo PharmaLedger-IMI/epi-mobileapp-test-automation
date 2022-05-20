@@ -40,15 +40,15 @@ exports.config = {
 
              'test/specs/createProductWithAddBatchTest.js',
             
-            // 'test/specs/editBatchCheckRecallMsgTest.js',
-            // 'test/specs/editProductSnRecallListTest.js',
+             'test/specs/editBatchCheckRecallMsgTest.js',
+             'test/specs/editProductSnRecallListTest.js',
             
-           //   'test/specs/enableSnCheckSnIsValidTest.js',
-           //  'test/specs/enableSnCheckSnIsInvalidTest.js',
-           //  'test/specs/disableSnCheckSnIsValidTest.js',
-           //    'test/specs/disableSnCheckWithoutSnValidTest.js',
+              'test/specs/enableSnCheckSnIsValidTest.js',
+              'test/specs/enableSnCheckSnIsInvalidTest.js',
+              'test/specs/disableSnCheckSnIsValidTest.js',
+              'test/specs/disableSnCheckWithoutSnValidTest.js',
             
-            // 'test/specs/enableExpiryDateCheckValidExpiryDateTest.js',
+              'test/specs/enableExpiryDateCheckValidExpiryDateTest.js',
             // 'test/specs/enableExpiryDateCheckInvalidExpiryDateTest.js',
             // 'test/specs/disableExpiryDateCheckInvalidExpiryDateTest.js',
             

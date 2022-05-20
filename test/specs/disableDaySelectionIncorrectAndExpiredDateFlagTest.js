@@ -1,4 +1,3 @@
-const { default: AllureReporter } = require('@wdio/allure-reporter');
 const disableDaySelectionWithIncorrectExpiredDateFlag = require('../pageObjectsNativeApp/disableDaySelectionAndIncorrectExpiredDateFlag.js')
 const allureReporter = require('@wdio/allure-reporter').default
 const nativePatientPage = require('../pageObjectsNativeApp/patientSettingPage')
