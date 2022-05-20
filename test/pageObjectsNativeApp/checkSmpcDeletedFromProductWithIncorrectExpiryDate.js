@@ -92,13 +92,13 @@ class CheckSmpcDeletedFromProductWithIncorrectExpiryDate {
         // product info message
         const prodInfoMsg = await this.prodInfo.getText();
         await timeoutWait.setTimeoutTime(2);
-        const prodDesc = await this.productDescription.getText();
+        const prodDescMsg = await this.productDescription.getText();
         await timeoutWait.setTimeoutTime(2);
 
         console.log(prodInfoMsg);
         expect(prodInfoMsg).includes(configData.prodName);
-        console.log(prodDesc);
-        expect(prodDesc).includes(configData.prodDesc);
+        console.log(prodDescMsg);
+        expect(prodDescMsg).includes(configData.prodDesc);
         // console.log(recalledMsg);
         // expect(recalledMsg).to.equal(configData.recalledMessage);
         console.log(incorrectExpiryDateTxtBatch);
@@ -148,6 +148,22 @@ class CheckSmpcDeletedFromProductWithIncorrectExpiryDate {
 
         console.log(batchInfo);
         expect(batchInfo).includes(configData.batchInfoMessage);
+
+        await this.closeLeafletBtn.click();
+        await timeout.setTimeoutWait(3);
+
+
+        let deviceScreenDimensionofLeafletType = await driver.getWindowRect();
+        await driver.touchPerform([
+            {
+                Element: this.leafletLevelDescriptionType,
+                action: 'tap',
+                options: {
+                    x: Math.floor(deviceScreenDimensionofLeafletType.width * 0.49),
+                    y: Math.floor(deviceScreenDimensionofLeafletType.height * 0.60)
+                }
+            }
+        ]);
 
         const leafletLevelDescription = await this.leafletLevelDescriptionType.getText();
         console.log(leafletLevelDescription);

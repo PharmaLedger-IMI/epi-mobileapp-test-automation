@@ -30,8 +30,8 @@ class checkSmpcIsDeletedInProductWithBatchIsUnknown {
 
     async checkSmpcIsDeletedInProductWithBatchIsUnknownFetch() {
 
-        const statusMessage = await this.statusMsg.getText();
-        console.log(statusMessage);
+        const statusMessageTxt = await this.statusMsg.getText();
+        console.log(statusMessageTxt);
         await timeout.setTimeoutTime(3);
         //get text of product information description
         const learnMoreStatus = await this.learnMore.getText();
@@ -46,7 +46,7 @@ class checkSmpcIsDeletedInProductWithBatchIsUnknown {
         console.log(prodTitleOfText);
         await timeout.setTimeoutTime(3);
 
-        await expect(statusMessage).to.not.equal("Batch Unknown");
+        await expect(statusMessageTxt).to.not.equal("Batch Unknown");
         await expect(learnMoreStatus).to.not.equal("Batch learn more");
         await expect(productTitle).to.not.equal("Unknown Batch");
         await expect(prodTitleOfText).to.not.equal("Batch Unknown");

@@ -73,7 +73,7 @@ class CreateBatchWithUploadLeafletSMPC {
         // expect(this.productInfo.getText()).to.not.equal(null);
         await timeout.setTimeoutTime(3);
         //get text of product information description
-        const prodDesc = await this.productDescription.getText();
+        const prodDescMsg = await this.productDescription.getText();
         await timeout.setTimeoutTime(3);
         //click on leaflet Shieled Button
         await this.leafletVerifiedShiledBtn.click();
@@ -86,11 +86,11 @@ class CreateBatchWithUploadLeafletSMPC {
         console.log(prodInfo);
         expect(prodInfo).includes(configData.prodName);
         //get prod Desc text and assert 
-        console.log(prodDesc);
-        expect(prodDesc).to.equal(configData.prodDesc);
+        console.log(prodDescMsg);
+        expect(prodDescMsg).to.equal(configData.prodDesc);
         //get batch Info text and assert 
         console.log(batchInfoTxt);
-        expect(batchInfoTxt).to.equal(configData.batchInfo);
+        expect(batchInfoTxt).to.equal(configData.batchInfoMessage);
 
     }
 
@@ -131,6 +131,19 @@ class CreateBatchWithUploadLeafletSMPC {
         await this.closeLeafletBtn.click();
         await timeout.setTimeoutTime(3);
 
+        
+        let deviceScreenDimensionofSMPCLeafletType = await driver.getWindowRect();
+        await driver.touchPerform([
+            {
+                Element: this.leafletLevelDescriptionType,
+                action: 'tap',
+                options: {
+                    x: Math.floor(deviceScreenDimensionofSMPCLeafletType.width * 0.49),
+                    y: Math.floor(deviceScreenDimensionofSMPCLeafletType.height * 0.60)
+                }
+            }
+        ]);
+
         const leafletLevelSMPCDescription = await this.leafletLevelDescriptionType.getText();
         console.log(leafletLevelSMPCDescription);
         expect(leafletLevelSMPCDescription).includes(configData.leafletBatchLevelDescription)
@@ -144,7 +157,7 @@ class CreateBatchWithUploadLeafletSMPC {
         let deviceScreenDimensionofLeafletType = await driver.getWindowRect();
         await driver.touchPerform([
             {
-                Element: this.leafletProdLevelDescType,
+                Element: this.leafletLevelDescriptionType,
                 action: 'tap',
                 options: {
                     x: Math.floor(deviceScreenDimensionofLeafletType.width * 0.49),

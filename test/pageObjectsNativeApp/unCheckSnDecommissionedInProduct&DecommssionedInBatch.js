@@ -48,7 +48,7 @@ class UncheckSNDecommissionedInProductAndDecommissonedInBatch {
     async uncheckSNDecommissionedInProductAndDecommissonedInBatchFetch() {
 
         // recalled text message 
-        const snDecommissionedBatch = await this.snDecommissionedTextBatch.getText();
+        const snDecommissionedBatchTxt = await this.snDecommissionedTextBatch.getText();
         await timeoutWait.setTimeoutTime(3);
         // product info message
         await this.snDecommissionedBatchLearnMore.click();
@@ -64,7 +64,7 @@ class UncheckSNDecommissionedInProductAndDecommissonedInBatch {
         // click on leaflet shield button
 
         // chai assertions on expiry date, serial number, gtin number and batch Number pattern
-        expect(snDecommissionedBatch).to.equal(configData.serialNumberDecommissionedLabelMessage)
+        expect(snDecommissionedBatchTxt).to.equal(configData.serialNumberDecommissionedLabelMessage)
         expect(leafletNotFound).to.equal(configData.leafletNotFoundMessage);
         expect(LeafletNotFoundDesc).to.equal(configData.leafletNotFoundDescription);
 

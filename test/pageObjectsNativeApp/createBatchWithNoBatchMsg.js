@@ -60,7 +60,7 @@ class CreateBatchWithNoBatchMsg {
         expect(prodDesc).to.equal(configData.prodDesc);
         //get batch Info text and assert 
         console.log(batchInfoTxt);
-        expect(batchInfoTxt).to.equal(configData.batchInfo);
+        expect(batchInfoTxt).to.equal(configData.batchInfoMessage);
 
     }
 

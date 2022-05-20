@@ -1,4 +1,5 @@
 const testData = require('../testdata/testExpectations.json')
+const configData = require('../testdata/config.json')
 const expect = require('chai').expect
 const timeoutWait = require('../utils/setTimeout')
 const moment = require('moment')
@@ -59,7 +60,7 @@ class CreateBatchWithExpiredDate {
     async createBatchWithExpiredDateFetch() {
 
         // recalled text message 
-        await this.expiredDateText.getText();
+        const expiredDateText = await this.expiredDateText.getText();
         await timeoutWait.setTimeoutTime(3);
         // product info message
         await this.expiredDateLearnMore.click();
@@ -68,16 +69,30 @@ class CreateBatchWithExpiredDate {
         await timeoutWait.setTimeoutTime(3);
         await this.closeExpiredDatePopUpMsg.click();
         await timeoutWait.setTimeoutTime(3);
-        await this.prodInfoMsg.getText();
+        const prodInfoMsg = await this.prodInfoMsg.getText();
         await timeoutWait.setTimeoutTime(2);
-        await this.productDescription.getText();
+        const prodDesc = await this.productDescription.getText();
         await timeoutWait.setTimeoutTime(2);
         // click on leaflet shield button
         await this.leafletShieldInfoBtn.click();
         await timeoutWait.setTimeoutTime(2);
         // btach info text message 
-        await this.batchInfoTxtMsg.getText();
+        const batchInfo = await this.batchInfoTxtMsg.getText();
         await timeoutWait.setTimeoutTime(2);
+
+        console.log(productInfoMsg);
+        expect(productInfoMsg).includes(configData.prodName);
+        console.log(prodDesc);
+        expect(prodDesc).to.equal(configData.prodDesc);
+        console.log(batchInfo);
+        expect(batchInfo).to.equal(configData.batchInfoMessage);
+        console.log(expiredDateText);
+        expect(expiredDateText).to.equal(configData.incorrectExpiryDateLabelMessage);
+
+    }
+
+    async createBatchWithExpiredLeafletDetailsFetch() {
+
         // leaflet product information details
         await this.productLeafletInfoDetails.getText();
         await timeoutWait.setTimeoutTime(2);
@@ -108,10 +123,6 @@ class CreateBatchWithExpiredDate {
         expect(leafletInfoDetailsFetch.match(batchNumberPattern)[0]).to.equal(testData.batchValue);
         expect(leafletInfoDetailsFetch.match(serialNumberPattern)[0]).to.equal(testData.batchSerialNumber);
         expect(dateafter).to.equal(testData.expiry);
-        //  expect(this.LeafletInfo().match(gtinPattern)[0]).to.equal(testData.prodCode);
-        //  expect(this.LeafletInfo().match(batchNumberPattern)[0]).to.equal(testData.batchValue);
-        // expect(this.LeafletInfo().match(serialNumberPattern)[0]).to.equal(testData.batchSerialNumber);
-        // expect(this.LeafletInfo().match(expiryDatePattern)[0]).to.equal(testData.expiryDate);
 
 
     }

@@ -14,19 +14,19 @@ class InvalidSerialNumberAndInvalidExpiryDate {
 
 
     //recalled Batch 
-    get incorrectExpDateTxtBatch() {
+    get incorrectSNExpDateTxtBatch() {
         return $("(//android.view.View[@resource-id='page-ion-content']/descendant::android.widget.TextView)[2]")
     }
 
-    get incorrectExpDateBatchLearnMore() {
+    get incorrectSNExpDateBatchLearnMore() {
         return $("(//android.view.View[@resource-id='page-ion-content']/descendant::android.widget.TextView)[3]")
     }
 
-    get incorrectExpDatePopUpMsg() {
+    get incorrectSNExpDatePopUpMsg() {
         return $("(//android.app.Dialog/descendant::android.view.View[5]/child::android.widget.TextView)")
     }
 
-    get closeIncorrectExpDatePopUpMsg() {
+    get closeIncorrectSNExpDatePopUpMsg() {
         return $("(//android.app.Dialog/descendant::android.view.View)[3]/child::android.widget.Button")
     }
 
@@ -48,14 +48,14 @@ class InvalidSerialNumberAndInvalidExpiryDate {
     async invalidSerialNumberAndInvalidExpiryDateFetch() {
 
         // recalled text message 
-        const incorrectBatch = await this.incorrectExpDateTxtBatch.getText();
+        const incorrectSNExpDateBatch = await this.incorrectSNExpDateTxtBatch.getText();
         await timeoutWait.setTimeoutTime(3);
         // product info message
-        await this.incorrectExpDateBatchLearnMore.click();
+        await this.incorrectSNExpDateBatchLearnMore.click();
         await timeoutWait.setTimeoutTime(3);
-        await this.incorrectExpDatePopUpMsg.getText();
+        await this.incorrectSNExpDatePopUpMsg.getText();
         await timeoutWait.setTimeoutTime(3);
-        await this.closeIncorrectExpDatePopUpMsg.click();
+        await this.closeIncorrectSNExpDatePopUpMsg.click();
         await timeoutWait.setTimeoutTime(3);
         const leafletNotFound = await this.leafletNotFoundText.getText();
         await timeoutWait.setTimeoutTime(2);
@@ -64,7 +64,7 @@ class InvalidSerialNumberAndInvalidExpiryDate {
         // click on leaflet shield button
 
         // chai assertions on expiry date, serial number, gtin number and batch Number pattern
-        expect(incorrectBatch).to.equal(configData.wrongBatchLabelMessage)
+        expect(incorrectSNExpDateBatch).to.equal(configData.combinationScenario1)
         expect(leafletNotFound).to.equal(configData.leafletNotFoundMessage);
         expect(LeafletNotFoundDesc).to.equal(configData.leafletNotFoundDescription);
 

@@ -108,7 +108,7 @@ class CheckIncorrectDateInProductAndBatch {
         // expect(this.productInfo.getText()).to.not.equal(null);
         await timeout.setTimeoutTime(3);
         //get text of product information description
-        const prodDesc = await this.productDescription.getText();
+        const prodDescMsg = await this.productDescription.getText();
         await timeout.setTimeoutTime(3);
         //click on leaflet Shieled Button
         await this.leafletVerifiedShiledBtn.click();
@@ -121,11 +121,11 @@ class CheckIncorrectDateInProductAndBatch {
         console.log(prodInfo);
         expect(prodInfo).includes(configData.prodName);
         //get prod Desc text and assert 
-        console.log(prodDesc);
-        expect(prodDesc).to.equal(configData.prodDesc);
+        console.log(prodDescMsg);
+        expect(prodDescMsg).to.equal(configData.prodDesc);
         //get batch Info text and assert 
         console.log(batchInfoTxt);
-        expect(batchInfoTxt).to.equal(configData.batchInfo);
+        expect(batchInfoTxt).to.equal(configData.batchInfoMessage);
         //get incorrect Expiry date assert
         console.log(incorrectExpiryDateTxtBatch);
         expect(incorrectExpiryDateTxtBatch).to.equal(configData.incorrectExpiryDateLabelMessage);
@@ -183,7 +183,7 @@ class CheckIncorrectDateInProductAndBatch {
         let deviceScreenDimensionofLeafletType = await driver.getWindowRect();
         await driver.touchPerform([
             {
-                Element: this.leafletProdLevelDescType,
+                Element: this.leafletLevelDescriptionType,
                 action: 'tap',
                 options: {
                     x: Math.floor(deviceScreenDimensionofLeafletType.width * 0.49),

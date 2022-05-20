@@ -81,6 +81,7 @@ class UncheckSmpcDeletedFromProductWithRecalledBatch {
         // chai assertions on expiry date, serial number, gtin number and batch Number pattern
         //  expect(recalledBatch).to.equal(configData.recalledBatch)
         expect(recalledMsg).to.equal(configData.recalledMessage)
+        expect(recalledBatch).to.equal(configData.recalledBatchLabelMessage)
         expect(leafletNotFound).to.equal(configData.leafletNotFoundMessage);
         expect(LeafletNotFoundDesc).to.equal(configData.leafletNotFoundDescription);
 

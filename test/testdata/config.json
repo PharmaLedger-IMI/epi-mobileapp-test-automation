@@ -8,23 +8,23 @@
 
     "prodDesc":"Sample medicinal product name",
 
-    "batchInfoMessage":"batch info",
+    "batchInfoMessage":"Batch Info",
 
     "recalledMessage":"This is a sample recall message",
 
     "recalledBatchLabelMessage":"Batch Recalled",
 
-    "invalidSNTextBatch":"Failed to validate serial Number",
+    "invalidSerialNumberLabelMessage":"Failed to validate serial Number",
 
     "incorrectExpiryDateLabelMessage":"Batch is expired",
 
     "expiredBatchLabelMessage":"Expired Batch",
 
-    "expiredproduct":"Product Expired",
+    "expiredProductLabelMessage":"Product Expired",
 
     "serialNumberDecommissionedLabelMessage":"decommissioned Batch",
 
-    "wrongBatchLabelMessage":"wrong batch",
+    "unKnownBatchLabelMessage":"wrong batch",
 
     "unknownGtinLabelMessage":"unknown GTIN",
 
@@ -43,6 +43,10 @@
     "leafletNotFoundMessage":"Leaflet Not Displayed",
 
     "leafletNotFoundDescription":"The leaflet for this product can't be displayed due to validation settings.",
+
+    "combinationScenario1":"Invalid SN and Invalid Expiry Date",
+
+    "combinationScenario2":"Invalid SN and Invalid Batch Recalled",
 
     "RecalledBatchDetails":{
       "recalledBatchLabelMessage":"Batch Recalled",

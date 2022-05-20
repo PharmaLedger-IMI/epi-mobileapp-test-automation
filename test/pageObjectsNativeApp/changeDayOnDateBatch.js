@@ -1,5 +1,5 @@
 const testData = require('../testdata/testExpectations.json')
-const configData=require('../testdata/config.json')
+const configData = require('../testdata/config.json')
 const expect = require('chai').expect
 const timeoutWait = require('../utils/setTimeout')
 const moment = require('moment')
@@ -75,14 +75,14 @@ class ChangeDayOnDateBatch {
         console.log(prodInfo);
         expect(prodInfo).includes(configData.prodName);
         console.log(incorrectExpiryDateText);
-        expect(incorrectExpiryDateText).to.equal(configData.incorrectExpiryDateTextVal);
+        expect(incorrectExpiryDateText).to.equal(configData.incorrectExpiryDateLabelMessage);
 
     }
 
     async changeDayOnDateBatchLeafletDetailsFetch() {
 
         // get product info description
-        await this.productInfoDescription.getText();
+        const prodDesc = await this.productInfoDescription.getText();
         await timeoutWait.setTimeoutTime(2);
         // click on leaflet shiled button icon
         await this.leafletVerifiedShiledBtn.click();
@@ -105,7 +105,6 @@ class ChangeDayOnDateBatch {
         console.log(leafletInfoDetailsFetch.match(gtinPattern)[0]);
         console.log(leafletInfoDetailsFetch.match(batchNumberPattern)[0]);
 
-
         await timeoutWait.setTimeoutTime(3);
 
         const datebefore = leafletInfoDetailsFetch.match(expiryDatePattern)[0];
@@ -117,9 +116,11 @@ class ChangeDayOnDateBatch {
         expect(leafletInfoDetailsFetch.match(batchNumberPattern)[0]).to.equal(testData.batchValue);
         expect(leafletInfoDetailsFetch.match(serialNumberPattern)[0]).to.equal(testData.batchSerialNumber);
         expect(dateafter).to.equal(testData.expiry);
-        
+
+        console.log(prodDesc);
+        expect(prodDesc).to.equal(configData.prodDesc)
         console.log(batchInfoTxt);
-        expect(batchInfoTxt).to.equal(configData.batchInfo)
+        expect(batchInfoTxt).to.equal(configData.batchInfoMessage)
 
     }
 }

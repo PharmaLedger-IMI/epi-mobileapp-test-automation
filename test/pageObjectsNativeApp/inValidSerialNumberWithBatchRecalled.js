@@ -20,20 +20,20 @@ class InvalidSerailNumberWithBatchRecalled {
         return $("//android.widget.Button[@text='Close']")
     }
 
-    //recalled Batch 
-    get recalledTextBatch() {
+    //failedSN Batch 
+    get failedSNTextBatch() {
         return $("(//android.view.View[@resource-id='page-ion-content']/descendant::android.widget.TextView)[2]")
     }
 
-    get recalledBatchLearnMore() {
+    get failedSNLearnMore() {
         return $("(//android.view.View[@resource-id='page-ion-content']/descendant::android.widget.TextView)[3]")
     }
 
-    get recalledPopUpMsg() {
+    get failedSNPopUpMsg() {
         return $("(//android.app.Dialog/descendant::android.view.View[5]/child::android.widget.TextView)")
     }
 
-    get closeRecalledPopUpMsg() {
+    get closeFailedSNPopUpMsg() {
         return $("(//android.app.Dialog/descendant::android.view.View)[3]/child::android.widget.Button")
     }
 
@@ -62,14 +62,14 @@ class InvalidSerailNumberWithBatchRecalled {
         await this.closeBtnMsg.click();
         await timeoutWait.setTimeoutTime(3);
         // recalled text message 
-        const recalledBatch = await this.recalledTextBatch.getText();
+        const failedSNBatch = await this.failedSNTextBatch.getText();
         await timeoutWait.setTimeoutTime(3);
         // product info message
-        await this.recalledBatchLearnMore.click();
+        await this.failedSNLearnMore.click();
         await timeoutWait.setTimeoutTime(3);
-        await this.recalledPopUpMsg.getText();
+        await this.failedSNPopUpMsg.getText();
         await timeoutWait.setTimeoutTime(3);
-        await this.closeRecalledPopUpMsg.click();
+        await this.closeFailedSNPopUpMsg.click();
         await timeoutWait.setTimeoutTime(3);
         const leafletNotFound = await this.leafletNotFoundText.getText();
         await timeoutWait.setTimeoutTime(2);
@@ -78,7 +78,7 @@ class InvalidSerailNumberWithBatchRecalled {
         // click on leaflet shield button
 
         // chai assertions on expiry date, serial number, gtin number and batch Number pattern
-        expect(recalledBatch).to.equal(configData.recalledBatch)
+        expect(failedSNBatch).to.equal(configData.combinationScenario2)
         expect(leafletNotFound).to.equal(configData.leafletNotFoundMessage);
         expect(LeafletNotFoundDesc).to.equal(configData.leafletNotFoundDescription);
 

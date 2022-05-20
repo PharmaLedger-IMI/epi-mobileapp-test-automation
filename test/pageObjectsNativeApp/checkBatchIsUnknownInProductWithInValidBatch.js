@@ -4,51 +4,37 @@ const expect = require('chai').expect
 const timeout = require('../utils/setTimeout')
 const moment = require('moment')
 
+class checkBatchIsUnknownInProductWithInValidMatrix {
 
-const expiryDatePattern = /(?<=Expiry:)(.*)(?=Serial)/g
-const serialNumberPattern = /(?<=Serial number:)(.*)(?=Product)/g
-const gtinPattern = /(?<=Product code:)(.*)(?=Batch)/g
-const batchNumberPattern = /(?<=Batch number:).*/g
-
-
-class CheckExpirationDateInProductAndBatchWithCorrectExpiryDate {
-
-    get recalledTxtMsg() {
-        return $("(//android.app.Dialog/descendant::android.view.View)[5]/child::android.widget.TextView")
-    }
-
-    get closeBtnMsg() {
-        return $("//android.widget.Button[@text='Close']")
-    }
-
-    get recalledTextBatch() {
+    get batchUnknownTextBatch() {
         return $("(//android.view.View[@resource-id='page-ion-content']/descendant::android.widget.TextView)[2]")
     }
 
-    get recalledBatchLearnMore() {
+    get batchUnknownLearnMore() {
         return $("(//android.view.View[@resource-id='page-ion-content']/descendant::android.widget.TextView)[3]")
     }
 
-    get recalledPopUpMsg() {
+    get batchUnknownPopUpMsg() {
         return $("(//android.app.Dialog/descendant::android.view.View[5]/child::android.widget.TextView)")
     }
 
-    get closeRecalledPopUpMsg() {
+    get closeBatchUnknownPopUpMsg() {
         return $("(//android.app.Dialog/descendant::android.view.View)[3]/child::android.widget.Button")
     }
 
-    get productInfo() {
+    get prodInfoMsg() {
         return $("(//android.view.View[@resource-id='leaflet-header']/descendant::android.widget.TextView)[1]")
     }
+
     get productDescription() {
         return $("(//android.view.View[@resource-id='leaflet-header']/descendant::android.widget.TextView)[2]");
     }
 
-    get leafletVerifiedShiledBtn() {
+    get leafletShieldInfoBtn() {
         return $("(//android.view.View[@resource-id='leaflet-header']/descendant::android.widget.Image)[1]")
     }
 
-    get batchInfo() {
+    get batchInfoTxtMsg() {
         return $("(//android.app.Dialog/descendant::android.view.View/child::android.widget.TextView)[1]")
     }
 
@@ -72,14 +58,29 @@ class CheckExpirationDateInProductAndBatchWithCorrectExpiryDate {
         return $("(//android.view.View[@resource-id='leaflet-content']/descendant::android.view.View)[2]/child::android.widget.TextView[2]")
     }
 
+    get statusMsg() {
+        return $("(//android.view.View[@resource-id='page-ion-content']/descendant::android.view.View)[1]/child::android.widget.TextView[1]")
+    }
+
+    get learnMore() {
+        return $("(//android.view.View[@resource-id='page-ion-content']/descendant::android.view.View)[1]/child::android.widget.TextView[2]")
+    }
+
+    get prodTitle() {
+        return $("(//android.view.View[@resource-id='page-ion-content']/descendant::android.view.View)[1]/child::android.widget.TextView[4]")
+    }
+
+    get prodTitleText() {
+        return $("(//android.view.View[@resource-id='page-ion-content']/descendant::android.view.View)[1]/child::android.widget.TextView[5]")
+    }
+
     async waitTimeout() {
-        await timeout.setTimeoutWait(32);
-        // await timeout.waitForElement(this.smpcDocType);
+        await timeout.setTimeoutWait(33);
+        await timeout.waitForElement(this.batchUnknownTextBatch);
 
     }
 
-
-    async checkExpirationDateInProductWithCorrectExpiryDateDetailsFetch() {
+    async checkBatchIsUnknownInProductWithInValidBatchDetailsFetch() {
 
         let deviceScreenDimensions = await driver.getWindowRect();
 
@@ -95,36 +96,62 @@ class CheckExpirationDateInProductAndBatchWithCorrectExpiryDate {
 
         await timeout.setTimeoutWait(8);
 
-        const prodInfo = await this.productInfo.getText();
-        // expect(this.productInfo.getText()).to.not.equal(null);
-        await timeout.setTimeoutTime(3);
-        //get text of product information description
+        const batchUnknownTxtBatch = await this.batchUnknownTextBatch.getText();
+        await timeoutWait.setTimeoutTime(2);
+        await this.batchUnknownLearnMore.click();
+        await timeoutWait.setTimeoutTime(3);
+        await this.batchUnknownPopUpMsg.getText();
+        await timeoutWait.setTimeoutTime(3);
+        await this.closeBatchUnknownPopUpMsg.click();
+        await timeoutWait.setTimeoutTime(3);
+
+        // const statusMessage = await this.statusMsg.getText();
+        // console.log(statusMessage);
+        // await timeout.setTimeoutTime(3);
+        // //get text of product information description
+        // const learnMoreStatus = await this.learnMore.getText();
+        // console.log(learnMoreStatus);
+        // await timeout.setTimeoutTime(3);
+        // //click on leaflet Shieled Button
+        // const productTitle = await this.prodTitle.getText();
+        // console.log(productTitle);
+        // await timeout.setTimeoutTime(3);
+        // // get batch info text
+        // const prodTitleOfText = await this.prodTitleText.getText();
+        // console.log(prodTitleOfText);
+        // await timeout.setTimeoutTime(3);
+
+        // await expect(statusMessage).to.not.equal("Batch Unknown");
+        // await expect(learnMoreStatus).to.not.equal("Batch learn more");
+        // await expect(productTitle).to.not.equal("Unknown Batch");
+        // await expect(prodTitleOfText).to.not.equal("Batch Unknown");
+
+        const prodInfoMsg = await this.productInfoMsg.getText();
+        await timeoutWait.setTimeoutTime(2);
         const prodDescMsg = await this.productDescription.getText();
-        await timeout.setTimeoutTime(3);
-        //click on leaflet Shieled Button
+        await timeoutWait.setTimeoutTime(2);
         await this.leafletVerifiedShiledBtn.click();
         await timeout.setTimeoutTime(3);
         // get batch info text
         const batchInfoTxt = await this.batchInfo.getText();
         await timeout.setTimeoutTime(3);
 
-        //get prod info text and assert 
-        console.log(prodInfo);
-        expect(prodInfo).includes(configData.prodName);
-        //get prod Desc text and assert 
+        console.log(prodInfoMsg);
+        expect(prodInfoMsg).includes(configData.prodName);
         console.log(prodDescMsg);
         expect(prodDescMsg).to.equal(configData.prodDesc);
+        console.log(batchUnknownTxtBatch);
+        expect(batchUnknownTxtBatch).to.equal(configData.unKnownBatchLabelMessage);
         //get batch Info text and assert 
         console.log(batchInfoTxt);
         expect(batchInfoTxt).to.equal(configData.batchInfoMessage);
-
     }
 
-    async checkExpirationDateInProductWithCorrectExpiryDateLeafletDetailsFetch() {
+    async checkBatchIsUnknownInProductWithInValidBatchLeafletDetailsFetch() {
+
         // get leaflet product details information
         await this.productLeafletInfoDetails.getText();
         await timeout.setTimeoutTime(3);
-
 
         const leafletInfoDetailsFetch = await this.productLeafletInfoDetails.getText();
         console.log("Prod Info Details of Leaflet is:" + " " + leafletInfoDetailsFetch)
@@ -157,10 +184,21 @@ class CheckExpirationDateInProductAndBatchWithCorrectExpiryDate {
         await this.closeLeafletBtn.click();
         await timeout.setTimeoutTime(3);
 
+        let deviceScreenDimensionofSMPCLeafletType = await driver.getWindowRect();
+        await driver.touchPerform([
+            {
+                Element: this.leafletLevelDescriptionType,
+                action: 'tap',
+                options: {
+                    x: Math.floor(deviceScreenDimensionofSMPCLeafletType.width * 0.49),
+                    y: Math.floor(deviceScreenDimensionofSMPCLeafletType.height * 0.60)
+                }
+            }
+        ]);
+
         const leafletLevelSMPCDescription = await this.leafletLevelDescriptionType.getText();
         console.log(leafletLevelSMPCDescription);
         expect(leafletLevelSMPCDescription).includes(configData.leafletProductLevelDescription)
-
 
         await this.leafletType.click();
         await timeout.setTimeoutWait(3);
@@ -185,6 +223,7 @@ class CheckExpirationDateInProductAndBatchWithCorrectExpiryDate {
         expect(leafletLevelDescription).includes(configData.leafletProductLevelDescription)
 
     }
-}
 
-module.exports = new CheckExpirationDateInProductAndBatchWithCorrectExpiryDate();
+
+}
+module.exports = new checkBatchIsUnknownInProductWithInValidMatrix();

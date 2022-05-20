@@ -71,15 +71,15 @@ class Update10SNInRecalledSN {
         // product info message
         const prodInfoMsg = await this.productInfoMsg.getText();
         await timeoutWait.setTimeoutTime(2);
-        await this.productDescription.getText();
+        const prodDescMsg = await this.productDescription.getText();
         await timeoutWait.setTimeoutTime(2);
 
         console.log(prodInfoMsg);
         expect(prodInfoMsg).includes(configData.prodName);
-        console.log(recalledMsg);
-        expect(recalledMsg).to.equal(configData.recalledMessage);
+        console.log(prodDescMsg);
+        expect(prodDescMsg).to.equal(configData.prodDesc);
         console.log(recalledTxtBatch);
-        expect(recalledTxtBatch).to.equal(configData.recalledBatchTextBatch)
+        expect(recalledTxtBatch).to.equal(configData.recalledBatchLabelMessage)
 
     }
 
@@ -123,7 +123,7 @@ class Update10SNInRecalledSN {
         expect(dateafter).to.equal(testData.expiry);
 
         console.log(batchInfoText);
-        expect(batchInfoText).to.equal(configData.batchInfo)
+        expect(batchInfoText).to.equal(configData.batchInfoMessage)
 
     }
 }

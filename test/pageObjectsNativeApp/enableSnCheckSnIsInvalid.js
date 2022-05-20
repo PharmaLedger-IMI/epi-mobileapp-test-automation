@@ -71,19 +71,19 @@ class EnableSnCheckSnIsInvalid {
         console.log(prodInfo);
         expect(prodInfo).includes(configData.prodName);
         console.log(invalidSNText);
-        expect(invalidSNText).to.equal(configData.invalidSNTextBatch);
+        expect(invalidSNText).to.equal(configData.invalidSerialNumberLabelMessage);
 
     }
 
     async enableSnCheckSnInvalidLeafletDetailsFetch() {
         // get product info description
-        await this.productDescription.getText();
+        const prodDescMsg =await this.productDescription.getText();
         await timeoutWait.setTimeoutTime(2);
         // click on leaflet shiled button icon
         await this.leafletVerifiedShiledBtn.click();
         await timeoutWait.setTimeoutTime(2);
         // get text of batch info
-        await this.batchInfo.getText();
+        const batchInfoTxt=await this.batchInfo.getText();
         await timeoutWait.setTimeoutTime(2);
         // get leaflet prod info data 
         await this.productLeafletInfoDetails.getText();
@@ -112,6 +112,11 @@ class EnableSnCheckSnIsInvalid {
         expect(leafletInfoDetailsFetch.match(batchNumberPattern)[0]).to.equal(testData.batchValue);
         expect(leafletInfoDetailsFetch.match(serialNumberPattern)[0]).to.equal(testData.batchSerialNumber);
         expect(dateafter).to.equal(testData.expiry);
+
+        console.log(prodDescMsg);
+        expect(prodDescMsg).to.equal(configData.prodDesc);
+        console.log(batchInfoTxt);
+        expect(batchInfoTxt).includes(configData.batchInfoMessage);
 
 
     }

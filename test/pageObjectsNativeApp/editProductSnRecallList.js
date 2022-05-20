@@ -1,5 +1,5 @@
 const testData = require('../testdata/testExpectations.json')
-const configData= require('../testdata/config.json')
+const configData = require('../testdata/config.json')
 const expect = require('chai').expect
 const timeoutWait = require('../utils/setTimeout')
 const moment = require('moment')
@@ -79,17 +79,17 @@ class UpdateProductSNRecallFlag {
         await this.closeRecalledPopUpMsg.click();
         await timeoutWait.setTimeoutTime(3);
         // product info message
-        const prodInfoMsg = await this.productInfoMsg.getText();
+        const productInfoMsg = await this.prodInfoMsg.getText();
         await timeoutWait.setTimeoutTime(2);
         await this.productDescription.getText();
         await timeoutWait.setTimeoutTime(2);
 
-        console.log(prodInfoMsg);
-        expect(prodInfoMsg).includes(configData.prodName);
+        console.log(productInfoMsg);
+        expect(productInfoMsg).includes(configData.prodName);
         console.log(recalledMsg);
         expect(recalledMsg).to.equal(configData.recalledMessage);
         console.log(recalledTxtBatch);
-        expect(recalledTxtBatch).to.equal(configData.recalledBatchTextBatch)
+        expect(recalledTxtBatch).to.equal(configData.recalledBatchLabelMessage)
 
     }
 
@@ -100,7 +100,7 @@ class UpdateProductSNRecallFlag {
         await this.leafletShieldInfoBtn.click();
         await timeoutWait.setTimeoutTime(2);
         // btach info text message 
-        await this.batchInfoTxtMsg.getText();
+        const batchInfo = await this.batchInfoTxtMsg.getText();
         await timeoutWait.setTimeoutTime(2);
         // leaflet product information details
         await this.productLeafletInfoDetails.getText();
@@ -116,7 +116,7 @@ class UpdateProductSNRecallFlag {
         console.log(leafletInfoDetailsFetch.match(serialNumberPattern)[0]);
         console.log(leafletInfoDetailsFetch.match(gtinPattern)[0]);
         console.log(leafletInfoDetailsFetch.match(batchNumberPattern)[0]);
-       
+
         await timeoutWait.setTimeoutTime(3);
 
         const datebefore = leafletInfoDetailsFetch.match(expiryDatePattern)[0];
@@ -128,6 +128,9 @@ class UpdateProductSNRecallFlag {
         expect(leafletInfoDetailsFetch.match(batchNumberPattern)[0]).to.equal(testData.batchValue);
         expect(leafletInfoDetailsFetch.match(serialNumberPattern)[0]).to.equal(testData.batchSerialNumber);
         expect(dateafter).to.equal(testData.expiry);
+
+        console.log(batchInfo);
+        expect(batchInfo).to.equal(configData.batchInfoMessage);
 
     }
 }

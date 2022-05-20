@@ -1,4 +1,5 @@
 const testData = require('../testdata/testExpectations.json')
+const configData = require('../testdata/config.json')
 const expect = require('chai').expect
 const timeoutWait = require('../utils/setTimeout')
 const moment = require('moment')
@@ -74,20 +75,6 @@ class CheckSmpcDeletedFromProductWithRecalledBatch {
 
     async checkSmpcDeletedFromProductWithRecalledBatchDetailsFetch() {
 
-        let deviceScreenDimensions = await driver.getWindowRect();
-
-        await driver.touchPerform([
-            {
-                action: 'tap',
-                options: {
-                    x: Math.floor(deviceScreenDimensions.width * 0.49),
-                    y: Math.floor(deviceScreenDimensions.height * 0.49)
-                }
-            }
-        ]);
-
-        await timeout.setTimeoutWait(8);
-
         const recalledMsg = await this.recalledTxtMsg.getText();
         console.log(recalledMsg);
         await timeoutWait.setTimeoutTime(2);
@@ -125,11 +112,11 @@ class CheckSmpcDeletedFromProductWithRecalledBatch {
         expect(prodDesc).to.equal(configData.prodDesc);
         //get batch Info text and assert 
         console.log(batchInfoTxt);
-        expect(batchInfoTxt).to.equal(configData.batchInfo);
+        expect(batchInfoTxt).to.equal(configData.batchInfoMessage);
         console.log(recalledMsg);
         expect(recalledMsg).to.equal(configData.recalledMessage);
         console.log(recalledTxtBatch);
-        expect(recalledTxtBatch).to.equal(configData.recalledBatchTextBatch)
+        expect(recalledTxtBatch).to.equal(configData.recalledBatchLabelMessage)
 
     }
 
@@ -170,16 +157,10 @@ class CheckSmpcDeletedFromProductWithRecalledBatch {
         await this.closeLeafletBtn.click();
         await timeout.setTimeoutTime(3);
 
-        await this.leafletType.click();
-        await timeout.setTimeoutWait(3);
-
-        await this.leafletTypeEpi.click();
-        await timeout.setTimeoutWait(4);
-
         let deviceScreenDimensionofLeafletType = await driver.getWindowRect();
         await driver.touchPerform([
             {
-                Element: this.leafletProdLevelDescType,
+                Element: this.leafletLevelDescriptionType,
                 action: 'tap',
                 options: {
                     x: Math.floor(deviceScreenDimensionofLeafletType.width * 0.49),

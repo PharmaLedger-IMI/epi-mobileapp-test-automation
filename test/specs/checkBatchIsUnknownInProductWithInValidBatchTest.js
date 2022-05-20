@@ -1,4 +1,4 @@
-const checkBatchIsUnknownInProductWithinValidMatrix = require('../pageObjectsNativeApp/checkBatchIsUnknownInProductWithInValidMatrix')
+const checkBatchIsUnknownInProductWithinValidMatrix = require('../pageObjectsNativeApp/checkBatchIsUnknownInProductWithInValidBatch')
 const allureReporter = require('@wdio/allure-reporter').default
 const nativePatientPage = require('../pageObjectsNativeApp/patientSettingPage')
 const timeoutWait = require('../utils/setTimeout')
@@ -33,8 +33,12 @@ describe('092_Edit Product to check batch is unknown and edit batch to have vali
                 await checkBatchIsUnknownInProductWithinValidMatrix.waitTimeout();
                 await timeoutWait.setTimeoutWait(3);
                 //display details on Add_productBatch Leaflet when Add_productBatch Leaflet for batch scenario created
-                await checkBatchIsUnknownInProductWithinValidMatrix.checkBatchIsUnknownInProductWithInValidMatrixFetch();
-                await timeoutWait.setTimeoutWait(4);
+                await checkBatchIsUnknownInProductWithinValidMatrix.checkBatchIsUnknownInProductWithInValidBatchDetailsFetch();
+                await timeoutWait.setTimeoutWait(3);
+                await checkBatchIsUnknownInProductWithinValidMatrix.checkBatchIsUnknownInProductWithInValidBatchLeafletDetailsFetch();
+                await timeoutWait.setTimeoutWait(3);
+                await checkBatchIsUnknownInProductWithinValidMatrix.getLeafletTypesAndLevel();
+                await timeoutWait.setTimeoutWait(3);
 
 
         });

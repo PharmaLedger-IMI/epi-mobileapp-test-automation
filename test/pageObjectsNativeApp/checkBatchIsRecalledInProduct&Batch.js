@@ -131,11 +131,11 @@ class CheckBatchRecalledInProductAndBatch {
         expect(prodDesc).to.equal(configData.prodDesc);
         //get batch Info text and assert 
         console.log(batchInfoTxt);
-        expect(batchInfoTxt).to.equal(configData.batchInfo);
+        expect(batchInfoTxt).to.equal(configData.batchInfoMessage);
         console.log(recalledMsg);
         expect(recalledMsg).to.equal(configData.recalledMessage);
         console.log(recalledTxtBatch);
-        expect(recalledTxtBatch).to.equal(configData.recalledBatchTextBatch)
+        expect(recalledTxtBatch).to.equal(configData.recalledBatchLabelMessage)
 
     }
 
@@ -189,7 +189,7 @@ class CheckBatchRecalledInProductAndBatch {
         let deviceScreenDimensionofLeafletType = await driver.getWindowRect();
         await driver.touchPerform([
             {
-                Element: this.leafletProdLevelDescType,
+                Element: this.leafletLevelDescriptionType,
                 action: 'tap',
                 options: {
                     x: Math.floor(deviceScreenDimensionofLeafletType.width * 0.49),

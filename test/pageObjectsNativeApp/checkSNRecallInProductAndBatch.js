@@ -12,8 +12,6 @@ const batchNumberPattern = /(?<=Batch number:).*/g
 
 class CheckSNRecallInProductAndBatch {
 
-
-
     //recalled Batch 
     get snRecallTextBatch() {
         return $("(//android.view.View[@resource-id='page-ion-content']/descendant::android.widget.TextView)[2]")
@@ -31,7 +29,7 @@ class CheckSNRecallInProductAndBatch {
         return $("(//android.app.Dialog/descendant::android.view.View)[3]/child::android.widget.Button")
     }
 
-    get prodInfo() {
+    get productInfo() {
         return $("(//android.view.View[@resource-id='leaflet-header']/descendant::android.widget.TextView)[1]")
     }
 
@@ -43,7 +41,7 @@ class CheckSNRecallInProductAndBatch {
         return $("(//android.view.View[@resource-id='leaflet-header']/descendant::android.widget.Image)[1]")
     }
 
-    get batchInfoTxtMsg() {
+    get batchInfo() {
         return $("(//android.app.Dialog/descendant::android.view.View/child::android.widget.TextView)[1]")
     }
 
@@ -102,10 +100,10 @@ class CheckSNRecallInProductAndBatch {
         // expect(this.productInfo.getText()).to.not.equal(null);
         await timeout.setTimeoutTime(3);
         //get text of product information description
-        const prodDesc = await this.productDescription.getText();
+        const prodDescMsg = await this.productDescription.getText();
         await timeout.setTimeoutTime(3);
         //click on leaflet Shieled Button
-        await this.leafletVerifiedShiledBtn.click();
+        await this.leafletShieldInfoBtn.click();
         await timeout.setTimeoutTime(3);
         // get batch info text
         const batchInfoTxt = await this.batchInfo.getText();
@@ -115,11 +113,11 @@ class CheckSNRecallInProductAndBatch {
         console.log(prodInfo);
         expect(prodInfo).includes(configData.prodName);
         //get prod Desc text and assert 
-        console.log(prodDesc);
-        expect(prodDesc).to.equal(configData.prodDesc);
+        console.log(prodDescMsg);
+        expect(prodDescMsg).to.equal(configData.prodDesc);
         //get batch Info text and assert 
         console.log(batchInfoTxt);
-        expect(batchInfoTxt).to.equal(configData.batchInfo);
+        expect(batchInfoTxt).to.equal(configData.batchInfoMessage);
         console.log(snRecallTxtBatch);
         expect(snRecallTxtBatch).to.equal(configData.serialNumberRecallLabelMessage);
 
@@ -161,6 +159,18 @@ class CheckSNRecallInProductAndBatch {
 
         await this.closeLeafletBtn.click();
         await timeout.setTimeoutTime(3);
+
+        let deviceScreenDimensionofSMPCLeafletType = await driver.getWindowRect();
+        await driver.touchPerform([
+            {
+                Element: this.leafletLevelDescriptionType,
+                action: 'tap',
+                options: {
+                    x: Math.floor(deviceScreenDimensionofSMPCLeafletType.width * 0.49),
+                    y: Math.floor(deviceScreenDimensionofSMPCLeafletType.height * 0.60)
+                }
+            }
+        ]);
 
         const leafletLevelSMPCDescription = await this.leafletLevelDescriptionType.getText();
         console.log(leafletLevelSMPCDescription);

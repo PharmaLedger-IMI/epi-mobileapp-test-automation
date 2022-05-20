@@ -64,7 +64,7 @@ class UncheckSNIsUnknownInProductAndBatch {
         // click on leaflet shield button
 
         // chai assertions on expiry date, serial number, gtin number and batch Number pattern
-        expect(snIsUnknownBatch).to.equal(configData.serialNumberUnknownLabelMessagerongBatchLabelMessage)
+        expect(snIsUnknownBatch).to.equal(configData.serialNumberUnknownLabelMessage)
         expect(leafletNotFound).to.equal(configData.leafletNotFoundMessage);
         expect(LeafletNotFoundDesc).to.equal(configData.leafletNotFoundDescription);
 

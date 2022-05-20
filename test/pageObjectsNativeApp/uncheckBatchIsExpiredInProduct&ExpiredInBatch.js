@@ -65,7 +65,7 @@ class UncheckBatchIsExpiredInProductAndExpiredInBatch {
         // click on leaflet shield button
 
         // chai assertions on expiry date, serial number, gtin number and batch Number pattern
-        expect(incorrectBatch).to.equal(configData.incorrectExpiryDateLabelMessage)
+        expect(incorrectBatch).to.equal(configData.expiredBatchLabelMessage)
         expect(leafletNotFound).to.equal(configData.leafletNotFoundMessage);
         expect(LeafletNotFoundDesc).to.equal(configData.leafletNotFoundDescription);
 

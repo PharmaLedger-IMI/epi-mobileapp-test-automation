@@ -27,7 +27,7 @@ class CheckUnkownBatchWithInvalidBatchAndInvalidExpiryDate {
 
     get closeSNIsUnknownPopUpMsg() {
         return $("(//android.app.Dialog/descendant::android.view.View)[3]/child::android.widget.Button")
-    } 
+    }
 
     get productInfo() {
         return $("(//android.view.View[@resource-id='leaflet-header']/descendant::android.widget.TextView)[1]")
@@ -79,7 +79,7 @@ class CheckUnkownBatchWithInvalidBatchAndInvalidExpiryDate {
         const prodInfo = await this.productInfo.getText();
         await timeout.setTimeoutTime(3);
         //get text of product information description
-        const prodDesc = await this.productDescription.getText();
+        const prodDescMsg = await this.productDescription.getText();
         await timeout.setTimeoutTime(3);
         //click on leaflet Shieled Button
         await this.leafletVerifiedShiledBtn.click();
@@ -92,11 +92,11 @@ class CheckUnkownBatchWithInvalidBatchAndInvalidExpiryDate {
         console.log(prodInfo);
         expect(prodInfo).includes(configData.prodName);
         //get prod Desc text and assert 
-        console.log(prodDesc);
-        expect(prodDesc).to.equal(configData.prodDesc);
+        console.log(prodDescMsg);
+        expect(prodDescMsg).to.equal(configData.prodDesc);
         //get batch Info text and assert 
         console.log(batchInfoTxt);
-        expect(batchInfoTxt).to.equal(configData.batchInfo);
+        expect(batchInfoTxt).to.equal(configData.batchInfoMessage);
         console.log(snIsUnknownTextBatch);
         expect(snIsUnknownTextBatch).to.equal(configData.serialNumberUnknownLabelMessage);
     }
@@ -135,7 +135,7 @@ class CheckUnkownBatchWithInvalidBatchAndInvalidExpiryDate {
         let deviceScreenDimensionofLeafletType = await driver.getWindowRect();
         await driver.touchPerform([
             {
-                Element: this.leafletProdLevelDescType,
+                Element: this.leafletLevelDescriptionType,
                 action: 'tap',
                 options: {
                     x: Math.floor(deviceScreenDimensionofLeafletType.width * 0.49),

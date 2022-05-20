@@ -1,5 +1,5 @@
 const testData = require('../testdata/testExpectations.json')
-const configData=require('../testdata/config.json')
+const configData = require('../testdata/config.json')
 const expect = require('chai').expect
 const timeoutWait = require('../utils/setTimeout')
 const moment = require('moment')
@@ -13,7 +13,7 @@ const batchNumberPattern = /(?<=Batch number:).*/g
 class Update10SNInDecommissionedSN {
 
 
-    //recalled Batch 
+    //decommissioned Batch 
     get decommissionedInfoBatch() {
         return $("(//android.view.View[@resource-id='page-ion-content']/descendant::android.widget.TextView)[2]")
     }
@@ -52,7 +52,7 @@ class Update10SNInDecommissionedSN {
 
     async waitTimeout() {
         await timeoutWait.setTimeoutWait(30);
-        await timeoutWait.waitForElement(this.incorrectExpiryBatch);
+        await timeoutWait.waitForElement(this.decommissionedInfoBatch);
 
     }
 
@@ -71,13 +71,15 @@ class Update10SNInDecommissionedSN {
         // product info message
         const productInfoMsg = await this.prodInfoMsg.getText();
         await timeoutWait.setTimeoutTime(2);
-        await this.productDescription.getText();
+        const prodDescMsg = await this.productDescription.getText();
         await timeoutWait.setTimeoutTime(2);
 
         console.log(productInfoMsg);
         expect(productInfoMsg).includes(configData.prodName);
+        console.log(prodDescMsg);
+        expect(prodDescMsg).to.equal(configData.prodDesc);
         console.log(decommisionedInfoTxtBatch);
-        expect(decommisionedInfoTxtBatch).to.equal(configData.decommisionedInfoTextBatch);
+        expect(decommisionedInfoTxtBatch).to.equal(configData.serialNumberDecommissionedLabelMessage);
 
     }
 
@@ -118,7 +120,7 @@ class Update10SNInDecommissionedSN {
         expect(dateafter).to.equal(testData.expiry);
 
         console.log(batchInfoText);
-        expect(batchInfoText).to.equal(configData.batchInfo)
+        expect(batchInfoText).to.equal(configData.batchInfoMessage)
 
     }
 

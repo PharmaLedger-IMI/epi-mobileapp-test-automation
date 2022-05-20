@@ -94,16 +94,10 @@ class CheckBatchRecallInProductAndNotRecallInBatch {
         // await this.closeRecalledPopUpMsg.click();
         // await timeoutWait.setTimeoutTime(3);
         // product info message
-        const prodInfoMsg = await this.productInfo.getText();
-        await timeoutWait.setTimeoutTime(2);
-        await this.productDescription.getText();
-        await timeoutWait.setTimeoutTime(2);
         const prodInfo = await this.productInfo.getText();
-        // expect(this.productInfo.getText()).to.not.equal(null);
-        await timeout.setTimeoutTime(3);
-        //get text of product information description
-        const prodDesc = await this.productDescription.getText();
-        await timeout.setTimeoutTime(3);
+        await timeoutWait.setTimeoutTime(2);
+        const prodDescMsg = await this.productDescription.getText();
+        await timeoutWait.setTimeoutTime(2);
         //click on leaflet Shieled Button
         await this.leafletVerifiedShiledBtn.click();
         await timeout.setTimeoutTime(3);
@@ -115,14 +109,13 @@ class CheckBatchRecallInProductAndNotRecallInBatch {
         console.log(prodInfo);
         expect(prodInfo).includes(configData.prodName);
         //get prod Desc text and assert 
-        console.log(prodDesc);
-        expect(prodDesc).to.equal(configData.prodDesc);
+        console.log(prodDescMsg);
+        expect(prodDescMsg).to.equal(configData.prodDesc);
         //get batch Info text and assert 
         console.log(batchInfoTxt);
-        expect(batchInfoTxt).to.equal(configData.batchInfo);
+        expect(batchInfoTxt).to.equal(configData.batchInfoMessage);
         // console.log(recalledTxtBatch);
         // expect(recalledTxtBatch).to.equal(configData.recalledBatchLabelMessage)
-
 
     }
 
@@ -175,7 +168,7 @@ class CheckBatchRecallInProductAndNotRecallInBatch {
         let deviceScreenDimensionofLeafletType = await driver.getWindowRect();
         await driver.touchPerform([
             {
-                Element: this.leafletProdLevelDescType,
+                Element: this.leafletLevelDescriptionType,
                 action: 'tap',
                 options: {
                     x: Math.floor(deviceScreenDimensionofLeafletType.width * 0.49),

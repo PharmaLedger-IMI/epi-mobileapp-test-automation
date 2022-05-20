@@ -30,7 +30,7 @@ class UncheckBatchIsUnknownInProductWithInValidBatch {
 
     async uncheckBatchIsUnknownInProductWithInValidBatchFetch() {
 
-        const statusMessage = await this.statusMsg.getText();
+        const statusMessageTxt = await this.statusMsg.getText();
         console.log(statusMessage);
         await timeout.setTimeoutTime(3);
         //get text of product information description
@@ -46,7 +46,7 @@ class UncheckBatchIsUnknownInProductWithInValidBatch {
         console.log(prodTitleOfText);
         await timeout.setTimeoutTime(3);
 
-        await expect(statusMessage).to.not.equal("Batch Unknown");
+        await expect(statusMessageTxt).to.not.equal("Batch Unknown");
         await expect(learnMoreStatus).to.not.equal("Batch learn more");
         await expect(productTitle).to.not.equal("Unknown Batch");
         await expect(prodTitleOfText).to.not.equal("Batch Unknown");

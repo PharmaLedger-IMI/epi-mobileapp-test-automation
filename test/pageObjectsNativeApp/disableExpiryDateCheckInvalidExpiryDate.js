@@ -1,5 +1,5 @@
 const testData = require('../testdata/testExpectations.json')
-const configData=require('../testdata/config.json')
+const configData = require('../testdata/config.json')
 const expect = require('chai').expect
 const timeoutWait = require('../utils/setTimeout')
 const moment = require('moment')
@@ -31,7 +31,7 @@ class DisableExpiryDateCheckInvalidExpiryDate {
     get productInfo() {
         return $("(//android.view.View[@resource-id='leaflet-header']/descendant::android.widget.TextView)[1]")
     }
-    get productInfoDescription() {
+    get productDescription() {
         return $("(//android.view.View[@resource-id='leaflet-header']/descendant::android.widget.TextView)[2]");
     }
 
@@ -70,14 +70,14 @@ class DisableExpiryDateCheckInvalidExpiryDate {
         console.log(prodInfo);
         expect(prodInfo).includes(configData.prodName);
         console.log(incorrectExpiryDateText);
-        expect(incorrectExpiryDateText).to.equal(configData.incorrectExpiryDateTextVal);
+        expect(incorrectExpiryDateText).to.equal(configData.incorrectExpiryDateLabelMessage);
 
     }
 
     async disableExpiryDateCheckInvalidExpiryDateLeafletDetailsFetch() {
 
         // get product info description
-        await this.productInfoDescription.getText();
+        const prodDesc = await this.productDescription.getText();
         await timeoutWait.setTimeoutTime(2);
         // click on leaflet shiled button icon
         await this.leafletVerifiedShiledBtn.click();
@@ -112,8 +112,11 @@ class DisableExpiryDateCheckInvalidExpiryDate {
         expect(leafletInfoDetailsFetch.match(batchNumberPattern)[0]).to.equal(testData.batchValue);
         expect(leafletInfoDetailsFetch.match(serialNumberPattern)[0]).to.equal(testData.batchSerialNumber);
         expect(dateafter).to.equal(testData.expiry);
+
+        console.log(prodDesc);
+        expect(prodDesc).to.equal(configData.prodDesc)
         console.log(batchInfoTxt);
-        expect(batchInfoTxt).to.equal(configData.batchInfo)
+        expect(batchInfoTxt).to.equal(configData.batchInfoMessage)
 
     }
 }

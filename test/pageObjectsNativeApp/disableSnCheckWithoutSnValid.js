@@ -45,7 +45,7 @@ class DisableSnCheckWithoutSnIsValid {
         const prodDesc = await this.productDescription.getText();
         await timeout.setTimeoutTime(3);
         //click on leaflet Shieled Button
-        await this.leafletVerifiedShiledBtn.click();
+        await this.leafletVerifiedShieldBtn.click();
         await timeout.setTimeoutTime(3);
         // get batch info text
         const batchInfoTxt = await this.batchInfo.getText();
@@ -59,7 +59,7 @@ class DisableSnCheckWithoutSnIsValid {
         expect(prodDesc).to.equal(configData.prodDesc);
         //get batch Info text and assert 
         console.log(batchInfoTxt);
-        expect(batchInfoTxt).to.equal(configData.batchInfo);
+        expect(batchInfoTxt).to.equal(configData.batchInfoMessage);
 
     }
 

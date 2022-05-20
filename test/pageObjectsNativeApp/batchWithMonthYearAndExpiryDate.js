@@ -1,4 +1,5 @@
 const testData = require('../testdata/testExpectations.json')
+const configData = require('../testdata/config.json')
 const expect = require('chai').expect
 const timeoutWait = require('../utils/setTimeout')
 const moment = require('moment')
@@ -43,24 +44,24 @@ class BatchWithMonthYearOnDate {
         const prodInfo = await this.productInfo.getText();
         await timeout.setTimeoutTime(3);
         //get text of product information description
-        const prodDesc=await this.productDescription.getText();
+        const prodDesc = await this.productDescription.getText();
         await timeout.setTimeoutTime(3);
         //click on leaflet Shieled Button
         await this.leafletVerifiedShiledBtn.click();
         await timeout.setTimeoutTime(3);
         // get batch info text
-        const batchInfoTxt= await this.batchInfo.getText();
+        const batchInfoTxt = await this.batchInfo.getText();
         await timeout.setTimeoutTime(3);
 
-         //get prod info text and assert 
-         console.log(prodInfo);
-         expect(prodInfo).includes(configData.prodName);
-         //get prod Desc text and assert 
-         console.log(prodDesc);
-         expect(prodDesc).to.equal(configData.prodDesc);
-         //get batch Info text and assert 
-         console.log(batchInfoTxt);
-         expect(batchInfoTxt).to.equal(configData.batchInfo);
+        //get prod info text and assert 
+        console.log(prodInfo);
+        expect(prodInfo).includes(configData.prodName);
+        //get prod Desc text and assert 
+        console.log(prodDesc);
+        expect(prodDesc).to.equal(configData.prodDesc);
+        //get batch Info text and assert 
+        console.log(batchInfoTxt);
+        expect(batchInfoTxt).to.equal(configData.batchInfoMessage);
 
     }
 

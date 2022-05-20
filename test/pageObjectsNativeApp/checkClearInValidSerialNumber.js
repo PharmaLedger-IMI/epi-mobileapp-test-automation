@@ -71,13 +71,15 @@ class CheckClearInValidSerailNumber {
         // product info message
         const productInfoMsg = await this.prodInfoMsg.getText();
         await timeoutWait.setTimeoutTime(2);
-        await this.productDescription.getText();
+        const prodDescMsg = await this.productDescription.getText();
         await timeoutWait.setTimeoutTime(2);
 
         console.log(productInfoMsg);
         expect(productInfoMsg).includes(configData.prodName);
+        console.log(prodDescMsg);
+        expect(prodDescMsg).to.equal(configData.prodDesc);
         console.log(failedSNTextBatch);
-        expect(failedSNTextBatch).to.equal(configData.invalidSNTextBatch);
+        expect(failedSNTextBatch).to.equal(configData.invalidSerialNumberLabelMessage);
 
     }
 
@@ -118,7 +120,7 @@ class CheckClearInValidSerailNumber {
         expect(dateafter).to.equal(testData.expiry);
 
         console.log(batchInfoText);
-        expect(batchInfoText).to.equal(configData.batchInfo)
+        expect(batchInfoText).to.equal(configData.batchInfoMessage)
 
     }
 

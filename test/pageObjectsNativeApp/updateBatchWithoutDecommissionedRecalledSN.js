@@ -12,21 +12,20 @@ const batchNumberPattern = /(?<=Batch number:).*/g
 
 class UpdateBatchWithoutDecommissionedRecalledSN {
 
-
     //recalled Batch 
-    get failedSNBatch() {
+    get decommissionedSNBatch() {
         return $("(//android.view.View[@resource-id='page-ion-content']/descendant::android.widget.TextView)[2]")
     }
 
-    get failedSNLearnMore() {
+    get decommissionedSNLearnMore() {
         return $("(//android.view.View[@resource-id='page-ion-content']/descendant::android.widget.TextView)[3]")
     }
 
-    get failedSNPopUpMsg() {
+    get decommissionedSNPopUpMsg() {
         return $("(//android.app.Dialog/descendant::android.view.View[5]/child::android.widget.TextView)")
     }
 
-    get closeFailedSNPopUpMsg() {
+    get closeDecommissionedSNPopUpMsg() {
         return $("(//android.app.Dialog/descendant::android.view.View[3]/child::android.widget.Button)")
     }
 
@@ -59,30 +58,31 @@ class UpdateBatchWithoutDecommissionedRecalledSN {
 
     async updateBatchWithoutDecommissionedAndRecalledDetailsFetch() {
 
-        // recalled text message 
-        const failedSNTextBatch = await this.failedSNBatch.getText();
-        await timeoutWait.setTimeoutTime(2);
-        await this.failedSNLearnMore.click();
-        await timeoutWait.setTimeoutTime(3);
-        await this.failedSNPopUpMsg.getText();
-        await timeoutWait.setTimeoutTime(3);
-        await this.closeFailedSNPopUpMsg.click();
-        await timeoutWait.setTimeoutTime(3);
+        // // recalled text message 
+        // const decommissionedSNTextBatch = await this.decommissionedSNBatch.getText();
+        // await timeoutWait.setTimeoutTime(2);
+        // await this.decommissionedSNLearnMore.click();
+        // await timeoutWait.setTimeoutTime(3);
+        // await this.decommissionedSNPopUpMsg.getText();
+        // await timeoutWait.setTimeoutTime(3);
+        // await this.closeDecommissionedSNPopUpMsg.click();
+        // await timeoutWait.setTimeoutTime(3);
         // product info message
         const productInfoMsg = await this.prodInfoMsg.getText();
         await timeoutWait.setTimeoutTime(2);
-        await this.productDescription.getText();
+        const prodDescMsg = await this.productDescription.getText();
         await timeoutWait.setTimeoutTime(2);
 
         console.log(productInfoMsg);
         expect(productInfoMsg).includes(configData.prodName);
-        console.log(failedSNTextBatch);
-        expect(failedSNTextBatch).to.equal(configData.invalidSNTextBatch);
+        console.log(prodDescMsg);
+        expect(prodDescMsg).to.equal(configData.prodDesc);
+        // console.log(decommissionedSNTextBatch);
+        // expect(decommissionedSNTextBatch).to.equal(configData.serialNumberDecommissionedLabelMessage);
 
     }
 
     async updateBatchWithoutDecommissionedAndRecalledLeafletDetailsFetch() {
-
 
         // click on leaflet shield button
         await this.leafletShieldInfoBtn.click();
@@ -118,7 +118,7 @@ class UpdateBatchWithoutDecommissionedRecalledSN {
         expect(dateafter).to.equal(testData.expiry);
 
         console.log(batchInfoText);
-        expect(batchInfoText).to.equal(configData.batchInfo)
+        expect(batchInfoText).to.equal(configData.batchInfoMessage)
 
     }
 
