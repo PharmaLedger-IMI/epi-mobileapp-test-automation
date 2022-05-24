@@ -25,7 +25,7 @@ class CheckClearRecalledSerialNumber {
         return $("(//android.app.Dialog/descendant::android.view.View[5]/child::android.widget.TextView)")
     }
 
-    get closeFailedSNInfoPopUpMsg() {
+    get closeFailedSNPopUpMsg() {
         return $("(//android.app.Dialog/descendant::android.view.View[3]/child::android.widget.Button)")
     }
 
@@ -59,7 +59,7 @@ class CheckClearRecalledSerialNumber {
     async checkClearRecalledSerialNumberDetailsFetch() {
 
         // recalled text message 
-        const failedSNTextBatch = await this.failedSNBatch.getText();
+        const failedSNTextBatch = await this.failedSNInfoBatch.getText();
         await timeoutWait.setTimeoutTime(2);
         await this.failedSNLearnMore.click();
         await timeoutWait.setTimeoutTime(3);

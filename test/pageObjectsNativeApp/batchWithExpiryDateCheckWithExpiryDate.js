@@ -85,14 +85,14 @@ class BatchWithExpiryDateCheckwithExpiryDate {
         // product info message
         const productInfoMsg = await this.prodInfoMsg.getText();
         await timeoutWait.setTimeoutTime(2);
-        const prodDesc = await this.productDescription.getText();
+        const prodDescMsg = await this.productDescription.getText();
         await timeoutWait.setTimeoutTime(2);
 
         //Assertions 
         console.log(productInfoMsg);
         expect(productInfoMsg).includes(configData.prodName);
-        console.log(prodDesc);
-        expect(prodDesc).to.equal(configData.prodDesc);
+        console.log(prodDescMsg);
+        expect(prodDescMsg).to.equal(configData.prodDesc);
         console.log(expiryDateTxtBatch);
         expect(expiryDateTxtBatch).to.equal(configData.expiredBatchLabelMessage);
         console.log(recalledMsg);

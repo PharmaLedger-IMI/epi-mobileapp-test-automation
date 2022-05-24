@@ -82,13 +82,13 @@ class ChangeDayOnDateBatch {
     async changeDayOnDateBatchLeafletDetailsFetch() {
 
         // get product info description
-        const prodDesc = await this.productInfoDescription.getText();
+        const prodDescMsg = await this.productDescription.getText();
         await timeoutWait.setTimeoutTime(2);
         // click on leaflet shiled button icon
-        await this.leafletVerifiedShiledBtn.click();
+        await this.leafletShieldInfoBtn.click();
         await timeoutWait.setTimeoutTime(2);
         // get text of batch info
-        const batchInfoTxt = await this.batchInfo.getText();
+        const batchInfoTxt = await this.batchInfoTxtMsg.getText();
         await timeoutWait.setTimeoutTime(2);
         // get leaflet prod info data 
         await this.productLeafletInfoDetails.getText();
@@ -117,8 +117,8 @@ class ChangeDayOnDateBatch {
         expect(leafletInfoDetailsFetch.match(serialNumberPattern)[0]).to.equal(testData.batchSerialNumber);
         expect(dateafter).to.equal(testData.expiry);
 
-        console.log(prodDesc);
-        expect(prodDesc).to.equal(configData.prodDesc)
+        console.log(prodDescMsg);
+        expect(prodDescMsg).to.equal(configData.prodDesc)
         console.log(batchInfoTxt);
         expect(batchInfoTxt).to.equal(configData.batchInfoMessage)
 

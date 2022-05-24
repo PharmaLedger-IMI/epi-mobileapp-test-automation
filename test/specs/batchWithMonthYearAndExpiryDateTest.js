@@ -33,8 +33,10 @@ describe('028_create a batch with only MonthYear as expiry date', () => {
         await batchWithMonthYearOnDate.waitTimeout();
         await timeoutWait.setTimeoutWait(4);
         //display details on Leaflet for recalled batch scenario
-        await batchWithMonthYearOnDate.batchWithMonthYearOnDateFetch();
-        await timeoutWait.setTimeoutWait(4);
+        await batchWithMonthYearOnDate.batchWithMonthYearAndExpiryDateDetailsFetch();
+        await timeoutWait.setTimeoutWait(3);
+        await batchWithMonthYearOnDate.batchWithMonthYearAndExpiryDateLeafletDataFetch();
+        await timeoutWait.setTimeoutWait(3);
 
     });
 

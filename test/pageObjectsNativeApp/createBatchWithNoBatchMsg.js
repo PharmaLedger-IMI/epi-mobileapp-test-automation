@@ -40,17 +40,17 @@ class CreateBatchWithNoBatchMsg {
 
     async createBatchWithNoBatchMsgDetailsFetch() {
 
-        const prodInfo = await this.productInfo.getText();
-        await timeout.setTimeoutTime(3);
+        const prodInfo = await this.prodInfoMsg.getText();
+        await timeoutWait.setTimeoutTime(3);
         //get text of product information description
         const prodDesc = await this.productDescription.getText();
-        await timeout.setTimeoutTime(3);
+        await timeoutWait.setTimeoutTime(3);
         //click on leaflet Shieled Button
-        await this.leafletVerifiedShiledBtn.click();
-        await timeout.setTimeoutTime(3);
+        await this.leafletShieldInfoBtn.click();
+        await timeoutWait.setTimeoutTime(3);
         // get batch info text
-        const batchInfoTxt = await this.batchInfo.getText();
-        await timeout.setTimeoutTime(3);
+        const batchInfoTxt = await this.batchInfoTxtMsg.getText();
+        await timeoutWait.setTimeoutTime(3);
 
         //get prod info text and assert 
         console.log(prodInfo);
@@ -68,7 +68,7 @@ class CreateBatchWithNoBatchMsg {
 
         // get leaflet product details information
         await this.productLeafletInfoDetails.getText();
-        await timeout.setTimeoutTime(3);
+        await timeoutWait.setTimeoutTime(3);
         const leafletInfoDetailsFetch = await this.productLeafletInfoDetails.getText();
         console.log("Prod Info Details of Leaflet is:" + " " + leafletInfoDetailsFetch)
         const leafletInfoFetch = leafletInfoDetailsFetch.replace(':', "=");
@@ -80,7 +80,7 @@ class CreateBatchWithNoBatchMsg {
         console.log(leafletInfoDetailsFetch.match(gtinPattern)[0]);
         console.log(leafletInfoDetailsFetch.match(batchNumberPattern)[0]);
 
-        await timeout.setTimeoutTime(3);
+        await timeoutWait.setTimeoutTime(3);
 
         const datebefore = leafletInfoDetailsFetch.match(expiryDatePattern)[0];
         const dateafter = moment(datebefore, "DD-MMM-YYYY").format("YYMMDD")

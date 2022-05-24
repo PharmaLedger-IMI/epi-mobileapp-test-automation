@@ -57,7 +57,7 @@ class EnableSnCheckSnIsInvalid {
 
         // invalid leaflet text
         const invalidSNText = await this.inValidText.getText();
-        await timeoutWait.setTimeoutTime(2);
+        await timeoutWait.setTimeoutTime(3);
         await this.inValidSNLearnMore.click();
         await timeoutWait.setTimeoutTime(3);
         await this.inValidSNPopUpMsg.getText();
@@ -65,11 +65,11 @@ class EnableSnCheckSnIsInvalid {
         await this.closeInValidSNPopUpMsg.click();
         await timeoutWait.setTimeoutTime(3);
         // get product info text
-        const prodInfo = await this.productInfo.getText();
+        const prodInfoMsg = await this.productInfo.getText();
         await timeoutWait.setTimeoutTime(2);
 
-        console.log(prodInfo);
-        expect(prodInfo).includes(configData.prodName);
+        console.log(prodInfoMsg);
+        expect(prodInfoMsg).includes(configData.prodName);
         console.log(invalidSNText);
         expect(invalidSNText).to.equal(configData.invalidSerialNumberLabelMessage);
 

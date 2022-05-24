@@ -14,15 +14,19 @@
 
     "recalledBatchLabelMessage":"Batch Recalled",
 
+    "recalledLabelMessage":"Recalled",
+
+    "batchLabelMessage":"Sample",
+
     "invalidSerialNumberLabelMessage":"Failed to validate serial Number",
 
-    "incorrectExpiryDateLabelMessage":"Batch is expired",
+    "incorrectExpiryDateLabelMessage":"Incorrect expiry date on pack",
 
-    "expiredBatchLabelMessage":"Expired Batch",
+    "expiredBatchLabelMessage":"Product expired",
 
-    "expiredProductLabelMessage":"Product Expired",
+    "expiredProductLabelMessage":"Product expired",
 
-    "serialNumberDecommissionedLabelMessage":"decommissioned Batch",
+    "serialNumberDecommissionedLabelMessage":"Decommissioned",
 
     "unKnownBatchLabelMessage":"wrong batch",
 

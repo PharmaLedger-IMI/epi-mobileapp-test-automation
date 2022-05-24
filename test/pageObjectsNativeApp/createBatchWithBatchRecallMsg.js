@@ -21,7 +21,7 @@ class CreateBatchWithBatchRecallMsg {
         return $("//android.widget.Button[@text='Close']")
     }
 
-    get recalledText() {
+    get recalledTextBatch() {
         return $("(//android.view.View[@resource-id='page-ion-content']/descendant::android.widget.TextView)[2]")
     }
 
@@ -81,7 +81,7 @@ class CreateBatchWithBatchRecallMsg {
         await this.closeRecalledPopUpMsg.click();
         await timeoutWait.setTimeoutTime(3);
         // product info message
-        const prodInfoMsg = await this.productInfoMsg.getText();
+        const prodInfoMsg = await this.prodInfoMsg.getText();
         await timeoutWait.setTimeoutTime(2);
         const prodDesc = await this.productDescription.getText();
         await timeoutWait.setTimeoutTime(2);

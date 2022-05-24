@@ -83,7 +83,7 @@ class EditBatchRecallForNonSerialzedSN {
         await this.closeRecalledPopUpMsg.click();
         await timeoutWait.setTimeoutTime(3);
         // product info message
-        const prodInfoMsg = await this.productInfoMsg.getText();
+        const prodInfoMsg = await this.prodInfoMsg.getText();
         await timeoutWait.setTimeoutTime(2);
         const prodDesc = await this.productDescription.getText();
         await timeoutWait.setTimeoutTime(2);
@@ -95,7 +95,7 @@ class EditBatchRecallForNonSerialzedSN {
         console.log(recalledMsg);
         expect(recalledMsg).to.equal(configData.recalledMessage);
         console.log(recalledTxtBatch);
-        expect(recalledTxtBatch).to.equal(configData.recalledBatchTextBatch)
+        expect(recalledTxtBatch).to.equal(configData.recalledBatchLabelMessage)
 
     }
 

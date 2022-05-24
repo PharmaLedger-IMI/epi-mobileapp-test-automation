@@ -1,19 +1,11 @@
-// const { remote } = require('webdriverio');
 
 const path = require('path');
-
-// const sharp = require('sharp')
 
 const fs = require('fs')
 
 const bwipjs = require('bwip-js')
 
-const barcode = '(01)89124541410931(17)271219(10)GW7950'
-
-
-
-// <iframe width="420" height="315" src="https://www.youtube.com/embed/giR-Sy7L8c0"></iframe>
-
+const barcode = '(01)20475673138727(17)261213(10)VQ5458(21)766743'
 
 
 bwipjs.toBuffer({

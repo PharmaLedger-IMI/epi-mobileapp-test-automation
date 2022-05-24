@@ -13,7 +13,7 @@ const batchNumberPattern = /(?<=Batch number:).*/g
 class allCombinationBatchMsg {
 
 
-    get recalledTxtMsg() {
+    get batchTxtMsg() {
         return $("(//android.app.Dialog/descendant::android.view.View)[5]/child::android.widget.TextView")
     }
 
@@ -43,30 +43,21 @@ class allCombinationBatchMsg {
 
     async waitTimeout() {
         await timeoutWait.setTimeoutWait(30)
-        await timeoutWait.waitForElement(this.recalledTxtMsg);
+        await timeoutWait.waitForElement(this.batchTxtMsg);
     }
 
 
 
     async createBatchWithBatchMsgDetailsFetch() {
         // recalled text message
-        const recalledMsg = await this.recalledTxtMsg.getText();
-        console.log(recalledMsg);
+        const batchTextMsg = await this.batchTxtMsg.getText();
+        console.log(batchTextMsg);
         await timeoutWait.setTimeoutTime(2);
         // close button click
         await this.closeBtnMsg.click();
         await timeoutWait.setTimeoutTime(2);
-        // recalled text message 
-        const recalledTxtBatch = await this.recalledTextBatch.getText();
-        await timeoutWait.setTimeoutTime(2);
-        await this.recalledBatchLearnMore.click();
-        await timeoutWait.setTimeoutTime(3);
-        await this.recalledPopUpMsg.getText();
-        await timeoutWait.setTimeoutTime(3);
-        await this.closeRecalledPopUpMsg.click();
-        await timeoutWait.setTimeoutTime(3);
         // product info message
-        const prodInfoMsg = await this.productInfoMsg.getText();
+        const prodInfoMsg = await this.prodInfoMsg.getText();
         await timeoutWait.setTimeoutTime(2);
         const prodDesc = await this.productDescription.getText();
         await timeoutWait.setTimeoutTime(2);
@@ -75,10 +66,9 @@ class allCombinationBatchMsg {
         expect(prodInfoMsg).includes(configData.prodName);
         console.log(prodDesc);
         expect(prodDesc).to.equal(configData.prodDesc);
-        console.log(recalledMsg);
-        expect(recalledMsg).to.equal(configData.recalledMessage);
-        console.log(recalledTxtBatch);
-        expect(recalledTxtBatch).to.equal(configData.recalledBatchLabelMessage)
+        console.log(batchTextMsg);
+        expect(batchTextMsg).to.equal(configData.batchLabelMessage);
+       
 
     }
 

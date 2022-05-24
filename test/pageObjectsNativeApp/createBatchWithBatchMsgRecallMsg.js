@@ -25,7 +25,7 @@ class CreateBatchWithBatchMsgRecallMsg {
         return $("//android.widget.Button[@text='Close']")
     }
 
-    get recalledText() {
+    get recalledTextBatch() {
         return $("(//android.view.View[@resource-id='page-ion-content']/descendant::android.widget.TextView)[2]")
     }
 
@@ -72,6 +72,9 @@ class CreateBatchWithBatchMsgRecallMsg {
         const recalledMsg = await this.recalledTxtMsg.getText();
         console.log(recalledMsg);
         await timeoutWait.setTimeoutTime(2);
+        const batchTextMsg = await this.batchTxtMsg.getText();
+        console.log(batchTextMsg);
+        await timeoutWait.setTimeoutTime(2);
         // close button click
         await this.closeBtnMsg.click();
         await timeoutWait.setTimeoutTime(2);
@@ -85,19 +88,21 @@ class CreateBatchWithBatchMsgRecallMsg {
         await this.closeRecalledPopUpMsg.click();
         await timeoutWait.setTimeoutTime(3);
         // product info message
-        const prodInfoMsg = await this.productInfoMsg.getText();
+        const prodInfoMsg = await this.prodInfoMsg.getText();
         await timeoutWait.setTimeoutTime(2);
-        const prodDesc = await this.productDescription.getText();
+        const prodDescMsg = await this.productDescription.getText();
         await timeoutWait.setTimeoutTime(2);
 
         console.log(prodInfoMsg);
         expect(prodInfoMsg).includes(configData.prodName);
-        console.log(prodDesc);
-        expect(prodDesc).to.equal(configData.prodDesc);
+        console.log(prodDescMsg);
+        expect(prodDescMsg).to.equal(configData.prodDesc);
         console.log(recalledMsg);
         expect(recalledMsg).to.equal(configData.recalledMessage);
         console.log(recalledTxtBatch);
         expect(recalledTxtBatch).to.equal(configData.recalledBatchLabelMessage)
+        console.log(batchTextMsg);
+        expect(batchTextMsg).to.equal(configData.batchLabelMessage)
 
     }
 

@@ -80,8 +80,8 @@ class CreateBatchWithExpiredDate {
         const batchInfo = await this.batchInfoTxtMsg.getText();
         await timeoutWait.setTimeoutTime(2);
 
-        console.log(productInfoMsg);
-        expect(productInfoMsg).includes(configData.prodName);
+        console.log(prodInfoMsg);
+        expect(prodInfoMsg).includes(configData.prodName);
         console.log(prodDesc);
         expect(prodDesc).to.equal(configData.prodDesc);
         console.log(batchInfo);

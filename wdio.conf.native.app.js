@@ -38,64 +38,64 @@ exports.config = {
     specs: [
         [
 
-             'test/specs/createProductWithAddBatchTest.js',
-            
-             'test/specs/editBatchCheckRecallMsgTest.js',
-             'test/specs/editProductSnRecallListTest.js',
-            
-              'test/specs/enableSnCheckSnIsValidTest.js',
-              'test/specs/enableSnCheckSnIsInvalidTest.js',
-              'test/specs/disableSnCheckSnIsValidTest.js',
-              'test/specs/disableSnCheckWithoutSnValidTest.js',
-            
-              'test/specs/enableExpiryDateCheckValidExpiryDateTest.js',
-            // 'test/specs/enableExpiryDateCheckInvalidExpiryDateTest.js',
-            // 'test/specs/disableExpiryDateCheckInvalidExpiryDateTest.js',
-            
-            //  'test/specs/batchRecallWithSerializedSnTest.js',
-            //   'test/specs/batchUncheckRecallFlagWithSerializedTest.js',
-            //   'test/specs/batchRecallNonSerializedWithoutSnTest.js',
-            //   'test/specs/batchUncheckRecallMsgNonSerilaizedWithoutSnTest.js',
-            
-            //  'test/specs/createBatchWithNoBatchMsgTest.js',
-            //   'test/specs/createBatchWithBatchMsgTest.js',
-            //  'test/specs/createBatchWithBatchRecallMsgTest.js',
-            // 'test/specs/createBatchWithBatchMsgRecallMsgTest.js',
-            
-            //    'test/specs/createBatchValidSnExpiryDateRecallMsgTest.js'
-            //   'test/specs/batchWithExpiryDateCheckWithExpiryDateTest.js' 
-            //    'test/specs/batchWithExpiredDateRecallMsgInvalidSnTest.js'
-            
-            // 'test/specs/createBatchWithExpiredDateTest.js',
-            //  'test/specs/changeDayOnDateBatchTest.js',
-            //  'test/specs/changeMonthOnDateBatchTest.js',
-            //    'test/specs/changeYearOnDateBatchTest.js',
-             
-             //   'test/specs/batchWithMonthYearAndExpiryDateTest.js',
-             //   'test/specs/disableDaySelectionIncorrectAndExpiredDateFlagTest.js',
-             //    'test/specs/disableDaySelectionIncorrectCheckExpiredDateFlagTest.js',
-             //    'test/specs/disableDaySelectionExpiredDateCheckIncorrectFlagTest.js',
-            //   'test/specs/enableDaySelectionDisableIncorrectAndExpiredDateFlagTest.js',
-            //      'test/specs/enableDaySelectionWithIncorrectAndDisableExpiredDateTest.js',
-            //       'test/specs/enableDaySelectionWithExpiredDateAndDisableIncorrectTest.js',
-            
-            // 'test/specs/checkValidSerialNumberTest.js',
-            //    'test/specs/checkClearValidSerialNumberTest.js',
-            //    'test/specs/checkClearInValidSerialNumberTest.js',
-            //      'test/specs/checkRecalledSerialNumberTest.js',
-            //  'test/specs/checkClearRecalledSerilaNumberTest.js',
-            //    'test/specs/decommissionedSerialNumberTest.js',
-            //   'test/specs/createBatchValidSNRecallSNDecommisonedSNTest.js'
-            //    'test/specs/scanUpdateRecalledSNTest.js',
-            // 'test/specs/scanUpdateDecommissionedSNTest.js',
-            // 'test/specs/update10SNInRecalledSNTest.js',
-            //   'test/specs/update10SNInDecommissionedSNTest.js',
-            //    'test/specs/updateBatchWithoutSerialNumberTest.js',
-            //     'test/specs/updateBatchWithSerialNumberTest.js',
-            //   'test/specs/updateBatchToResetSerialNumberTest.js',
-            //  'test/specs/updateBatchWithDecommissioned&RecalledSNTest.js',
-            //   'test/specs/updateBatchWithoutDecommissionedRecalledSNTest.js',
-            
+            'test/specs/createProductWithAddBatchTest.js',
+
+            'test/specs/editBatchCheckRecallMsgTest.js',
+            'test/specs/editProductSnRecallListTest.js',
+
+            'test/specs/enableSnCheckSnIsValidTest.js',
+            'test/specs/enableSnCheckSnIsInvalidTest.js',
+            'test/specs/disableSnCheckSnIsValidTest.js',
+            'test/specs/disableSnCheckWithoutSnValidTest.js',
+
+            'test/specs/enableExpiryDateCheckValidExpiryDateTest.js',
+            'test/specs/enableExpiryDateCheckInvalidExpiryDateTest.js',
+            'test/specs/disableExpiryDateCheckInvalidExpiryDateTest.js',
+
+            'test/specs/batchRecallWithSerializedSnTest.js',
+            'test/specs/batchUncheckRecallFlagWithSerializedTest.js',
+            'test/specs/batchRecallNonSerializedWithoutSnTest.js',
+            'test/specs/batchUncheckRecallMsgNonSerilaizedWithoutSnTest.js',
+
+            'test/specs/createBatchWithNoBatchMsgTest.js',
+            'test/specs/createBatchWithBatchMsgTest.js',
+            'test/specs/createBatchWithBatchRecallMsgTest.js',
+            'test/specs/createBatchWithBatchMsgRecallMsgTest.js',
+
+            'test/specs/createBatchValidSnExpiryDateRecallMsgTest.js',
+            'test/specs/batchWithExpiryDateCheckWithExpiryDateTest.js',
+            'test/specs/batchWithExpiredDateRecallMsgInvalidSnTest.js',
+
+            'test/specs/createBatchWithExpiredDateTest.js',
+            'test/specs/changeDayOnDateBatchTest.js',
+            'test/specs/changeMonthOnDateBatchTest.js',
+            'test/specs/changeYearOnDateBatchTest.js',
+
+            'test/specs/batchWithMonthYearAndExpiryDateTest.js',
+            'test/specs/disableDaySelectionIncorrectAndExpiredDateFlagTest.js',
+            'test/specs/disableDaySelectionIncorrectCheckExpiredDateFlagTest.js',
+            'test/specs/disableDaySelectionExpiredDateCheckIncorrectFlagTest.js',
+            'test/specs/enableDaySelectionDisableIncorrectAndExpiredDateFlagTest.js',
+            'test/specs/enableDaySelectionWithIncorrectAndDisableExpiredDateTest.js',
+            'test/specs/enableDaySelectionWithExpiredDateAndDisableIncorrectTest.js',
+
+            'test/specs/checkValidSerialNumberTest.js',
+            'test/specs/checkClearValidSerialNumberTest.js',
+            'test/specs/checkClearInValidSerialNumberTest.js',
+            'test/specs/checkRecalledSerialNumberTest.js',
+            'test/specs/checkClearRecalledSerilaNumberTest.js',
+            'test/specs/decommissionedSerialNumberTest.js',
+            'test/specs/createBatchValidSNRecallSNDecommisonedSNTest.js',
+            'test/specs/scanUpdateRecalledSNTest.js',
+            'test/specs/scanUpdateDecommissionedSNTest.js',
+            'test/specs/update10SNInRecalledSNTest.js',
+            'test/specs/update10SNInDecommissionedSNTest.js',
+            'test/specs/updateBatchWithoutSerialNumberTest.js',
+            'test/specs/updateBatchWithSerialNumberTest.js',
+            'test/specs/updateBatchToResetSerialNumberTest.js',
+            'test/specs/updateBatchWithDecommissioned&RecalledSNTest.js',
+            'test/specs/updateBatchWithoutDecommissionedRecalledSNTest.js',
+
             //   'test/specs/createBatchWithoutEpiUpdateValidSNTest.js',
             //   'test/specs/uploadNewVersionEpiInProductTest.js',
             //    'test/specs/createBatchWithUploadLeafletTest.js',
@@ -105,20 +105,20 @@ exports.config = {
             //    'test/specs/createBatchWithUploadLeaflet&SMPCTest.js'
             //  'test/specs/deleteLeafletAndSMPCInBatchTest.js',
             //   'test/specs/scanPreviousBatchTest.js',
-            
+
             //    'test/specs/checkBatchRecallInProduct&NotRecallInBatchTest.js',
             //   'test/specs/checkBatchIsRecalledInProduct&BatchTest.js',
             //   'test/specs/checkSmpcDeletedFromProductWithRecalledBatchTest.js'
             //      'test/specs/uncheckBatchIsRecallInProduct&RecalledInBatchTest.js',
             //     'test/specs/unCheckBatchRecallInProduct&BatchTest.js',
             //      'test/specs/uncheckSmpcDeletedFromProductWithRecalledBatchTest.js',
-            
+
             //       'test/specs/checkExpirationDateInProduct&BatchWithCorrectExpiryDateTest.js',
             //       'test/specs/checkIncorrectExpiryDateInProduct&BatchTest.js',
             //      'test/specs/checkSmpcDeletedInProductWithIncorrectExpiryDateTest.js',
             //       'test/specs/uncheckIncorrectExpiryDateInProduct&BatchTest.js',
             //       'test/specs/uncheckExpirationDateInProduct&BatchWithCorrectExpiryDateTest.js',
-            
+
             //       'test/specs/checkBatchIsExpiredInProductAndBatchTest.js',
             //       'test/specs/checkBatchIsExpiredInProductNotExpiredInBatchTest.js',
             //       'test/specs/checkSmpcDeletedFromProductWithExpiredBatchTest.js',
@@ -130,13 +130,13 @@ exports.config = {
             //      'test/specs/checkSmpcDeletedInProductWithSNRecalledTest.js',
             //      'test/specs/uncheckSNRecallInProduct&UpdateInBatchTest.js',
             //      'test/specs/uncheckSNRecallInProduct&NotRecalledInBatchTest.js',
-                     
+
             //     'test/specs/checkSNDecommissionedInProductAndBatchTest.js',
             //    'test/specs/checkSNDecommissionedInProduct&NotInBatchTest.js',
             //   'test/specs/checkSmpcDeletedFromProductWithSNDecommissonedTest.js',
             //     'test/specs/unCheckSnDecommissionedInProduct&DecommissionedInBatchTest.js',
             //      'test/specs/uncheckSnDecommissionedInProduct&NotDecommissionedInBatchTest.js',
-        
+
             //    'test/specs/checkSNIsUnknownInProductAndBatchTest.js',
             //    'test/specs/checkSNIsUnknownInProduct&KnownInBatchTest.js'
             //    'test/specs/checkSmpcIsDeletedFromProductWithSnIsUnknownTest.js',
@@ -148,13 +148,13 @@ exports.config = {
             //    'test/specs/checkSmpcIsDeletedFromProductWithBatchIsUnknownTest.js',
             //    'test/specs/unCheckBatchIsUnknownInProductWithInValidBatchTest.js',
             //    'test/specs/unCheckBatchIsUnknownInProductWithValidBatchTest.js'
-       
+
             // 'test/specs/inValidSerialNumberAndInvalidExpiryDateTest.js',
             // 'test/specs/checkUnknownBatchWithInvalidBatch&InvalidExpiryDateTest.js',
             // 'test/specs/inValidSerialNumberWithBatchRecalledTest.js'
 
-        ],            
-        
+        ],
+
     ],
 
     // Patterns to exclude.
@@ -196,7 +196,7 @@ exports.config = {
         "appium:resetKeyboard": "true",
         'appium:newCommandTimeout': 240,
         'appium:noReset': "false",
-       
+
     }],
 
     // capabilities: [
@@ -246,7 +246,7 @@ exports.config = {
     //
     // If you only want to run your tests until a specific amount of tests have failed use
     // bail (default is 0 - don't bail, run all tests).
-    bail: 10,
+    bail: 1,
     //
     // Set a base URL in order to shorten url command calls. If your `url` parameter starts
     // with `/`, the base url gets prepended, not including the path portion of your baseUrl.
@@ -260,7 +260,7 @@ exports.config = {
     //
     // Default timeout in milliseconds for request
     // if browser driver or grid doesn't send response
-    connectionRetryTimeout: 400000,
+    connectionRetryTimeout: 500000,
     //
     // Default request retries count
     connectionRetryCount: 5,
@@ -303,7 +303,7 @@ exports.config = {
     // See the full list at http://mochajs.org/
     mochaOpts: {
         ui: 'bdd',
-        timeout: 400000
+        timeout: 500000
     },
     //
     // =====
@@ -405,7 +405,7 @@ exports.config = {
 
         if (passed) {
             // console.info("Starting Mobile Execution");
-            // const { stdout1, stderr1 } =await exec('cd ../../../epi-mobileapp-test-automation && npm run addProductBatchLeaflet');
+            // const { stdout1, stderr1 } =await exec('cd ../epi-mobileapp-test-automation && npm run addProductBatchLeaflet');
 
             // console.log('stdout: ', stdout1);
 
