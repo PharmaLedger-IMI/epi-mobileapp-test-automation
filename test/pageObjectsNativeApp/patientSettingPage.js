@@ -51,7 +51,7 @@ class PatientSettingPage {
 
         await this.allowCamera.click();
         console.log("Clicked on allow camera")
-        await timeoutWait.setTimeoutWait(68);
+        await timeoutWait.setTimeoutWait(62);
         console.log("wait timeout")
         await timeoutWait.waitForElement(this.hoverMenuSettings);
     }

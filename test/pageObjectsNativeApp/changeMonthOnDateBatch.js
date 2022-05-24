@@ -26,7 +26,7 @@ class ChangeMonthOnDateBatch {
         return $("(//android.app.Dialog/descendant::android.view.View[5]/child::android.widget.TextView)")
     }
 
-    get closeincorrectExpiryPopUpMsg() {
+    get closeIncorrectExpiryPopUpMsg() {
         return $("(//android.app.Dialog/descendant::android.view.View)[3]/child::android.widget.Button")
     }
 
@@ -82,13 +82,13 @@ class ChangeMonthOnDateBatch {
     async changeMonthOnDateBatchLeafletDetailsFetch() {
 
         // get product info description
-        const prodDescMsg = await this.productInfoDescription.getText();
+        const prodDescMsg = await this.productDescription.getText();
         await timeoutWait.setTimeoutTime(2);
         // click on leaflet shiled button icon
-        await this.leafletVerifiedShiledBtn.click();
+        await this.leafletShieldInfoBtn.click();
         await timeoutWait.setTimeoutTime(2);
         // get text of batch info
-        const batchInfoTxt = await this.batchInfo.getText();
+        const batchInfoTxt = await this.batchInfoTxtMsg.getText();
         await timeoutWait.setTimeoutTime(2);
         // get leaflet prod info data 
         await this.productLeafletInfoDetails.getText();

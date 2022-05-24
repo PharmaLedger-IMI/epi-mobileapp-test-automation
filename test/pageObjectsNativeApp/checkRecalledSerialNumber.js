@@ -12,6 +12,22 @@ const batchNumberPattern = /(?<=Batch number:).*/g
 
 class CheckRecalledSerailNumber {
 
+    get recalledTextBatch() {
+        return $("(//android.view.View[@resource-id='page-ion-content']/descendant::android.widget.TextView)[2]")
+    }
+
+    get recalledBatchLearnMore() {
+        return $("(//android.view.View[@resource-id='page-ion-content']/descendant::android.widget.TextView)[3]")
+    }
+
+    get recalledPopUpMsg() {
+        return $("(//android.app.Dialog/descendant::android.view.View[5]/child::android.widget.TextView)")
+    }
+
+    get closeRecalledPopUpMsg() {
+        return $("(//android.app.Dialog/descendant::android.view.View)[3]/child::android.widget.Button")
+    }
+
     get prodInfoMsg() {
         return $("(//android.view.View[@resource-id='leaflet-header']/descendant::android.widget.TextView)[1]")
     }
@@ -41,25 +57,36 @@ class CheckRecalledSerailNumber {
 
     async checkRecalledSerialNumberDetailsFetch() {
 
+        const recalledTxtBatch = await this.recalledTextBatch.getText();
+        await timeoutWait.setTimeoutTime(2);
+        await this.recalledBatchLearnMore.click();
+        await timeoutWait.setTimeoutTime(3);
+        await this.recalledPopUpMsg.getText();
+        await timeoutWait.setTimeoutTime(3);
+        await this.closeRecalledPopUpMsg.click();
+        await timeoutWait.setTimeoutTime(3);
+
         const prodInfo = await this.prodInfoMsg.getText();
-        await timeout.setTimeoutTime(3);
+        await timeoutWait.setTimeoutTime(3);
         //get text of product information description
-        const prodDesc = await this.productDescription.getText();
-        await timeout.setTimeoutTime(3);
+        const prodDescMsg = await this.productDescription.getText();
+        await timeoutWait.setTimeoutTime(3);
         //click on leaflet Shieled Button
         await this.leafletShieldInfoBtn.click();
-        await timeout.setTimeoutTime(3);
+        await timeoutWait.setTimeoutTime(3);
         // get batch info text
         const batchInfoTxt = await this.batchInfoTxtMsg.getText();
-        await timeout.setTimeoutTime(3);
+        await timeoutWait.setTimeoutTime(3);
 
         //get prod info text and assert 
         console.log(prodInfo);
         expect(prodInfo).includes(configData.prodName);
         //get prod Desc text and assert 
-        console.log(prodDesc);
-        expect(prodDesc).to.equal(configData.prodDesc);
-        //get batch Info text and assert 
+        console.log(prodDescMsg);
+        expect(prodDescMsg).to.equal(configData.prodDesc);
+        //get batch Info text and assert
+        console.log(recalledTxtBatch);
+        expect(recalledTxtBatch).to.equal(configData.recalledLabelMessage) 
         console.log(batchInfoTxt);
         expect(batchInfoTxt).to.equal(configData.batchInfoMessage);
 
@@ -69,7 +96,7 @@ class CheckRecalledSerailNumber {
 
         // get leaflet product details information
         await this.productLeafletInfoDetails.getText();
-        await timeout.setTimeoutTime(3);
+        await timeoutWait.setTimeoutTime(3);
         const leafletInfoDetailsFetch = await this.productLeafletInfoDetails.getText();
         console.log("Prod Info Details of Leaflet is:" + " " + leafletInfoDetailsFetch)
         const leafletInfoFetch = leafletInfoDetailsFetch.replace(':', "=");
@@ -81,7 +108,7 @@ class CheckRecalledSerailNumber {
         console.log(leafletInfoDetailsFetch.match(gtinPattern)[0]);
         console.log(leafletInfoDetailsFetch.match(batchNumberPattern)[0]);
 
-        await timeout.setTimeoutTime(3);
+        await timeoutWait.setTimeoutTime(3);
 
         const datebefore = leafletInfoDetailsFetch.match(expiryDatePattern)[0];
         const dateafter = moment(datebefore, "DD-MMM-YYYY").format("YYMMDD")

@@ -52,7 +52,7 @@ class UpdateBatchWithoutSN {
 
     async waitTimeout() {
         await timeoutWait.setTimeoutWait(30);
-        await timeoutWait.waitForElement(this.incorrectExpiryBatch);
+        await timeoutWait.waitForElement(this.failedSNBatch);
 
     }
 

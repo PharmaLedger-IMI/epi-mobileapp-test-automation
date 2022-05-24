@@ -12,22 +12,6 @@ const batchNumberPattern = /(?<=Batch number:).*/g
 
 class CreateBatchValidSNRecalledSNDecommissionedSN {
 
-    //decommisioned Batch 
-    get decommisionedInfoBatch() {
-        return $("(//android.view.View[@resource-id='page-ion-content']/descendant::android.widget.TextView)[2]")
-    }
-
-    get decommisionedInfoLearnMore() {
-        return $("(//android.view.View[@resource-id='page-ion-content']/descendant::android.widget.TextView)[3]")
-    }
-
-    get decommisionedInfoPopUpMsg() {
-        return $("(//android.app.Dialog/descendant::android.view.View[5]/child::android.widget.TextView)")
-    }
-
-    get closeDecommisionedInfoPopUpMsg() {
-        return $("(//android.app.Dialog/descendant::android.view.View[3]/child::android.widget.Button)")
-    }
 
     get prodInfoMsg() {
         return $("(//android.view.View[@resource-id='leaflet-header']/descendant::android.widget.TextView)[1]")
@@ -51,22 +35,13 @@ class CreateBatchValidSNRecalledSNDecommissionedSN {
 
     async waitTimeout() {
         await timeoutWait.setTimeoutWait(30);
-        await timeoutWait.waitForElement(this.decommisionedInfoBatch);
+        await timeoutWait.waitForElement(this.prodInfoMsg);
 
     }
 
 
     async createBatchValidSNRecalledSNDecommissionedSNDetailsFetch() {
 
-        // recalled text message 
-        const decommisionedInfoTxtBatch = await this.decommisionedInfoBatch.getText();
-        await timeoutWait.setTimeoutTime(2);
-        await this.decommisionedInfoLearnMore.click();
-        await timeoutWait.setTimeoutTime(3);
-        await this.decommisionedInfoPopUpMsg.getText();
-        await timeoutWait.setTimeoutTime(3);
-        await this.closeDecommisionedInfoPopUpMsg.click();
-        await timeoutWait.setTimeoutTime(3);
         // product info message
         const productInfoMsg = await this.prodInfoMsg.getText();
         await timeoutWait.setTimeoutTime(2);
@@ -77,9 +52,7 @@ class CreateBatchValidSNRecalledSNDecommissionedSN {
         expect(productInfoMsg).includes(configData.prodName);
         console.log(prodDescMsg);
         expect(prodDescMsg).to.equal(configData.prodDesc);
-        console.log(decommisionedInfoTxtBatch);
-        expect(decommisionedInfoTxtBatch).to.equal(configData.serialNumberDecommissionedLabelMessage);
-
+        
     }
 
     async createBatchValidSNRecalledSNDecommissionedSNLeafletDetailsFetch() {

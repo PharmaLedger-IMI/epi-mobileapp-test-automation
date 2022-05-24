@@ -79,7 +79,7 @@ class ScanUpdateRecalledSN {
         console.log(prodDescMsg);
         expect(prodDescMsg).to.equal(configData.prodDesc)
         console.log(recalledTxtBatch);
-        expect(recalledTxtBatch).to.equal(configData.recalledBatchLabelMessage)
+        expect(recalledTxtBatch).to.equal(configData.recalledLabelMessage)
 
     }
 

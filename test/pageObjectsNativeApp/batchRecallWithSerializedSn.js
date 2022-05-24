@@ -82,7 +82,7 @@ class EditBatchRecallForSerialzedSN {
         await this.closeRecalledPopUpMsg.click();
         await timeoutWait.setTimeoutTime(3);
         // product info message
-        const prodInfoMsg = await this.productInfoMsg.getText();
+        const prodInfoMsg = await this.prodInfoMsg.getText();
         await timeoutWait.setTimeoutTime(2);
         const prodDesc = await this.productDescription.getText();
         await timeoutWait.setTimeoutTime(2);
@@ -121,11 +121,7 @@ class EditBatchRecallForSerialzedSN {
         console.log(leafletInfoDetailsFetch.match(serialNumberPattern)[0]);
         console.log(leafletInfoDetailsFetch.match(gtinPattern)[0]);
         console.log(leafletInfoDetailsFetch.match(batchNumberPattern)[0]);
-        // console.log(this.LeafletInfo().expiryDatePattern[0].match(expiryDatePattern)[0]);
-        // console.log(this.LeafletInfo().match(serialNumberPattern)[0]);
-        // console.log(this.LeafletInfo().match(gtinPattern)[0]);
-        // console.log(this.LeafletInfo().match(batchNumberPattern)[0]);
-
+       
         await timeoutWait.setTimeoutTime(3);
 
         const datebefore = leafletInfoDetailsFetch.match(expiryDatePattern)[0];
