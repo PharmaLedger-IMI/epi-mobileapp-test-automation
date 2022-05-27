@@ -40,7 +40,15 @@
 
     "leafletBatchLevelDescription":"Leaflet at batch level",
 
-    "leafletUpdatedAtProductLevelDescription":"Updated Leaflet at product level",
+    "smpcProductLevelDescription":"SMPC at product level",
+
+    "smpcBatchLevelDescription":"SMPC at batch level",
+
+    "smpcUpdatedAtProductLevelDescription":"Updated SMPC at product level",
+
+    "smpcUpdatedAtBatchLevelDescription":"Updated SMPC at batch level",
+
+    "leafletUpdatedAtProductLevelDescription":"Updated leaflet at product level",
 
     "leafletUpdatedAtBatchLevelDescription":"Updated Leaflet at batch level",
 

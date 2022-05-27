@@ -30,10 +30,17 @@ class UncheckBatchIsRecallInProductAndBatch {
     get productLeafletInfoDetails() {
         return $("(//android.app.Dialog/descendant::android.view.View)[5]/child::android.view.View")
     }
-
-
+ 
     get closeLeafletBtn() {
         return $("(//android.app.Dialog/descendant::android.view.View)[4]/following-sibling::android.widget.Button")
+    }
+
+    get aboutBtn() {
+        return $("(//android.view.View[@resource-id='leaflet-header']/child::android.view.View[3]/descendant::android.view.View)[2]/child::android.widget.Button")
+    }
+
+    get leafletLevelDescriptionType() {
+        return $("(//android.view.View[@resource-id='page-ion-content']/descendant::android.view.View[@resource-id='leaflet-content']/descendant::android.view.View)[2]/child::android.widget.TextView[2]")
     }
 
     get leafletType() {
@@ -44,15 +51,10 @@ class UncheckBatchIsRecallInProductAndBatch {
         return $("(//android.app.Dialog[@resource-id='ion-overlay-1']/descendant::android.view.View)[1]/child::android.widget.Button[2]")
     }
 
-    get leafletLevelDescriptionType() {
-        return $("(//android.view.View[@resource-id='leaflet-content']/descendant::android.view.View)[2]/child::android.widget.TextView[2]")
-    }
-
 
     async waitTimeout() {
         await timeoutWait.setTimeoutWait(30);
-        await timeoutWait.waitForElement(this.failedSNBatch);
-
+       
     }
 
     async unCheckBatchRecallInProductAndBatchDetailsFetch() {
@@ -69,7 +71,7 @@ class UncheckBatchIsRecallInProductAndBatch {
             }
         ]);
 
-        await timeout.setTimeoutWait(8);
+        await timeoutWait.setTimeoutWait(8);
 
         // product info message
         const productInfoMsg = await this.prodInfoMsg.getText();
@@ -128,41 +130,38 @@ class UncheckBatchIsRecallInProductAndBatch {
     async getLeafletTypesAndLevel() {
 
         await this.closeLeafletBtn.click();
-        await timeout.setTimeoutTime(3);
-   
-        let deviceScreenDimensionofSMPCLeafletType = await driver.getWindowRect();
-        await driver.touchPerform([
-            {
-                Element: this.leafletLevelDescriptionType,
-                action: 'tap',
-                options: {
-                    x: Math.floor(deviceScreenDimensionofSMPCLeafletType.width * 0.49),
-                    y: Math.floor(deviceScreenDimensionofSMPCLeafletType.height * 0.60)
-                }
-            }
-        ]);
+        await timeoutWait.setTimeoutWait(5);
+
+        await this.aboutBtn.click();
+        await timeoutWait.setTimeoutWait(3);
 
         const leafletLevelSMPCDescription = await this.leafletLevelDescriptionType.getText();
         console.log(leafletLevelSMPCDescription);
-        expect(leafletLevelSMPCDescription).includes(configData.leafletProductLevelDescription)
+        expect(leafletLevelSMPCDescription).includes(configData.smpcProductLevelDescription)
 
-        await this.leafletType.click();
-        await timeout.setTimeoutWait(3);
+        await timeoutWait.setTimeoutWait(4);
 
-        await this.leafletTypeEpi.click();
-        await timeout.setTimeoutWait(4);
-
-        let deviceScreenDimensionofLeafletType = await driver.getWindowRect();
+        let deviceScreenDimension = await driver.getWindowRect();
         await driver.touchPerform([
             {
-                Element: this.leafletLevelDescriptionType,
                 action: 'tap',
                 options: {
-                    x: Math.floor(deviceScreenDimensionofLeafletType.width * 0.49),
-                    y: Math.floor(deviceScreenDimensionofLeafletType.height * 0.60)
+                    x: Math.floor(deviceScreenDimension.width * 0.49),
+                    y: Math.floor(deviceScreenDimension.height * 0.90)
                 }
             }
         ]);
+
+        await timeoutWait.setTimeoutWait(8);
+
+        await this.leafletType.click();
+        await timeoutWait.setTimeoutWait(8);
+
+        await this.leafletTypeEpi.click();
+        await timeoutWait.setTimeoutWait(10);
+
+        await this.aboutBtn.click();
+        await timeoutWait.setTimeoutWait(8);
 
         const leafletLevelDescription = await this.leafletLevelDescriptionType.getText();
         console.log(leafletLevelDescription);

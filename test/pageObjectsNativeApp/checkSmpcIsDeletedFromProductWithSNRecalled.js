@@ -14,19 +14,19 @@ class CheckSmpcIsDeletedFromProductWithSNRecalled {
 
 
     //recalled Batch 
-    get snrecalledTextBatch() {
+    get recalledTextBatch() {
         return $("(//android.view.View[@resource-id='page-ion-content']/descendant::android.widget.TextView)[2]")
     }
 
-    get snrecalledBatchLearnMore() {
+    get recalledBatchLearnMore() {
         return $("(//android.view.View[@resource-id='page-ion-content']/descendant::android.widget.TextView)[3]")
     }
 
-    get snrecalledPopUpMsg() {
+    get recalledPopUpMsg() {
         return $("(//android.app.Dialog/descendant::android.view.View[5]/child::android.widget.TextView)")
     }
 
-    get closeSNRecalledPopUpMsg() {
+    get closeRecalledPopUpMsg() {
         return $("(//android.app.Dialog/descendant::android.view.View)[3]/child::android.widget.Button")
     }
 
@@ -54,13 +54,17 @@ class CheckSmpcIsDeletedFromProductWithSNRecalled {
         return $("(//android.app.Dialog/descendant::android.view.View)[4]/following-sibling::android.widget.Button")
     }
 
+    get aboutBtn() {
+        return $("(//android.view.View[@resource-id='leaflet-header']/child::android.view.View[3]/descendant::android.view.View)[2]/child::android.widget.Button")
+    }
+
     get leafletLevelDescriptionType() {
-        return $("(//android.view.View[@resource-id='leaflet-content']/descendant::android.view.View)[2]/child::android.widget.TextView[2]")
+        return $("(//android.view.View[@resource-id='page-ion-content']/descendant::android.view.View[@resource-id='leaflet-content']/descendant::android.view.View)[2]/child::android.widget.TextView[2]")
     }
 
     async waitTimeout() {
         await timeoutWait.setTimeoutWait(30);
-        await timeoutWait.waitForElement(this.snrecalledTextBatch);
+        await timeoutWait.waitForElement(this.recalledTextBatch);
 
     }
 
@@ -70,26 +74,26 @@ class CheckSmpcIsDeletedFromProductWithSNRecalled {
         // recalled text message
 
         // recalled text message 
-        const snrecalledTxtBatch = await this.snrecalledTextBatch.getText();
-        await timeoutWait.setTimeoutTime(2);
-        await this.snrecalledBatchLearnMore.click();
-        await timeoutWait.setTimeoutTime(3);
-        await this.snrecalledPopUpMsg.getText();
-        await timeoutWait.setTimeoutTime(3);
-        await this.closeSNRecalledPopUpMsg.click();
-        await timeoutWait.setTimeoutTime(3);
+        const recalledTxtBatch = await this.recalledTextBatch.getText();
+        await timeoutWait.setTimeoutWait(2);
+        await this.recalledBatchLearnMore.click();
+        await timeoutWait.setTimeoutWait(3);
+        await this.recalledPopUpMsg.getText();
+        await timeoutWait.setTimeoutWait(3);
+        await this.closeRecalledPopUpMsg.click();
+        await timeoutWait.setTimeoutWait(3);
         // product info message
-        const prodInfoMsg = await this.productInfoMsg.getText();
-        await timeoutWait.setTimeoutTime(2);
+        const prodInfoMsg = await this.prodInfoMsg.getText();
+        await timeoutWait.setTimeoutWait(2);
         const prodDescMsg = await this.productDescription.getText();
-        await timeoutWait.setTimeoutTime(2);
+        await timeoutWait.setTimeoutWait(2);
 
         console.log(prodInfoMsg);
         expect(prodInfoMsg).includes(configData.prodName);
         console.log(prodDescMsg);
         expect(prodDescMsg).includes(configData.prodDesc);
-        console.log(snrecalledTxtBatch);
-        expect(snrecalledTxtBatch).to.equal(configData.serialNumberRecallLabelMessage)
+        console.log(recalledTxtBatch);
+        expect(recalledTxtBatch).to.equal(configData.recalledLabelMessage)
 
     }
 
@@ -98,13 +102,13 @@ class CheckSmpcIsDeletedFromProductWithSNRecalled {
 
         // click on leaflet shield button
         await this.leafletShieldInfoBtn.click();
-        await timeoutWait.setTimeoutTime(2);
+        await timeoutWait.setTimeoutWait(2);
         // btach info text message 
         const batchInfo = await this.batchInfoTxtMsg.getText();
-        await timeoutWait.setTimeoutTime(2);
+        await timeoutWait.setTimeoutWait(2);
         // leaflet product information details
         await this.productLeafletInfoDetails.getText();
-        await timeoutWait.setTimeoutTime(2);
+        await timeoutWait.setTimeoutWait(2);
 
         const leafletInfoDetailsFetch = await this.productLeafletInfoDetails.getText();
         console.log("Prod Info Details of Leaflet is:" + " " + leafletInfoDetailsFetch)
@@ -121,7 +125,7 @@ class CheckSmpcIsDeletedFromProductWithSNRecalled {
         // console.log(this.LeafletInfo().match(gtinPattern)[0]);
         // console.log(this.LeafletInfo().match(batchNumberPattern)[0]);
 
-        await timeoutWait.setTimeoutTime(3);
+        await timeoutWait.setTimeoutWait(3);
 
         const datebefore = leafletInfoDetailsFetch.match(expiryDatePattern)[0];
         const dateafter = moment(datebefore, "DD-MMM-YYYY").format("YYMMDD")
@@ -136,20 +140,13 @@ class CheckSmpcIsDeletedFromProductWithSNRecalled {
         console.log(batchInfo);
         expect(batchInfo).to.equal(configData.batchInfoMessage);
 
-        await this.closeLeafletBtn.click();
-        await timeoutWait.setTimeoutWait(3);
+        await timeoutWait.setTimeoutWait(7);
 
-        let deviceScreenDimensionofLeafletType = await driver.getWindowRect();
-        await driver.touchPerform([
-            {
-                Element: this.leafletProdLevelDescType,
-                action: 'tap',
-                options: {
-                    x: Math.floor(deviceScreenDimensionofLeafletType.width * 0.49),
-                    y: Math.floor(deviceScreenDimensionofLeafletType.height * 0.60)
-                }
-            }
-        ]);
+        await this.closeLeafletBtn.click();
+        await timeoutWait.setTimeoutWait(5);
+
+        await this.aboutBtn.click();
+        await timeoutWait.setTimeoutWait(5);
 
         const leafletLevelDescription = await this.leafletLevelDescriptionType.getText();
         console.log(leafletLevelDescription);

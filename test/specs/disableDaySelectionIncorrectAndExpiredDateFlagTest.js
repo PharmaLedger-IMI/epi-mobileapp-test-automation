@@ -1,4 +1,4 @@
-const disableDaySelectionWithIncorrectExpiredDateFlag = require('../pageObjectsNativeApp/disableDaySelectionAndIncorrectExpiredDateFlag.js')
+const disableDaySelectionWithIncorrectExpiredDateFlag = require('../pageObjectsNativeApp/disableDaySelectionIncorrectAndExpiredDateFlag.js')
 const allureReporter = require('@wdio/allure-reporter').default
 const nativePatientPage = require('../pageObjectsNativeApp/patientSettingPage')
 const timeoutWait = require('../utils/setTimeout')

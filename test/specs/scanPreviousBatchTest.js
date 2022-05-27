@@ -2,7 +2,6 @@ const scanThePreviousBatchTest = require('../pageObjectsNativeApp/scanPreviousBa
 const allureReporter = require('@wdio/allure-reporter').default
 const nativePatientPage = require('../pageObjectsNativeApp/patientSettingPage')
 const timeoutWait = require('../utils/setTimeout')
-const webView = require('../pageObjectsNativeApp/webView')
 
 describe('060_Scan previous batch to see the leaflet at product level', () => {
 

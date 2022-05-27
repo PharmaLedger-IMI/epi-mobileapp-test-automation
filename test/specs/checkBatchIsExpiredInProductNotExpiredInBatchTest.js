@@ -1,4 +1,4 @@
-const checkBatchIsExpiredInProductNotExpiredInBatchTest = require('../pageObjectsNativeApp/checkBatchIsExpiredInProduct&NotExpiredInBatch')
+const checkBatchIsExpiredInProductNotExpiredInBatchTest = require('../pageObjectsNativeApp/checkBatchIsExpiredInProductAndNotExpiredInBatch')
 const allureReporter = require('@wdio/allure-reporter').default
 const nativePatientPage = require('../pageObjectsNativeApp/patientSettingPage')
 const timeoutWait = require('../utils/setTimeout')

@@ -12,14 +12,6 @@ const batchNumberPattern = /(?<=Batch number:).*/g
 
 class CheckSmpcDeletedFromProductWithIncorrectExpiryDate {
 
-    get recalledTxtMsg() {
-        return $("(//android.app.Dialog/descendant::android.view.View)[5]/child::android.widget.TextView")
-    }
-
-    get closeBtnMsg() {
-        return $("//android.widget.Button[@text='Close']")
-    }
-
     //incorrect Batch 
     get incorrectTextBatch() {
         return $("(//android.view.View[@resource-id='page-ion-content']/descendant::android.widget.TextView)[2]")
@@ -61,26 +53,23 @@ class CheckSmpcDeletedFromProductWithIncorrectExpiryDate {
         return $("(//android.app.Dialog/descendant::android.view.View)[4]/following-sibling::android.widget.Button")
     }
 
+    get aboutBtn() {
+        return $("(//android.view.View[@resource-id='leaflet-header']/child::android.view.View[3]/descendant::android.view.View)[2]/child::android.widget.Button")
+    }
+
     get leafletLevelDescriptionType() {
-        return $("(//android.view.View[@resource-id='leaflet-content']/descendant::android.view.View)[2]/child::android.widget.TextView[2]")
+        return $("(//android.view.View[@resource-id='page-ion-content']/descendant::android.view.View[@resource-id='leaflet-content']/descendant::android.view.View)[2]/child::android.widget.TextView[2]")
     }
 
     async waitTimeout() {
         await timeoutWait.setTimeoutWait(30);
-        await timeoutWait.waitForElement(this.recalledTxtMsg);
+        await timeoutWait.waitForElement(this.incorrectTextBatch);
 
     }
 
 
     async checkSmpcDeletedFromProductWithIncorrectExpiryDateDetailsFetch() {
-        // recalled text message
-        // const recalledMsg = await this.recalledTxtMsg.getText();
-        // console.log(recalledMsg);
-        // await timeoutWait.setTimeoutTime(2);
-        // // close button click
-        // await this.closeBtnMsg.click();
-        // await timeoutWait.setTimeoutTime(2);
-        // recalled text message 
+    
         const incorrectExpiryDateTxtBatch = await this.incorrectTextBatch.getText();
         await timeoutWait.setTimeoutTime(2);
         await this.incorrectBatchLearnMore.click();
@@ -129,11 +118,7 @@ class CheckSmpcDeletedFromProductWithIncorrectExpiryDate {
         console.log(leafletInfoDetailsFetch.match(serialNumberPattern)[0]);
         console.log(leafletInfoDetailsFetch.match(gtinPattern)[0]);
         console.log(leafletInfoDetailsFetch.match(batchNumberPattern)[0]);
-        // console.log(this.LeafletInfo().expiryDatePattern[0].match(expiryDatePattern)[0]);
-        // console.log(this.LeafletInfo().match(serialNumberPattern)[0]);
-        // console.log(this.LeafletInfo().match(gtinPattern)[0]);
-        // console.log(this.LeafletInfo().match(batchNumberPattern)[0]);
-
+        
         await timeoutWait.setTimeoutTime(3);
 
         const datebefore = leafletInfoDetailsFetch.match(expiryDatePattern)[0];
@@ -149,21 +134,13 @@ class CheckSmpcDeletedFromProductWithIncorrectExpiryDate {
         console.log(batchInfo);
         expect(batchInfo).includes(configData.batchInfoMessage);
 
+        await timeoutWait.setTimeoutTime(4);
+
         await this.closeLeafletBtn.click();
-        await timeout.setTimeoutWait(3);
+        await timeoutWait.setTimeoutWait(5);
 
-
-        let deviceScreenDimensionofLeafletType = await driver.getWindowRect();
-        await driver.touchPerform([
-            {
-                Element: this.leafletLevelDescriptionType,
-                action: 'tap',
-                options: {
-                    x: Math.floor(deviceScreenDimensionofLeafletType.width * 0.49),
-                    y: Math.floor(deviceScreenDimensionofLeafletType.height * 0.60)
-                }
-            }
-        ]);
+        await this.aboutBtn.click();
+        await timeoutWait.setTimeoutWait(4);
 
         const leafletLevelDescription = await this.leafletLevelDescriptionType.getText();
         console.log(leafletLevelDescription);
