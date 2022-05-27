@@ -13,19 +13,19 @@ const batchNumberPattern = /(?<=Batch number:).*/g
 class CheckSmpcIsDeletedFromProductWithSNDecommissioned {
 
     //decommissioned Batch 
-    get sndecommissionedTextBatch() {
+    get decommissionedTextBatch() {
         return $("(//android.view.View[@resource-id='page-ion-content']/descendant::android.widget.TextView)[2]")
     }
 
-    get sndecommissionedBatchLearnMore() {
+    get decommissionedBatchLearnMore() {
         return $("(//android.view.View[@resource-id='page-ion-content']/descendant::android.widget.TextView)[3]")
     }
 
-    get sndecommissionedPopUpMsg() {
+    get decommissionedPopUpMsg() {
         return $("(//android.app.Dialog/descendant::android.view.View[5]/child::android.widget.TextView)")
     }
 
-    get closeSNDecommissionedPopUpMsg() {
+    get closeDecommissionedPopUpMsg() {
         return $("(//android.app.Dialog/descendant::android.view.View)[3]/child::android.widget.Button")
     }
 
@@ -53,14 +53,18 @@ class CheckSmpcIsDeletedFromProductWithSNDecommissioned {
         return $("(//android.app.Dialog/descendant::android.view.View)[4]/following-sibling::android.widget.Button")
     }
 
+    get aboutBtn() {
+        return $("(//android.view.View[@resource-id='leaflet-header']/child::android.view.View[3]/descendant::android.view.View)[2]/child::android.widget.Button")
+    }
+
     get leafletLevelDescriptionType() {
-        return $("(//android.view.View[@resource-id='leaflet-content']/descendant::android.view.View)[2]/child::android.widget.TextView[2]")
+        return $("(//android.view.View[@resource-id='page-ion-content']/descendant::android.view.View[@resource-id='leaflet-content']/descendant::android.view.View)[2]/child::android.widget.TextView[2]")
     }
 
 
     async waitTimeout() {
         await timeoutWait.setTimeoutWait(30);
-        await timeoutWait.waitForElement(this.recalledTextBatch);
+        await timeoutWait.waitForElement(this.decommissionedTextBatch);
 
     }
 
@@ -68,13 +72,13 @@ class CheckSmpcIsDeletedFromProductWithSNDecommissioned {
     async checkSmpcDeletedFromProductWithSNdecommissionedDetailsFetch() {
 
         // recalled text message 
-        const sndecommisionedInfoTxtBatch = await this.sndecommissionedTextBatch.getText();
+        const decommisionedInfoTxtBatch = await this.decommissionedTextBatch.getText();
         await timeoutWait.setTimeoutTime(2);
-        await this.sndecommissionedBatchLearnMore.click();
+        await this.decommissionedBatchLearnMore.click();
         await timeoutWait.setTimeoutTime(3);
-        await this.sndecommissionedPopUpMsg.getText();
+        await this.decommissionedPopUpMsg.getText();
         await timeoutWait.setTimeoutTime(3);
-        await this.closeSNDecommissionedPopUpMsg.click();
+        await this.closeDecommissionedPopUpMsg.click();
         await timeoutWait.setTimeoutTime(3);
         // product info message
         const productInfoMsg = await this.prodInfoMsg.getText();
@@ -86,8 +90,8 @@ class CheckSmpcIsDeletedFromProductWithSNDecommissioned {
         expect(productInfoMsg).includes(configData.prodName);
         console.log(prodDescMsg);
         expect(prodDescMsg).includes(configData.prodDesc);
-        console.log(sndecommisionedInfoTxtBatch);
-        expect(sndecommisionedInfoTxtBatch).to.equal(configData.serialNumberDecommissionedLabelMessage);
+        console.log(decommisionedInfoTxtBatch);
+        expect(decommisionedInfoTxtBatch).to.equal(configData.serialNumberDecommissionedLabelMessage);
 
     }
 
@@ -130,20 +134,13 @@ class CheckSmpcIsDeletedFromProductWithSNDecommissioned {
         console.log(batchInfoText);
         expect(batchInfoText).to.equal(configData.batchInfoMessage);
 
-        await this.closeLeafletBtn.click();
-        await timeout.setTimeoutTime(3);
+        await timeoutWait.setTimeoutWait(5);
 
-        let deviceScreenDimensionofLeafletType = await driver.getWindowRect();
-        await driver.touchPerform([
-            {
-                Element: this.leafletLevelDescriptionType,
-                action: 'tap',
-                options: {
-                    x: Math.floor(deviceScreenDimensionofLeafletType.width * 0.49),
-                    y: Math.floor(deviceScreenDimensionofLeafletType.height * 0.60)
-                }
-            }
-        ]);
+        await this.closeLeafletBtn.click();
+        await timeoutWait.setTimeoutWait(5);
+
+        await this.aboutBtn.click();
+        await timeoutWait.setTimeoutWait(5);
 
         const leafletLevelDescription = await this.leafletLevelDescriptionType.getText();
         console.log(leafletLevelDescription);

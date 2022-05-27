@@ -12,6 +12,22 @@ const batchNumberPattern = /(?<=Batch number:).*/g
 
 class EnableDaySelectionExpiredDateDisableIncoreectFlag {
 
+    get productExpiredTextBatch() {
+        return $("(//android.view.View[@resource-id='page-ion-content']/descendant::android.widget.TextView)[2]")
+    }
+
+    get productExpiredLearnMore() {
+        return $("(//android.view.View[@resource-id='page-ion-content']/descendant::android.widget.TextView)[3]")
+    }
+
+    get productExpiredPopUpMsg() {
+        return $("(//android.app.Dialog/descendant::android.view.View[5]/child::android.widget.TextView)")
+    }
+
+    get closeProductExpiredPopUpMsg() {
+        return $("(//android.app.Dialog/descendant::android.view.View)[3]/child::android.widget.Button")
+    }
+
 
     get prodInfoMsg() {
         return $("(//android.view.View[@resource-id='leaflet-header']/descendant::android.widget.TextView)[1]")
@@ -42,6 +58,15 @@ class EnableDaySelectionExpiredDateDisableIncoreectFlag {
 
     async enableDaySelectionWithExpiredDateDisableIncorrectDetailsFetch() {
 
+        const productExpiredTxtBatch = await this.productExpiredTextBatch.getText();
+        await timeoutWait.setTimeoutTime(2);
+        await this.productExpiredLearnMore.click();
+        await timeoutWait.setTimeoutTime(3);
+        await this.productExpiredPopUpMsg.getText();
+        await timeoutWait.setTimeoutTime(3);
+        await this.closeProductExpiredPopUpMsg.click();
+        await timeoutWait.setTimeoutTime(3);
+
         const prodInfo = await this.prodInfoMsg.getText();
         await timeoutWait.setTimeoutTime(3);
         //get text of product information description
@@ -63,6 +88,8 @@ class EnableDaySelectionExpiredDateDisableIncoreectFlag {
         //get batch Info text and assert 
         console.log(batchInfoTxt);
         expect(batchInfoTxt).to.equal(configData.batchInfoMessage);
+        console.log(productExpiredTxtBatch);
+        expect(productExpiredTxtBatch).to.equal(configData.expiredProductLabelMessage);
 
     }
 

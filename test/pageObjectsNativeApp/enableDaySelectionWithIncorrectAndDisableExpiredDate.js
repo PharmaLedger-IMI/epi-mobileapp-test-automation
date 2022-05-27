@@ -11,6 +11,21 @@ const batchNumberPattern = /(?<=Batch number:).*/g
 
 class EnableDaySelectionIncorrectDisableExpiredDateFlag {
 
+    get incorrectExpDateTextBatch() {
+        return $("(//android.view.View[@resource-id='page-ion-content']/descendant::android.widget.TextView)[2]")
+    }
+
+    get incorrectExpDateLearnMore() {
+        return $("(//android.view.View[@resource-id='page-ion-content']/descendant::android.widget.TextView)[3]")
+    }
+
+    get incorrectExpDatePopUpMsg() {
+        return $("(//android.app.Dialog/descendant::android.view.View[5]/child::android.widget.TextView)")
+    }
+
+    get closeIncorrectExpDatePopUpMsg() {
+        return $("(//android.app.Dialog/descendant::android.view.View)[3]/child::android.widget.Button")
+    }
 
     get prodInfoMsg() {
         return $("(//android.view.View[@resource-id='leaflet-header']/descendant::android.widget.TextView)[1]")
@@ -34,11 +49,20 @@ class EnableDaySelectionIncorrectDisableExpiredDateFlag {
 
     async waitTimeout() {
         await timeoutWait.setTimeoutWait(30);
-        await timeoutWait.waitForElement(this.prodInfoMsg);
+        await timeoutWait.waitForElement(this.incorrectExpDateTextBatch);
 
     }
 
     async enableDaySelectionWithIncorrectAndDisableExpiredDateDetailsFetch() {
+
+        const incorrectExpDateTxtBatch = await this.incorrectExpDateTextBatch.getText();
+        await timeoutWait.setTimeoutTime(2);
+        await this.incorrectExpDateLearnMore.click();
+        await timeoutWait.setTimeoutTime(3);
+        await this.incorrectExpDatePopUpMsg.getText();
+        await timeoutWait.setTimeoutTime(3);
+        await this.closeIncorrectExpDatePopUpMsg.click();
+        await timeoutWait.setTimeoutTime(3);
 
         const prodInfo = await this.prodInfoMsg.getText();
         await timeoutWait.setTimeoutTime(3);
@@ -61,6 +85,9 @@ class EnableDaySelectionIncorrectDisableExpiredDateFlag {
         //get batch Info text and assert 
         console.log(batchInfoTxt);
         expect(batchInfoTxt).to.equal(configData.batchInfoMessage);
+        // get incorrectExpDateTxtBatch test and assert
+        console.log(incorrectExpDateTxtBatch);
+        expect(incorrectExpDateTxtBatch).to.equal(configData.incorrectExpiryDateLabelMessage);
 
     }
 

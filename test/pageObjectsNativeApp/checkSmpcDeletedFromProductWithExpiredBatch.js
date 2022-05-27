@@ -12,22 +12,20 @@ const batchNumberPattern = /(?<=Batch number:).*/g
 
 class CheckSmpcDeletedFromProductWithExpiredBatch {
 
-
-
-    //recalled Batch 
-    get incorrectTextBatch() {
+    //incorrect Batch 
+    get prodExpiredTextBatch() {
         return $("(//android.view.View[@resource-id='page-ion-content']/descendant::android.widget.TextView)[2]")
     }
 
-    get incorrectBatchLearnMore() {
+    get prodExpiredLearnMore() {
         return $("(//android.view.View[@resource-id='page-ion-content']/descendant::android.widget.TextView)[3]")
     }
 
-    get incorrectPopUpMsg() {
+    get prodExpiredPopUpMsg() {
         return $("(//android.app.Dialog/descendant::android.view.View[5]/child::android.widget.TextView)")
     }
 
-    get closeIncorrectPopUpMsg() {
+    get closeProdExpiredPopUpMsg() {
         return $("(//android.app.Dialog/descendant::android.view.View)[3]/child::android.widget.Button")
     }
 
@@ -55,41 +53,43 @@ class CheckSmpcDeletedFromProductWithExpiredBatch {
         return $("(//android.app.Dialog/descendant::android.view.View)[4]/following-sibling::android.widget.Button")
     }
 
+    get aboutBtn() {
+        return $("(//android.view.View[@resource-id='leaflet-header']/child::android.view.View[3]/descendant::android.view.View)[2]/child::android.widget.Button")
+    }
+
     get leafletLevelDescriptionType() {
-        return $("(//android.view.View[@resource-id='leaflet-content']/descendant::android.view.View)[2]/child::android.widget.TextView[2]")
+        return $("(//android.view.View[@resource-id='page-ion-content']/descendant::android.view.View[@resource-id='leaflet-content']/descendant::android.view.View)[2]/child::android.widget.TextView[2]")
     }
 
     async waitTimeout() {
         await timeoutWait.setTimeoutWait(30);
-        await timeoutWait.waitForElement(this.recalledTxtMsg);
+        await timeoutWait.waitForElement(this.prodExpiredTextBatch);
 
     }
 
     async checkSmpcDeletedFromProductWithExpiredBatchDetailsFetch() {
 
         // recalled text message 
-        const incorrectTxtBatch = await this.incorrectTextBatch.getText();
-        await timeoutWait.setTimeoutTime(2);
-        await this.incorrectBatchLearnMore.click();
-        await timeoutWait.setTimeoutTime(3);
-        await this.incorrectPopUpMsg.getText();
-        await timeoutWait.setTimeoutTime(3);
-        await this.closeIncorrectPopUpMsg.click();
-        await timeoutWait.setTimeoutTime(3);
+        const prodExpiredTxtBatch = await this.prodExpiredTextBatch.getText();
+        await timeoutWait.setTimeoutWait(2);
+        await this.prodExpiredLearnMore.click();
+        await timeoutWait.setTimeoutWait(3);
+        await this.prodExpiredPopUpMsg.getText();
+        await timeoutWait.setTimeoutWait(3);
+        await this.closeProdExpiredPopUpMsg.click();
+        await timeoutWait.setTimeoutWait(3);
         // product info message
         const prodInfoMsg = await this.prodInfo.getText();
-        await timeoutWait.setTimeoutTime(2);
+        await timeoutWait.setTimeoutWait(2);
         const prodDescMsg = await this.productDescription.getText();
-        await timeoutWait.setTimeoutTime(2);
+        await timeoutWait.setTimeoutWait(2);
 
         console.log(prodInfoMsg);
         expect(prodInfoMsg).includes(configData.prodName);
         console.log(prodDescMsg);
         expect(prodDescMsg).to.equal(configData.prodDesc);
-        // console.log(recalledMsg);
-        // expect(recalledMsg).to.equal(configData.recalledMessage);
-        console.log(incorrectTxtBatch);
-        expect(incorrectTxtBatch).to.equal(configData.incorrectExpiryDateLabelMessage)
+        console.log(prodExpiredTxtBatch);
+        expect(prodExpiredTxtBatch).to.equal(configData.expiredProductLabelMessage)
 
     }
 
@@ -98,13 +98,13 @@ class CheckSmpcDeletedFromProductWithExpiredBatch {
 
         // click on leaflet shield button
         await this.leafletShieldInfoBtn.click();
-        await timeoutWait.setTimeoutTime(2);
+        await timeoutWait.setTimeoutWait(2);
         // btach info text message 
-        await this.batchInfoTxtMsg.getText();
-        await timeoutWait.setTimeoutTime(2);
+        const batchInfoMsg = await this.batchInfoTxtMsg.getText();
+        await timeoutWait.setTimeoutWait(2);
         // leaflet product information details
         await this.productLeafletInfoDetails.getText();
-        await timeoutWait.setTimeoutTime(2);
+        await timeoutWait.setTimeoutWait(2);
 
         const leafletInfoDetailsFetch = await this.productLeafletInfoDetails.getText();
         console.log("Prod Info Details of Leaflet is:" + " " + leafletInfoDetailsFetch)
@@ -121,7 +121,7 @@ class CheckSmpcDeletedFromProductWithExpiredBatch {
         // console.log(this.LeafletInfo().match(gtinPattern)[0]);
         // console.log(this.LeafletInfo().match(batchNumberPattern)[0]);
 
-        await timeoutWait.setTimeoutTime(3);
+        await timeoutWait.setTimeoutWait(3);
 
         const datebefore = leafletInfoDetailsFetch.match(expiryDatePattern)[0];
         const dateafter = moment(datebefore, "DD-MMM-YYYY").format("YYMMDD")
@@ -133,19 +133,15 @@ class CheckSmpcDeletedFromProductWithExpiredBatch {
         expect(leafletInfoDetailsFetch.match(serialNumberPattern)[0]).to.equal(testData.batchSerialNumber);
         expect(dateafter).to.equal(testData.expiry);
 
-        await this.closeLeafletBtn.click();
+        expect(batchInfoMsg).equal(configData.batchInfoMessage)
 
-        let deviceScreenDimensionofLeafletType = await driver.getWindowRect();
-        await driver.touchPerform([
-            {
-                Element: this.leafletLevelDescriptionType,
-                action: 'tap',
-                options: {
-                    x: Math.floor(deviceScreenDimensionofLeafletType.width * 0.49),
-                    y: Math.floor(deviceScreenDimensionofLeafletType.height * 0.60)
-                }
-            }
-        ]);
+        await timeoutWait.setTimeoutWait(4);
+
+        await this.closeLeafletBtn.click();
+        await timeoutWait.setTimeoutWait(5);
+
+        await this.aboutBtn.click();
+        await timeoutWait.setTimeoutWait(4);
 
         const leafletLevelDescription = await this.leafletLevelDescriptionType.getText();
         console.log(leafletLevelDescription);

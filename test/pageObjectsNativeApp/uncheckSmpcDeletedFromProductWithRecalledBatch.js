@@ -48,7 +48,7 @@ class UncheckSmpcDeletedFromProductWithRecalledBatch {
 
     async waitTimeout() {
         await timeoutWait.setTimeoutWait(30);
-        await timeoutWait.waitForElement(this.recalledTextBatch);
+        await timeoutWait.waitForElement(this.recalledTxtMsg);
 
     }
 
