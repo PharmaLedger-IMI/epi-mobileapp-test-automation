@@ -1,7 +1,7 @@
 const testData = require('../testdata/testExpectations.json')
 const configData = require('../testdata/config.json');
 const expect = require('chai').expect
-const timeout = require('../utils/setTimeout')
+const timeoutWait = require('../utils/setTimeout')
 const moment = require('moment')
 
 const expiryDatePattern = /(?<=Expiry:)(.*)(?=Serial)/g
@@ -31,8 +31,8 @@ class DisableSNFlagWithInvalidSN {
     }
 
     async waitTimeout() {
-        await timeout.setTimeoutWait(30);
-        await timeout.waitForElement(this.productInfo);
+        await timeoutWait.setTimeoutWait(30);
+        await timeoutWait.waitForElement(this.productInfo);
         // await browser.pause(30000);
     }
 
@@ -41,16 +41,16 @@ class DisableSNFlagWithInvalidSN {
     async disableSNFlagWithInvalidSNDetailsFetch() {
 
         const prodInfo = await this.productInfo.getText();
-        await timeout.setTimeoutTime(3);
+        await timeoutWait.setTimeoutWait(3);
         //get text of product information description
         const prodDesc = await this.productDescription.getText();
-        await timeout.setTimeoutTime(3);
+        await timeoutWait.setTimeoutWait(3);
         //click on leaflet Shieled Button
         await this.leafletVerifiedShiledBtn.click();
-        await timeout.setTimeoutTime(3);
+        await timeoutWait.setTimeoutWait(3);
         // get batch info text
         const batchInfoTxt = await this.batchInfo.getText();
-        await timeout.setTimeoutTime(3);
+        await timeoutWait.setTimeoutWait(3);
 
         //get prod info text and assert 
         console.log(prodInfo);
@@ -68,7 +68,7 @@ class DisableSNFlagWithInvalidSN {
 
         // get leaflet product details information
         await this.productLeafletInfoDetails.getText();
-        await timeout.setTimeoutTime(3);
+        await timeoutWait.setTimeoutWait(3);
         const leafletInfoDetailsFetch = await this.productLeafletInfoDetails.getText();
         console.log("Prod Info Details of Leaflet is:" + " " + leafletInfoDetailsFetch)
         const leafletInfoFetch = leafletInfoDetailsFetch.replace(':', "=");
@@ -80,7 +80,7 @@ class DisableSNFlagWithInvalidSN {
         console.log(leafletInfoDetailsFetch.match(gtinPattern)[0]);
         console.log(leafletInfoDetailsFetch.match(batchNumberPattern)[0]);
 
-        await timeout.setTimeoutTime(3);
+        await timeoutWait.setTimeoutWait(3);
 
         const datebefore = leafletInfoDetailsFetch.match(expiryDatePattern)[0];
         const dateafter = moment(datebefore, "DD-MMM-YYYY").format("YYMMDD")

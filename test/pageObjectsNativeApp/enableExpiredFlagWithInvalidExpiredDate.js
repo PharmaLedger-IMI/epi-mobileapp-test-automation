@@ -11,22 +11,7 @@ const batchNumberPattern = /(?<=Batch number:).*/g
 
 class EnableExpiredFlagWithInvalidExpiredDate {
 
-    get incorrectExpDateTextBatch() {
-        return $("(//android.view.View[@resource-id='page-ion-content']/descendant::android.widget.TextView)[2]")
-    }
-
-    get incorrectExpDateLearnMore() {
-        return $("(//android.view.View[@resource-id='page-ion-content']/descendant::android.widget.TextView)[3]")
-    }
-
-    get incorrectExpDatePopUpMsg() {
-        return $("(//android.app.Dialog/descendant::android.view.View[5]/child::android.widget.TextView)")
-    }
-
-    get closeIncorrectExpDatePopUpMsg() {
-        return $("(//android.app.Dialog/descendant::android.view.View)[3]/child::android.widget.Button")
-    }
-
+    
     get prodInfoMsg() {
         return $("(//android.view.View[@resource-id='leaflet-header']/descendant::android.widget.TextView)[1]")
     }
@@ -49,32 +34,23 @@ class EnableExpiredFlagWithInvalidExpiredDate {
 
     async waitTimeout() {
         await timeoutWait.setTimeoutWait(30);
-        await timeoutWait.waitForElement(this.incorrectExpDateTextBatch);
+        await timeoutWait.waitForElement(this.prodInfoMsg);
 
     }
 
     async enableExpiredFlagWithInvalidExpiredDateDetailsFetch() {
 
-        const incorrectExpDateTxtBatch = await this.incorrectExpDateTextBatch.getText();
-        await timeoutWait.setTimeoutTime(2);
-        await this.incorrectExpDateLearnMore.click();
-        await timeoutWait.setTimeoutTime(3);
-        await this.incorrectExpDatePopUpMsg.getText();
-        await timeoutWait.setTimeoutTime(3);
-        await this.closeIncorrectExpDatePopUpMsg.click();
-        await timeoutWait.setTimeoutTime(3);
-
         const prodInfo = await this.prodInfoMsg.getText();
-        await timeoutWait.setTimeoutTime(3);
+        await timeoutWait.setTimeoutWait(3);
         //get text of product information description
         const prodDescMsg = await this.productDescription.getText();
-        await timeoutWait.setTimeoutTime(3);
+        await timeoutWait.setTimeoutWait(3);
         //click on leaflet Shieled Button
         await this.leafletShieldInfoBtn.click();
-        await timeoutWait.setTimeoutTime(3);
+        await timeoutWait.setTimeoutWait(3);
         // get batch info text
         const batchInfoTxt = await this.batchInfoTxtMsg.getText();
-        await timeoutWait.setTimeoutTime(3);
+        await timeoutWait.setTimeoutWait(3);
 
         //get prod info text and assert 
         console.log(prodInfo);
@@ -85,9 +61,7 @@ class EnableExpiredFlagWithInvalidExpiredDate {
         //get batch Info text and assert 
         console.log(batchInfoTxt);
         expect(batchInfoTxt).to.equal(configData.batchInfoMessage);
-        // get incorrectExpDateTxtBatch test and assert
-        console.log(incorrectExpDateTxtBatch);
-        expect(incorrectExpDateTxtBatch).to.equal(configData.incorrectExpiryDateLabelMessage);
+       
 
     }
 
@@ -95,7 +69,7 @@ class EnableExpiredFlagWithInvalidExpiredDate {
 
         // get leaflet product details information
         await this.productLeafletInfoDetails.getText();
-        await timeoutWait.setTimeoutTime(3);
+        await timeoutWait.setTimeoutWait(3);
         const leafletInfoDetailsFetch = await this.productLeafletInfoDetails.getText();
         console.log("Prod Info Details of Leaflet is:" + " " + leafletInfoDetailsFetch)
         const leafletInfoFetch = leafletInfoDetailsFetch.replace(':', "=");
@@ -107,7 +81,7 @@ class EnableExpiredFlagWithInvalidExpiredDate {
         console.log(leafletInfoDetailsFetch.match(gtinPattern)[0]);
         console.log(leafletInfoDetailsFetch.match(batchNumberPattern)[0]);
 
-        await timeoutWait.setTimeoutTime(3);
+        await timeoutWait.setTimeoutWait(3);
 
         const datebefore = leafletInfoDetailsFetch.match(expiryDatePattern)[0];
         const dateafter = moment(datebefore, "DD-MMM-YYYY").format("YYMMDD")

@@ -2,7 +2,6 @@ const invalidSerialNumberAndInvalidExpiryDate = require('../pageObjectsNativeApp
 const allureReporter = require('@wdio/allure-reporter').default
 const nativePatientPage = require('../pageObjectsNativeApp/patientSettingPage')
 const timeoutWait = require('../utils/setTimeout')
-const webView = require('../pageObjectsNativeApp/webView')
 
 describe('097_Other tests', () => {
 

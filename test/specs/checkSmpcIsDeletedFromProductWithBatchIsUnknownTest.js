@@ -2,7 +2,6 @@ const checkSmpcDeletedInProductWithBatchIsUnknown = require('../pageObjectsNativ
 const allureReporter = require('@wdio/allure-reporter').default
 const nativePatientPage = require('../pageObjectsNativeApp/patientSettingPage')
 const timeoutWait = require('../utils/setTimeout')
-// const commonFunctions=require('../utils/commonutilitiesFunctions')
 
 describe('094_Edit product to check batch is unknown and delete smpc. Pass unknown batch in matrix', () => {
 
@@ -33,8 +32,10 @@ describe('094_Edit product to check batch is unknown and delete smpc. Pass unkno
         await checkSmpcDeletedInProductWithBatchIsUnknown.waitTimeout();
         await timeoutWait.setTimeoutWait(4);
         //display details on Leaflet for recalled batch scenario
-        await checkSmpcDeletedInProductWithBatchIsUnknown.checkSmpcIsDeletedInProductWithBatchIsUnknownFetch();
-        await timeoutWait.setTimeoutWait(4);
+        await checkSmpcDeletedInProductWithBatchIsUnknown.checkSmpcIsDeletedFromProductWithBatchIsUnknownDetailsFetch();
+        await timeoutWait.setTimeoutWait(3);
+        await checkSmpcDeletedInProductWithBatchIsUnknown.checkSmpcIsDeletedFromProductWithBatchIsUnknownLeafletDetailsFetch();
+        await timeoutWait.setTimeoutWait(3);
 
     });
 

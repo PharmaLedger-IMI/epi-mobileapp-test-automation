@@ -56,16 +56,16 @@ class DisableExpiryDateCheckInvalidExpiryDate {
 
         // invalid leaflet text
         const incorrectExpiryDateText = await this.incorrectExpiryText.getText();
-        await timeoutWait.setTimeoutTime(2);
+        await timeoutWait.setTimeoutWait(2);
         await this.incorrectExpiryLearnMore.click();
-        await timeoutWait.setTimeoutTime(3);
+        await timeoutWait.setTimeoutWait(3);
         await this.incorrectExpiryPopUpMsg.getText();
-        await timeoutWait.setTimeoutTime(3);
+        await timeoutWait.setTimeoutWait(3);
         await this.closeIncorrectPopUpMsg.click();
-        await timeoutWait.setTimeoutTime(3);
+        await timeoutWait.setTimeoutWait(3);
         // get product info text
         const prodInfo = await this.productInfo.getText();
-        await timeoutWait.setTimeoutTime(2);
+        await timeoutWait.setTimeoutWait(2);
 
         console.log(prodInfo);
         expect(prodInfo).includes(configData.prodName);
@@ -78,16 +78,16 @@ class DisableExpiryDateCheckInvalidExpiryDate {
 
         // get product info description
         const prodDesc = await this.productDescription.getText();
-        await timeoutWait.setTimeoutTime(2);
+        await timeoutWait.setTimeoutWait(2);
         // click on leaflet shiled button icon
         await this.leafletVerifiedShiledBtn.click();
-        await timeoutWait.setTimeoutTime(2);
+        await timeoutWait.setTimeoutWait(2);
         // get text of batch info
         const batchInfoTxt = await this.batchInfo.getText();
-        await timeoutWait.setTimeoutTime(2);
+        await timeoutWait.setTimeoutWait(2);
         // get leaflet prod info data 
         await this.productLeafletInfoDetails.getText();
-        await timeoutWait.setTimeoutTime(2);
+        await timeoutWait.setTimeoutWait(2);
 
         const leafletInfoDetailsFetch = await this.productLeafletInfoDetails.getText();
         console.log("Prod Info Details of Leaflet is:" + " " + leafletInfoDetailsFetch)
@@ -101,7 +101,7 @@ class DisableExpiryDateCheckInvalidExpiryDate {
         console.log(leafletInfoDetailsFetch.match(batchNumberPattern)[0]);
 
 
-        await timeoutWait.setTimeoutTime(3);
+        await timeoutWait.setTimeoutWait(3);
 
         const datebefore = leafletInfoDetailsFetch.match(expiryDatePattern)[0];
         const dateafter = moment(datebefore, "DD-MMM-YYYY").format("YYMMDD")

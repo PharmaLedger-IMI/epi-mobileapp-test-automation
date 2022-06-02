@@ -1,8 +1,7 @@
-const checkUnknownBatchWithInavledBatchAndInavlidExpiryDate = require('../pageObjectsNativeApp/checkUnknownBatchWithInvalidBatchAndInvalidExpiryDate')
+const checkUnknownBatchWithInvalidBatchAndInvalidExpiryDate = require('../pageObjectsNativeApp/checkUnknownBatchWithInvalidBatchAndInvalidExpiryDate')
 const allureReporter = require('@wdio/allure-reporter').default
 const nativePatientPage = require('../pageObjectsNativeApp/patientSettingPage')
 const timeoutWait = require('../utils/setTimeout')
-// const commonFunctions=require('../utils/commonutilitiesFunctions')
 
 describe('098_Edit product to check batch is unknown and pass invalid batch and invalid expiry date', () => {
 
@@ -30,13 +29,15 @@ describe('098_Edit product to check batch is unknown and pass invalid batch and 
     it('Mobile App - should open LeafLet to check batch is unknown and pass invalid batch and invalid expiry date', async () => {
         allureReporter.addFeature('Recalled Batch Leaflet display Info Data');
         //Wait timeout for Leaflet to be displayed 
-        await checkUnknownBatchWithInavledBatchAndInavlidExpiryDate.waitTimeout();
+        await checkUnknownBatchWithInvalidBatchAndInvalidExpiryDate.waitTimeout();
         await timeoutWait.setTimeoutWait(4);
         //display details on Leaflet for recalled batch scenario
-        await checkUnknownBatchWithInavledBatchAndInavlidExpiryDate.checkUnknownBatchWithInvalidBatchAndInvalidExpiryDateDetailsFetch();
+        await checkUnknownBatchWithInvalidBatchAndInvalidExpiryDate.checkUnknownBatchWithInvalidBatchAndInvalidExpiryDateDetailsFetch();
         await timeoutWait.setTimeoutWait(3);
-        await checkUnknownBatchWithInavledBatchAndInavlidExpiryDate.checkUnknownBatchWithInvalidBatchAndInvalidExpiryDateLeafletDataFetch();
+        await checkUnknownBatchWithInvalidBatchAndInvalidExpiryDate.checkUnknownBatchWithInvalidBatchAndInvalidExpiryDateLeafletDetailsFetch();
         await timeoutWait.setTimeoutWait(3);
+        // await checkUnknownBatchWithInvalidBatchAndInvalidExpiryDate.getLeafletTypesAndLevel();
+        // await timeoutWait.setTimeoutWait(3);
 
     });
 

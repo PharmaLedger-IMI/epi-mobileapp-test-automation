@@ -40,31 +40,45 @@ class InvalidSerialNumberAndInvalidExpiryDate {
 
     async waitTimeout() {
         await timeoutWait.setTimeoutWait(30);
-        await timeoutWait.waitForElement(this.incorrectExpDateTxtBatch);
-
+       
     }
 
 
     async invalidSerialNumberAndInvalidExpiryDateFetch() {
 
+        let deviceScreenDimensions = await driver.getWindowRect();
+
+        await driver.touchPerform([
+            {
+                action: 'tap',
+                options: {
+                    x: Math.floor(deviceScreenDimensions.width * 0.49),
+                    y: Math.floor(deviceScreenDimensions.height * 0.49)
+                }
+            }
+        ]);
+
+        await timeoutWait.setTimeoutWait(8);
+
         // recalled text message 
         const incorrectSNExpDateBatch = await this.incorrectSNExpDateTxtBatch.getText();
-        await timeoutWait.setTimeoutTime(3);
+        await timeoutWait.setTimeoutWait(3);
         // product info message
         await this.incorrectSNExpDateBatchLearnMore.click();
-        await timeoutWait.setTimeoutTime(3);
+        await timeoutWait.setTimeoutWait(3);
         await this.incorrectSNExpDatePopUpMsg.getText();
-        await timeoutWait.setTimeoutTime(3);
+        await timeoutWait.setTimeoutWait(3);
         await this.closeIncorrectSNExpDatePopUpMsg.click();
-        await timeoutWait.setTimeoutTime(3);
+        await timeoutWait.setTimeoutWait(3);
         const leafletNotFound = await this.leafletNotFoundText.getText();
-        await timeoutWait.setTimeoutTime(2);
+        await timeoutWait.setTimeoutWait(2);
         const LeafletNotFoundDesc = await this.leafletNotFoundProdDesc.getText();
-        await timeoutWait.setTimeoutTime(2);
+        await timeoutWait.setTimeoutWait(2);
         // click on leaflet shield button
 
         // chai assertions on expiry date, serial number, gtin number and batch Number pattern
-        expect(incorrectSNExpDateBatch).to.equal(configData.combinationScenario1)
+       // expect(incorrectSNExpDateBatch).to.equal(configData.combinationScenario1)
+        expect(incorrectSNExpDateBatch).to.equal(configData.incorrectExpiryDateLabelMessage);
         expect(leafletNotFound).to.equal(configData.leafletNotFoundMessage);
         expect(LeafletNotFoundDesc).to.equal(configData.leafletNotFoundDescription);
 

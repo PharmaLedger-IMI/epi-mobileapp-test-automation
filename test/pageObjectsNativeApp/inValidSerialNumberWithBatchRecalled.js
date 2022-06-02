@@ -20,20 +20,20 @@ class InvalidSerailNumberWithBatchRecalled {
         return $("//android.widget.Button[@text='Close']")
     }
 
-    //failedSN Batch 
-    get failedSNTextBatch() {
+    //recalled Batch 
+    get recalledTextBatch() {
         return $("(//android.view.View[@resource-id='page-ion-content']/descendant::android.widget.TextView)[2]")
     }
 
-    get failedSNLearnMore() {
+    get recalledLearnMore() {
         return $("(//android.view.View[@resource-id='page-ion-content']/descendant::android.widget.TextView)[3]")
     }
 
-    get failedSNPopUpMsg() {
+    get recalledPopUpMsg() {
         return $("(//android.app.Dialog/descendant::android.view.View[5]/child::android.widget.TextView)")
     }
 
-    get closeFailedSNPopUpMsg() {
+    get closeRecalledPopUpMsg() {
         return $("(//android.app.Dialog/descendant::android.view.View)[3]/child::android.widget.Button")
     }
 
@@ -47,38 +47,52 @@ class InvalidSerailNumberWithBatchRecalled {
 
     async waitTimeout() {
         await timeoutWait.setTimeoutWait(30);
-        await timeoutWait.waitForElement(this.recalledTxtMsg);
-
+       
     }
 
 
     async invalidSerailNumberWithBatchRecalledFetch() {
 
+        let deviceScreenDimensions = await driver.getWindowRect();
+
+        await driver.touchPerform([
+            {
+                action: 'tap',
+                options: {
+                    x: Math.floor(deviceScreenDimensions.width * 0.49),
+                    y: Math.floor(deviceScreenDimensions.height * 0.49)
+                }
+            }
+        ]);
+
+        await timeoutWait.setTimeoutWait(8);
+
         // recalled text message
         const recalledMsg = await this.recalledTxtMsg.getText();
         console.log(recalledMsg);
-        await timeoutWait.setTimeoutTime(2);
+        await timeoutWait.setTimeoutWait(2);
         // close button click
         await this.closeBtnMsg.click();
-        await timeoutWait.setTimeoutTime(3);
+        await timeoutWait.setTimeoutWait(3);
         // recalled text message 
-        const failedSNBatch = await this.failedSNTextBatch.getText();
-        await timeoutWait.setTimeoutTime(3);
+        const recalledBatch = await this.recalledTextBatch.getText();
+        await timeoutWait.setTimeoutWait(3);
         // product info message
-        await this.failedSNLearnMore.click();
-        await timeoutWait.setTimeoutTime(3);
-        await this.failedSNPopUpMsg.getText();
-        await timeoutWait.setTimeoutTime(3);
-        await this.closeFailedSNPopUpMsg.click();
-        await timeoutWait.setTimeoutTime(3);
+        await this.recalledLearnMore.click();
+        await timeoutWait.setTimeoutWait(3);
+        await this.recalledPopUpMsg.getText();
+        await timeoutWait.setTimeoutWait(3);
+        await this.closeRecalledPopUpMsg.click();
+        await timeoutWait.setTimeoutWait(3);
         const leafletNotFound = await this.leafletNotFoundText.getText();
-        await timeoutWait.setTimeoutTime(2);
+        await timeoutWait.setTimeoutWait(2);
         const LeafletNotFoundDesc = await this.leafletNotFoundProdDesc.getText();
-        await timeoutWait.setTimeoutTime(2);
+        await timeoutWait.setTimeoutWait(2);
         // click on leaflet shield button
 
         // chai assertions on expiry date, serial number, gtin number and batch Number pattern
-        expect(failedSNBatch).to.equal(configData.combinationScenario2)
+       // expect(failedSNBatch).to.equal(configData.combinationScenario2)
+        expect(recalledBatch).to.equal(configData.recalledBatchLabelMessage);
         expect(leafletNotFound).to.equal(configData.leafletNotFoundMessage);
         expect(LeafletNotFoundDesc).to.equal(configData.leafletNotFoundDescription);
 

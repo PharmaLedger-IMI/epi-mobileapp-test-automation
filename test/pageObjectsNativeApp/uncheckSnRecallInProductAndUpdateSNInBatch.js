@@ -79,10 +79,12 @@ class UncheckSNRecallInProductAndUpdateInBatch {
 
         // chai assertions on expiry date, serial number, gtin number and batch Number pattern
         // expect(recalledMsg).to.equal(configData.recalledMessage)
-        expect(recalledBatch).to.equal(configData.recalledLabelMessage)
+        expect(recalledBatch).to.equal(configData.recalledLabelMessage);
+        await timeoutWait.setTimeoutWait(2);
         expect(leafletNotFound).to.equal(configData.leafletNotFoundMessage);
         expect(LeafletNotFoundDesc).to.equal(configData.leafletNotFoundDescription);
 
+       
     }
 
 }

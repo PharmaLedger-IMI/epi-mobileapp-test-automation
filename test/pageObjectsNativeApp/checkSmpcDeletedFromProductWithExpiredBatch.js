@@ -91,6 +91,7 @@ class CheckSmpcDeletedFromProductWithExpiredBatch {
         console.log(prodExpiredTxtBatch);
         expect(prodExpiredTxtBatch).to.equal(configData.expiredProductLabelMessage)
 
+        await timeoutWait.setTimeoutWait(3);
     }
 
     async checkSmpcDeletedFromProductWithExpiredBatchLeafletDetailsFetch() {

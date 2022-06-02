@@ -53,9 +53,7 @@ class CheckBatchIsExpiredInProductNotExpiredInBatch {
     }
 
     async waitTimeout() {
-
         await timeoutWait.setTimeoutWait(32);
-    
     }
 
 
@@ -109,6 +107,8 @@ class CheckBatchIsExpiredInProductNotExpiredInBatch {
         console.log("Prod Info Details of Leaflet is:" + " " + leafletInfoDetailsFetch)
         const leafletInfoFetch = leafletInfoDetailsFetch.replace(':', "=");
         console.log("Batch Info Details of Leaflet is: " + leafletInfoFetch);
+
+        await timeoutWait.setTimeoutWait(2);
 
         // log output for expiry date, serial number, gtin number and batch Number pattern
         console.log(leafletInfoDetailsFetch.match(expiryDatePattern)[0]);

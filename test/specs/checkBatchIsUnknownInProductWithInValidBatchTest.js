@@ -37,8 +37,8 @@ describe('092_Edit Product to check batch is unknown and edit batch to have vali
                 await timeoutWait.setTimeoutWait(3);
                 await checkBatchIsUnknownInProductWithinValidMatrix.checkBatchIsUnknownInProductWithInValidBatchLeafletDetailsFetch();
                 await timeoutWait.setTimeoutWait(3);
-                await checkBatchIsUnknownInProductWithinValidMatrix.getLeafletTypesAndLevel();
-                await timeoutWait.setTimeoutWait(3);
+               // await checkBatchIsUnknownInProductWithinValidMatrix.getLeafletTypesAndLevel();
+               // await timeoutWait.setTimeoutWait(3);
 
 
         });

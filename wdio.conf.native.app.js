@@ -104,17 +104,17 @@ exports.config = {
             'test/specs/uploadNewVersionEpiInProductTest.js',
             'test/specs/createBatchWithUploadLeafletTest.js',
             'test/specs/versionOfEpiNotReplacedTest.js',
-            'test/specs/createProductWithUploadLeaflet&SMPCTest.js',
+            'test/specs/createProductWithUploadLeafletAndSMPCTest.js',
             'test/specs/updateProductWithNewSmpcTest.js',
             'test/specs/createBatchWithUploadLeafletAndSMPCTest.js',
             'test/specs/deleteLeafletAndSMPCInBatchTest.js',
             'test/specs/scanPreviousBatchTest.js',
 
-            'test/specs/checkBatchRecallInProduct&NotRecallInBatchTest.js',
-            'test/specs/checkBatchIsRecalledInProduct&BatchTest.js',
+            'test/specs/checkBatchRecallInProductAndNotRecallInBatchTest.js',
+            'test/specs/checkBatchIsRecalledInProductAndBatchTest.js',
             'test/specs/checkSmpcDeletedFromProductWithRecalledBatchTest.js',
-            'test/specs/uncheckBatchIsRecallInProduct&RecalledInBatchTest.js',
-            'test/specs/unCheckBatchRecallInProduct&BatchTest.js',
+            'test/specs/uncheckBatchIsRecallInProductAndRecalledInBatchTest.js',
+            'test/specs/unCheckBatchRecallInProductAndBatchTest.js',
             'test/specs/uncheckSmpcDeletedFromProductWithRecalledBatchTest.js',
 
             'test/specs/checkExpirationDateInProductAndBatchWithCorrectExpiryDateTest.js',
@@ -141,21 +141,24 @@ exports.config = {
             'test/specs/unCheckSnDecommissionedInProductAndDecommissionedInBatchTest.js',
             'test/specs/uncheckSnDecommissionedInProductAndNotDecommissionedInBatchTest.js',
 
-            //    'test/specs/checkSNIsUnknownInProductAndBatchTest.js',
-            //    'test/specs/checkSNIsUnknownInProduct&KnownInBatchTest.js'
-            //    'test/specs/checkSmpcIsDeletedFromProductWithSnIsUnknownTest.js',
-            //    'test/specs/unCheckSNIsUnknownInProductAndBatchTest',
-            //    'test/specs/unCheckSNIsUnknownInProduct&KnownInBatchTest.js',
+            'test/specs/checkSNIsUnknownInProductAndBatchTest.js',
+            'test/specs/checkSNIsUnknownInProductAndKnownInBatchTest.js',
+            'test/specs/checkSmpcIsDeletedFromProductWithSnIsUnknownTest.js',
+            'test/specs/unCheckSNIsUnknownInProductAndBatchTest.js',
+            'test/specs/unCheckSNIsUnknownInProductAndKnownInBatchTest.js',
 
-            // 'test/specs/checkBatchIsUnknownInProductWithInValidMatrixTest.js',
-            // 'test/specs/checkBatchIsUnknownInProductWithValidMatrixTest.js'
-            //    'test/specs/checkSmpcIsDeletedFromProductWithBatchIsUnknownTest.js',
-            //    'test/specs/unCheckBatchIsUnknownInProductWithInValidBatchTest.js',
-            //    'test/specs/unCheckBatchIsUnknownInProductWithValidBatchTest.js'
-
-            // 'test/specs/inValidSerialNumberAndInvalidExpiryDateTest.js',
-            // 'test/specs/checkUnknownBatchWithInvalidBatch&InvalidExpiryDateTest.js',
-            // 'test/specs/inValidSerialNumberWithBatchRecalledTest.js'
+            'test/specs/checkBatchIsUnknownInProductWithInValidBatchTest.js',
+            'test/specs/checkBatchIsUnknownInProductWithValidMatrixTest.js',
+            'test/specs/checkSmpcIsDeletedFromProductWithBatchIsUnknownTest.js',
+            'test/specs/unCheckBatchIsUnknownInProductWithInValidBatchTest.js',
+            'test/specs/unCheckBatchIsUnknownInProductWithValidBatchTest.js',
+            
+            'test/specs/inValidSerialNumberAndInvalidExpiryDateTest.js',
+            'test/specs/checkUnknownBatchWithInvalidBatchAndInvalidExpiryDateTest.js',
+            'test/specs/unCheckUnknownBatchWithInvalidBatchAndExpiryDateTest.js',
+            'test/specs/inValidSerialNumberWithBatchRecalledTest.js',
+            'test/specs/scanUnknownGTINWithValidBatchSNAndExpiryDateTest.js',
+            'test/specs/scanKnownGTINWithoutBatchSNAndExpiryDateTest.js'
 
         ],
 

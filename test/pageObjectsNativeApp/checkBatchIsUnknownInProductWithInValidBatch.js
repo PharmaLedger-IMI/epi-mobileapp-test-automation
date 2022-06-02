@@ -1,24 +1,38 @@
 const testData = require('../testdata/testExpectations.json')
 const configData = require('../testdata/config.json')
 const expect = require('chai').expect
-const timeout = require('../utils/setTimeout')
+const timeoutWait = require('../utils/setTimeout')
 const moment = require('moment')
+
+const expiryDatePattern = /(?<=Expiry:)(.*)(?=Serial)/g
+const serialNumberPattern = /(?<=Serial number:)(.*)(?=Product)/g
+const gtinPattern = /(?<=Product code:)(.*)(?=Batch)/g
+const batchNumberPattern = /(?<=Batch number:).*/g
 
 class checkBatchIsUnknownInProductWithInValidMatrix {
 
-    get batchUnknownTextBatch() {
+    get batchUnknownTxtMsg() {
+        return $("(//android.app.Dialog/descendant::android.view.View)[5]/child::android.widget.TextView")
+    }
+
+    get closeBtnMsg() {
+        return $("//android.widget.Button[@text='Close']")
+    }
+
+    //unableToValiddate Batch 
+    get unableToValidateTextBatch() {
         return $("(//android.view.View[@resource-id='page-ion-content']/descendant::android.widget.TextView)[2]")
     }
 
-    get batchUnknownLearnMore() {
+    get unableToValidateLearnMore() {
         return $("(//android.view.View[@resource-id='page-ion-content']/descendant::android.widget.TextView)[3]")
     }
 
-    get batchUnknownPopUpMsg() {
+    get unableToValidatePopUpMsg() {
         return $("(//android.app.Dialog/descendant::android.view.View[5]/child::android.widget.TextView)")
     }
 
-    get closeBatchUnknownPopUpMsg() {
+    get closeUnableToValidatePopUpMsg() {
         return $("(//android.app.Dialog/descendant::android.view.View)[3]/child::android.widget.Button")
     }
 
@@ -42,10 +56,6 @@ class checkBatchIsUnknownInProductWithInValidMatrix {
         return $("(//android.app.Dialog/descendant::android.view.View)[5]/child::android.view.View")
     }
 
-    get closeLeafletBtn() {
-        return $("(//android.app.Dialog/descendant::android.view.View)[4]/following-sibling::android.widget.Button")
-    }
-
     get leafletType() {
         return $("(//android.view.View[@resource-id='leaflet-header']/descendant::android.view.View)[3]/child::android.view.View[@resource-id='ion-sel-1']")
     }
@@ -54,126 +64,150 @@ class checkBatchIsUnknownInProductWithInValidMatrix {
         return $("(//android.app.Dialog[@resource-id='ion-overlay-1']/descendant::android.view.View)[1]/child::android.widget.Button[2]")
     }
 
+    get closeLeafletBtn() {
+        return $("(//android.app.Dialog/descendant::android.view.View)[4]/following-sibling::android.widget.Button")
+    }
+
+    get aboutBtn() {
+        return $("(//android.view.View[@resource-id='leaflet-header']/child::android.view.View[3]/descendant::android.view.View)[2]/child::android.widget.Button")
+    }
+
     get leafletLevelDescriptionType() {
-        return $("(//android.view.View[@resource-id='leaflet-content']/descendant::android.view.View)[2]/child::android.widget.TextView[2]")
+        return $("(//android.view.View[@resource-id='page-ion-content']/descendant::android.view.View[@resource-id='leaflet-content']/descendant::android.view.View)[2]/child::android.widget.TextView[2]")
     }
 
-    get statusMsg() {
-        return $("(//android.view.View[@resource-id='page-ion-content']/descendant::android.view.View)[1]/child::android.widget.TextView[1]")
+    get productNotFound(){
+        return $("(//android.view.View[@resource-id='page-ion-content']/descendant::android.view.View)/child::android.widget.TextView[1]")
     }
 
-    get learnMore() {
-        return $("(//android.view.View[@resource-id='page-ion-content']/descendant::android.view.View)[1]/child::android.widget.TextView[2]")
+    get prodCodeText(){
+        return $("(//android.view.View[@resource-id='page-ion-content']/descendant::android.view.View)/child::android.widget.TextView[2]")
     }
 
-    get prodTitle() {
-        return $("(//android.view.View[@resource-id='page-ion-content']/descendant::android.view.View)[1]/child::android.widget.TextView[4]")
+    get serialNumberText(){
+        return $("(//android.view.View[@resource-id='page-ion-content']/descendant::android.view.View)/child::android.widget.TextView[4]")
     }
 
-    get prodTitleText() {
-        return $("(//android.view.View[@resource-id='page-ion-content']/descendant::android.view.View)[1]/child::android.widget.TextView[5]")
+    get productCodeText(){
+        return $("(//android.view.View[@resource-id='page-ion-content']/descendant::android.view.View)/child::android.widget.TextView[6]")
+    }
+
+    get batchNumberText(){
+        return $("(//android.view.View[@resource-id='page-ion-content']/descendant::android.view.View)/child::android.widget.TextView[8]")
+    }
+
+    get expiryDateText(){
+        return $("(//android.view.View[@resource-id='page-ion-content']/descendant::android.view.View)/child::android.widget.TextView[10]")
     }
 
     async waitTimeout() {
-        await timeout.setTimeoutWait(33);
-        await timeout.waitForElement(this.batchUnknownTextBatch);
-
+        await timeoutWait.setTimeoutWait(33);
     }
 
     async checkBatchIsUnknownInProductWithInValidBatchDetailsFetch() {
 
-        let deviceScreenDimensions = await driver.getWindowRect();
+        // let deviceScreenDimensions = await driver.getWindowRect();
 
-        await driver.touchPerform([
-            {
-                action: 'tap',
-                options: {
-                    x: Math.floor(deviceScreenDimensions.width * 0.49),
-                    y: Math.floor(deviceScreenDimensions.height * 0.49)
-                }
-            }
-        ]);
+        // await driver.touchPerform([
+        //     {
+        //         action: 'tap',
+        //         options: {
+        //             x: Math.floor(deviceScreenDimensions.width * 0.49),
+        //             y: Math.floor(deviceScreenDimensions.height * 0.49)
+        //         }
+        //     }
+        // ]);
 
-        await timeout.setTimeoutWait(8);
+         await timeoutWait.setTimeoutWait(8);
 
-        const batchUnknownTxtBatch = await this.batchUnknownTextBatch.getText();
-        await timeoutWait.setTimeoutTime(2);
-        await this.batchUnknownLearnMore.click();
-        await timeoutWait.setTimeoutTime(3);
-        await this.batchUnknownPopUpMsg.getText();
-        await timeoutWait.setTimeoutTime(3);
-        await this.closeBatchUnknownPopUpMsg.click();
-        await timeoutWait.setTimeoutTime(3);
+        // await this.batchUnknownTxtMsg.getText();
+        // await timeoutWait.setTimeoutWait(3);
+        // await this.closeBtnMsg.click();
+        // await timeoutWait.setTimeoutWait(3);
+        // const unableToValidateTxtBatch = await this.unableToValidateTextBatch.getText();
+        // await timeoutWait.setTimeoutWait(2);
+        // await this.unableToValidateLearnMore.click();
+        // await timeoutWait.setTimeoutWait(3);
+        // await this.unableToValidatePopUpMsg.getText();
+        // await timeoutWait.setTimeoutWait(3);
+        // await this.closeUnableToValidatePopUpMsg.click();
+        // await timeoutWait.setTimeoutWait(3);
 
-        // const statusMessage = await this.statusMsg.getText();
-        // console.log(statusMessage);
-        // await timeout.setTimeoutTime(3);
-        // //get text of product information description
-        // const learnMoreStatus = await this.learnMore.getText();
-        // console.log(learnMoreStatus);
-        // await timeout.setTimeoutTime(3);
-        // //click on leaflet Shieled Button
-        // const productTitle = await this.prodTitle.getText();
-        // console.log(productTitle);
-        // await timeout.setTimeoutTime(3);
+        // const prodInfoMsg = await this.prodInfoMsg.getText();
+        // await timeoutWait.setTimeoutWait(2);
+        // const prodDescMsg = await this.productDescription.getText();
+        // await timeoutWait.setTimeoutWait(2);
+        // await this.leafletShieldInfoBtn.click();
+        // await timeoutWait.setTimeoutWait(3);
         // // get batch info text
-        // const prodTitleOfText = await this.prodTitleText.getText();
-        // console.log(prodTitleOfText);
-        // await timeout.setTimeoutTime(3);
+        // const batchInfoTxt = await this.batchInfoTxtMsg.getText();
+        // await timeoutWait.setTimeoutWait(3);
 
-        // await expect(statusMessage).to.not.equal("Batch Unknown");
-        // await expect(learnMoreStatus).to.not.equal("Batch learn more");
-        // await expect(productTitle).to.not.equal("Unknown Batch");
-        // await expect(prodTitleOfText).to.not.equal("Batch Unknown");
+        // console.log(prodInfoMsg);
+        // expect(prodInfoMsg).includes(configData.prodName);
+        // console.log(prodDescMsg);
+        // expect(prodDescMsg).to.equal(configData.prodDesc);
+        // console.log(unableToValidateTxtBatch);
+        // expect(unableToValidateTxtBatch).to.equal(configData.batchUnknownValidateMessage);
+        // //get batch Info text and assert 
+        // console.log(batchInfoTxt);
+        // expect(batchInfoTxt).to.equal(configData.batchInfoMessage);
+        
+        const productNotFound= await this.productNotFound.getText();
+        await timeoutWait.setTimeoutWait(3);
+        const prodCodeTxt= await this.prodCodeText.getText();
+        await timeoutWait.setTimeoutWait(3);
 
-        const prodInfoMsg = await this.productInfoMsg.getText();
-        await timeoutWait.setTimeoutTime(2);
-        const prodDescMsg = await this.productDescription.getText();
-        await timeoutWait.setTimeoutTime(2);
-        await this.leafletVerifiedShiledBtn.click();
-        await timeout.setTimeoutTime(3);
-        // get batch info text
-        const batchInfoTxt = await this.batchInfo.getText();
-        await timeout.setTimeoutTime(3);
+        console.log(productNotFound);
+        expect(productNotFound).to.equal(configData.productNotFoundMessage);
+        console.log(prodCodeTxt);
+        expect(prodCodeTxt).to.equal(configData.productCodeCombinationMessage);
 
-        console.log(prodInfoMsg);
-        expect(prodInfoMsg).includes(configData.prodName);
-        console.log(prodDescMsg);
-        expect(prodDescMsg).to.equal(configData.prodDesc);
-        console.log(batchUnknownTxtBatch);
-        expect(batchUnknownTxtBatch).to.equal(configData.unKnownBatchLabelMessage);
-        //get batch Info text and assert 
-        console.log(batchInfoTxt);
-        expect(batchInfoTxt).to.equal(configData.batchInfoMessage);
     }
 
     async checkBatchIsUnknownInProductWithInValidBatchLeafletDetailsFetch() {
 
         // get leaflet product details information
-        await this.productLeafletInfoDetails.getText();
-        await timeout.setTimeoutTime(3);
+        // await this.productLeafletInfoDetails.getText();
+        // await timeoutWait.setTimeoutWait(3);
 
-        const leafletInfoDetailsFetch = await this.productLeafletInfoDetails.getText();
-        console.log("Prod Info Details of Leaflet is:" + " " + leafletInfoDetailsFetch)
-        const leafletInfoFetch = leafletInfoDetailsFetch.replace(':', "=");
-        console.log("Batch Info Details of Leaflet is: " + leafletInfoFetch);
+        // const leafletInfoDetailsFetch = await this.productLeafletInfoDetails.getText();
+        // console.log("Prod Info Details of Leaflet is:" + " " + leafletInfoDetailsFetch)
+        // const leafletInfoFetch = leafletInfoDetailsFetch.replace(':', "=");
+        // console.log("Batch Info Details of Leaflet is: " + leafletInfoFetch);
 
         // log output for expiry date, serial number, gtin number and batch Number pattern
-        console.log(leafletInfoDetailsFetch.match(expiryDatePattern)[0]);
-        console.log(leafletInfoDetailsFetch.match(serialNumberPattern)[0]);
-        console.log(leafletInfoDetailsFetch.match(gtinPattern)[0]);
-        console.log(leafletInfoDetailsFetch.match(batchNumberPattern)[0]);
+        // console.log(leafletInfoDetailsFetch.match(expiryDatePattern)[0]);
+        // console.log(leafletInfoDetailsFetch.match(serialNumberPattern)[0]);
+        // console.log(leafletInfoDetailsFetch.match(gtinPattern)[0]);
+        // console.log(leafletInfoDetailsFetch.match(batchNumberPattern)[0]);
 
-        await timeout.setTimeoutTime(3);
+        // await timeoutWait.setTimeoutWait(3);
 
-        const datebefore = leafletInfoDetailsFetch.match(expiryDatePattern)[0];
+        // const datebefore = leafletInfoDetailsFetch.match(expiryDatePattern)[0];
+        // const dateafter = moment(datebefore, "DD-MMM-YYYY").format("YYMMDD")
+        // console.log(dateafter);
+
+        // // chai assertions on expiry date, serial number, gtin number and batch Number pattern
+        // expect(leafletInfoDetailsFetch.match(gtinPattern)[0]).to.equal(testData.prodCode);
+        // expect(leafletInfoDetailsFetch.match(batchNumberPattern)[0]).to.equal(testData.batchValue);
+        // expect(leafletInfoDetailsFetch.match(serialNumberPattern)[0]).to.equal(testData.batchSerialNumber);
+        // expect(dateafter).to.equal(testData.expiry);
+
+        const datebefore =await this.expiryDateText.getText();
         const dateafter = moment(datebefore, "DD-MMM-YYYY").format("YYMMDD")
         console.log(dateafter);
 
-        // chai assertions on expiry date, serial number, gtin number and batch Number pattern
-        expect(leafletInfoDetailsFetch.match(gtinPattern)[0]).to.equal(testData.prodCode);
-        expect(leafletInfoDetailsFetch.match(batchNumberPattern)[0]).to.equal(testData.batchValue);
-        expect(leafletInfoDetailsFetch.match(serialNumberPattern)[0]).to.equal(testData.batchSerialNumber);
+        console.log(await this.productCodeText.getText())
+        console.log(await this.batchNumberText.getText())
+        console.log(await this.serialNumberText.getText())
+        console.log(dateafter);
+
+        await timeoutWait.setTimeoutWait(3);
+
+        expect(await this.productCodeText.getText()).to.equal(testData.prodCode);
+        expect(await this.batchNumberText.getText()).to.equal(testData.batchValue);
+        expect(await this.serialNumberText.getText()).to.equal(testData.batchSerialNumber);
         expect(dateafter).to.equal(testData.expiry);
 
 
@@ -182,41 +216,42 @@ class checkBatchIsUnknownInProductWithInValidMatrix {
     async getLeafletTypesAndLevel() {
 
         await this.closeLeafletBtn.click();
-        await timeout.setTimeoutTime(3);
+        await timeoutWait.setTimeoutWait(5);
 
-        let deviceScreenDimensionofSMPCLeafletType = await driver.getWindowRect();
-        await driver.touchPerform([
-            {
-                Element: this.leafletLevelDescriptionType,
-                action: 'tap',
-                options: {
-                    x: Math.floor(deviceScreenDimensionofSMPCLeafletType.width * 0.49),
-                    y: Math.floor(deviceScreenDimensionofSMPCLeafletType.height * 0.60)
-                }
-            }
-        ]);
+        await this.aboutBtn.click();
+        await timeoutWait.setTimeoutWait(4);
 
         const leafletLevelSMPCDescription = await this.leafletLevelDescriptionType.getText();
         console.log(leafletLevelSMPCDescription);
-        expect(leafletLevelSMPCDescription).includes(configData.leafletProductLevelDescription)
+        expect(leafletLevelSMPCDescription).includes(configData.smpcProductLevelDescription)
 
-        await this.leafletType.click();
-        await timeout.setTimeoutWait(3);
+        await timeoutWait.setTimeoutWait(4);
 
-        await this.leafletTypeEpi.click();
-        await timeout.setTimeoutWait(4);
-
-        let deviceScreenDimensionofLeafletType = await driver.getWindowRect();
+        let deviceScreenDimension = await driver.getWindowRect();
         await driver.touchPerform([
             {
-                Element: this.leafletLevelDescriptionType,
                 action: 'tap',
                 options: {
-                    x: Math.floor(deviceScreenDimensionofLeafletType.width * 0.49),
-                    y: Math.floor(deviceScreenDimensionofLeafletType.height * 0.60)
+                    x: Math.floor(deviceScreenDimension.width * 0.49),
+                    y: Math.floor(deviceScreenDimension.height * 0.90)
                 }
             }
         ]);
+
+        await timeoutWait.setTimeoutWait(8);
+
+        await this.leafletType.click();
+        await timeoutWait.setTimeoutWait(8);
+
+        await this.leafletTypeEpi.click();
+        await timeoutWait.setTimeoutWait(10);
+
+        // close button click
+        await this.closeBtnMsg.click();
+        await timeoutWait.setTimeoutWait(5);
+
+        await this.aboutBtn.click();
+        await timeoutWait.setTimeoutWait(8);
 
         const leafletLevelDescription = await this.leafletLevelDescriptionType.getText();
         console.log(leafletLevelDescription);

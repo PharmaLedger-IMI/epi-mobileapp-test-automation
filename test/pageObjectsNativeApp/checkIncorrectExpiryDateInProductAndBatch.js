@@ -1,9 +1,8 @@
 const testData = require('../testdata/testExpectations.json')
 const configData = require('../testdata/config.json')
 const expect = require('chai').expect
-const timeout = require('../utils/setTimeout')
+const timeoutWait = require('../utils/setTimeout')
 const moment = require('moment')
-
 
 const expiryDatePattern = /(?<=Expiry:)(.*)(?=Serial)/g
 const serialNumberPattern = /(?<=Serial number:)(.*)(?=Product)/g
@@ -93,25 +92,25 @@ class CheckIncorrectDateInProductAndBatch {
         await timeout.setTimeoutWait(8);
 
         const incorrectExpiryDateTxtBatch = await this.incorrectExpiryDateTextBatch.getText();
-        await timeout.setTimeoutTime(2);
+        await timeout.setTimeoutWait(2);
         await this.incorrectExpiryDateBatchLearnMore.click();
-        await timeout.setTimeoutTime(3);
+        await timeout.setTimeoutWait(3);
         await this.incorrectExpiryDatePopUpMsg.getText();
-        await timeout.setTimeoutTime(3);
+        await timeout.setTimeoutWait(3);
         await this.closeIncorrectExpiryDatePopUpMsg.click();
-        await timeout.setTimeoutTime(3);
+        await timeout.setTimeoutWait(3);
         const prodInfo = await this.productInfo.getText();
         // expect(this.productInfo.getText()).to.not.equal(null);
-        await timeout.setTimeoutTime(3);
+        await timeout.setTimeoutWait(3);
         //get text of product information description
         const prodDescMsg = await this.productDescription.getText();
-        await timeout.setTimeoutTime(3);
+        await timeout.setTimeoutWait(3);
         //click on leaflet Shieled Button
         await this.leafletVerifiedShiledBtn.click();
-        await timeout.setTimeoutTime(3);
+        await timeout.setTimeoutWait(3);
         // get batch info text
         const batchInfoTxt = await this.batchInfo.getText();
-        await timeout.setTimeoutTime(3);
+        await timeout.setTimeoutWait(3);
 
         //get prod info text and assert 
         console.log(prodInfo);
@@ -131,7 +130,7 @@ class CheckIncorrectDateInProductAndBatch {
     async checkIncorrectExpiryDateInProductAndBatchLeafletDetailsFetch() {
         // get leaflet product details information
         await this.productLeafletInfoDetails.getText();
-        await timeout.setTimeoutTime(3);
+        await timeout.setTimeoutWait(3);
 
 
         const leafletInfoDetailsFetch = await this.productLeafletInfoDetails.getText();
@@ -145,7 +144,7 @@ class CheckIncorrectDateInProductAndBatch {
         console.log(leafletInfoDetailsFetch.match(gtinPattern)[0]);
         console.log(leafletInfoDetailsFetch.match(batchNumberPattern)[0]);
 
-        await timeout.setTimeoutTime(3);
+        await timeout.setTimeoutWait(3);
 
         const datebefore = leafletInfoDetailsFetch.match(expiryDatePattern)[0];
         const dateafter = moment(datebefore, "DD-MMM-YYYY").format("YYMMDD")

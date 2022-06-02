@@ -71,18 +71,18 @@ class CheckSmpcDeletedFromProductWithIncorrectExpiryDate {
     async checkSmpcDeletedFromProductWithIncorrectExpiryDateDetailsFetch() {
     
         const incorrectExpiryDateTxtBatch = await this.incorrectTextBatch.getText();
-        await timeoutWait.setTimeoutTime(2);
+        await timeoutWait.setTimeoutWait(2);
         await this.incorrectBatchLearnMore.click();
-        await timeoutWait.setTimeoutTime(3);
+        await timeoutWait.setTimeoutWait(3);
         await this.incorrectPopUpMsg.getText();
-        await timeoutWait.setTimeoutTime(3);
+        await timeoutWait.setTimeoutWait(3);
         await this.closeIncorrectPopUpMsg.click();
-        await timeoutWait.setTimeoutTime(3);
+        await timeoutWait.setTimeoutWait(3);
         // product info message
         const prodInfoMsg = await this.prodInfo.getText();
-        await timeoutWait.setTimeoutTime(2);
+        await timeoutWait.setTimeoutWait(2);
         const prodDescMsg = await this.productDescription.getText();
-        await timeoutWait.setTimeoutTime(2);
+        await timeoutWait.setTimeoutWait(2);
 
         console.log(prodInfoMsg);
         expect(prodInfoMsg).includes(configData.prodName);
@@ -100,13 +100,13 @@ class CheckSmpcDeletedFromProductWithIncorrectExpiryDate {
 
         // click on leaflet shield button
         await this.leafletShieldInfoBtn.click();
-        await timeoutWait.setTimeoutTime(2);
+        await timeoutWait.setTimeoutWait(2);
         // btach info text message 
         const batchInfo = await this.batchInfoTxtMsg.getText();
-        await timeoutWait.setTimeoutTime(2);
+        await timeoutWait.setTimeoutWait(2);
         // leaflet product information details
         await this.productLeafletInfoDetails.getText();
-        await timeoutWait.setTimeoutTime(2);
+        await timeoutWait.setTimeoutWait(2);
 
         const leafletInfoDetailsFetch = await this.productLeafletInfoDetails.getText();
         console.log("Prod Info Details of Leaflet is:" + " " + leafletInfoDetailsFetch)
@@ -119,7 +119,7 @@ class CheckSmpcDeletedFromProductWithIncorrectExpiryDate {
         console.log(leafletInfoDetailsFetch.match(gtinPattern)[0]);
         console.log(leafletInfoDetailsFetch.match(batchNumberPattern)[0]);
         
-        await timeoutWait.setTimeoutTime(3);
+        await timeoutWait.setTimeoutWait(3);
 
         const datebefore = leafletInfoDetailsFetch.match(expiryDatePattern)[0];
         const dateafter = moment(datebefore, "DD-MMM-YYYY").format("YYMMDD")
@@ -134,7 +134,7 @@ class CheckSmpcDeletedFromProductWithIncorrectExpiryDate {
         console.log(batchInfo);
         expect(batchInfo).includes(configData.batchInfoMessage);
 
-        await timeoutWait.setTimeoutTime(4);
+        await timeoutWait.setTimeoutWait(4);
 
         await this.closeLeafletBtn.click();
         await timeoutWait.setTimeoutWait(5);
