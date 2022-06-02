@@ -1,7 +1,7 @@
 const testData = require('../testdata/testExpectations.json')
 const configData = require('../testdata/config.json')
 const expect = require('chai').expect
-const timeout = require('../utils/setTimeout')
+const timeoutWait = require('../utils/setTimeout')
 const moment = require('moment')
 
 
@@ -44,8 +44,8 @@ class VersionOfEpiNotReplaced {
     }
 
     async waitTimeout() {
-        await timeout.setTimeoutWait(30);
-        await timeout.waitForElement(this.productInfo);
+        await timeoutWait.setTimeoutWait(30);
+        await timeoutWait.waitForElement(this.productInfo);
 
     }
 
@@ -53,16 +53,16 @@ class VersionOfEpiNotReplaced {
     async versionOfEPINotReplacedDetailsFetch() {
 
         const prodInfo = await this.productInfo.getText();
-        await timeout.setTimeoutTime(3);
+        await timeoutWait.setTimeoutWait(3);
         //get text of product information description
         const prodDescMsg = await this.productDescription.getText();
-        await timeout.setTimeoutTime(3);
+        await timeoutWait.setTimeoutWait(3);
         //click on leaflet Shieled Button
         await this.leafletVerifiedShiledBtn.click();
-        await timeout.setTimeoutTime(3);
+        await timeoutWait.setTimeoutWait(3);
         // get batch info text
         const batchInfoTxt = await this.batchInfo.getText();
-        await timeout.setTimeoutTime(3);
+        await timeoutWait.setTimeoutWait(3);
 
         //get prod info text and assert 
         console.log(prodInfo);
@@ -80,7 +80,7 @@ class VersionOfEpiNotReplaced {
 
         // get leaflet product details information
         await this.productLeafletInfoDetails.getText();
-        await timeout.setTimeoutTime(3);
+        await timeoutWait.setTimeoutWait(3);
         const leafletInfoDetailsFetch = await this.productLeafletInfoDetails.getText();
         console.log("Prod Info Details of Leaflet is:" + " " + leafletInfoDetailsFetch)
         const leafletInfoFetch = leafletInfoDetailsFetch.replace(':', "=");
@@ -92,7 +92,7 @@ class VersionOfEpiNotReplaced {
         console.log(leafletInfoDetailsFetch.match(gtinPattern)[0]);
         console.log(leafletInfoDetailsFetch.match(batchNumberPattern)[0]);
 
-        await timeout.setTimeoutTime(3);
+        await timeoutWait.setTimeoutWait(3);
 
         const datebefore = leafletInfoDetailsFetch.match(expiryDatePattern)[0];
         const dateafter = moment(datebefore, "DD-MMM-YYYY").format("YYMMDD")
@@ -104,13 +104,13 @@ class VersionOfEpiNotReplaced {
         expect(leafletInfoDetailsFetch.match(serialNumberPattern)[0]).to.equal(testData.batchSerialNumber);
         expect(dateafter).to.equal(testData.expiry);
 
-        await timeout.setTimeoutTime(3);
+        await timeoutWait.setTimeoutWait(3);
 
         await this.closeLeafletBtn.click();
-        await timeout.setTimeoutWait(5);
+        await timeoutWait.setTimeoutWait(5);
 
         await this.aboutBtn.click();
-        await timeout.setTimeoutWait(3);
+        await timeoutWait.setTimeoutWait(3);
 
         const leafletLevelDescription = await this.leafletLevelDescriptionType.getText();
         console.log(leafletLevelDescription);

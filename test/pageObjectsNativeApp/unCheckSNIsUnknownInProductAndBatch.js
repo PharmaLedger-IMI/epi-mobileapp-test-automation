@@ -13,20 +13,20 @@ const batchNumberPattern = /(?<=Batch number:).*/g
 class UncheckSNIsUnknownInProductAndBatch {
 
 
-    //snIsUnknown Batch 
-    get snIsUnknownTextBatch() {
+    //failedSN Batch 
+    get failedSNTextBatch() {
         return $("(//android.view.View[@resource-id='page-ion-content']/descendant::android.widget.TextView)[2]")
     }
 
-    get snIsUnknownBatchLearnMore() {
+    get failedSNLearnMore() {
         return $("(//android.view.View[@resource-id='page-ion-content']/descendant::android.widget.TextView)[3]")
     }
 
-    get snIsUnknownPopUpMsg() {
+    get failedSNPopUpMsg() {
         return $("(//android.app.Dialog/descendant::android.view.View[5]/child::android.widget.TextView)")
     }
 
-    get closeSNIsUnknownPopUpMsg() {
+    get closeFailedSNPopUpMsg() {
         return $("(//android.app.Dialog/descendant::android.view.View)[3]/child::android.widget.Button")
     }
 
@@ -40,31 +40,43 @@ class UncheckSNIsUnknownInProductAndBatch {
 
     async waitTimeout() {
         await timeoutWait.setTimeoutWait(30);
-        await timeoutWait.waitForElement(this.snIsUnknownTextBatch);
-
     }
 
 
     async uncheckSNIsUnknownInProductAndBatchFetch() {
 
+        let deviceScreenDimensions = await driver.getWindowRect();
+
+        await driver.touchPerform([
+            {
+                action: 'tap',
+                options: {
+                    x: Math.floor(deviceScreenDimensions.width * 0.49),
+                    y: Math.floor(deviceScreenDimensions.height * 0.49)
+                }
+            }
+        ]);
+
+        await timeoutWait.setTimeoutWait(6);
+
         // failedSN text message 
-        const snIsUnknownBatch = await this.snIsUnknownTextBatch.getText();
-        await timeoutWait.setTimeoutTime(3);
+        const failedSNBatch = await this.failedSNTextBatch.getText();
+        await timeoutWait.setTimeoutWait(3);
         // product info message
-        await this.snIsUnknownBatchLearnMore.click();
-        await timeoutWait.setTimeoutTime(3);
-        await this.snIsUnknownPopUpMsg.getText();
-        await timeoutWait.setTimeoutTime(3);
-        await this.closeSNIsUnknownPopUpMsg.click();
-        await timeoutWait.setTimeoutTime(3);
+        await this.failedSNLearnMore.click();
+        await timeoutWait.setTimeoutWait(3);
+        await this.failedSNPopUpMsg.getText();
+        await timeoutWait.setTimeoutWait(3);
+        await this.closeFailedSNPopUpMsg.click();
+        await timeoutWait.setTimeoutWait(3);
         const leafletNotFound = await this.leafletNotFoundText.getText();
-        await timeoutWait.setTimeoutTime(2);
+        await timeoutWait.setTimeoutWait(2);
         const LeafletNotFoundDesc = await this.leafletNotFoundProdDesc.getText();
-        await timeoutWait.setTimeoutTime(2);
+        await timeoutWait.setTimeoutWait(2);
         // click on leaflet shield button
 
         // chai assertions on expiry date, serial number, gtin number and batch Number pattern
-        expect(snIsUnknownBatch).to.equal(configData.serialNumberUnknownLabelMessage)
+        expect(failedSNBatch).to.equal(configData.invalidSerialNumberLabelMessage)
         expect(leafletNotFound).to.equal(configData.leafletNotFoundMessage);
         expect(LeafletNotFoundDesc).to.equal(configData.leafletNotFoundDescription);
 

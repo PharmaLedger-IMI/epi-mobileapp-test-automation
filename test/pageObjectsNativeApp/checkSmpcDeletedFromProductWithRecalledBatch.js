@@ -80,32 +80,32 @@ class CheckSmpcDeletedFromProductWithRecalledBatch {
 
         const recalledMsg = await this.recalledTxtMsg.getText();
         console.log(recalledMsg);
-        await timeoutWait.setTimeoutTime(2);
+        await timeoutWait.setTimeoutWait(2);
         // close button click
         await this.closeBtnMsg.click();
-        await timeoutWait.setTimeoutTime(2);
+        await timeoutWait.setTimeoutWait(2);
         // recalled text message 
         const recalledTxtBatch = await this.recalledTextBatch.getText();
-        await timeoutWait.setTimeoutTime(2);
+        await timeoutWait.setTimeoutWait(2);
         await this.recalledBatchLearnMore.click();
-        await timeoutWait.setTimeoutTime(3);
+        await timeoutWait.setTimeoutWait(3);
         await this.recalledPopUpMsg.getText();
-        await timeoutWait.setTimeoutTime(3);
+        await timeoutWait.setTimeoutWait(3);
         await this.closeRecalledPopUpMsg.click();
-        await timeoutWait.setTimeoutTime(3);
+        await timeoutWait.setTimeoutWait(3);
 
         const prodInfo = await this.prodInfoMsg.getText();
         // expect(this.productInfo.getText()).to.not.equal(null);
-        await timeoutWait.setTimeoutTime(3);
+        await timeoutWait.setTimeoutWait(3);
         //get text of product information description
         const prodDesc = await this.productDescription.getText();
-        await timeoutWait.setTimeoutTime(3);
+        await timeoutWait.setTimeoutWait(3);
         //click on leaflet Shieled Button
         await this.leafletShieldInfoBtn.click();
-        await timeoutWait.setTimeoutTime(3);
+        await timeoutWait.setTimeoutWait(3);
         // get batch info text
         const batchInfoTxt = await this.batchInfoTxtMsg.getText();
-        await timeoutWait.setTimeoutTime(3);
+        await timeoutWait.setTimeoutWait(3);
 
         //get prod info text and assert 
         console.log(prodInfo);
@@ -126,7 +126,7 @@ class CheckSmpcDeletedFromProductWithRecalledBatch {
     async checkSmpcDeletedFromProductWithRecalledBatchLeafletDetailsFetch() {
         // get leaflet product details information
         await this.productLeafletInfoDetails.getText();
-        await timeoutWait.setTimeoutTime(3);
+        await timeoutWait.setTimeoutWait(3);
 
 
         const leafletInfoDetailsFetch = await this.productLeafletInfoDetails.getText();
@@ -140,7 +140,7 @@ class CheckSmpcDeletedFromProductWithRecalledBatch {
         console.log(leafletInfoDetailsFetch.match(gtinPattern)[0]);
         console.log(leafletInfoDetailsFetch.match(batchNumberPattern)[0]);
 
-        await timeoutWait.setTimeoutTime(3);
+        await timeoutWait.setTimeoutWait(3);
 
         const datebefore = leafletInfoDetailsFetch.match(expiryDatePattern)[0];
         const dateafter = moment(datebefore, "DD-MMM-YYYY").format("YYMMDD")

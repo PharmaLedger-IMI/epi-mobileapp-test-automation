@@ -44,9 +44,9 @@ class CreateBatchValidSNRecalledSNDecommissionedSN {
 
         // product info message
         const productInfoMsg = await this.prodInfoMsg.getText();
-        await timeoutWait.setTimeoutTime(2);
+        await timeoutWait.setTimeoutWait(2);
         const prodDescMsg = await this.productDescription.getText();
-        await timeoutWait.setTimeoutTime(2);
+        await timeoutWait.setTimeoutWait(2);
 
         console.log(productInfoMsg);
         expect(productInfoMsg).includes(configData.prodName);
@@ -60,13 +60,13 @@ class CreateBatchValidSNRecalledSNDecommissionedSN {
 
         // click on leaflet shield button
         await this.leafletShieldInfoBtn.click();
-        await timeoutWait.setTimeoutTime(2);
+        await timeoutWait.setTimeoutWait(2);
         // btach info text message 
         const batchInfoText = await this.batchInfoTxtMsg.getText();
-        await timeoutWait.setTimeoutTime(2);
+        await timeoutWait.setTimeoutWait(2);
         // leaflet product information details
         await this.productLeafletInfoDetails.getText();
-        await timeoutWait.setTimeoutTime(2);
+        await timeoutWait.setTimeoutWait(2);
 
         const leafletInfoDetailsFetch = await this.productLeafletInfoDetails.getText();
         console.log("Prod Info Details of Leaflet is:" + " " + leafletInfoDetailsFetch)
@@ -79,7 +79,7 @@ class CreateBatchValidSNRecalledSNDecommissionedSN {
         console.log(leafletInfoDetailsFetch.match(gtinPattern)[0]);
         console.log(leafletInfoDetailsFetch.match(batchNumberPattern)[0]);
 
-        await timeoutWait.setTimeoutTime(3);
+        await timeoutWait.setTimeoutWait(3);
 
         const datebefore = leafletInfoDetailsFetch.match(expiryDatePattern)[0];
         const dateafter = moment(datebefore, "DD-MMM-YYYY").format("YYMMDD")

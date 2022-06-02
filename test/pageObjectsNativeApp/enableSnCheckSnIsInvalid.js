@@ -57,16 +57,16 @@ class EnableSnCheckSnIsInvalid {
 
         // invalid leaflet text
         const invalidSNText = await this.inValidText.getText();
-        await timeoutWait.setTimeoutTime(3);
+        await timeoutWait.setTimeoutWait(3);
         await this.inValidSNLearnMore.click();
-        await timeoutWait.setTimeoutTime(3);
+        await timeoutWait.setTimeoutWait(3);
         await this.inValidSNPopUpMsg.getText();
-        await timeoutWait.setTimeoutTime(3);
+        await timeoutWait.setTimeoutWait(3);
         await this.closeInValidSNPopUpMsg.click();
-        await timeoutWait.setTimeoutTime(3);
+        await timeoutWait.setTimeoutWait(3);
         // get product info text
         const prodInfoMsg = await this.productInfo.getText();
-        await timeoutWait.setTimeoutTime(2);
+        await timeoutWait.setTimeoutWait(2);
 
         console.log(prodInfoMsg);
         expect(prodInfoMsg).includes(configData.prodName);
@@ -78,16 +78,16 @@ class EnableSnCheckSnIsInvalid {
     async enableSnCheckSnInvalidLeafletDetailsFetch() {
         // get product info description
         const prodDescMsg =await this.productDescription.getText();
-        await timeoutWait.setTimeoutTime(2);
+        await timeoutWait.setTimeoutWait(2);
         // click on leaflet shiled button icon
         await this.leafletVerifiedShiledBtn.click();
-        await timeoutWait.setTimeoutTime(2);
+        await timeoutWait.setTimeoutWait(2);
         // get text of batch info
         const batchInfoTxt=await this.batchInfo.getText();
-        await timeoutWait.setTimeoutTime(2);
+        await timeoutWait.setTimeoutWait(2);
         // get leaflet prod info data 
         await this.productLeafletInfoDetails.getText();
-        await timeoutWait.setTimeoutTime(2);
+        await timeoutWait.setTimeoutWait(2);
 
         const leafletInfoDetailsFetch = await this.productLeafletInfoDetails.getText();
         console.log("Prod Info Details of Leaflet is:" + " " + leafletInfoDetailsFetch)
@@ -101,7 +101,7 @@ class EnableSnCheckSnIsInvalid {
         console.log(leafletInfoDetailsFetch.match(batchNumberPattern)[0]);
 
 
-        await timeoutWait.setTimeoutTime(3);
+        await timeoutWait.setTimeoutWait(3);
 
         const datebefore = leafletInfoDetailsFetch.match(expiryDatePattern)[0];
         const dateafter = moment(datebefore, "DD-MMM-YYYY").format("YYMMDD")

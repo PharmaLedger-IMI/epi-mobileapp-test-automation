@@ -14,19 +14,19 @@ class CheckSmpcDeletedFromProductWithSnIsUnknown {
 
 
     //faliedSN Batch 
-    get snIsUnknownTextBatch() {
+    get failedSNTextBatch() {
         return $("(//android.view.View[@resource-id='page-ion-content']/descendant::android.widget.TextView)[2]")
     }
 
-    get snIsUnknownBatchLearnMore() {
+    get failedSNLearnMore() {
         return $("(//android.view.View[@resource-id='page-ion-content']/descendant::android.widget.TextView)[3]")
     }
 
-    get snIsUnknownPopUpMsg() {
+    get failedSNPopUpMsg() {
         return $("(//android.app.Dialog/descendant::android.view.View[5]/child::android.widget.TextView)")
     }
 
-    get closeSNIsUnknownPopUpMsg() {
+    get closeFailedSNPopUpMsg() {
         return $("(//android.app.Dialog/descendant::android.view.View)[3]/child::android.widget.Button")
     }
 
@@ -54,13 +54,17 @@ class CheckSmpcDeletedFromProductWithSnIsUnknown {
         return $("(//android.app.Dialog/descendant::android.view.View)[4]/following-sibling::android.widget.Button")
     }
 
+    get aboutBtn() {
+        return $("(//android.view.View[@resource-id='leaflet-header']/child::android.view.View[3]/descendant::android.view.View)[2]/child::android.widget.Button")
+    }
+
     get leafletLevelDescriptionType() {
-        return $("(//android.view.View[@resource-id='leaflet-content']/descendant::android.view.View)[2]/child::android.widget.TextView[2]")
+        return $("(//android.view.View[@resource-id='page-ion-content']/descendant::android.view.View[@resource-id='leaflet-content']/descendant::android.view.View)[2]/child::android.widget.TextView[2]")
     }
 
     async waitTimeout() {
         await timeoutWait.setTimeoutWait(30);
-        await timeoutWait.waitForElement(this.snIsUnknownTextBatch);
+        await timeoutWait.waitForElement(this.failedSNTextBatch);
 
     }
 
@@ -68,26 +72,26 @@ class CheckSmpcDeletedFromProductWithSnIsUnknown {
     async checkSmpcIsDeletedFromProductWithSnIsUnknownDetailsFetch() {
 
         // recalled text message 
-        const snIsUnknownTextBatch = await this.snIsUnknownTextBatch.getText();
-        await timeoutWait.setTimeoutTime(2);
-        await this.snIsUnknownBatchLearnMore.click();
-        await timeoutWait.setTimeoutTime(3);
-        await this.snIsUnknownPopUpMsg.getText();
-        await timeoutWait.setTimeoutTime(3);
-        await this.closeSNIsUnknownPopUpMsg.click();
-        await timeoutWait.setTimeoutTime(3);
+        const failedSNTxtBatch = await this.failedSNTextBatch.getText();
+        await timeoutWait.setTimeoutWait(2);
+        await this.failedSNLearnMore.click();
+        await timeoutWait.setTimeoutWait(3);
+        await this.failedSNPopUpMsg.getText();
+        await timeoutWait.setTimeoutWait(3);
+        await this.closeFailedSNPopUpMsg.click();
+        await timeoutWait.setTimeoutWait(3);
         // product info message
         const productInfoMsg = await this.prodInfoMsg.getText();
-        await timeoutWait.setTimeoutTime(2);
+        await timeoutWait.setTimeoutWait(2);
         const prodDesc = await this.productDescription.getText();
-        await timeoutWait.setTimeoutTime(2);
+        await timeoutWait.setTimeoutWait(2);
 
         console.log(productInfoMsg);
         expect(productInfoMsg).includes(configData.prodName);
         console.log(prodDesc);
-        expect(prodDesc).includes(configData.prodName);
-        console.log(snIsUnknownTextBatch);
-        expect(snIsUnknownTextBatch).to.equal(configData.serialNumberUnknownLabelMessage);
+        expect(prodDesc).includes(configData.prodDesc);
+        console.log(failedSNTxtBatch);
+        expect(failedSNTxtBatch).to.equal(configData.invalidSerialNumberLabelMessage);
 
     }
 
@@ -96,13 +100,13 @@ class CheckSmpcDeletedFromProductWithSnIsUnknown {
 
         // click on leaflet shield button
         await this.leafletShieldInfoBtn.click();
-        await timeoutWait.setTimeoutTime(2);
+        await timeoutWait.setTimeoutWait(2);
         // btach info text message 
         const batchInfoText = await this.batchInfoTxtMsg.getText();
-        await timeoutWait.setTimeoutTime(2);
+        await timeoutWait.setTimeoutWait(2);
         // leaflet product information details
         await this.productLeafletInfoDetails.getText();
-        await timeoutWait.setTimeoutTime(2);
+        await timeoutWait.setTimeoutWait(2);
 
         const leafletInfoDetailsFetch = await this.productLeafletInfoDetails.getText();
         console.log("Prod Info Details of Leaflet is:" + " " + leafletInfoDetailsFetch)
@@ -115,7 +119,7 @@ class CheckSmpcDeletedFromProductWithSnIsUnknown {
         console.log(leafletInfoDetailsFetch.match(gtinPattern)[0]);
         console.log(leafletInfoDetailsFetch.match(batchNumberPattern)[0]);
 
-        await timeoutWait.setTimeoutTime(3);
+        await timeoutWait.setTimeoutWait(3);
 
         const datebefore = leafletInfoDetailsFetch.match(expiryDatePattern)[0];
         const dateafter = moment(datebefore, "DD-MMM-YYYY").format("YYMMDD")
@@ -131,23 +135,15 @@ class CheckSmpcDeletedFromProductWithSnIsUnknown {
         expect(batchInfoText).to.equal(configData.batchInfoMessage)
 
         await this.closeLeafletBtn.click();
-        await timeout.setTimeoutTime(3);
+        await timeoutWait.setTimeoutWait(5);
 
-        let deviceScreenDimensionofLeafletType = await driver.getWindowRect();
-        await driver.touchPerform([
-            {
-                Element: this.leafletLevelDescriptionType,
-                action: 'tap',
-                options: {
-                    x: Math.floor(deviceScreenDimensionofLeafletType.width * 0.49),
-                    y: Math.floor(deviceScreenDimensionofLeafletType.height * 0.60)
-                }
-            }
-        ]);
+        await this.aboutBtn.click();
+        await timeoutWait.setTimeoutWait(8);
 
         const leafletLevelDescription = await this.leafletLevelDescriptionType.getText();
         console.log(leafletLevelDescription);
         expect(leafletLevelDescription).includes(configData.leafletProductLevelDescription)
+
 
 
     }

@@ -42,16 +42,16 @@ class UpdateBatchWithSN {
     async updateBatchWithSerialNumberDetailsFetch() {
 
         const prodInfo = await this.productInfo.getText();
-        await timeout.setTimeoutTime(3);
+        await timeoutWait.setTimeoutWait(3);
         //get text of product information description
         const prodDescMsg = await this.productDescription.getText();
-        await timeout.setTimeoutTime(3);
+        await timeoutWait.setTimeoutWait(3);
         //click on leaflet Shieled Button
         await this.leafletShieldInfoBtn.click();
-        await timeout.setTimeoutTime(3);
+        await timeoutWait.setTimeoutWait(3);
         // get batch info text
         const batchInfoTxt = await this.batchInfoTxtMsg.getText();
-        await timeout.setTimeoutTime(3);
+        await timeoutWait.setTimeoutWait(3);
 
         //get prod info text and assert 
         console.log(prodInfo);
@@ -69,7 +69,7 @@ class UpdateBatchWithSN {
 
         // get leaflet product details information
         await this.productLeafletInfoDetails.getText();
-        await timeout.setTimeoutTime(3);
+        await timeoutWait.setTimeoutWait(3);
         const leafletInfoDetailsFetch = await this.productLeafletInfoDetails.getText();
         console.log("Prod Info Details of Leaflet is:" + " " + leafletInfoDetailsFetch)
         const leafletInfoFetch = leafletInfoDetailsFetch.replace(':', "=");
@@ -81,7 +81,7 @@ class UpdateBatchWithSN {
         console.log(leafletInfoDetailsFetch.match(gtinPattern)[0]);
         console.log(leafletInfoDetailsFetch.match(batchNumberPattern)[0]);
 
-        await timeout.setTimeoutTime(3);
+        await timeoutWait.setTimeoutWait(3);
 
         const datebefore = leafletInfoDetailsFetch.match(expiryDatePattern)[0];
         const dateafter = moment(datebefore, "DD-MMM-YYYY").format("YYMMDD")

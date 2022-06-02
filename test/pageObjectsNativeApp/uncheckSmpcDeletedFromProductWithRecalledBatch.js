@@ -58,24 +58,24 @@ class UncheckSmpcDeletedFromProductWithRecalledBatch {
         // recalled text message
         const recalledMsg = await this.recalledTxtMsg.getText();
         console.log(recalledMsg);
-        await timeoutWait.setTimeoutTime(2);
+        await timeoutWait.setTimeoutWait(2);
         // close button click
         await this.closeBtnMsg.click();
-        await timeoutWait.setTimeoutTime(2);
+        await timeoutWait.setTimeoutWait(2);
         // recalled text message 
         const recalledBatch = await this.recalledTextBatch.getText();
-        await timeoutWait.setTimeoutTime(3);
+        await timeoutWait.setTimeoutWait(3);
         // product info message
         await this.recalledBatchLearnMore.click();
-        await timeoutWait.setTimeoutTime(3);
+        await timeoutWait.setTimeoutWait(3);
         await this.recalledPopUpMsg.getText();
-        await timeoutWait.setTimeoutTime(3);
+        await timeoutWait.setTimeoutWait(3);
         await this.closeRecalledPopUpMsg.click();
-        await timeoutWait.setTimeoutTime(3);
+        await timeoutWait.setTimeoutWait(3);
         const leafletNotFound = await this.leafletNotFoundText.getText();
-        await timeoutWait.setTimeoutTime(2);
+        await timeoutWait.setTimeoutWait(2);
         const LeafletNotFoundDesc = await this.leafletNotFoundProdDesc.getText();
-        await timeoutWait.setTimeoutTime(2);
+        await timeoutWait.setTimeoutWait(2);
         // click on leaflet shield button
 
         // chai assertions on expiry date, serial number, gtin number and batch Number pattern

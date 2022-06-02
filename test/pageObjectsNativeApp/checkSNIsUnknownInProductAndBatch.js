@@ -92,25 +92,25 @@ class CheckSNIsUnknownInProductAndBatch {
         await timeoutWait.setTimeoutWait(8);
         // recalled text message 
         const failedSNTextBatch = await this.failedSNTextBatch.getText();
-        await timeoutWait.setTimeoutTime(2);
+        await timeoutWait.setTimeoutWait(2);
         await this.failedSNBatchLearnMore.click();
-        await timeoutWait.setTimeoutTime(3);
+        await timeoutWait.setTimeoutWait(3);
         await this.failedSNPopUpMsg.getText();
-        await timeoutWait.setTimeoutTime(3);
+        await timeoutWait.setTimeoutWait(3);
         await this.closeFailedSNPopUpMsg.click();
-        await timeoutWait.setTimeoutTime(3);
+        await timeoutWait.setTimeoutWait(3);
         // product info message
         const productInfoMsg = await this.prodInfoMsg.getText();
-        await timeoutWait.setTimeoutTime(2);
+        await timeoutWait.setTimeoutWait(2);
         const prodDescMsg = await this.productDescription.getText();
-        await timeoutWait.setTimeoutTime(2);
+        await timeoutWait.setTimeoutWait(2);
 
         //click on leaflet Shieled Button
-        await this.leafletVerifiedShiledBtn.click();
-        await timeoutWait.setTimeoutTime(3);
+        await this.leafletShieldInfoBtn.click();
+        await timeoutWait.setTimeoutWait(3);
         // get batch info text
-        const batchInfoTxt = await this.batchInfo.getText();
-        await timeoutWait.setTimeoutTime(3);
+        const batchInfoTxt = await this.batchInfoTxtMsg.getText();
+        await timeoutWait.setTimeoutWait(3);
 
         //Assertions 
         console.log(productInfoMsg);
@@ -127,7 +127,7 @@ class CheckSNIsUnknownInProductAndBatch {
     async checkSNIsUnknownInProductAndBatchLeafletDetailsFetch() {
         // get leaflet product details information
         await this.productLeafletInfoDetails.getText();
-        await timeoutWait.setTimeoutTime(3);
+        await timeoutWait.setTimeoutWait(3);
 
         const leafletInfoDetailsFetch = await this.productLeafletInfoDetails.getText();
         console.log("Prod Info Details of Leaflet is:" + " " + leafletInfoDetailsFetch)
@@ -140,7 +140,7 @@ class CheckSNIsUnknownInProductAndBatch {
         console.log(leafletInfoDetailsFetch.match(gtinPattern)[0]);
         console.log(leafletInfoDetailsFetch.match(batchNumberPattern)[0]);
 
-        await timeoutWait.setTimeoutTime(3);
+        await timeoutWait.setTimeoutWait(3);
 
         const datebefore = leafletInfoDetailsFetch.match(expiryDatePattern)[0];
         const dateafter = moment(datebefore, "DD-MMM-YYYY").format("YYMMDD")
@@ -189,7 +189,7 @@ class CheckSNIsUnknownInProductAndBatch {
         await timeoutWait.setTimeoutWait(10);
 
         await this.aboutBtn.click();
-        await timeoutWait.setTimeoutWait(8);
+        await timeoutWait.setTimeoutWait(10);
 
         const leafletLevelDescription = await this.leafletLevelDescriptionType.getText();
         console.log(leafletLevelDescription);

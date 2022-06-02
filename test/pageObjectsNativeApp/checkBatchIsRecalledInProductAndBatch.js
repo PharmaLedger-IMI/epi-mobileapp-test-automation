@@ -1,7 +1,7 @@
 const testData = require('../testdata/testExpectations.json')
 const configData = require('../testdata/config.json')
 const expect = require('chai').expect
-const timeout = require('../utils/setTimeout')
+const timeoutWait = require('../utils/setTimeout')
 const moment = require('moment')
 
 const expiryDatePattern = /(?<=Expiry:)(.*)(?=Serial)/g
@@ -76,9 +76,7 @@ class CheckBatchRecalledInProductAndBatch {
     }
 
     async waitTimeout() {
-        await timeout.setTimeoutWait(32);
-        // await timeout.waitForElement(this.smpcDocType);
-
+        await timeoutWait.setTimeoutWait(32);
     }
 
 
@@ -96,36 +94,36 @@ class CheckBatchRecalledInProductAndBatch {
             }
         ]);
 
-        await timeout.setTimeoutWait(8);
+        await timeoutWait.setTimeoutWait(8);
 
         const recalledMsg = await this.recalledTxtMsg.getText();
         console.log(recalledMsg);
-        await timeout.setTimeoutTime(2);
+        await timeoutWait.setTimeoutWait(2);
         // close button click
         await this.closeBtnMsg.click();
-        await timeout.setTimeoutTime(2);
+        await timeoutWait.setTimeoutWait(2);
         // recalled text message 
         const recalledTxtBatch = await this.recalledTextBatch.getText();
-        await timeout.setTimeoutTime(2);
+        await timeoutWait.setTimeoutWait(2);
         await this.recalledBatchLearnMore.click();
-        await timeout.setTimeoutTime(3);
+        await timeoutWait.setTimeoutWait(3);
         await this.recalledPopUpMsg.getText();
-        await timeout.setTimeoutTime(3);
+        await timeoutWait.setTimeoutWait(3);
         await this.closeRecalledPopUpMsg.click();
-        await timeout.setTimeoutTime(3);
+        await timeoutWait.setTimeoutWait(3);
 
         const prodInfo = await this.productInfo.getText();
         // expect(this.productInfo.getText()).to.not.equal(null);
-        await timeout.setTimeoutTime(3);
+        await timeoutWait.setTimeoutWait(3);
         //get text of product information description
         const prodDesc = await this.productDescription.getText();
-        await timeout.setTimeoutTime(3);
+        await timeoutWait.setTimeoutWait(3);
         //click on leaflet Shieled Button
         await this.leafletVerifiedShiledBtn.click();
-        await timeout.setTimeoutTime(3);
+        await timeoutWait.setTimeoutWait(3);
         // get batch info text
         const batchInfoTxt = await this.batchInfo.getText();
-        await timeout.setTimeoutTime(3);
+        await timeoutWait.setTimeoutWait(3);
 
         //get prod info text and assert 
         console.log(prodInfo);
@@ -147,7 +145,7 @@ class CheckBatchRecalledInProductAndBatch {
 
         // get leaflet product details information
         await this.productLeafletInfoDetails.getText();
-        await timeout.setTimeoutTime(3);
+        await timeoutWait.setTimeoutWait(3);
 
         const leafletInfoDetailsFetch = await this.productLeafletInfoDetails.getText();
         console.log("Prod Info Details of Leaflet is:" + " " + leafletInfoDetailsFetch)
@@ -160,7 +158,7 @@ class CheckBatchRecalledInProductAndBatch {
         console.log(leafletInfoDetailsFetch.match(gtinPattern)[0]);
         console.log(leafletInfoDetailsFetch.match(batchNumberPattern)[0]);
 
-        await timeout.setTimeoutTime(3);
+        await timeoutWait.setTimeoutWait(3);
 
         const datebefore = leafletInfoDetailsFetch.match(expiryDatePattern)[0];
         const dateafter = moment(datebefore, "DD-MMM-YYYY").format("YYMMDD")
@@ -178,16 +176,16 @@ class CheckBatchRecalledInProductAndBatch {
     async getLeafletTypesAndLevel() {
 
         await this.closeLeafletBtn.click();
-        await timeout.setTimeoutWait(5);
+        await timeoutWait.setTimeoutWait(5);
 
         await this.aboutBtn.click();
-        await timeout.setTimeoutWait(4);
+        await timeoutWait.setTimeoutWait(4);
 
         const leafletLevelSMPCDescription = await this.leafletLevelDescriptionType.getText();
         console.log(leafletLevelSMPCDescription);
         expect(leafletLevelSMPCDescription).includes(configData.smpcProductLevelDescription)
 
-        await timeout.setTimeoutWait(4);
+        await timeoutWait.setTimeoutWait(4);
 
         let deviceScreenDimension = await driver.getWindowRect();
         await driver.touchPerform([
@@ -200,20 +198,20 @@ class CheckBatchRecalledInProductAndBatch {
             }
         ]);
 
-        await timeout.setTimeoutWait(8);
+        await timeoutWait.setTimeoutWait(8);
 
         await this.leafletType.click();
-        await timeout.setTimeoutWait(8);
+        await timeoutWait.setTimeoutWait(8);
 
         await this.leafletTypeEpi.click();
-        await timeout.setTimeoutWait(10);
+        await timeoutWait.setTimeoutWait(10);
 
         // close button click
         await this.closeBtnMsg.click();
-        await timeout.setTimeoutTime(5);
+        await timeoutWait.setTimeoutWait(5);
 
         await this.aboutBtn.click();
-        await timeout.setTimeoutWait(8);
+        await timeoutWait.setTimeoutWait(8);
 
         const leafletLevelDescription = await this.leafletLevelDescriptionType.getText();
         console.log(leafletLevelDescription);

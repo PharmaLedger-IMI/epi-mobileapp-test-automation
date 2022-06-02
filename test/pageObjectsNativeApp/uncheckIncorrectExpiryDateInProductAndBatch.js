@@ -1,9 +1,8 @@
 const testData = require('../testdata/testExpectations.json')
 const configData = require('../testdata/config.json')
 const expect = require('chai').expect
-const timeout = require('../utils/setTimeout')
+const timeoutWait = require('../utils/setTimeout')
 const moment = require('moment')
-
 
 const expiryDatePattern = /(?<=Expiry:)(.*)(?=Serial)/g
 const serialNumberPattern = /(?<=Serial number:)(.*)(?=Product)/g
@@ -38,7 +37,7 @@ class UnCheckIncorrectExpiryDateInProductAndBatch {
     }
 
     async waitTimeout() {
-        await timeout.setTimeoutWait(32);
+        await timeoutWait.setTimeoutWait(32);
        
     }
 
@@ -57,20 +56,20 @@ class UnCheckIncorrectExpiryDateInProductAndBatch {
             }
         ]);
 
-        await timeout.setTimeoutWait(8);
+        await timeoutWait.setTimeoutWait(8);
 
         const incorrectTxtBatch = await this.incorrectTextBatch.getText();
-        await timeout.setTimeoutTime(3);
+        await timeoutWait.setTimeoutWait(3);
         await this.incorrectBatchLearnMore.click();
-        await timeout.setTimeoutTime(3);
+        await timeoutWait.setTimeoutWait(3);
         await this.incorrectPopUpMsg.getText();
-        await timeout.setTimeoutTime(3);
+        await timeoutWait.setTimeoutWait(3);
         await this.closeIncorrectPopUpMsg.click();
-        await timeout.setTimeoutTime(3);
+        await timeoutWait.setTimeoutWait(3);
         const leafletNotFound = await this.leafletNotFoundText.getText();
-        await timeout.setTimeoutTime(2);
+        await timeoutWait.setTimeoutWait(2);
         const LeafletNotFoundDesc = await this.leafletNotFoundProdDesc.getText();
-        await timeout.setTimeoutTime(2);
+        await timeoutWait.setTimeoutWait(2);
         // click on leaflet shield button
 
         // chai assertions on expiry date, serial number, gtin number and batch Number pattern

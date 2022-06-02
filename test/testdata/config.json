@@ -18,6 +18,14 @@
 
     "batchLabelMessage":"Sample",
 
+    "batchUnknownLabelMessage":"Batch Unknown",
+
+    "batchUnknownTitleMessage":"No Title",
+
+    "productTitleInfoMessage":"No Prod Title",
+
+    "ProdTitleUnknownBatchText":"No Text Title",
+
     "invalidSerialNumberLabelMessage":"Failed to validate serial Number",
 
     "incorrectExpiryDateLabelMessage":"Incorrect expiry date on pack",
@@ -31,6 +39,12 @@
     "unKnownBatchLabelMessage":"wrong batch",
 
     "unknownGtinLabelMessage":"unknown GTIN",
+
+    "productNotFoundMessage":"Product not found",
+
+    "productCodeCombinationMessage":"Product code combination could not be resolved.",
+
+    "batchUnknownValidateMessage":"Unable to validate",
 
     "serialNumberRecallLabelMessage":"recalled Sn",
 
@@ -59,6 +73,8 @@
     "combinationScenario1":"Invalid SN and Invalid Expiry Date",
 
     "combinationScenario2":"Invalid SN and Invalid Batch Recalled",
+
+    "batchUnknownBarcodeMessage":"The batch number in the barcode could not be found",
 
     "RecalledBatchDetails":{
       "recalledBatchLabelMessage":"Batch Recalled",

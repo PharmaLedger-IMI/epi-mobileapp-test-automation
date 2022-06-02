@@ -1,16 +1,15 @@
-const invalidSerialNumberWithBatchRecalled = require('../pageObjectsNativeApp/inValidSerialNumberWithBatchRecalled')
+const scanUnknownGTINTest = require('../pageObjectsNativeApp/scanUnknownGTINWithValidBatchSNAndExpiryDate')
 const allureReporter = require('@wdio/allure-reporter').default
 const nativePatientPage = require('../pageObjectsNativeApp/patientSettingPage')
 const timeoutWait = require('../utils/setTimeout')
 
+describe('060_Scan previous batch to see the leaflet at product level', () => {
 
-describe('099_Other tests', () => {
-
-        allureReporter.addFeature('Other tests')
+        allureReporter.addFeature('Create Batch')
         allureReporter.addSeverity('Critical');
-        allureReporter.addTestId('OtherTests_3')
-        allureReporter.addDescription('Check that Leaflet details are displayed for Other tests')
-        allureReporter.startStep("leaflet Details are Populated for Other tests")
+        allureReporter.addTestId('ProductInfoUpdate_4_3')
+        allureReporter.addDescription('Check that Leaflet details are displayed for batch to see the leaflet at product level')
+        allureReporter.startStep("leaflet Details are Populated when batch to see the leaflet at product level")
 
         it('Mobile App-should set Patient Setting and Scan 2D Matrix', async () => {
 
@@ -27,18 +26,15 @@ describe('099_Other tests', () => {
 
         });
 
-        it('Mobile App-should display LeafLet details for Other tests', async () => {
+        it('Mobile App-should display LeafLet details for batch to see the leaflet at product level', async () => {
                 allureReporter.addFeature('LeafLet Recalled Batch Info Data');
                 //wait timeout for Leaflet to be displayed
-                await invalidSerialNumberWithBatchRecalled.waitTimeout();
+                await scanUnknownGTINTest.waitTimeout();
                 await timeoutWait.setTimeoutWait(3);
                 //display details on Add_productBatch Leaflet when Add_productBatch Leaflet for batch scenario created
-                await invalidSerialNumberWithBatchRecalled.invalidSerailNumberWithBatchRecalledFetch();
-                await timeoutWait.setTimeoutWait(4);
-                // await setTimeout(() => {
-                //     console.log("inside timeout");
-                // }, 4000);
-
+                await scanUnknownGTINTest.scanUnknownGTINDetailsFetch();
+                await timeoutWait.setTimeoutWait(3);
+        
         });
 
 });
