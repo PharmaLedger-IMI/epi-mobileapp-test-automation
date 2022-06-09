@@ -1,4 +1,4 @@
-const scanknownGTINTest = require('../pageObjectsNativeApp/scanKnownGTINWithoutBatchSNAndExpiryDate')
+const checkBatchIsUnknownFlagWithOnlyValidGTINMatrix = require('../pageObjectsNativeApp/enableBatchIsUnknownFlagWithOnlyValidGTINMatrix')
 const allureReporter = require('@wdio/allure-reporter').default
 const nativePatientPage = require('../pageObjectsNativeApp/patientSettingPage')
 const timeoutWait = require('../utils/setTimeout')
@@ -29,10 +29,14 @@ describe('060_Scan previous batch to see the leaflet at product level', () => {
         it('Mobile App-should display LeafLet details for batch to see the leaflet at product level', async () => {
                 allureReporter.addFeature('LeafLet Recalled Batch Info Data');
                 //wait timeout for Leaflet to be displayed
-                await scanknownGTINTest.waitTimeout();
+                await checkBatchIsUnknownFlagWithOnlyValidGTINMatrix.waitTimeout();
                 await timeoutWait.setTimeoutWait(3);
                 //display details on Add_productBatch Leaflet when Add_productBatch Leaflet for batch scenario created
-                await scanknownGTINTest.scanknownGTINWithoutBatchSNAndExpiryDateDetailsFetch();
+                await checkBatchIsUnknownFlagWithOnlyValidGTINMatrix.checkBatchIsUnknownFlagWithOnlyValidGTINMatrixDetailsFetch();
+                await timeoutWait.setTimeoutWait(3);
+                await checkBatchIsUnknownFlagWithOnlyValidGTINMatrix.checkBatchIsUnknownFlagWithOnlyValidGTINMatrixLeafletDetailsFetch();
+                await timeoutWait.setTimeoutWait(3);
+                await checkBatchIsUnknownFlagWithOnlyValidGTINMatrix.getLeafletTypesAndLevel();
                 await timeoutWait.setTimeoutWait(3);
         
         });

@@ -157,7 +157,8 @@ exports.config = {
             'test/specs/unCheckUnknownBatchWithInvalidBatchAndExpiryDateTest.js',
             'test/specs/inValidSerialNumberWithBatchRecalledTest.js',
             'test/specs/scanUnknownGTINWithValidBatchSNAndExpiryDateTest.js',
-            'test/specs/scanKnownGTINWithoutBatchSNAndExpiryDateTest.js'
+            'test/specs/disableBatchIsUnknownFlagWithOnlyValidGTINMatrixTest.js',
+            'test/specs/enableBatchIsUnknownFlagWithOnlyValidGTINMatrixTest.js'
 
         ],
 
