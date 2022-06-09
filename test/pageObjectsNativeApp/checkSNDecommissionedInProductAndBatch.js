@@ -12,6 +12,23 @@ const batchNumberPattern = /(?<=Batch number:).*/g
 
 class CheckSNDecommissionedInProductAndBatch {
 
+    
+    //decommisioned Batch 
+    get decommisionedInfoBatch() {
+        return $("(//android.view.View[@resource-id='page-ion-content']/descendant::android.widget.TextView)[2]")
+    }
+
+    get decommisionedInfoLearnMore() {
+        return $("(//android.view.View[@resource-id='page-ion-content']/descendant::android.widget.TextView)[3]")
+    }
+
+    get decommisionedInfoPopUpMsg() {
+        return $("(//android.app.Dialog/descendant::android.view.View[5]/child::android.widget.TextView)")
+    }
+
+    get closeDecommisionedInfoPopUpMsg() {
+        return $("(//android.app.Dialog/descendant::android.view.View[3]/child::android.widget.Button)")
+    }
 
     get prodInfoMsg() {
         return $("(//android.view.View[@resource-id='leaflet-header']/descendant::android.widget.TextView)[1]")
@@ -72,6 +89,16 @@ class CheckSNDecommissionedInProductAndBatch {
         ]);
 
         await timeoutWait.setTimeoutWait(8);
+
+        // decommisioned text message 
+        const decommisionedInfoTxtBatch = await this.decommisionedInfoBatch.getText();
+        await timeoutWait.setTimeoutWait(2);
+        await this.decommisionedInfoLearnMore.click();
+        await timeoutWait.setTimeoutWait(3);
+        await this.decommisionedInfoPopUpMsg.getText();
+        await timeoutWait.setTimeoutWait(3);
+        await this.closeDecommisionedInfoPopUpMsg.click();
+        await timeoutWait.setTimeoutWait(3);
         
         // product info message
         const productInfoMsg = await this.prodInfoMsg.getText();

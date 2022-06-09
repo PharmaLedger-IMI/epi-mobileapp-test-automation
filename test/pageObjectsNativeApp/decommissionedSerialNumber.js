@@ -59,7 +59,7 @@ class DecommisionedSerailNumber {
 
     async decommissionedSerialNumberDetailsFetch() {
 
-        // recalled text message 
+        // decommisioned text message 
         const decommisionedInfoTxtBatch = await this.decommisionedInfoBatch.getText();
         await timeoutWait.setTimeoutWait(2);
         await this.decommisionedInfoLearnMore.click();

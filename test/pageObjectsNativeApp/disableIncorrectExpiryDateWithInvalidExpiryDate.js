@@ -12,22 +12,6 @@ const batchNumberPattern = /(?<=Batch number:).*/g
 
 class DisableExpiryDateCheckInvalidExpiryDate {
 
-    get incorrectExpiryText() {
-        return $("(//android.view.View[@resource-id='page-ion-content']/descendant::android.widget.TextView)[2]")
-    }
-
-    get incorrectExpiryLearnMore() {
-        return $("(//android.view.View[@resource-id='page-ion-content']/descendant::android.widget.TextView)[3]")
-    }
-
-    get incorrectExpiryPopUpMsg() {
-        return $("(//android.app.Dialog/descendant::android.view.View[5]/child::android.widget.TextView)")
-    }
-
-    get closeIncorrectPopUpMsg() {
-        return $("(//android.app.Dialog/descendant::android.view.View)[3]/child::android.widget.Button")
-    }
-
     get productInfo() {
         return $("(//android.view.View[@resource-id='leaflet-header']/descendant::android.widget.TextView)[1]")
     }
@@ -49,42 +33,34 @@ class DisableExpiryDateCheckInvalidExpiryDate {
 
     async waitTimeout() {
         await timeoutWait.setTimeoutWait(30);
-        await timeoutWait.waitForElement(this.incorrectExpiryText);
+        await timeoutWait.waitForElement(this.productInfo);
     }
 
     async disableExpiryDateCheckInvalidExpiryDateDetailsFetch() {
-
-        // invalid leaflet text
-        const incorrectExpiryDateText = await this.incorrectExpiryText.getText();
-        await timeoutWait.setTimeoutWait(2);
-        await this.incorrectExpiryLearnMore.click();
-        await timeoutWait.setTimeoutWait(3);
-        await this.incorrectExpiryPopUpMsg.getText();
-        await timeoutWait.setTimeoutWait(3);
-        await this.closeIncorrectPopUpMsg.click();
-        await timeoutWait.setTimeoutWait(3);
+       
         // get product info text
         const prodInfo = await this.productInfo.getText();
         await timeoutWait.setTimeoutWait(2);
-
-        console.log(prodInfo);
-        expect(prodInfo).includes(configData.prodName);
-        console.log(incorrectExpiryDateText);
-        expect(incorrectExpiryDateText).to.equal(configData.incorrectExpiryDateLabelMessage);
-
-    }
-
-    async disableExpiryDateCheckInvalidExpiryDateLeafletDetailsFetch() {
-
-        // get product info description
+        //get product Description details
         const prodDesc = await this.productDescription.getText();
         await timeoutWait.setTimeoutWait(2);
         // click on leaflet shiled button icon
-        await this.leafletVerifiedShiledBtn.click();
+        await this.leafletShieldBtn.click();
         await timeoutWait.setTimeoutWait(2);
         // get text of batch info
         const batchInfoTxt = await this.batchInfo.getText();
         await timeoutWait.setTimeoutWait(2);
+
+        console.log(prodInfo);
+        expect(prodInfo).includes(configData.prodName);
+        console.log(prodDesc);
+        expect(prodDesc).to.equal(configData.prodDesc);
+        console.log(batchInfoTxt);
+        expect(batchInfoTxt).to.equal(configData.batchInfoMessage);
+    }
+
+    async disableExpiryDateCheckInvalidExpiryDateLeafletDetailsFetch() {
+        
         // get leaflet prod info data 
         await this.productLeafletInfoDetails.getText();
         await timeoutWait.setTimeoutWait(2);
@@ -111,12 +87,7 @@ class DisableExpiryDateCheckInvalidExpiryDate {
         expect(leafletInfoDetailsFetch.match(gtinPattern)[0]).to.equal(testData.prodCode);
         expect(leafletInfoDetailsFetch.match(batchNumberPattern)[0]).to.equal(testData.batchValue);
         expect(leafletInfoDetailsFetch.match(serialNumberPattern)[0]).to.equal(testData.batchSerialNumber);
-        expect(dateafter).to.equal(testData.expiry);
-
-        console.log(prodDesc);
-        expect(prodDesc).to.equal(configData.prodDesc)
-        console.log(batchInfoTxt);
-        expect(batchInfoTxt).to.equal(configData.batchInfoMessage)
+        expect(dateafter).to.equal(testData.expiry); 
 
     }
 }

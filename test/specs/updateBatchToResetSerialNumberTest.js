@@ -33,8 +33,10 @@ describe('049_Edit batch to reset the serial Numbers', () => {
         await updateBatchToResetSNTest.waitTimeout();
         await timeoutWait.setTimeoutWait(4);
         //display details on Leaflet for recalled batch scenario
-        await updateBatchToResetSNTest.updateBatchToResetSNFetch();
-        await timeoutWait.setTimeoutWait(4);
+        await updateBatchToResetSNTest.updateBatchToResetSerialNumberDetailsFetch();
+        await timeoutWait.setTimeoutWait(3);
+        await updateBatchToResetSNTest.updateBatchToResetSerialNumberLeafletDetailsFetch();
+        await timeoutWait.setTimeoutWait(3);
 
     });
 

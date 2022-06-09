@@ -75,16 +75,16 @@ class UncheckBatchIsRecallInProductAndBatch {
 
         // product info message
         const productInfoMsg = await this.prodInfoMsg.getText();
-        await timeoutWait.setTimeoutWait(2);
+        await timeoutWait.setTimeoutWait(3);
         const prodDescMsg = await this.productDescription.getText();
-        await timeoutWait.setTimeoutWait(2);
+        await timeoutWait.setTimeoutWait(3);
 
         // click on leaflet shield button
         await this.leafletShieldInfoBtn.click();
-        await timeoutWait.setTimeoutWait(2);
+        await timeoutWait.setTimeoutWait(3);
         // btach info text message 
         const batchInfoText = await this.batchInfoTxtMsg.getText();
-        await timeoutWait.setTimeoutWait(2);
+        await timeoutWait.setTimeoutWait(3);
 
         console.log(productInfoMsg);
         expect(productInfoMsg).includes(configData.prodName);

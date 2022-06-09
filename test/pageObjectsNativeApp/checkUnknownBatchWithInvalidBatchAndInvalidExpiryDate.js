@@ -114,112 +114,113 @@ class CheckUnkownBatchWithInvalidBatchAndInvalidExpiryDate {
 
     async checkUnknownBatchWithInvalidBatchAndInvalidExpiryDateDetailsFetch() {
 
-        // let deviceScreenDimensions = await driver.getWindowRect();
+        let deviceScreenDimensions = await driver.getWindowRect();
 
-        // await driver.touchPerform([
-        //     {
-        //         action: 'tap',
-        //         options: {
-        //             x: Math.floor(deviceScreenDimensions.width * 0.49),
-        //             y: Math.floor(deviceScreenDimensions.height * 0.49)
-        //         }
-        //     }
-        // ]);
+        await driver.touchPerform([
+            {
+                action: 'tap',
+                options: {
+                    x: Math.floor(deviceScreenDimensions.width * 0.49),
+                    y: Math.floor(deviceScreenDimensions.height * 0.49)
+                }
+            }
+        ]);
 
-        // await timeoutWait.setTimeoutWait(8);
+        await timeoutWait.setTimeoutWait(8);
 
-        // const batchUnknownTextMessage=await this.batchUnknownTxtMsg.getText();
-        // await timeoutWait.setTimeoutWait(3);
-        // await this.closeBtnMsg.click();
-        // await timeoutWait.setTimeoutWait(3);
-        // const unableToValidateTxtBatch = await this.unableToValidateTextBatch.getText();
-        // await timeoutWait.setTimeoutWait(2);
-        // await this.unableToValidateLearnMore.click();
-        // await timeoutWait.setTimeoutWait(3);
-        // await this.unableToValidatePopUpMsg.getText();
-        // await timeoutWait.setTimeoutWait(3);
-        // await this.closeUnableToValidatePopUpMsg.click();
-        // await timeoutWait.setTimeoutWait(3);
-
-        // const prodInfo = await this.productInfo.getText();
-        // // expect(this.productInfo.getText()).to.not.equal(null);
-        // await timeoutWait.setTimeoutTime(3);
-        // //get text of product information description
-        // const prodDescMsg = await this.productDescription.getText();
-        // await timeoutWait.setTimeoutTime(3);
-        // //click on leaflet Shieled Button
-        // await this.leafletVerifiedShiledBtn.click();
-        // await timeoutWait.setTimeoutTime(3);
-        // // get batch info text
-        // const batchInfoTxt = await this.batchInfo.getText();
-        // await timeoutWait.setTimeoutTime(3);
-
-        // //get prod info text and assert 
-        // console.log(prodInfo);
-        // expect(prodInfo).includes(configData.prodName);
-        // //get prod Desc text and assert 
-        // console.log(prodDescMsg);
-        // expect(prodDescMsg).to.equal(configData.prodDesc);
-        // //get batch Info text and assert 
-        // console.log(batchInfoTxt);
-        // expect(batchInfoTxt).to.equal(configData.batchInfoMessage);
-        // console.log(unableToValidateTxtBatch);
-        // expect(unableToValidateTxtBatch).to.equal(configData.batchUnknownValidateMessage);
-        // console.log(batchUnknownTextMessage);
-        // expect(batchUnknownTextMessage).to.equal(configData.batchUnknownBarcodeMessage);
-
-        const productNotFound= await this.productNotFound.getText();
+        const batchUnknownTextMessage=await this.batchUnknownTxtMsg.getText();
         await timeoutWait.setTimeoutWait(3);
-        const prodCodeTxt= await this.prodCodeText.getText();
+        await this.closeBtnMsg.click();
+        await timeoutWait.setTimeoutWait(3);
+        const unableToValidateTxtBatch = await this.unableToValidateTextBatch.getText();
+        await timeoutWait.setTimeoutWait(2);
+        await this.unableToValidateLearnMore.click();
+        await timeoutWait.setTimeoutWait(3);
+        await this.unableToValidatePopUpMsg.getText();
+        await timeoutWait.setTimeoutWait(3);
+        await this.closeUnableToValidatePopUpMsg.click();
         await timeoutWait.setTimeoutWait(3);
 
-        console.log(productNotFound);
-        expect(productNotFound).to.equal(configData.productNotFoundMessage);
-        console.log(prodCodeTxt);
-        expect(prodCodeTxt).to.equal(configData.productCodeCombinationMessage);
+        const prodInfo = await this.productInfo.getText();
+        // expect(this.productInfo.getText()).to.not.equal(null);
+        await timeoutWait.setTimeoutTime(3);
+        //get text of product information description
+        const prodDescMsg = await this.productDescription.getText();
+        await timeoutWait.setTimeoutTime(3);
+        //click on leaflet Shieled Button
+        await this.leafletVerifiedShiledBtn.click();
+        await timeoutWait.setTimeoutTime(3);
+        // get batch info text
+        const batchInfoTxt = await this.batchInfo.getText();
+        await timeoutWait.setTimeoutTime(3);
+
+        //get prod info text and assert 
+        console.log(prodInfo);
+        expect(prodInfo).includes(configData.prodName);
+        //get prod Desc text and assert 
+        console.log(prodDescMsg);
+        expect(prodDescMsg).to.equal(configData.prodDesc);
+        //get batch Info text and assert 
+        console.log(batchInfoTxt);
+        expect(batchInfoTxt).to.equal(configData.batchInfoMessage);
+        console.log(unableToValidateTxtBatch);
+        expect(unableToValidateTxtBatch).to.equal(configData.batchUnknownValidateMessage);
+        console.log(batchUnknownTextMessage);
+        expect(batchUnknownTextMessage).to.equal(configData.batchUnknownBarcodeMessage);
+
+        // const productNotFound= await this.productNotFound.getText();
+        // await timeoutWait.setTimeoutWait(3);
+        // const prodCodeTxt= await this.prodCodeText.getText();
+        // await timeoutWait.setTimeoutWait(3);
+
+        // console.log(productNotFound);
+        // expect(productNotFound).to.equal(configData.productNotFoundMessage);
+        // console.log(prodCodeTxt);
+        // expect(prodCodeTxt).to.equal(configData.productCodeCombinationMessage);
+    
     }
 
     async checkUnknownBatchWithInvalidBatchAndInvalidExpiryDateLeafletDetailsFetch() {
-        // get leaflet product details information
-        // await this.productLeafletInfoDetails.getText();
-        // await timeoutWait.setTimeoutTime(3);
+       // get leaflet product details information
+        await this.productLeafletInfoDetails.getText();
+        await timeoutWait.setTimeoutTime(3);
 
-        // const leafletInfoDetailsFetch = await this.productLeafletInfoDetails.getText();
-        // console.log("Prod Info Details of Leaflet is:" + " " + leafletInfoDetailsFetch)
-        // const leafletInfoFetch = leafletInfoDetailsFetch.replace(':', "=");
-        // console.log("Batch Info Details of Leaflet is: " + leafletInfoFetch);
+        const leafletInfoDetailsFetch = await this.productLeafletInfoDetails.getText();
+        console.log("Prod Info Details of Leaflet is:" + " " + leafletInfoDetailsFetch)
+        const leafletInfoFetch = leafletInfoDetailsFetch.replace(':', "=");
+        console.log("Batch Info Details of Leaflet is: " + leafletInfoFetch);
 
-        // // log output for expiry date, serial number, gtin number and batch Number pattern
-        // console.log(leafletInfoDetailsFetch.match(expiryDatePattern)[0]);
-        // console.log(leafletInfoDetailsFetch.match(serialNumberPattern)[0]);
-        // console.log(leafletInfoDetailsFetch.match(gtinPattern)[0]);
-        // console.log(leafletInfoDetailsFetch.match(batchNumberPattern)[0]);
+        // log output for expiry date, serial number, gtin number and batch Number pattern
+        console.log(leafletInfoDetailsFetch.match(expiryDatePattern)[0]);
+        console.log(leafletInfoDetailsFetch.match(serialNumberPattern)[0]);
+        console.log(leafletInfoDetailsFetch.match(gtinPattern)[0]);
+        console.log(leafletInfoDetailsFetch.match(batchNumberPattern)[0]);
 
-        // await timeoutWait.setTimeoutTime(3);
+        await timeoutWait.setTimeoutTime(3);
 
-        // const datebefore = leafletInfoDetailsFetch.match(expiryDatePattern)[0];
-        // const dateafter = moment(datebefore, "DD-MMM-YYYY").format("YYMMDD")
-        // console.log(dateafter);
-
-        // // chai assertions on expiry date, serial number, gtin number and batch Number pattern
-        // expect(leafletInfoDetailsFetch.match(gtinPattern)[0]).to.equal(testData.prodCode);
-        // expect(leafletInfoDetailsFetch.match(batchNumberPattern)[0]).to.equal(testData.batchValue);
-        // expect(leafletInfoDetailsFetch.match(serialNumberPattern)[0]).to.equal(testData.batchSerialNumber);
-        // expect(dateafter).to.equal(testData.expiry);
-
-        const datebefore =await this.expiryDateText.getText();
+        const datebefore = leafletInfoDetailsFetch.match(expiryDatePattern)[0];
         const dateafter = moment(datebefore, "DD-MMM-YYYY").format("YYMMDD")
         console.log(dateafter);
 
-        console.log(await this.productCodeText.getText())
-        console.log(await this.batchNumberText.getText())
-        console.log(await this.serialNumberText.getText())
-        console.log(dateafter);
-
-        expect(await this.productCodeText.getText()).to.equal(testData.prodCode);
-        expect(await this.batchNumberText.getText()).to.equal(testData.batchValue);
-        expect(await this.serialNumberText.getText()).to.equal(testData.batchSerialNumber);
+        // chai assertions on expiry date, serial number, gtin number and batch Number pattern
+        expect(leafletInfoDetailsFetch.match(gtinPattern)[0]).to.equal(testData.prodCode);
+        expect(leafletInfoDetailsFetch.match(batchNumberPattern)[0]).to.equal(testData.batchValue);
+        expect(leafletInfoDetailsFetch.match(serialNumberPattern)[0]).to.equal(testData.batchSerialNumber);
         expect(dateafter).to.equal(testData.expiry);
+
+        // const datebefore =await this.expiryDateText.getText();
+        // const dateafter = moment(datebefore, "DD-MMM-YYYY").format("YYMMDD")
+        // console.log(dateafter);
+
+        // console.log(await this.productCodeText.getText())
+        // console.log(await this.batchNumberText.getText())
+        // console.log(await this.serialNumberText.getText())
+        // console.log(dateafter);
+
+        // expect(await this.productCodeText.getText()).to.equal(testData.prodCode);
+        // expect(await this.batchNumberText.getText()).to.equal(testData.batchValue);
+        // expect(await this.serialNumberText.getText()).to.equal(testData.batchSerialNumber);
+        // expect(dateafter).to.equal(testData.expiry);
 
     }
 

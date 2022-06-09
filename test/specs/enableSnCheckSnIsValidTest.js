@@ -29,7 +29,7 @@ describe('007_Edit batch and enable serial number check with valid SN', () => {
         });
 
         it('Mobile App-should display LeafLet details for Enable SN Check SN is Valid for Batch', async () => {
-                allureReporter.addFeature('LeafLet Recalled Batch Info Data');
+                allureReporter.addFeature('Display LeafLet details for Edit batch and enable serial number check with valid SN');
                 //wait timeout for Leaflet to be displayed
                 await enableSnCheckSnValid.waitTimeout();
                 await timeoutWait.setTimeoutWait(3);

@@ -33,7 +33,6 @@ class DisableSNFlagWithInvalidSN {
     async waitTimeout() {
         await timeoutWait.setTimeoutWait(30);
         await timeoutWait.waitForElement(this.productInfo);
-        // await browser.pause(30000);
     }
 
 
@@ -43,7 +42,7 @@ class DisableSNFlagWithInvalidSN {
         const prodInfo = await this.productInfo.getText();
         await timeoutWait.setTimeoutWait(3);
         //get text of product information description
-        const prodDesc = await this.productDescription.getText();
+        const prodDescMsg = await this.productDescription.getText();
         await timeoutWait.setTimeoutWait(3);
         //click on leaflet Shieled Button
         await this.leafletVerifiedShiledBtn.click();
@@ -56,8 +55,8 @@ class DisableSNFlagWithInvalidSN {
         console.log(prodInfo);
         expect(prodInfo).includes(configData.prodName);
         //get prod Desc text and assert 
-        console.log(prodDesc);
-        expect(prodDesc).to.equal(configData.prodDesc);
+        console.log(prodDescMsg);
+        expect(prodDescMsg).to.equal(configData.prodDesc);
         //get batch Info text and assert 
         console.log(batchInfoTxt);
         expect(batchInfoTxt).to.equal(configData.batchInfoMessage);

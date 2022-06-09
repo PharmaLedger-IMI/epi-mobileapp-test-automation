@@ -27,7 +27,7 @@ describe('004_Create Batch', () => {
         });
 
         it('Mobile App-should display LeafLet details for product and batch created', async () => {
-                allureReporter.addFeature('LeafLet Recalled Batch Info Data');
+                allureReporter.addFeature('LeafLet details for Batch is populated');
                 //wait timeout for Leaflet to be displayed
                 await addProductBatchLeaflet.waitTimeout();
                 await timeoutWait.setTimeoutWait(3);
@@ -36,9 +36,6 @@ describe('004_Create Batch', () => {
                 await timeoutWait.setTimeoutWait(2);
                 await addProductBatchLeaflet.addproductBatchLeafletDataFetch();
                 await timeoutWait.setTimeoutWait(2);
-                // await setTimeout(() => {
-                //     console.log("inside timeout");
-                // }, 4000);
 
         });
 

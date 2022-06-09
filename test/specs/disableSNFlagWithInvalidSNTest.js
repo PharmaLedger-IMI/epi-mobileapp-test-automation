@@ -4,13 +4,13 @@ const nativePatientPage = require('../pageObjectsNativeApp/patientSettingPage')
 const timeoutWait = require('../utils/setTimeout')
 
 
-describe('009_Edit batch and disable serial number check with valid SN', () => {
+describe('011_Edit batch and disable serial number check with invalid SN', () => {
 
     allureReporter.addFeature('Disable SN with Valid SN check')
     allureReporter.addSeverity('Critical');
     allureReporter.addTestId('BasicAuthFeatureTest_1_3')
-    allureReporter.addDescription('Check that disable SN and Check with SN Leaflet details are displayed')
-    allureReporter.startStep("leaflet Details are Populated with SN Valid details for Batch")
+    allureReporter.addDescription('disable serial number check with invalid SN and Check with Leaflet details are displayed')
+    allureReporter.startStep("leaflet Details are Populated for disable serial number check with invalid SN for Batch")
 
     it('Mobile App-should set Patient Settings Scan 2D Matrix', async () => {
 
@@ -27,8 +27,8 @@ describe('009_Edit batch and disable serial number check with valid SN', () => {
 
     });
 
-    it('Mobile App-LeafLet details after disable serial number check with valid SN', async () => {
-        allureReporter.addFeature('LeafLet Recalled Batch Info Data');
+    it('Mobile App-LeafLet details after disable serial number check with invalid SN', async () => {
+        allureReporter.addFeature('Display LeafLet details for disable serial number check with invalid SN');
         //wait timeout for Leaflet to be displayed
         await disableSNFlagWithInValidSNTest.waitTimeout();
         await timeoutWait.setTimeoutWait(3);
