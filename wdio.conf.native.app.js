@@ -39,7 +39,6 @@ exports.config = {
         [
 
             'test/specs/createProductWithAddBatchTest.js',
-
             'test/specs/editBatchCheckRecallMsgTest.js',
             'test/specs/editProductSnRecallListTest.js',
 

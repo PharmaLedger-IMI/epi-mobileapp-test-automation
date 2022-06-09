@@ -27,7 +27,7 @@ describe('006_Edit product to check SN is in recalled list', () => {
     });
 
     it('Mobile App-should open LeafLet to check SN is Recalled list in Product', async () => {
-        allureReporter.addFeature('Recalled Batch Leaflet display Info Data for Product');
+        allureReporter.addFeature('Display Leaflet for Edit product to check SN is in recalled list');
         //Wait timeout for Leaflet to be displayed 
         await updateProductSnRecalledFlag.waitTimeout();
         await timeoutWait.setTimeoutWait(4);

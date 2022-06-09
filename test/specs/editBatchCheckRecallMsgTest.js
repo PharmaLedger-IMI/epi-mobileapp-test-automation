@@ -27,7 +27,7 @@ describe('005_Edit batch to set recall message', () => {
     });
 
     it('Mobile App-should display LeafLet for edit Batch Recall Message', async () => {
-        allureReporter.addFeature('Edit Batch Recall Msg Leaflet display Info Data');
+        allureReporter.addFeature('Display Leaflets for Edit batch to set recall message');
         //Wait timeout for Leaflet to be displayed 
         await editBatchRecallMsg.waitTimeout();
         await timeoutWait.setTimeoutWait(4);

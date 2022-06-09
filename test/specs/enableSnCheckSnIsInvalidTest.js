@@ -28,7 +28,7 @@ describe('008_Edit batch and enable serial number check with invalid SN', () => 
         });
 
         it('Mobile App-should open LeafLet after enable serial number check with invalid SN', async () => {
-                allureReporter.addFeature('LeafLet Recalled Batch Info Data');
+                allureReporter.addFeature('Dsiplay LeafLet details for Edit batch and enable serial number check with invalid SN');
                 //wait timeout for Leaflet to be displayed
                 await enableSnCheckSnInValidTest.waitTimeout();
                 await timeoutWait.setTimeoutWait(3);

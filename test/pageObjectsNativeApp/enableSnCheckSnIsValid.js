@@ -31,7 +31,7 @@ class EnableSNCheckSnIsValid {
     }
 
     async waitTimeout() {
-        await timeoutWait.TimeoutWait(30);
+        await timeoutWait.setTimeoutWait(30);
         await timeoutWait.waitForElement(this.productInfo);
     }
 

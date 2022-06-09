@@ -39,7 +39,7 @@ class UncheckBatchIsUnknownInProductWithValidBatch {
     get leafletTypeEpi() {
         return $("(//android.app.Dialog[@resource-id='ion-overlay-1']/descendant::android.view.View)[1]/child::android.widget.Button[2]")
     }
-
+    
     get closeLeafletBtn() {
         return $("(//android.app.Dialog/descendant::android.view.View)[4]/following-sibling::android.widget.Button")
     }

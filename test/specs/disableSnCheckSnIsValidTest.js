@@ -28,7 +28,7 @@ describe('009_Edit batch and disable serial number check with valid SN', () => {
         });
 
         it('Mobile App-LeafLet details after disable serial number check with valid SN', async () => {
-                allureReporter.addFeature('LeafLet Recalled Batch Info Data');
+                allureReporter.addFeature('Display LeafLet Details for Edit batch and disable serial number check with valid SN');
                 //wait timeout for Leaflet to be displayed
                 await disableSnCheckSNIsValidTest.waitTimeout();
                 await timeoutWait.setTimeoutWait(3);

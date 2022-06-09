@@ -1,4 +1,4 @@
-const uncheckBatchIsRecallInProductAndBatchTest = require('../pageObjectsNativeApp/unCheckBatchRecallInProduct&Batch')
+const uncheckBatchIsRecallInProductAndBatchTest = require('../pageObjectsNativeApp/unCheckBatchRecallInProductAndBatch')
 const allureReporter = require('@wdio/allure-reporter').default
 const nativePatientPage = require('../pageObjectsNativeApp/patientSettingPage')
 const timeoutWait = require('../utils/setTimeout')

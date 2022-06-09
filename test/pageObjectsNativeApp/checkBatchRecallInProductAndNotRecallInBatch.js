@@ -13,22 +13,6 @@ const batchNumberPattern = /(?<=Batch number:).*/g
 
 class CheckBatchRecallInProductAndNotRecallInBatch {
 
-    get recalledTextBatch() {
-        return $("(//android.view.View[@resource-id='page-ion-content']/descendant::android.widget.TextView)[2]")
-    }
-
-    get recalledBatchLearnMore() {
-        return $("(//android.view.View[@resource-id='page-ion-content']/descendant::android.widget.TextView)[3]")
-    }
-
-    get recalledPopUpMsg() {
-        return $("(//android.app.Dialog/descendant::android.view.View[5]/child::android.widget.TextView)")
-    }
-
-    get closeRecalledPopUpMsg() {
-        return $("(//android.app.Dialog/descendant::android.view.View)[3]/child::android.widget.Button")
-    }
-
     get productInfo() {
         return $("(//android.view.View[@resource-id='leaflet-header']/descendant::android.widget.TextView)[1]")
     }
@@ -36,7 +20,7 @@ class CheckBatchRecallInProductAndNotRecallInBatch {
         return $("(//android.view.View[@resource-id='leaflet-header']/descendant::android.widget.TextView)[2]");
     }
 
-    get leafletVerifiedShiledBtn() {
+    get leafletVerifiedShieldBtn() {
         return $("(//android.view.View[@resource-id='leaflet-header']/descendant::android.widget.Image)[1]")
     }
 
@@ -89,22 +73,13 @@ class CheckBatchRecallInProductAndNotRecallInBatch {
 
         await timeoutWait.setTimeoutWait(8);
 
-        const recalledTxtBatch = await this.recalledTextBatch.getText();
-        await timeoutWait.setTimeoutWait(2);
-        await this.recalledBatchLearnMore.click();
-        await timeoutWait.setTimeoutWait(3);
-        await this.recalledPopUpMsg.getText();
-        await timeoutWait.setTimeoutWait(3);
-        await this.closeRecalledPopUpMsg.click();
-        await timeoutWait.setTimeoutWait(3);
-
         // product info message
         const prodInfo = await this.productInfo.getText();
         await timeoutWait.setTimeoutWait(2);
         const prodDescMsg = await this.productDescription.getText();
         await timeoutWait.setTimeoutWait(2);
         //click on leaflet Shieled Button
-        await this.leafletVerifiedShiledBtn.click();
+        await this.leafletVerifiedShieldBtn.click();
         await timeoutWait.setTimeoutWait(3);
         // get batch info text
         const batchInfoTxt = await this.batchInfo.getText();
@@ -119,9 +94,7 @@ class CheckBatchRecallInProductAndNotRecallInBatch {
         //get batch Info text and assert 
         console.log(batchInfoTxt);
         expect(batchInfoTxt).to.equal(configData.batchInfoMessage);
-        console.log(recalledTxtBatch);
-        expect(recalledTxtBatch).to.equal(configData.recalledLabelMessage)
-
+       
     }
 
     async checkBatchRecallInProductAndNotRecalledInBatchLeafletDetailsFetch() {

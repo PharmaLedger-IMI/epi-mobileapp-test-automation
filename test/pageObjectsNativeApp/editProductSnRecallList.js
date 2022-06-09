@@ -12,14 +12,6 @@ const batchNumberPattern = /(?<=Batch number:).*/g
 class UpdateProductSNRecallFlag {
 
 
-    get recalledTxtMsg() {
-        return $("(//android.app.Dialog/descendant::android.view.View)[5]/child::android.widget.TextView")
-    }
-
-    get closeBtnMsg() {
-        return $("//android.widget.Button[@text='Close']")
-    }
-
     get recalledTextBatch() {
         return $("(//android.view.View[@resource-id='page-ion-content']/descendant::android.widget.TextView)[2]")
     }
@@ -58,17 +50,11 @@ class UpdateProductSNRecallFlag {
 
     async waitTimeout() {
         await timeoutWait.setTimeoutWait(30);
-        await timeoutWait.waitForElement(this.recalledTxtMsg);
+        await timeoutWait.waitForElement(this.recalledTextBatch);
     }
 
     async editProductSnRecallFlagDetailsFetch() {
-        // recalled text message
-        const recalledMsg = await this.recalledTxtMsg.getText();
-        console.log(recalledMsg);
-        await timeoutWait.setTimeoutWait(2);
-        // close button click
-        await this.closeBtnMsg.click();
-        await timeoutWait.setTimeoutWait(2);
+      
         // recalled text message 
         const recalledTxtBatch = await this.recalledTextBatch.getText();
         await timeoutWait.setTimeoutWait(2);
@@ -81,15 +67,15 @@ class UpdateProductSNRecallFlag {
         // product info message
         const productInfoMsg = await this.prodInfoMsg.getText();
         await timeoutWait.setTimeoutWait(2);
-        await this.productDescription.getText();
+        const prodDescMsg = await this.productDescription.getText();
         await timeoutWait.setTimeoutWait(2);
 
         console.log(productInfoMsg);
         expect(productInfoMsg).includes(configData.prodName);
-        console.log(recalledMsg);
-        expect(recalledMsg).to.equal(configData.recalledMessage);
+        console.log(prodDescMsg);
+        expect(prodDescMsg).to.equal(configData.prodDesc);
         console.log(recalledTxtBatch);
-        expect(recalledTxtBatch).to.equal(configData.recalledBatchLabelMessage)
+        expect(recalledTxtBatch).to.equal(configData.recalledLabelMessage);
 
     }
 

@@ -94,7 +94,7 @@ class BatchWithExpiryDateCheckwithExpiryDate {
         console.log(prodDescMsg);
         expect(prodDescMsg).to.equal(configData.prodDesc);
         console.log(expiryDateTxtBatch);
-        expect(expiryDateTxtBatch).to.equal(configData.expiredBatchLabelMessage);
+        expect(expiryDateTxtBatch).to.equal(configData.expiredProductLabelMessage);
         console.log(recalledMsg);
         expect(recalledMsg).to.equal(configData.recalledMessage);
 
