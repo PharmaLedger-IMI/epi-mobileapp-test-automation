@@ -3,7 +3,7 @@ const allureReporter = require('@wdio/allure-reporter').default
 const nativePatientPage = require('../pageObjectsNativeApp/patientSettingPage')
 const timeoutWait = require('../utils/setTimeout')
 
-describe('021_Create a batch to set batch recall and batch message', () => {
+describe('025_Create a batch to set batch recall and batch message', () => {
 
     allureReporter.addFeature('Create Batch With Batch Message and Recall Message')
     allureReporter.addSeverity('Critical');
@@ -20,14 +20,14 @@ describe('021_Create a batch to set batch recall and batch message', () => {
         // add the block chain value epiqa in settings page
         await nativePatientPage.patientsettingsScan();
         await timeoutWait.setTimeoutWait(3);
-        // Scan the 2D matrix Data 
+        // Scan the 2D matrix Data
         await nativePatientPage.scan2DImageProcess();
         await timeoutWait.setTimeoutWait(4);
     });
 
-    it('Mobile App-should display LeafLet with Batch Message and Recall Message Info Page', async () => {
-        allureReporter.addFeature('Create Batch With Batch Message and Recall Message');
-        //Wait timeout for Leaflet to be displayed 
+    it('Mobile App - should display LeafLet with Batch Message and Recall Message Info Page', async () => {
+        allureReporter.addFeature('Leaflet displayed for Create Batch With Batch Message and Recall Message');
+        //Wait timeout for Leaflet to be displayed
         await createBatchWithBatchMsgRecallMsg.waitTimeout();
         await timeoutWait.setTimeoutWait(3);
         //display details on Leaflet for recalled batch scenario

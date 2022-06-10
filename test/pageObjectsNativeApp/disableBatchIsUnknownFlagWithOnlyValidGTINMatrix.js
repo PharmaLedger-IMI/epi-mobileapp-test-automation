@@ -4,7 +4,7 @@ const timeoutWait = require('../utils/setTimeout')
 const moment = require('moment')
 const configData = require('../testdata/config.json')
 
-class scanKnownGTIN {
+class uncheckBatchIsUnknownFlagWithOnlyValidGTINMatrix {
 
     get batchUnknownTxtMsg() {
         return $("(//android.view.View[@resource-id='page-ion-content']/descendant::android.app.Dialog/descendant::android.view.View)[4]/child::android.widget.TextView")
@@ -42,7 +42,7 @@ class scanKnownGTIN {
         await timeoutWait.setTimeoutWait(33);
     }
 
-    async scanknownGTINWithoutBatchSNAndExpiryDateDetailsFetch() {
+    async uncheckBatchIsUnknownFlagWithOnlyValidGTINMatrixDetailsFetch() {
 
         let deviceScreenDimensions = await driver.getWindowRect();
 
@@ -89,4 +89,4 @@ class scanKnownGTIN {
     }
 
 }
-module.exports = new scanKnownGTIN();
+module.exports = new uncheckBatchIsUnknownFlagWithOnlyValidGTINMatrix();

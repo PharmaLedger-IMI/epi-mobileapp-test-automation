@@ -1,14 +1,15 @@
-const versionEpiNotReplacedTest = require('../pageObjectsNativeApp/versionOfEpiNotReplaced')
+const uncheckBatchIsUnknownFlagWithOnlyValidGTINMatrix = require('../pageObjectsNativeApp/disableBatchIsUnknownFlagWithOnlyValidGTINMatrix')
 const allureReporter = require('@wdio/allure-reporter').default
 const nativePatientPage = require('../pageObjectsNativeApp/patientSettingPage')
 const timeoutWait = require('../utils/setTimeout')
 
-describe('057_Update product information that the version of ePI is not impacted / not replaced by  the batch specific', () => {
-        allureReporter.addFeature('Update product information that the version of ePI is not impacted / not replaced by  the batch specific')
+describe('106_Scan previous batch to see the leaflet at product level', () => {
+
+        allureReporter.addFeature('Scan previous batch to see the leaflet at product level')
         allureReporter.addSeverity('Critical');
-        allureReporter.addTestId('ProductInfoUpdate_2_2')
-        allureReporter.addDescription('Check that Add_productBatch Leaflet details are displayed')
-        allureReporter.startStep("Add_productBatch leaflet Details are Populated when batch is created with specified details")
+        allureReporter.addTestId('ProductInfoUpdate_4_3')
+        allureReporter.addDescription('Check that Leaflet details are displayed for batch to see the leaflet at product level')
+        allureReporter.startStep("leaflet Details are Populated when batch to see the leaflet at product level")
 
         it('Mobile App - should set Patient Setting and Scan 2D Matrix', async () => {
 
@@ -25,15 +26,13 @@ describe('057_Update product information that the version of ePI is not impacted
 
         });
 
-        it('Mobile App - should display LeafLet details for product and btach created', async () => {
-                allureReporter.addFeature('LeafLet displayed for product and btach created');
+        it('Mobile App - should display LeafLet details for batch to see the leaflet at product level', async () => {
+                allureReporter.addFeature('LeafLet dispalyed for Scan previous batch to see the leaflet at product level');
                 //wait timeout for Leaflet to be displayed
-                await versionEpiNotReplacedTest.waitTimeout();
+                await uncheckBatchIsUnknownFlagWithOnlyValidGTINMatrix.waitTimeout();
                 await timeoutWait.setTimeoutWait(3);
                 //display details on Add_productBatch Leaflet when Add_productBatch Leaflet for batch scenario created
-                await versionEpiNotReplacedTest.versionOfEPINotReplacedDetailsFetch();
-                await timeoutWait.setTimeoutWait(3);
-                await versionEpiNotReplacedTest.versionOfEPINotReplacedLeafletDataFetch();
+                await uncheckBatchIsUnknownFlagWithOnlyValidGTINMatrix.uncheckBatchIsUnknownFlagWithOnlyValidGTINMatrixDetailsFetch();
                 await timeoutWait.setTimeoutWait(3);
 
         });

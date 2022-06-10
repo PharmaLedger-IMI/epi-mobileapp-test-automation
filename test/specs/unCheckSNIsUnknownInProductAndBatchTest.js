@@ -3,7 +3,7 @@ const allureReporter = require('@wdio/allure-reporter').default
 const nativePatientPage = require('../pageObjectsNativeApp/patientSettingPage')
 const timeoutWait = require('../utils/setTimeout')
 
-describe('090_Edit product to uncheck SN is unknown and edit batch to have valid SN and pass invalid SN in matrix', () => {
+describe('094_Edit product to uncheck SN is unknown and edit batch to have valid SN and pass invalid SN in matrix', () => {
 
         allureReporter.addFeature('Edit product to uncheck SN is unknown and edit batch to have valid SN and pass invalid SN in matrix')
         allureReporter.addSeverity('Critical');
@@ -20,14 +20,14 @@ describe('090_Edit product to uncheck SN is unknown and edit batch to have valid
                 // add the block chain value epiqa in settings page
                 await nativePatientPage.patientsettingsScan();
                 await timeoutWait.setTimeoutWait(3);
-                // Scan the 2D matrix Data 
+                // Scan the 2D matrix Data
                 await nativePatientPage.scan2DImageProcess();
                 await timeoutWait.setTimeoutWait(4);
 
         });
 
         it('Mobile App - should display LeafLet details to uncheck SN is unknown and edit batch to have valid SN and pass invalid SN in matrix', async () => {
-                allureReporter.addFeature('LeafLet Recalled Batch Info Data');
+                allureReporter.addFeature('LeafLet displayed for Edit product to uncheck SN is unknown and edit batch to have valid SN and pass invalid SN in matrix');
                 //wait timeout for Leaflet to be displayed
                 await unCheckSNIsUnknownInProductAndBatch.waitTimeout();
                 await timeoutWait.setTimeoutWait(3);

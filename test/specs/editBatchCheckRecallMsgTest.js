@@ -13,7 +13,7 @@ describe('005_Edit batch to set recall message', () => {
     allureReporter.startStep("Recalled Leaflet Details are Populated after batch is recalled in edit batch")
 
 
-    it('Mobile App-should set Patient Setting and Scan 2D Matrix', async () => {
+    it('Mobile App - should set Patient Setting and Scan 2D Matrix', async () => {
         allureReporter.addFeature('Patient Setting Scan Page');
         // wait time for application to launch
         await nativePatientPage.waitLaunchURL();
@@ -26,7 +26,7 @@ describe('005_Edit batch to set recall message', () => {
         await timeoutWait.setTimeoutWait(4);
     });
 
-    it('Mobile App-should display LeafLet for edit Batch Recall Message', async () => {
+    it('Mobile App - should display LeafLet for edit Batch Recall Message', async () => {
         allureReporter.addFeature('Display Leaflets for Edit batch to set recall message');
         //Wait timeout for Leaflet to be displayed 
         await editBatchRecallMsg.waitTimeout();

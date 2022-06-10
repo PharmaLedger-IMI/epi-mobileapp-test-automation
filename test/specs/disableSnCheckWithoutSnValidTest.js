@@ -6,12 +6,13 @@ const timeoutWait = require('../utils/setTimeout')
 
 describe('010_Edit batch and disable serial number check without SN', () => {
 
+        allureReporter.addFeature('Edit batch and disable serial number check without SN');
         allureReporter.addSeverity('Critical');
         allureReporter.addTestId('BasicAuthFeatureTest_1_4')
         allureReporter.addDescription('Check that Leaflet is displayed for disable serial number check without SN')
         allureReporter.startStep("leaflet Details are Populated when disable serial number check without SN")
 
-        it('Mobile App-should set Patient Setting and Scan 2D Matrix', async () => {
+        it('Mobile App - should set Patient Setting and Scan 2D Matrix', async () => {
 
                 allureReporter.addFeature('Patient Setting Scan Page');
                 // wait time for application to launch
@@ -26,8 +27,8 @@ describe('010_Edit batch and disable serial number check without SN', () => {
 
         });
 
-        it('Mobile App-should display LeafLet details without SN', async () => {
-                allureReporter.addFeature('LeafLet Recalled Batch Info Data');
+        it('Mobile App - should display LeafLet details without SN', async () => {
+                allureReporter.addFeature('LeafLet displayed for Edit batch and disable serial number check without SN');
                 //wait timeout for Leaflet to be displayed
                 await disableSnCheckWithoutSNIsValidTest.waitTimeout();
                 await timeoutWait.setTimeoutWait(3);

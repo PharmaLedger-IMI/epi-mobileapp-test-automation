@@ -4,7 +4,7 @@ const nativePatientPage = require('../pageObjectsNativeApp/patientSettingPage')
 const timeoutWait = require('../utils/setTimeout')
 
 
-describe('072_Edit Product to check batch is expired and edit batch to set expired date', () => {
+describe('076_Edit Product to check batch is expired and edit batch to set expired date', () => {
 
         allureReporter.addFeature('Edit Product to check batch is expired and edit batch to set expired date')
         allureReporter.addSeverity('Critical');
@@ -12,7 +12,7 @@ describe('072_Edit Product to check batch is expired and edit batch to set expir
         allureReporter.addDescription('Check that Leaflet details are displayed to check batch is expired and edit batch to set expired date')
         allureReporter.startStep("leaflet Details are Populated when batch is recalled to check batch is expired and edit batch to set expired date")
 
-        it('Mobile App-should set Patient Setting and Scan 2D Matrix', async () => {
+        it('Mobile App - should set Patient Setting and Scan 2D Matrix', async () => {
 
                 allureReporter.addFeature('Patient Setting Scan Page');
                 // wait time for application to launch
@@ -21,14 +21,14 @@ describe('072_Edit Product to check batch is expired and edit batch to set expir
                 // add the block chain value epiqa in settings page
                 await nativePatientPage.patientsettingsScan();
                 await timeoutWait.setTimeoutWait(3);
-                // Scan the 2D matrix Data 
+                // Scan the 2D matrix Data
                 await nativePatientPage.scan2DImageProcess();
                 await timeoutWait.setTimeoutWait(4);
 
         });
 
-        it('Mobile App-should display LeafLet details to check batch is expired and edit batch to set expired date', async () => {
-                allureReporter.addFeature('LeafLet Recalled Batch Info Data');
+        it('Mobile App - should display LeafLet details to check batch is expired and edit batch to set expired date', async () => {
+                allureReporter.addFeature('LeafLet displayed for Edit Product to check batch is expired and edit batch to set expired date');
                 //wait timeout for Leaflet to be displayed
                 await checkBatchIsExpiredInProductAndBatchTest.waitTimeout();
                 await timeoutWait.setTimeoutWait(3);

@@ -4,7 +4,7 @@ const nativePatientPage = require('../pageObjectsNativeApp/patientSettingPage')
 const timeoutWait = require('../utils/setTimeout')
 
 
-describe('092_Edit Product to check batch is unknown and edit batch to have valid SN and pass unknown batch in matrix', () => {
+describe('096_Edit Product to check batch is unknown and edit batch to have valid SN and pass unknown batch in matrix', () => {
 
         allureReporter.addFeature('Edit Product to check batch is unknown and edit batch to have valid SN and pass unknown batch in matrix')
         allureReporter.addSeverity('Critical');
@@ -21,14 +21,14 @@ describe('092_Edit Product to check batch is unknown and edit batch to have vali
                 // add the block chain value epiqa in settings page
                 await nativePatientPage.patientsettingsScan();
                 await timeoutWait.setTimeoutWait(3);
-                // Scan the 2D matrix Data 
+                // Scan the 2D matrix Data
                 await nativePatientPage.scan2DImageProcess();
                 await timeoutWait.setTimeoutWait(4);
 
         });
 
         it('Mobile App - should display LeafLet details to check batch is unknown and edit batch to have valid SN and pass unknown batch in matrix', async () => {
-                allureReporter.addFeature('LeafLet Recalled Batch Info Data');
+                allureReporter.addFeature('LeafLet dipplayed for Edit Product to check batch is unknown and edit batch to have valid SN and pass unknown batch in matrix');
                 //wait timeout for Leaflet to be displayed
                 await checkBatchIsUnknownInProductWithinValidMatrix.waitTimeout();
                 await timeoutWait.setTimeoutWait(3);
@@ -37,8 +37,8 @@ describe('092_Edit Product to check batch is unknown and edit batch to have vali
                 await timeoutWait.setTimeoutWait(3);
                 await checkBatchIsUnknownInProductWithinValidMatrix.checkBatchIsUnknownInProductWithInValidBatchLeafletDetailsFetch();
                 await timeoutWait.setTimeoutWait(3);
-               // await checkBatchIsUnknownInProductWithinValidMatrix.getLeafletTypesAndLevel();
-               // await timeoutWait.setTimeoutWait(3);
+                // await checkBatchIsUnknownInProductWithinValidMatrix.getLeafletTypesAndLevel();
+                // await timeoutWait.setTimeoutWait(3);
 
 
         });

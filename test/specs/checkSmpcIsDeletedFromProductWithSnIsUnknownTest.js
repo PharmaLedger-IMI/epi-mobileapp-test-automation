@@ -4,7 +4,7 @@ const nativePatientPage = require('../pageObjectsNativeApp/patientSettingPage')
 const timeoutWait = require('../utils/setTimeout')
 
 
-describe('089_Edit product to check SN is unknown and delete smpc. Pass unknown SN in matrix', () => {
+describe('091_Edit product to check SN is unknown and delete smpc. Pass unknown SN in matrix', () => {
 
     allureReporter.addFeature('Edit product to check SN is unknown and delete smpc. Pass unknown SN in matrix')
     allureReporter.addSeverity('Critical');
@@ -13,7 +13,7 @@ describe('089_Edit product to check SN is unknown and delete smpc. Pass unknown 
     allureReporter.startStep("Leaflet Details are Populated to check SN is unknown and delete smpc. Pass unknown SN in matrix")
 
 
-    it('Mobile App-should set Patient Setting and Scan 2D Matrix', async () => {
+    it('Mobile App - should set Patient Setting and Scan 2D Matrix', async () => {
         allureReporter.addFeature('Patient Setting Scan Page');
         // wait time for application to launch
         await nativePatientPage.waitLaunchURL();
@@ -21,15 +21,15 @@ describe('089_Edit product to check SN is unknown and delete smpc. Pass unknown 
         // add the block chain value epiqa in settings page
         await nativePatientPage.patientsettingsScan();
         await timeoutWait.setTimeoutWait(3);
-        // Scan the 2D matrix Data 
+        // Scan the 2D matrix Data
         await nativePatientPage.scan2DImageProcess();
         await timeoutWait.setTimeoutWait(4);
 
     });
 
-    it('Mobile App-should display LeafLet Details to check SN is unknown and delete smpc. Pass unknown SN in matrix', async () => {
-        allureReporter.addFeature('Recalled Batch Leaflet display Info Data');
-        //Wait timeout for Leaflet to be displayed 
+    it('Mobile App - should display LeafLet Details to check SN is unknown and delete smpc. Pass unknown SN in matrix', async () => {
+        allureReporter.addFeature('Leaflet displayed for Edit product to check SN is unknown and delete smpc. Pass unknown SN in matrix');
+        //Wait timeout for Leaflet to be displayed
         await checkSmpcIsDeletedFromProductWithSnIsUnknown.waitTimeout();
         await timeoutWait.setTimeoutWait(4);
         //display details on Leaflet for recalled batch scenario

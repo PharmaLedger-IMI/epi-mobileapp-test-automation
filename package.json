@@ -110,7 +110,8 @@
     "unCheckUnknownBatchWithInvalidBatchAndInvalidExpiryDateTestRun":"npx wdio run wdio.conf.native.app.js --spec unCheckUnknownBatchWithInvalidBatchAndExpiryDateTest.js",
     "inValidSerialNumberWithBatchRecalledTestRun": "npx wdio run wdio.conf.native.app.js --spec inValidSerialNumberWithBatchRecalledTest.js",
     "scanUnknownGTINWithValidBatchSNAndExpiryDateTestRun":"npx wdio run wdio.conf.native.app.js --spec scanUnknownGTINWithValidBatchSNAndExpiryDateTest.js",
-    "scanKnownGTINWithoutBatchSNAndExpiryDateTestRun":"npx wdio run wdio.conf.native.app.js --spec scanKnownGTINWithoutBatchSNAndExpiryDateTest.js",
+    "disableBatchIsUnknownWithOnlyValidGTINMatrixTestRun":"npx wdio run wdio.conf.native.app.js --spec disableBatchIsUnknownFlagWithOnlyValidGTINMatrixTest.js",
+    "enableBatchIsUnknownWithOnlyValidGTINMatrixTestRun":"npx wdio run wdio.conf.native.app.js --spec enableBatchIsUnknownFlagWithOnlyValidGTINMatrixTest.js",
     "report": "allure generate allure-results/ --clean && allure open"
   },
   "keywords": [],

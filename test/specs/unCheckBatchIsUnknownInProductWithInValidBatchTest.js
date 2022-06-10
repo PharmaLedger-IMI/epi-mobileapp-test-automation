@@ -2,9 +2,9 @@ const uncheckBatchIsUnknownInProductWithInvalidBatch = require('../pageObjectsNa
 const allureReporter = require('@wdio/allure-reporter').default
 const nativePatientPage = require('../pageObjectsNativeApp/patientSettingPage')
 const timeoutWait = require('../utils/setTimeout')
-// const commonFunctions=require('../utils/commonutilitiesFunctions')
 
-describe('095_Edit product to uncheck batch is unknown and edit batch to have valid batch and pass invalid batch in matrix', () => {
+
+describe('099_Edit product to uncheck batch is unknown and edit batch to have valid batch and pass invalid batch in matrix', () => {
 
     allureReporter.addFeature('Edit product to uncheck batch is unknown and edit batch to have valid batch and pass invalid batch in matrix')
     allureReporter.addSeverity('Critical');
@@ -21,15 +21,15 @@ describe('095_Edit product to uncheck batch is unknown and edit batch to have va
         // add the block chain value epiqa in settings page
         await nativePatientPage.patientsettingsScan();
         await timeoutWait.setTimeoutWait(3);
-        // Scan the 2D matrix Data 
+        // Scan the 2D matrix Data
         await nativePatientPage.scan2DImageProcess();
         await timeoutWait.setTimeoutWait(4);
 
     });
 
     it('Mobile App - should display LeafLet to uncheck batch is unknown and edit batch to have valid batch and pass invalid batch in matrix', async () => {
-        allureReporter.addFeature('Recalled Batch Leaflet display Info Data');
-        //Wait timeout for Leaflet to be displayed 
+        allureReporter.addFeature('Leaflet displayed for uncheck batch is unknown and edit batch to have valid batch and pass invalid batch in matrix');
+        //Wait timeout for Leaflet to be displayed
         await uncheckBatchIsUnknownInProductWithInvalidBatch.waitTimeout();
         await timeoutWait.setTimeoutWait(4);
         //display details on Leaflet for recalled batch scenario
