@@ -4,7 +4,7 @@ const nativePatientPage = require('../pageObjectsNativeApp/patientSettingPage')
 const timeoutWait = require('../utils/setTimeout')
 
 
-describe('018_Create a batch with no batch message', () => {
+describe('022_Create a batch with no batch message', () => {
 
     allureReporter.addFeature('Create Batch without Any Batch Message')
     allureReporter.addSeverity('Critical');
@@ -13,7 +13,7 @@ describe('018_Create a batch with no batch message', () => {
     allureReporter.startStep("Leaflet Details are Populated without Batch Message Displayed")
 
 
-    it('Mobile App-should set Patient Setting and Scan 2D Matrix', async () => {
+    it('Mobile App - should set Patient Setting and Scan 2D Matrix', async () => {
         allureReporter.addFeature('Patient Setting Scan Page');
         // wait time for application to launch
         await nativePatientPage.waitLaunchURL();
@@ -21,15 +21,15 @@ describe('018_Create a batch with no batch message', () => {
         // add the block chain value epiqa in settings page
         await nativePatientPage.patientsettingsScan();
         await timeoutWait.setTimeoutWait(3);
-        // Scan the 2D matrix Data 
+        // Scan the 2D matrix Data
         await nativePatientPage.scan2DImageProcess();
         await timeoutWait.setTimeoutWait(4);
 
     });
 
-    it('Mobile App-should dsiplay LeafLet details without Batch Message', async () => {
-        allureReporter.addFeature('All Combination No Batch Msg Leaflet display Info Data');
-        //Wait timeout for Leaflet to be displayed 
+    it('Mobile App - should dsiplay LeafLet details without Batch Message', async () => {
+        allureReporter.addFeature('Leaflet dispalyed for Create Batch without Any Batch Message');
+        //Wait timeout for Leaflet to be displayed
         await createBatchWithNoBatchMsg.waitTimeout();
         await timeoutWait.setTimeoutWait(3);
         //display details on Leaflet for recalled batch scenario

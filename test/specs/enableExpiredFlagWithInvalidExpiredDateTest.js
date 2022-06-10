@@ -4,7 +4,7 @@ const nativePatientPage = require('../pageObjectsNativeApp/patientSettingPage')
 const timeoutWait = require('../utils/setTimeout')
 
 
-describe('012_Edit batch and enable expiry date check with invalid expiry date', () => {
+describe('016_Edit batch and enable expiry date check with invalid expiry date', () => {
 
         allureReporter.addFeature('Enable Expiry Date with Invalid Data')
         allureReporter.addSeverity('Critical');
@@ -12,7 +12,7 @@ describe('012_Edit batch and enable expiry date check with invalid expiry date',
         allureReporter.addDescription('Check that Add_productBatch Leaflet displayed')
         allureReporter.startStep("leaflet Details are Populated as Expired Date on Pack for Batch")
 
-        it('Mobile App-should set Patient Setting and Scan 2D Matrix', async () => {
+        it('Mobile App - should set Patient Setting and Scan 2D Matrix', async () => {
 
                 allureReporter.addFeature('Patient Setting Scan Page');
                 // wait time for application to launch
@@ -21,14 +21,14 @@ describe('012_Edit batch and enable expiry date check with invalid expiry date',
                 // add the block chain value epiqa in settings page
                 await nativePatientPage.patientsettingsScan();
                 await timeoutWait.setTimeoutWait(3);
-                // Scan the 2D matrix Data 
+                // Scan the 2D matrix Data
                 await nativePatientPage.scan2DImageProcess();
                 await timeoutWait.setTimeoutWait(4);
 
         });
 
-        it('Mobile App-should open LeafLet after enable expiry date check with invalid expiry date', async () => {
-                allureReporter.addFeature('LeafLet Recalled Batch Info Data');
+        it('Mobile App - should open LeafLet after enable expiry date check with invalid expiry date', async () => {
+                allureReporter.addFeature('LeafLet displayed for Edit batch and enable expiry date check with invalid expiry date');
                 //wait timeout for Leaflet to be displayed
                 await enableExpiredFlagWithInValidExpiryDate.waitTimeout();
                 await timeoutWait.setTimeoutWait(3);

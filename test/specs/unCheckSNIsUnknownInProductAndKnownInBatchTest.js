@@ -3,7 +3,7 @@ const allureReporter = require('@wdio/allure-reporter').default
 const nativePatientPage = require('../pageObjectsNativeApp/patientSettingPage')
 const timeoutWait = require('../utils/setTimeout')
 
-describe('091_Edit product to uncheck SN is unknown and edit batch to have valid SN', () => {
+describe('095_Edit product to uncheck SN is unknown and edit batch to have valid SN', () => {
 
         allureReporter.addFeature('Edit product to uncheck SN is unknown and edit batch to have valid SN')
         allureReporter.addSeverity('Critical');
@@ -11,7 +11,7 @@ describe('091_Edit product to uncheck SN is unknown and edit batch to have valid
         allureReporter.addDescription('Check that Leaflet details are displayed to uncheck SN is unknown and edit batch to have valid SN')
         allureReporter.startStep("Add_productBatch leaflet Details are Populated to uncheck SN is unknown and edit batch to have valid SN")
 
-        it('Mobile App-should set Patient Setting and Scan 2D Matrix', async () => {
+        it('Mobile App - should set Patient Setting and Scan 2D Matrix', async () => {
 
                 allureReporter.addFeature('Patient Setting Scan Page');
                 // wait time for application to launch
@@ -20,14 +20,14 @@ describe('091_Edit product to uncheck SN is unknown and edit batch to have valid
                 // add the block chain value epiqa in settings page
                 await nativePatientPage.patientsettingsScan();
                 await timeoutWait.setTimeoutWait(3);
-                // Scan the 2D matrix Data 
+                // Scan the 2D matrix Data
                 await nativePatientPage.scan2DImageProcess();
                 await timeoutWait.setTimeoutWait(4);
 
         });
 
-        it('Mobile App-should display LeafLet details to uncheck SN is unknown and edit batch to have valid SN', async () => {
-                allureReporter.addFeature('LeafLet Recalled Batch Info Data');
+        it('Mobile App - should display LeafLet details to uncheck SN is unknown and edit batch to have valid SN', async () => {
+                allureReporter.addFeature('LeafLet displayed for Batch to uncheck SN is unknown and edit batch to have valid SN');
                 //wait timeout for Leaflet to be displayed
                 await unCheckSNIsUnknownInProductAndKnownInBatch.waitTimeout();
                 await timeoutWait.setTimeoutWait(3);

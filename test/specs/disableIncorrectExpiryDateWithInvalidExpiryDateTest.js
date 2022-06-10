@@ -4,7 +4,7 @@ const nativePatientPage = require('../pageObjectsNativeApp/patientSettingPage')
 const timeoutWait = require('../utils/setTimeout')
 
 
-describe('013_Edit batch and disable expiry date check with valid expiry date', () => {
+describe('014_Edit batch and disable expiry date check with valid expiry date', () => {
 
         allureReporter.addFeature('Disable Expiry Date Check with Invalid Data')
         allureReporter.addSeverity('Critical');
@@ -12,7 +12,7 @@ describe('013_Edit batch and disable expiry date check with valid expiry date', 
         allureReporter.addDescription('Check that Leaflet are displayed for Disable Expiry Date with Invalid ExpiredDate')
         allureReporter.startStep("leaflet Details are Populated as Expired Date on pack for Batch")
 
-        it('Mobile App-should set Patient Setting and Scan 2D Matrix', async () => {
+        it('Mobile App - should set Patient Setting and Scan 2D Matrix', async () => {
 
                 allureReporter.addFeature('Patient Setting Scan Page');
                 // wait time for application to launch
@@ -21,14 +21,14 @@ describe('013_Edit batch and disable expiry date check with valid expiry date', 
                 // add the block chain value epiqa in settings page
                 await nativePatientPage.patientsettingsScan();
                 await timeoutWait.setTimeoutWait(3);
-                // Scan the 2D matrix Data 
+                // Scan the 2D matrix Data
                 await nativePatientPage.scan2DImageProcess();
                 await timeoutWait.setTimeoutWait(4);
 
         });
 
-        it('Mobile App-should display LeafLet details for Invalid ExpiryDate Details', async () => {
-                allureReporter.addFeature('LeafLet Recalled Batch Info Data');
+        it('Mobile App - should display LeafLet details for Invalid ExpiryDate Details', async () => {
+                allureReporter.addFeature('LeafLet displayed for Disable Expiry Date Check with Invalid Data');
                 //wait timeout for Leaflet to be displayed
                 await disableExpiryDateCheckInValidExpiryDate.waitTimeout();
                 await timeoutWait.setTimeoutWait(3);

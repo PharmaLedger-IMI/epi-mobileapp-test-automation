@@ -12,7 +12,7 @@ describe('008_Edit batch and enable serial number check with invalid SN', () => 
         allureReporter.addDescription('Check that Leaflet details are displayed when SN is Enabled and with SN is Invalid')
         allureReporter.startStep("leaflet Details are Populated and should populate leaflet details as failed to vaildate SN")
 
-        it('Mobile App-should open Patient Setting Scan Page', async () => {
+        it('Mobile App - should open Patient Setting Scan Page', async () => {
 
                 allureReporter.addFeature('Patient Setting Scan Page');
                 // wait time for application to launch
@@ -27,8 +27,8 @@ describe('008_Edit batch and enable serial number check with invalid SN', () => 
 
         });
 
-        it('Mobile App-should open LeafLet after enable serial number check with invalid SN', async () => {
-                allureReporter.addFeature('Dsiplay LeafLet details for Edit batch and enable serial number check with invalid SN');
+        it('Mobile App - should open LeafLet after enable serial number check with invalid SN', async () => {
+                allureReporter.addFeature('Display LeafLet details for Edit batch and enable serial number check with invalid SN');
                 //wait timeout for Leaflet to be displayed
                 await enableSnCheckSnInValidTest.waitTimeout();
                 await timeoutWait.setTimeoutWait(3);

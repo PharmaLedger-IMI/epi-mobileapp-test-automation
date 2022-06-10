@@ -13,7 +13,7 @@ describe('007_Edit batch and enable serial number check with valid SN', () => {
         allureReporter.addDescription('Check that Leaflet are displayed with valid details when SN is enabled')
         allureReporter.startStep("leaflet Details are Populated with Valid SN details")
 
-        it('Mobile App-should set Patient Setting and Scan 2D Matrix', async () => {
+        it('Mobile App - should set Patient Setting and Scan 2D Matrix', async () => {
 
                 allureReporter.addFeature('Patient Setting Scan Page');
                 // wait time for application to launch
@@ -28,7 +28,7 @@ describe('007_Edit batch and enable serial number check with valid SN', () => {
 
         });
 
-        it('Mobile App-should display LeafLet details for Enable SN Check SN is Valid for Batch', async () => {
+        it('Mobile App - should display LeafLet details for Enable SN Check SN is Valid for Batch', async () => {
                 allureReporter.addFeature('Display LeafLet details for Edit batch and enable serial number check with valid SN');
                 //wait timeout for Leaflet to be displayed
                 await enableSnCheckSnValid.waitTimeout();

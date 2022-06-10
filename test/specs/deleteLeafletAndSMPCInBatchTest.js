@@ -3,7 +3,7 @@ const allureReporter = require('@wdio/allure-reporter').default
 const nativePatientPage = require('../pageObjectsNativeApp/patientSettingPage')
 const timeoutWait = require('../utils/setTimeout')
 
-describe('059_Edit batch to delete ePI and SMPC file.', () => {
+describe('063_Edit batch to delete ePI and SMPC file.', () => {
 
         allureReporter.addFeature('Edit batch to delete ePI and SMPC file.')
         allureReporter.addSeverity('Critical');
@@ -20,14 +20,14 @@ describe('059_Edit batch to delete ePI and SMPC file.', () => {
                 // add the block chain value epiqa in settings page
                 await nativePatientPage.patientsettingsScan();
                 await timeoutWait.setTimeoutWait(3);
-                // Scan the 2D matrix Data 
+                // Scan the 2D matrix Data
                 await nativePatientPage.scan2DImageProcess();
                 await timeoutWait.setTimeoutWait(4);
 
         });
 
         it('Mobile App - should display LeafLet details for batch to delete ePI and SMPC file.', async () => {
-                allureReporter.addFeature('LeafLet Recalled Batch Info Data');
+                allureReporter.addFeature('LeafLet displayed for Edit batch to delete ePI and SMPC file.');
                 //wait timeout for Leaflet to be displayed
                 await deleteBatchUploadLeafletSMPCTest.waitTimeout();
                 await timeoutWait.setTimeoutWait(3);

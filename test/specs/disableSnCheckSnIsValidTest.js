@@ -12,7 +12,7 @@ describe('009_Edit batch and disable serial number check with valid SN', () => {
         allureReporter.addDescription('Check that disable SN and Check with SN Leaflet details are displayed')
         allureReporter.startStep("leaflet Details are Populated with SN Valid details for Batch")
 
-        it('Mobile App-should set Patient Settings Scan 2D Matrix', async () => {
+        it('Mobile App - should set Patient Settings Scan 2D Matrix', async () => {
 
                 allureReporter.addFeature('Patient Setting Scan Page');
                 // wait time for application to launch
@@ -27,7 +27,7 @@ describe('009_Edit batch and disable serial number check with valid SN', () => {
 
         });
 
-        it('Mobile App-LeafLet details after disable serial number check with valid SN', async () => {
+        it('Mobile App - LeafLet details after disable serial number check with valid SN', async () => {
                 allureReporter.addFeature('Display LeafLet Details for Edit batch and disable serial number check with valid SN');
                 //wait timeout for Leaflet to be displayed
                 await disableSnCheckSNIsValidTest.waitTimeout();

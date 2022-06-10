@@ -11,7 +11,7 @@ describe('004_Create Batch', () => {
         allureReporter.addDescription('Check that Add_productBatch Leaflet details are displayed')
         allureReporter.startStep("Add_productBatch leaflet Details are Populated when batch is created with specified details")
 
-        it('Mobile App-should set Patient Setting and Scan 2D Matrix', async () => {
+        it('Mobile App - should set Patient Setting and Scan 2D Matrix', async () => {
 
                 allureReporter.addFeature('Patient Setting Scan Page');
                 // wait time for application to launch
@@ -26,7 +26,7 @@ describe('004_Create Batch', () => {
 
         });
 
-        it('Mobile App-should display LeafLet details for product and batch created', async () => {
+        it('Mobile App - should display LeafLet details for product and batch created', async () => {
                 allureReporter.addFeature('LeafLet details for Batch is populated');
                 //wait timeout for Leaflet to be displayed
                 await addProductBatchLeaflet.waitTimeout();

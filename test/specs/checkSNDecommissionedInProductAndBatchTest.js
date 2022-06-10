@@ -4,7 +4,7 @@ const nativePatientPage = require('../pageObjectsNativeApp/patientSettingPage')
 const timeoutWait = require('../utils/setTimeout')
 
 
-describe('082_Edit product to check SN is decommssioned and edit batch to update decommissioned SN.', () => {
+describe('086_Edit product to check SN is decommssioned and edit batch to update decommissioned SN.', () => {
 
     allureReporter.addFeature('Edit product to check SN is decommssioned and edit batch to update decommissioned SN.')
     allureReporter.addSeverity('Critical');
@@ -13,7 +13,7 @@ describe('082_Edit product to check SN is decommssioned and edit batch to update
     allureReporter.startStep("Leaflet Details are Populated to check SN is decommssioned and edit batch to update decommissioned SN")
 
 
-    it('Mobile App-should set Patient Setting and Scan 2D Matrix', async () => {
+    it('Mobile App - should set Patient Setting and Scan 2D Matrix', async () => {
         allureReporter.addFeature('Patient Setting Scan Page');
         // wait time for application to launch
         await nativePatientPage.waitLaunchURL();
@@ -21,15 +21,15 @@ describe('082_Edit product to check SN is decommssioned and edit batch to update
         // add the block chain value epiqa in settings page
         await nativePatientPage.patientsettingsScan();
         await timeoutWait.setTimeoutWait(3);
-        // Scan the 2D matrix Data 
+        // Scan the 2D matrix Data
         await nativePatientPage.scan2DImageProcess();
         await timeoutWait.setTimeoutWait(4);
 
     });
 
-    it('Mobile App-should display LeafLet Details to check SN is decommssioned and edit batch to update decommissioned SN.', async () => {
-        allureReporter.addFeature('Recalled Batch Leaflet display Info Data');
-        //Wait timeout for Leaflet to be displayed 
+    it('Mobile App - should display LeafLet Details to check SN is decommssioned and edit batch to update decommissioned SN.', async () => {
+        allureReporter.addFeature('Leaflet displayed for Edit product to check SN is decommssioned and edit batch to update decommissioned SN.');
+        //Wait timeout for Leaflet to be displayed
         await checkSNDecommissionedInProductAndBatch.waitTimeout();
         await timeoutWait.setTimeoutWait(4);
         //display details on Leaflet for recalled batch scenario

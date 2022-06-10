@@ -4,7 +4,7 @@ const nativePatientPage = require('../pageObjectsNativeApp/patientSettingPage')
 const timeoutWait = require('../utils/setTimeout')
 
 
-describe('028_create a batch with only MonthYear as expiry date', () => {
+describe('033_create a batch with only MonthYear as expiry date', () => {
 
     allureReporter.addTestId("ExpiryDateChecks_3_1")
     allureReporter.addSeverity('Critical');
@@ -13,7 +13,7 @@ describe('028_create a batch with only MonthYear as expiry date', () => {
     allureReporter.startStep("Leaflet Details are Populated after MonthYear as expiry date")
 
 
-    it('Mobile App-should open Patient Settings and Scan 2D Matrix', async () => {
+    it('Mobile App - should open Patient Settings and Scan 2D Matrix', async () => {
         allureReporter.addFeature('Patient Setting Scan Page');
         // wait time for application to launch
         await nativePatientPage.waitLaunchURL();
@@ -21,15 +21,15 @@ describe('028_create a batch with only MonthYear as expiry date', () => {
         // add the block chain value epiqa in settings page
         await nativePatientPage.patientsettingsScan();
         await timeoutWait.setTimeoutWait(3);
-        // Scan the 2D matrix Data 
+        // Scan the 2D matrix Data
         await nativePatientPage.scan2DImageProcess();
         await timeoutWait.setTimeoutWait(4);
 
     });
 
-    it('Mobile App-should open LeafLet for MonthYear and Expiry date in Batch', async () => {
-        allureReporter.addFeature('Recalled Batch Leaflet display Info Data');
-        //Wait timeout for Leaflet to be displayed 
+    it('Mobile App - should open LeafLet for MonthYear and Expiry date in Batch', async () => {
+        allureReporter.addFeature('Leaflet displayed for create a batch with only MonthYear as expiry date');
+        //Wait timeout for Leaflet to be displayed
         await batchWithMonthYearOnDate.waitTimeout();
         await timeoutWait.setTimeoutWait(4);
         //display details on Leaflet for recalled batch scenario

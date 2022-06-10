@@ -4,7 +4,7 @@ const nativePatientPage = require('../pageObjectsNativeApp/patientSettingPage')
 const timeoutWait = require('../utils/setTimeout')
 
 
-describe('062_Edit Product to check batch is recalled and edit batch to set recall message', () => {
+describe('066_Edit Product to check batch is recalled and edit batch to set recall message', () => {
 
         allureReporter.addFeature('Edit Product to check batch is recalled and edit batch to set recall message')
         allureReporter.addSeverity('Critical');
@@ -12,7 +12,7 @@ describe('062_Edit Product to check batch is recalled and edit batch to set reca
         allureReporter.addDescription('Check that Leaflet details are displayed for check batch is recalled and edit batch to set recall message')
         allureReporter.startStep("leaflet Details are Populated when check batch is recalled and edit batch to set recall message")
 
-        it('Mobile App-should set Patient Setting and Scan 2D Matrix', async () => {
+        it('Mobile App - should set Patient Setting and Scan 2D Matrix', async () => {
 
                 allureReporter.addFeature('Patient Setting Scan Page');
                 // wait time for application to launch
@@ -21,14 +21,14 @@ describe('062_Edit Product to check batch is recalled and edit batch to set reca
                 // add the block chain value epiqa in settings page
                 await nativePatientPage.patientsettingsScan();
                 await timeoutWait.setTimeoutWait(3);
-                // Scan the 2D matrix Data 
+                // Scan the 2D matrix Data
                 await nativePatientPage.scan2DImageProcess();
                 await timeoutWait.setTimeoutWait(4);
 
         });
 
-        it('Mobile App-should display LeafLet details for check batch is recalled and edit batch to set recall message', async () => {
-                allureReporter.addFeature('LeafLet Recalled Batch Info Data');
+        it('Mobile App - should display LeafLet details for check batch is recalled and edit batch to set recall message', async () => {
+                allureReporter.addFeature('LeafLet displayed for Edit Product to check batch is recalled and edit batch to set recall message');
                 //wait timeout for Leaflet to be displayed
                 await checkBatchRecallInProductAndBatchTest.waitTimeout();
                 await timeoutWait.setTimeoutWait(3);

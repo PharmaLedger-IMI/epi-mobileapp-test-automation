@@ -13,7 +13,7 @@ describe('006_Edit product to check SN is in recalled list', () => {
     allureReporter.startStep("Product Leaflet Details are Populated after SN is Recall List is enabled in Product")
 
 
-    it('Mobile App-should open Patient Setting and Scan 2D Matrix', async () => {
+    it('Mobile App - should open Patient Setting and Scan 2D Matrix', async () => {
         allureReporter.addFeature('Patient Setting Scan Page');
         // wait time for application to launch
         await nativePatientPage.waitLaunchURL();
@@ -26,7 +26,7 @@ describe('006_Edit product to check SN is in recalled list', () => {
         await timeoutWait.setTimeoutWait(4);
     });
 
-    it('Mobile App-should open LeafLet to check SN is Recalled list in Product', async () => {
+    it('Mobile App - should open LeafLet to check SN is Recalled list in Product', async () => {
         allureReporter.addFeature('Display Leaflet for Edit product to check SN is in recalled list');
         //Wait timeout for Leaflet to be displayed 
         await updateProductSnRecalledFlag.waitTimeout();
