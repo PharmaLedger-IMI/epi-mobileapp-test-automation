@@ -1,3 +1,5 @@
+This repository contains scripts to test native Android ePI mobile app. This repo is dependent on https://github.com/PharmaLedger-IMI/epi-test-automation.
+
 ### Step 1: Clone the workspace
 
 ```sh
@@ -15,7 +17,6 @@ $ npm install
 
 ### Step 2: Appium Setup and IDE Setup
 
-```prerequisite for Appium setup steps
 
 1) Appium Server - Install Appium from https://appium.io/ select appium installation file.
 
@@ -27,22 +28,20 @@ $ npm install
 
 5) Set Environment Variable path for Android -- set Android Home Path till sdk located in system and set the tools and platform tools directory in path varaible.
 
-````Any IDE Setup can be choosen for scripting so all steps are configured with epi-test-automation web based application please follow steps in README.md file project link as https://github.com/PharmaLedger-IMI/epi-test-automation.git 
 
+### Step 3: Setup config and static data
 
-### Step 3: config file setup
+Edit epi-mobileapp-test-automation > test > testdata > config.json file to do following
 
-Config file can be edited according to your Requirement as follows:
-
-1)setup the blockchain network value in patients settings wallet.
-2)setup all the required fields that can be edited according to requirement of the project.
+1) Setup the blockchain network value in patients settings wallet under ```setBlockChainNetwork``` property
+2) Remaining fields are related to epiphany messages that is shown in mobile app during various scenarios. Change it according to expected values
  
 
 ### Step 4: wdio.conf.native.app setup 
 
 Follow the steps to add in wdio.conf.native.app file:
 
-1) set the capabilities settings required for Appium.
-2) set the specs files to execute all specs files in serial mode.
-3) set the services and allure reporter dependencies for Appium.
-4) set the Mochaopts timeout and Connection retry timeout as required to execute both web based and mobile native application 
+1) Set the capabilities settings required for Appium.
+2) Set the specs files to execute all specs files in serial mode.
+3) Set the services and allure reporter dependencies for Appium.
+4) Set the Mochaopts timeout and Connection retry timeout as required to execute both web based and mobile native application 
